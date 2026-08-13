@@ -45,9 +45,10 @@ bun run snapshot
 ```
 
 Commit the generated PCB and schematic SVGs alongside every board. The
-`tscircuit Snapshot` workflow runs `tsci snapshot --ci` on pushes and pull
-requests. It fails when a snapshot is missing or stale and uploads generated
-diff SVGs when an existing snapshot changes.
+`tscircuit Snapshot` workflow regenerates snapshots with `tsci snapshot` on
+pushes and pull requests, canonicalizes sub-pixel renderer precision, and fails
+when a snapshot is missing or stale. This keeps the SVGs stable across macOS
+and Linux while still checking every visible PCB or schematic change.
 
 `examples/snapshot-fixture.circuit.tsx` is a small smoke test for the snapshot
 pipeline. It is not a Grove board recreation.
