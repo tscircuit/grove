@@ -73,7 +73,7 @@ export const GroveConnector = ({
   const signal2 = kind === "i2c" ? "SDA" : "NC"
 
   return (
-    <connector
+    <jumper
       name={name}
       displayName="Grove 4-pin"
       manufacturerPartNumber="B4B-PH-K-S"
@@ -90,6 +90,7 @@ export const GroveConnector = ({
       schX={schX}
       schY={schY}
       schRotation={schRotation}
+      schDirection="right"
       schWidth={2.5}
       schHeight={3}
     />
