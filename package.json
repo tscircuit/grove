@@ -1,0 +1,26 @@
+{
+  "name": "grove",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Grove-compatible board recreations built with tscircuit TSX",
+  "keywords": [
+    "tscircuit",
+    "grove",
+    "pcb",
+    "electronics"
+  ],
+  "scripts": {
+    "dev": "tsci dev",
+    "build": "tsci build --concurrency 4",
+    "snapshot": "tsci snapshot --ci --concurrency 4",
+    "snapshot:update": "tsci snapshot --update --concurrency 4",
+    "typecheck": "tsc --noEmit",
+    "check": "bun run typecheck && bun run build && bun run snapshot"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "tscircuit": "^0.0.2319",
+    "typescript": "^5.0.0"
+  }
+}
