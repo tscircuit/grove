@@ -1,0 +1,8 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/@tscircuit/cli/types/tscircuit.config.schema.json",
+  "alwaysUseLatestTscircuitOnCloud": true,
+  "includeBoardFiles": [
+    "boards/**/*.circuit.tsx",
+    "examples/**/*.circuit.tsx"
+  ]
+}
