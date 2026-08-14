@@ -34,8 +34,8 @@ export const GroveDht20 = () => (
     <resistor name="R3" resistance="10k" footprint="0402" pcbX={-3} pcbY={-4.5} schX={-2} schY={-5.5} />
     <resistor name="R4" resistance="10k" footprint="0402" pcbX={4} pcbY={-4.5} schX={4} schY={-5.5} />
     <resistor name="R5" resistance="390" footprint="0402" pcbX={7} pcbY={5} schX={7} schY={4} />
-    <capacitor name="C1" capacitance="1uF" footprint="0402" pcbX={-10} pcbY={4.5} schX={-6} schY={7} />
-    <capacitor name="C2" capacitance="1uF" footprint="0402" pcbX={-8.9} pcbY={0} pcbRotation={90} schX={-4} schY={7} />
+    <capacitor name="C1" capacitance="1uF" footprint="0402" pcbX={-10} pcbY={4.5} schX={-6} schY={6.3} />
+    <capacitor name="C2" capacitance="1uF" footprint="0402" pcbX={-8.9} pcbY={0} pcbRotation={90} schX={-4} schY={6.3} />
     <capacitor name="C3" capacitance="100nF" footprint="0402" pcbX={10} pcbY={-1.3} pcbRotation={180} schX={10} schY={4} />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="J1.VCC" to="R1.pin1" />

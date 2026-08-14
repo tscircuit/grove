@@ -44,8 +44,6 @@ const OledPanel = () => (
     pcbY={0}
     schX={8}
     schY={0}
-    schWidth={4}
-    schHeight={8}
   />
 )
 
@@ -63,8 +61,8 @@ export const GroveOledSsd1315 = () => (
     <resistor name="R4" resistance="4.7k" footprint="0402" pcbX={-2} pcbY={-6} schX={3} schY={-6} />
     <resistor name="R5" resistance="4.7k" footprint="0402" pcbX={3} pcbY={7} schX={7} schY={6} />
     <resistor name="R6" resistance="620k" footprint="0402" pcbX={7} pcbY={7} schX={12} schY={5} />
-    <capacitor name="C1" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={5} schX={-7} schY={8} />
-    <capacitor name="C2" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={0} pcbRotation={90} schX={-5} schY={8} />
+    <capacitor name="C1" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={5} schX={-7} schY={7} />
+    <capacitor name="C2" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={0} pcbRotation={90} schX={-5} schY={7} />
     <capacitor name="C3" capacitance="1uF" footprint="0402" pcbX={11} pcbY={7} schX={13} schY={2} />
     <capacitor name="C4" capacitance="1uF" footprint="0402" pcbX={14} pcbY={7} schX={13} schY={0} />
     <capacitor name="C5" capacitance="10uF" footprint="0603" pcbX={5.5} pcbY={-8.1} pcbRotation={-90} schX={13} schY={-3} />

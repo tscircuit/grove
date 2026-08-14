@@ -25,8 +25,6 @@ const Relay = () => (
     pcbY={1.8}
     schX={4}
     schY={0}
-    schWidth={3}
-    schHeight={4}
   />
 )
 
@@ -68,11 +66,11 @@ export const GroveRelay = () => (
     />
     <transistor name="Q1" displayName="S8050TL" type="npn" footprint="sot23" pcbX={-4} pcbY={-3.5} schX={0} schY={-2.5} />
     <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={-8} pcbY={-3} schX={-3.5} schY={-2.5} />
-    <resistor name="R2" resistance="470" footprint="0603" pcbX={7} pcbY={-3.5} schX={1} schY={3.5} />
+    <resistor name="R2" resistance="470" footprint="0603" pcbX={7} pcbY={-3.5} schX={1} schY={4} />
     <resistor name="R3" resistance="47k" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
-    <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-9.1375} pcbY={4} pcbRotation={-90} schX={-4} schY={5} />
-    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={6} pcbY={5.5} schX={4} schY={4} />
-    <led name="D2" color="red" footprint="0603" pcbX={10} pcbY={5.5} schX={4} schY={6} />
+    <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-9.1375} pcbY={4} pcbRotation={-90} schX={-4} schY={4} />
+    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={6} pcbY={5.5} schX={4} schY={2.5} />
+    <led name="D2" color="red" footprint="0603" pcbX={10} pcbY={5.5} schX={4} schY={4} />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="U1.GND" to="J1.GND" />
     <trace from="U1.VOUT" to="K1.COIL_POS" />

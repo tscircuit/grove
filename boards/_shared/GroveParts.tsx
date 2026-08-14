@@ -91,8 +91,6 @@ export const GroveConnector = ({
       schY={schY}
       schRotation={schRotation}
       schDirection="right"
-      schWidth={2.5}
-      schHeight={3}
     />
   )
 }

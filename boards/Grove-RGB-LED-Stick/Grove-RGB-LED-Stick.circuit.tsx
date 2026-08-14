@@ -4,7 +4,7 @@ import { Fragment } from "react"
 const Ws2813Mini = ({ name, pcbX, schX }: { name: string; pcbX: number; schX: number }) => (
   <chip
     name={name}
-    displayName="WS2813-MINI"
+    displayName={name}
     pinLabels={{ pin1: "VDD", pin2: "DO", pin3: "GND", pin4: "DIN", pin5: "BIN", pin6: "VCC" }}
     footprint={
       <footprint>
@@ -22,12 +22,17 @@ const Ws2813Mini = ({ name, pcbX, schX }: { name: string; pcbX: number; schX: nu
     pcbY={0}
     schX={schX}
     schY={0}
-    schWidth={2.2}
-    schHeight={3.5}
+    schPinArrangement={{
+      leftSide: ["DIN", "BIN"],
+      rightSide: ["DO"],
+      topSide: ["VDD", "VCC"],
+      bottomSide: ["GND"],
+    }}
   />
 )
 
 const ledPositions = [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27]
+const getLedSchX = (index: number) => index * 4 - 8
 
 export const GroveRgbLedStick = () => (
   <board name="GroveRgbLedStick" title="Grove - RGB LED Stick (10 WS2813 Mini)" width="80mm" height="10mm" borderRadius="2mm" solderMaskColor="blue" placementDrcChecksDisabled>
@@ -45,17 +50,17 @@ export const GroveRgbLedStick = () => (
     <net name="LED10_VCC" />
     <GroveConnector pcbX={-35} pcbY={0} schX={-14} schY={0} />
     {ledPositions.map((pcbX, index) => (
-      <Ws2813Mini key={`LED${index + 1}`} name={`LED${index + 1}`} pcbX={pcbX} schX={index * 3 - 9} />
+      <Ws2813Mini key={`LED${index + 1}`} name={`LED${index + 1}`} pcbX={pcbX} schX={getLedSchX(index)} />
     ))}
     {ledPositions.map((pcbX, index) => (
-      <capacitor key={`C${index + 1}`} name={`C${index + 1}`} capacitance="100nF" footprint="0402" connections={{ pin1: `net.LED${index + 1}_VCC`, pin2: "net.GND" }} pcbX={pcbX} pcbY={3.3} schX={index * 3 - 9} schY={4} />
+      <capacitor key={`C${index + 1}`} name={`C${index + 1}`} capacitance="100nF" footprint="0402" connections={{ pin1: `net.LED${index + 1}_VCC`, pin2: "net.GND" }} pcbX={pcbX} pcbY={3.3} schX={getLedSchX(index)} schY={4} />
     ))}
     {ledPositions.map((pcbX, index) => (
-      <resistor key={`R${index + 1}`} name={`R${index + 1}`} resistance="200" footprint="0402" connections={{ pin1: "net.VCC_RGB", pin2: `net.LED${index + 1}_VCC` }} pcbX={pcbX} pcbY={-3.3} schX={index * 3 - 9} schY={-4} />
+      <resistor key={`R${index + 1}`} name={`R${index + 1}`} resistance="200" footprint="0402" connections={{ pin1: "net.VCC_RGB", pin2: `net.LED${index + 1}_VCC` }} pcbX={pcbX} pcbY={-3.3} schX={getLedSchX(index)} schY={-4} />
     ))}
     <resistor name="RIN" resistance="220" footprint="0402" pcbX={-30.5} pcbY={-3.2} schX={-10.8} schY={-4} />
-    <capacitor name="CIN" capacitance="10uF" footprint="0805" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={33} pcbY={2} schX={17} schY={4} />
-    <capacitor name="CBULK" capacitance="220uF" footprint="1206" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={35} pcbY={-2} schX={19} schY={4} />
+    <capacitor name="CIN" capacitance="10uF" footprint="0805" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={33} pcbY={2} schX={32} schY={4} />
+    <capacitor name="CBULK" capacitance="220uF" footprint="1206" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={35} pcbY={-2} schX={34} schY={4} />
     <trace from="J1.SIG" to="RIN.pin1" />
     <trace from="J1.VCC" to="net.VCC_RGB" />
     <trace from="J1.GND" to="net.GND" />

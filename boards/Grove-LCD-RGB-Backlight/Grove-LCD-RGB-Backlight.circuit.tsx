@@ -45,38 +45,40 @@ const LcdPanel = () => (
     pcbY={0}
     schX={11}
     schY={0}
-    schWidth={4}
-    schHeight={9}
   />
 )
 
 export const GroveLcdRgbBacklight = () => (
   <board name="GroveLcdRgbBacklight" title="Grove - LCD RGB Backlight v5.0" width="80mm" height="36mm" borderRadius="1.5mm" solderMaskColor="blue">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
     <GroveMountingHoles x={37} y={15} diameter="2.8mm" />
     <GroveConnector kind="i2c" pcbX={-34} pcbY={0} pcbRotation={90} schX={-12} schY={0} />
     <LcdPanel />
-    <chip name="U1" displayName="JHD1313 LCD controller" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW", pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST" }} footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={1} schWidth={4} schHeight={8} />
-    <chip name="U2" displayName="SGM31323 RGB driver" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }} footprint="qfn16" layer="bottom" pcbX={8} pcbY={9} schX={3} schY={-6} schWidth={4} schHeight={6} />
-    <resistor name="R1" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={5} />
-    <resistor name="R2" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={5} />
+    <chip name="U1" displayName="JHD1313 LCD controller" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW", pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST" }} footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={1} />
+    <chip name="U2" displayName="SGM31323 RGB driver" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }} footprint="qfn16" layer="bottom" pcbX={8} pcbY={9} schX={3} schY={-6} schPinArrangement={{ leftSide: ["SCL", "SDA"], rightSide: ["R", "G", "B"], topSide: ["VCC"], bottomSide: ["GND"] }} noConnect={["pin8", "pin9", "pin10", "pin11", "pin12", "pin13", "pin14", "pin15", "pin16"]} />
+    <resistor name="R1" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={4} />
+    <resistor name="R2" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={4} />
     <resistor name="RR" resistance="100" footprint="0603" layer="bottom" pcbX={16} pcbY={11} schX={7} schY={-4} />
     <resistor name="RG" resistance="100" footprint="0603" layer="bottom" pcbX={20} pcbY={11} schX={8} schY={-6} />
     <resistor name="RB" resistance="100" footprint="0603" layer="bottom" pcbX={24} pcbY={11} schX={7} schY={-8} />
-    <capacitor name="C1" capacitance="100nF" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={6} />
+    <capacitor name="C1" capacitance="100nF" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} />
     <capacitor name="C2" capacitance="1uF" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} />
-    <trace from="J1.VCC" to="U1.VCC" />
-    <trace from="J1.VCC" to="U2.VCC" />
-    <trace from="J1.VCC" to="LCD1.VCC" />
-    <trace from="J1.VCC" to="LCD1.BL_COM" />
-    <trace from="J1.VCC" to="R1.pin1" />
-    <trace from="J1.VCC" to="R2.pin1" />
-    <trace from="J1.VCC" to="C1.pin1" />
-    <trace from="J1.VCC" to="C2.pin1" />
-    <trace from="C1.pin2" to="J1.GND" />
-    <trace from="C2.pin2" to="J1.GND" />
-    <trace from="J1.GND" to="U1.GND" />
-    <trace from="J1.GND" to="U2.GND" />
-    <trace from="J1.GND" to="LCD1.GND" />
+    <trace from="J1.VCC" to="net.VCC" />
+    <trace from="U1.VCC" to="net.VCC" />
+    <trace from="U2.VCC" to="net.VCC" />
+    <trace from="LCD1.VCC" to="net.VCC" />
+    <trace from="LCD1.BL_COM" to="net.VCC" />
+    <trace from="R1.pin1" to="net.VCC" />
+    <trace from="R2.pin1" to="net.VCC" />
+    <trace from="C1.pin1" to="net.VCC" />
+    <trace from="C2.pin1" to="net.VCC" />
+    <trace from="J1.GND" to="net.GND" />
+    <trace from="U1.GND" to="net.GND" />
+    <trace from="U2.GND" to="net.GND" />
+    <trace from="LCD1.GND" to="net.GND" />
+    <trace from="C1.pin2" to="net.GND" />
+    <trace from="C2.pin2" to="net.GND" />
     <trace from="J1.SCL" to="U1.SCL" />
     <trace from="J1.SCL" to="U2.SCL" />
     <trace from="J1.SCL" to="R1.pin2" />

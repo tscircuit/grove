@@ -22,7 +22,7 @@ export const GroveCapacitiveMoisture = () => (
   <board name="GroveCapacitiveMoisture" title="Grove - Capacitive Moisture Sensor (Corrosion Resistant)" width="23.5mm" height="92.1mm" borderRadius="2mm" solderMaskColor="blue">
     <GroveConnector kind="analog" pcbX={0} pcbY={-41} schX={-11} schY={0} />
     <ProbeElectrodes />
-    <chip name="U1" displayName="NE555DR" pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }} footprint="soic8" pcbX={-4} pcbY={-29} schX={-4} schY={2} schWidth={3} schHeight={5} />
+    <chip name="U1" displayName="NE555DR" pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }} footprint="soic8" pcbX={-4} pcbY={-29} schX={-4} schY={2} />
     <opamp name="U2" displayName="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
     <resistor name="R1" resistance="1.5k" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
     <resistor name="R2" resistance="2.4k" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />

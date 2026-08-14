@@ -12,14 +12,12 @@ export const GroveUltrasonicRanger = () => (
       pcbY={0}
       schX={0}
       schY={0}
-      schWidth={3.5}
-      schHeight={4}
     />
     <transistor name="Q1" displayName="TX driver" type="npn" footprint="sot23" pcbX={-5} pcbY={-5} schX={4} schY={3} />
     <resistor name="R1" resistance="1k" footprint="0603" pcbX={-7} pcbY={-8} schX={2} schY={3} />
     <resistor name="R2" resistance="10k" footprint="0603" pcbX={-7} pcbY={7} schX={3} schY={-3} />
-    <capacitor name="C14" capacitance="10uF" footprint="0805" pcbX={-13} pcbY={7} schX={-4} schY={4} />
-    <capacitor name="C1" capacitance="100nF" footprint="0603" pcbX={-10} pcbY={7} schX={-2} schY={4} />
+    <capacitor name="C14" capacitance="10uF" footprint="0805" pcbX={-13} pcbY={7} schX={-4} schY={3.5} />
+    <capacitor name="C1" capacitance="100nF" footprint="0603" pcbX={-10} pcbY={7} schX={-2} schY={3.5} />
     <TwoPinModule name="TX1" label="40 kHz transmitter" width={16} height={16} pcbX={5} pcbY={0} schX={8} schY={3} />
     <TwoPinModule name="RX1" label="40 kHz receiver" width={16} height={16} pcbX={17} pcbY={0} schX={8} schY={-3} />
     <trace from="J1.VCC" to="U1.VCC" />
