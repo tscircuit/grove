@@ -50,11 +50,11 @@ jobs:
             exit 1
           fi
 
-      - name: Upload snapshot diffs
+      - name: Upload generated snapshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: tscircuit-snapshot-diffs
-          path: "**/__snapshots__/*.diff.*"
+          name: tscircuit-snapshot-output
+          path: "**/__snapshots__/*.snap.*"
           if-no-files-found: ignore
           retention-days: 7
