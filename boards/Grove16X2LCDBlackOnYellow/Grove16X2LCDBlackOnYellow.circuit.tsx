@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const Grove16X2LCDBlackOnYellow = () => (
-  <GroveCatalogueModule
-    name={"Grove16X2LCDBlackOnYellow"}
-    title={"Grove 16 x 2 LCD Black on Yellow"}
-    category={"Display"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-16-x-2-LCD-Black-on-Yellow.html"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "Grove16X2LCDBlackOnYellow",
+      title: "Grove 16 x 2 LCD Black on Yellow",
+      category: "Display",
+      sourceUrl: "https://www.seeedstudio.com/Grove-16-x-2-LCD-Black-on-Yellow.html",
+      interfaceKind: "i2c",
+      detailKind: "display",
+      primaryModel: "Grove 16X2LCDBlackOnYellow controller",
+      manufacturerPartNumber: "GROVE-GROVE16X2LCDBLACKONYELLOW",
+      powerVoltage: "5V",
+    }}
   />
 )
 

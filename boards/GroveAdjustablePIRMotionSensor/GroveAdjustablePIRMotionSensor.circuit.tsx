@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveAdjustablePIRMotionSensor = () => (
-  <GroveCatalogueModule
-    name={"GroveAdjustablePIRMotionSensor"}
-    title={"Grove - Adjustable PIR Motion Sensor"}
-    category={"Proximity"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"uart"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveAdjustablePIRMotionSensor",
+      title: "Grove - Adjustable PIR Motion Sensor",
+      category: "Proximity",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "uart",
+      detailKind: "communications",
+      primaryModel: "Grove AdjustablePIRMotionSensor controller",
+      manufacturerPartNumber: "GROVE-GROVEADJUSTABLEPIRMOTIONSENSOR",
+      powerVoltage: "5V",
+    }}
   />
 )
 

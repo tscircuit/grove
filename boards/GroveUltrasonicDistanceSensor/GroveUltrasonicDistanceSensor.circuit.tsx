@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveUltrasonicDistanceSensor = () => (
-  <GroveCatalogueModule
-    name={"GroveUltrasonicDistanceSensor"}
-    title={"Grove Ultrasonic Distance Sensor"}
-    category={"Sensor"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Ultrasonic-Distance-Sensor.html"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveUltrasonicDistanceSensor",
+      title: "Grove Ultrasonic Distance Sensor",
+      category: "Sensor",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Ultrasonic-Distance-Sensor.html",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "Grove UltrasonicDistanceSensor controller",
+      manufacturerPartNumber: "GROVE-GROVEULTRASONICDISTANCESENSOR",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveIMU10DOFV20 = () => (
-  <GroveCatalogueModule
-    name={"GroveIMU10DOFV20"}
-    title={"Grove IMU 10DOF v2 0"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-IMU-10DOF-v2-0.html"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveIMU10DOFV20",
+      title: "Grove IMU 10DOF v2 0",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-IMU-10DOF-v2-0.html",
+      interfaceKind: "digital",
+      detailKind: "utility",
+      primaryModel: "Grove IMU10DOFV20 controller",
+      manufacturerPartNumber: "GROVE-GROVEIMU10DOFV20",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveI2CThermocoupleAmplifierMCP9600 = () => (
-  <GroveCatalogueModule
-    name={"GroveI2CThermocoupleAmplifierMCP9600"}
-    title={"Grove - I2C Thermocouple Amplifier (MCP9600)"}
-    category={"Temperature"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveI2CThermocoupleAmplifierMCP9600",
+      title: "Grove - I2C Thermocouple Amplifier (MCP9600)",
+      category: "Temperature",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "i2c",
+      detailKind: "sensor",
+      primaryModel: "MCP9600",
+      manufacturerPartNumber: "MCP9600",
+      powerVoltage: "5V",
+    }}
   />
 )
 

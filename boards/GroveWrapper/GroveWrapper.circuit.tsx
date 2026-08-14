@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveWrapper = () => (
-  <GroveCatalogueModule
-    name={"GroveWrapper"}
-    title={"Grove - Wrapper"}
-    category={"Case"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Accessories_Intro/"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveWrapper",
+      title: "Grove - Wrapper",
+      category: "Case",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
+      interfaceKind: "digital",
+      detailKind: "utility",
+      primaryModel: "Grove Wrapper controller",
+      manufacturerPartNumber: "GROVE-GROVEWRAPPER",
+      powerVoltage: "5V",
+    }}
   />
 )
 

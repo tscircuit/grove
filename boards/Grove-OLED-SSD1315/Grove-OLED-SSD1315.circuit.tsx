@@ -20,6 +20,22 @@ const OledPanel = () => (
       pin13: "C2P",
       pin14: "C2N",
     }}
+    pinAttributes={{
+      VSS: { requiresGround: true },
+      VDD: { requiresPower: true, requiresVoltage: "3.3V" },
+      SCL: { mustBeConnected: true, isGpio: true },
+      SDA: { mustBeConnected: true, isGpio: true },
+      RESET: { mustBeConnected: true },
+      IREF: { mustBeConnected: true },
+      VCOMH: { mustBeConnected: true },
+      VCC: { requiresPower: true, requiresVoltage: "3.3V" },
+      VBAT: { requiresPower: true, requiresVoltage: "3.3V" },
+      ADDR: { mustBeConnected: true },
+      C1P: { mustBeConnected: true },
+      C1N: { mustBeConnected: true },
+      C2P: { mustBeConnected: true },
+      C2N: { mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <smtpad shape="rect" width="0.7mm" height="2mm" pcbX={-6.5} pcbY={-7} portHints={["pin1"]} />
@@ -48,11 +64,11 @@ const OledPanel = () => (
 )
 
 export const GroveOledSsd1315 = () => (
-  <board name="GroveOledSsd1315" title="Grove - OLED Display 0.96 inch (SSD1315) v1.0" width="40mm" height="20mm" borderRadius="1mm" solderMaskColor="blue" placementDrcChecksDisabled>
+  <board name="GroveOledSsd1315" title="Grove - OLED Display 0.96 inch (SSD1315) v1.0" width="40mm" height="20mm" borderRadius="1mm" solderMaskColor="blue">
     <GroveMountingHoles x={18} y={8} />
-    <GroveConnector kind="i2c" pcbX={-14} pcbY={0} pcbRotation={90} schX={-11} schY={0} />
+    <GroveConnector kind="i2c" pcbX={-14} pcbY={0} pcbRotation={-90} schX={-11} schY={0} />
     <OledPanel />
-    <chip name="U1" displayName="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} footprint="sot23" pcbX={-8} pcbY={0} schX={-6} schY={5} />
+    <chip name="U1" displayName="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { requiresPower: true, requiresVoltage: "3.3V" }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-8} pcbY={0} schX={-6} schY={5} schHeight="0.4mm" />
     <mosfet name="Q1" displayName="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={3} schX={0} schY={3} />
     <mosfet name="Q2" displayName="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={-3} schX={0} schY={-3} />
     <resistor name="R1" resistance="4.7k" footprint="0402" pcbX={-6} pcbY={6} schX={-3} schY={6} />
@@ -61,11 +77,11 @@ export const GroveOledSsd1315 = () => (
     <resistor name="R4" resistance="4.7k" footprint="0402" pcbX={-2} pcbY={-6} schX={3} schY={-6} />
     <resistor name="R5" resistance="4.7k" footprint="0402" pcbX={3} pcbY={7} schX={7} schY={6} />
     <resistor name="R6" resistance="620k" footprint="0402" pcbX={7} pcbY={7} schX={12} schY={5} />
-    <capacitor name="C1" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={5} schX={-7} schY={7} />
-    <capacitor name="C2" capacitance="10uF" footprint="0603" pcbX={-10} pcbY={0} pcbRotation={90} schX={-5} schY={7} />
-    <capacitor name="C3" capacitance="1uF" footprint="0402" pcbX={11} pcbY={7} schX={13} schY={2} />
-    <capacitor name="C4" capacitance="1uF" footprint="0402" pcbX={14} pcbY={7} schX={13} schY={0} />
-    <capacitor name="C5" capacitance="10uF" footprint="0603" pcbX={5.5} pcbY={-8.1} pcbRotation={-90} schX={13} schY={-3} />
+    <capacitor name="C1" capacitance="10uF" footprint="0603" pcbX={-12} pcbY={5} schX={-7} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
+    <capacitor name="C2" capacitance="10uF" footprint="0603" pcbX={-11} pcbY={0} pcbRotation={90} schX={-5} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
+    <capacitor name="C3" capacitance="1uF" footprint="0402" pcbX={11} pcbY={7} schX={13} schY={2} schOrientation="vertical" />
+    <capacitor name="C4" capacitance="1uF" footprint="0402" pcbX={14} pcbY={7} schX={13} schY={0} schOrientation="vertical" />
+    <capacitor name="C5" capacitance="10uF" footprint="0603" pcbX={-2} pcbY={-8} pcbRotation={-90} schX={13} schY={-3} schOrientation="vertical" />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="J1.VCC" to="R1.pin1" />
     <trace from="J1.VCC" to="R3.pin1" />

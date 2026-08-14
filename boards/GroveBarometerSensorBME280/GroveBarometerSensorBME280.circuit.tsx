@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveBarometerSensorBME280 = () => (
-  <GroveCatalogueModule
-    name={"GroveBarometerSensorBME280"}
-    title={"Grove - Barometer Sensor(BME280)"}
-    category={"Barometer"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveBarometerSensorBME280",
+      title: "Grove - Barometer Sensor(BME280)",
+      category: "Barometer",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "i2c",
+      detailKind: "sensor",
+      primaryModel: "BME280",
+      manufacturerPartNumber: "BME280",
+      powerVoltage: "5V",
+    }}
   />
 )
 

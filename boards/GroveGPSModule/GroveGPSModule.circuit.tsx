@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveGPSModule = () => (
-  <GroveCatalogueModule
-    name={"GroveGPSModule"}
-    title={"Grove GPS Module"}
-    category={"Communications"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-GPS-Module.html"}
-    interfaceKind={"uart"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveGPSModule",
+      title: "Grove GPS Module",
+      category: "Communications",
+      sourceUrl: "https://www.seeedstudio.com/Grove-GPS-Module.html",
+      interfaceKind: "uart",
+      detailKind: "communications",
+      primaryModel: "Grove GPSModule controller",
+      manufacturerPartNumber: "GROVE-GROVEGPSMODULE",
+      powerVoltage: "5V",
+    }}
   />
 )
 

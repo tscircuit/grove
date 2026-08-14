@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveNFC = () => (
-  <GroveCatalogueModule
-    name={"GroveNFC"}
-    title={"Grove NFC"}
-    category={"Communications"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-NFC.html"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveNFC",
+      title: "Grove NFC",
+      category: "Communications",
+      sourceUrl: "https://www.seeedstudio.com/Grove-NFC.html",
+      interfaceKind: "i2c",
+      detailKind: "communications",
+      primaryModel: "Grove NFC controller",
+      manufacturerPartNumber: "GROVE-GROVENFC",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -45,6 +45,10 @@ export const TactileButton = ({
     name={name}
     displayName="6 mm tactile button"
     pinLabels={{ pin1: "A", pin2: "B" }}
+    pinAttributes={{
+      A: { requiresPower: true, mustBeConnected: true },
+      B: { requiresGround: true, mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-3.25} pcbY={0} portHints={["pin1"]} />
@@ -73,6 +77,7 @@ export const GroveConnector = ({
     kind === "i2c" ? "SCL" : kind === "uart" ? "RX" : "SIG"
   const signal2 =
     kind === "i2c" ? "SDA" : kind === "uart" ? "TX" : "NC"
+  const signal2IsActive = kind === "i2c" || kind === "uart"
 
   return (
     <jumper
@@ -85,6 +90,14 @@ export const GroveConnector = ({
         pin3: "VCC",
         pin4: "GND",
       }}
+      pinAttributes={{
+        [signal1]: { mustBeConnected: true, isGpio: true },
+        [signal2]: signal2IsActive
+          ? { mustBeConnected: true, isGpio: true }
+          : { doNotConnect: true },
+        VCC: { requiresPower: true, requiresVoltage: "5V" },
+        GND: { requiresGround: true },
+      }}
       footprint={<GroveConnectorFootprint />}
       pcbX={pcbX}
       pcbY={pcbY}
@@ -92,8 +105,8 @@ export const GroveConnector = ({
       schX={schX}
       schY={schY}
       schRotation={schRotation}
-      schWidth="3.5mm"
-      schHeight="2.5mm"
+      schWidth="1.3mm"
+      schHeight="1mm"
       schPinArrangement={{
         rightSide: [signal1, signal2, "VCC", "GND"],
       }}
@@ -142,6 +155,10 @@ export const TwoPinModule = ({
     name={name}
     displayName={label}
     pinLabels={{ pin1: "POS", pin2: "NEG" }}
+    pinAttributes={{
+      POS: { requiresPower: true, mustBeConnected: true },
+      NEG: { requiresGround: true, mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <platedhole

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const Grove2ChannelInductiveSensorLDC1612 = () => (
-  <GroveCatalogueModule
-    name={"Grove2ChannelInductiveSensorLDC1612"}
-    title={"Grove - 2-Channel Inductive Sensor(LDC1612)"}
-    category={"Touch"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "Grove2ChannelInductiveSensorLDC1612",
+      title: "Grove - 2-Channel Inductive Sensor(LDC1612)",
+      category: "Touch",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "digital",
+      detailKind: "input",
+      primaryModel: "Grove 2ChannelInductiveSensorLDC1612 controller",
+      manufacturerPartNumber: "GROVE-GROVE2CHANNELINDUCTIVESENSORLDC1612",
+      powerVoltage: "5V",
+    }}
   />
 )
 

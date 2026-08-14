@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveThermalImagingCameraIRArrayMLX90640110Degree = () => (
-  <GroveCatalogueModule
-    name={"GroveThermalImagingCameraIRArrayMLX90640110Degree"}
-    title={"Grove Thermal Imaging Camera IR Array MLX90640 110 degree"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Thermal-Imaging-Camera-IR-Array-MLX90640-110-degree-p-4334.html"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveThermalImagingCameraIRArrayMLX90640110Degree",
+      title: "Grove Thermal Imaging Camera IR Array MLX90640 110 degree",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Thermal-Imaging-Camera-IR-Array-MLX90640-110-degree-p-4334.html",
+      interfaceKind: "i2c",
+      detailKind: "communications",
+      primaryModel: "MLX9064x",
+      manufacturerPartNumber: "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90640110DEGREE",
+      powerVoltage: "5V",
+    }}
   />
 )
 

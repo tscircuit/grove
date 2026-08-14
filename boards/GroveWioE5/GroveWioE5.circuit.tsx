@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveWioE5 = () => (
-  <GroveCatalogueModule
-    name={"GroveWioE5"}
-    title={"Grove Wio-E5"}
-    category={"LoRa®"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_network_module_intro/"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveWioE5",
+      title: "Grove Wio-E5",
+      category: "LoRa®",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
+      interfaceKind: "digital",
+      detailKind: "communications",
+      primaryModel: "Grove WioE5 controller",
+      manufacturerPartNumber: "GROVE-GROVEWIOE5",
+      powerVoltage: "5V",
+    }}
   />
 )
 

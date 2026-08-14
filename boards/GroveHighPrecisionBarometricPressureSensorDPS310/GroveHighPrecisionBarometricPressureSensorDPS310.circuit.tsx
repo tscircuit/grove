@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveHighPrecisionBarometricPressureSensorDPS310 = () => (
-  <GroveCatalogueModule
-    name={"GroveHighPrecisionBarometricPressureSensorDPS310"}
-    title={"Grove - High Precision Barometric Pressure Sensor DPS310"}
-    category={"Barometer"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveHighPrecisionBarometricPressureSensorDPS310",
+      title: "Grove - High Precision Barometric Pressure Sensor DPS310",
+      category: "Barometer",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "i2c",
+      detailKind: "sensor",
+      primaryModel: "DPS310",
+      manufacturerPartNumber: "DPS310",
+      powerVoltage: "5V",
+    }}
   />
 )
 

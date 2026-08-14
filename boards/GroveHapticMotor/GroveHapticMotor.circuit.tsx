@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveHapticMotor = () => (
-  <GroveCatalogueModule
-    name={"GroveHapticMotor"}
-    title={"Grove Haptic Motor"}
-    category={"Actuator"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Haptic-Motor-p-2546.html"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveHapticMotor",
+      title: "Grove Haptic Motor",
+      category: "Actuator",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Haptic-Motor-p-2546.html",
+      interfaceKind: "analog",
+      detailKind: "actuator",
+      primaryModel: "Grove HapticMotor controller",
+      manufacturerPartNumber: "GROVE-GROVEHAPTICMOTOR",
+      powerVoltage: "5V",
+    }}
   />
 )
 

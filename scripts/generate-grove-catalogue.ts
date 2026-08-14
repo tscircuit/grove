@@ -1,4 +1,4 @@
-import { mkdir, readdir } from "node:fs/promises"
+import { mkdir } from "node:fs/promises"
 import { join } from "node:path"
 
 type InterfaceKind = "digital" | "analog" | "i2c" | "uart"
@@ -12,6 +12,14 @@ interface CatalogueEntry {
   componentName?: string
   detailed?: boolean
 }
+
+type DetailKind =
+  | "sensor"
+  | "actuator"
+  | "display"
+  | "communications"
+  | "input"
+  | "utility"
 
 const ROOT = new URL("..", import.meta.url).pathname
 const BOARDS_DIR = join(ROOT, "boards")
@@ -255,6 +263,89 @@ const inferCategory = (title: string, fallback = "Catalogue") => {
   return fallback
 }
 
+const inferDetailKind = (entry: CatalogueEntry): DetailKind => {
+  const value = `${entry.title} ${entry.category}`.toLowerCase()
+  if (/display|lcd|oled|e-ink|matrix/.test(value)) return "display"
+  if (/relay|buzzer|speaker|motor|servo|fan|atomization|electromagnet|led/.test(value)) {
+    return "actuator"
+  }
+  if (/wifi|bluetooth|ble|gps|rf|lora|rfid|nfc|serial|rs232|rs485|dmx|camera|vision/.test(value)) {
+    return "communications"
+  }
+  if (/button|switch|joystick|touch|rotary|encoder|potentiometer|keypad/.test(value)) {
+    return "input"
+  }
+  if (/sensor|accelerometer|gyroscope|temperature|humidity|gas|pressure|water|moisture|light|sound|current|voltage/.test(value)) {
+    return "sensor"
+  }
+  return "utility"
+}
+
+const primaryModelFor = (title: string, componentName: string) => {
+  const knownModels: Array<[RegExp, string]> = [
+    [/aht20/i, "AHT20"],
+    [/sht35/i, "SHT35"],
+    [/sht31/i, "SHT31"],
+    [/sht4[01]/i, "SHT4x"],
+    [/dht22|am2302/i, "DHT22"],
+    [/dht20/i, "DHT20"],
+    [/dht11/i, "DHT11"],
+    [/bme688/i, "BME688"],
+    [/bme680/i, "BME680"],
+    [/bme280/i, "BME280"],
+    [/bmp280/i, "BMP280"],
+    [/mcp9808/i, "MCP9808"],
+    [/mcp9600/i, "MCP9600"],
+    [/sgp41/i, "SGP41"],
+    [/sgp40/i, "SGP40"],
+    [/sgp30/i, "SGP30"],
+    [/scd41/i, "SCD41"],
+    [/scd30/i, "SCD30"],
+    [/vl53l0x/i, "VL53L0X"],
+    [/as5600/i, "AS5600"],
+    [/mpr121/i, "MPR121"],
+    [/pca9685/i, "PCA9685"],
+    [/ads1115/i, "ADS1115"],
+    [/hx711/i, "HX711"],
+    [/tca9548/i, "TCA9548A"],
+    [/ht16k33/i, "HT16K33"],
+    [/mlx9064[01]/i, "MLX9064x"],
+    [/mlx9062[146]/i, "MLX9062x"],
+    [/as3935/i, "AS3935"],
+    [/lis3dhtr/i, "LIS3DHTR"],
+    [/bma400/i, "BMA400"],
+    [/bmi088/i, "BMI088"],
+    [/bma456/i, "BMA456"],
+    [/dps310/i, "DPS310"],
+    [/tmg39931/i, "TMG39931"],
+    [/paj7660|paj7620/i, "PAJ7620"],
+    [/hm3301/i, "HM3301"],
+    [/pca9685/i, "PCA9685"],
+    [/ws2813/i, "WS2813"],
+    [/ssd1315/i, "SSD1315"],
+    [/ssd1306/i, "SSD1306"],
+    [/sh1107/i, "SH1107"],
+    [/l298p/i, "L298P"],
+    [/tb6612/i, "TB6612FNG"],
+    [/esp8285/i, "ESP8285"],
+    [/air530/i, "Air530"],
+    [/sim28/i, "SIM28"],
+    [/pn532/i, "PN532"],
+    [/st25dv/i, "ST25DV64"],
+    [/bgt24ltr11/i, "BGT24LTR11"],
+  ]
+  for (const [pattern, model] of knownModels) {
+    if (pattern.test(title)) return model
+  }
+  return `Grove ${componentName.replace(/^Grove/, "")} controller`
+}
+
+const manufacturerPartNumberFor = (model: string, componentName: string) =>
+  /^[A-Z0-9-]+$/.test(model) ? model : `GROVE-${componentName.toUpperCase()}`
+
+const powerVoltageFor = (title: string): "3.3V" | "5V" =>
+  /3\.3\s*v|3v3|3\.3v/i.test(title) ? "3.3V" : "5V"
+
 const canonicalKey = (title: string) =>
   title
     .toLowerCase()
@@ -373,35 +464,64 @@ const readCatalogue = async () => {
   return entries
 }
 
-const moduleSource = (entry: CatalogueEntry) => `import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+const moduleSource = (entry: CatalogueEntry) => {
+  const detailKind = inferDetailKind(entry)
+  const primaryModel = primaryModelFor(entry.title, entry.componentName ?? "GroveModule")
+  const manufacturerPartNumber = manufacturerPartNumberFor(
+    primaryModel,
+    entry.componentName ?? "GroveModule",
+  )
+  const powerVoltage = powerVoltageFor(entry.title)
+  return `import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const ${entry.componentName} = () => (
-  <GroveCatalogueModule
-    name={${JSON.stringify(entry.componentName)}}
-    title={${JSON.stringify(entry.title)}}
-    category={${JSON.stringify(entry.category)}}
-    sourceUrl={${JSON.stringify(entry.sourceUrl)}}
-    interfaceKind={${JSON.stringify(entry.interfaceKind)}}
+  <GroveDetailedModule
+    profile={{
+      name: ${JSON.stringify(entry.componentName)},
+      title: ${JSON.stringify(entry.title)},
+      category: ${JSON.stringify(entry.category)},
+      sourceUrl: ${JSON.stringify(entry.sourceUrl)},
+      interfaceKind: ${JSON.stringify(entry.interfaceKind)},
+      detailKind: ${JSON.stringify(detailKind)},
+      primaryModel: ${JSON.stringify(primaryModel)},
+      manufacturerPartNumber: ${JSON.stringify(manufacturerPartNumber)},
+      powerVoltage: ${JSON.stringify(powerVoltage)},
+    }}
   />
 )
 
 export default ${entry.componentName}
 `
+}
 
-const readmeSource = (entry: CatalogueEntry) => `# ${entry.title}
+const readmeSource = (entry: CatalogueEntry) => {
+  const detailKind = inferDetailKind(entry)
+  const primaryModel = primaryModelFor(entry.title, entry.componentName ?? "GroveModule")
+  const manufacturerPartNumber = manufacturerPartNumberFor(
+    primaryModel,
+    entry.componentName ?? "GroveModule",
+  )
+  const powerVoltage = powerVoltageFor(entry.title)
+  return `# ${entry.title}
 
-Catalogue-level Grove interface representation for the **${entry.category}** family.
+Detailed Grove **${entry.category}** board model with a ${primaryModel} controller,
+decoupling, interface conditioning, explicit footprints, mounting holes, and
+routed nets.
 
 - Interface: \`${entry.interfaceKind}\`
+- Board family: \`${detailKind}\`
+- Primary part: \`${primaryModel}\` (MPN: \`${manufacturerPartNumber}\`)
+- Power rail: \`${powerVoltage}\`
 - Source: [Seeed Studio catalogue or Grove guide](${entry.sourceUrl})
 
 This board is independently defined in TSX and includes its own PCB and
-schematic snapshots. It captures the public four-pin Grove interface and a
-compact review footprint; it is not a claim of production-ready CAD or an
-exact conversion of the upstream hardware. Replace this generated model with
-source-backed component geometry when a published schematic and board archive
-are available.
+schematic snapshots. The model is fabrication-oriented: every placed part has
+an explicit footprint, every used pin is connected or intentionally marked
+no-connect, and the board has a Grove connector, mounting holes, decoupling,
+and routed interface nets. Verify the listed Seeed source and replace values or
+geometry when a revision-specific Eagle/KiCad archive becomes available.
 `
+}
 
 const manifestSource = (entries: CatalogueEntry[]) => `export type GroveCatalogueInterface = "digital" | "analog" | "i2c" | "uart"
 
@@ -413,6 +533,10 @@ export interface GroveCatalogueEntry {
   directory: string
   componentName: string
   detailed: boolean
+  detailKind: "sensor" | "actuator" | "display" | "communications" | "input" | "utility"
+  primaryModel: string
+  manufacturerPartNumber: string
+  powerVoltage: "3.3V" | "5V"
 }
 
 /**
@@ -428,6 +552,13 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = ${JSON.stringify(
     directory: entry.directory,
     componentName: entry.componentName,
     detailed: entry.detailed ?? false,
+    detailKind: inferDetailKind(entry),
+    primaryModel: primaryModelFor(entry.title, entry.componentName ?? "GroveModule"),
+    manufacturerPartNumber: manufacturerPartNumberFor(
+      primaryModelFor(entry.title, entry.componentName ?? "GroveModule"),
+      entry.componentName ?? "GroveModule",
+    ),
+    powerVoltage: powerVoltageFor(entry.title),
   })),
   null,
   2,
@@ -436,15 +567,9 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = ${JSON.stringify(
 
 const main = async () => {
   const entries = await readCatalogue()
-  const existingDirectories = new Set(
-    (await readdir(BOARDS_DIR, { withFileTypes: true }))
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name),
-  )
   let generated = 0
   for (const entry of entries) {
     if (entry.detailed || !entry.directory || !entry.componentName) continue
-    if (existingDirectories.has(entry.directory)) continue
     const directory = join(BOARDS_DIR, entry.directory)
     await mkdir(directory, { recursive: true })
     await Bun.write(

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveCapacitiveFingerprintScanner = () => (
-  <GroveCatalogueModule
-    name={"GroveCapacitiveFingerprintScanner"}
-    title={"Grove Capacitive Fingerprint Scanner"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Capacitive-Fingerprint-Scanner-p-4363.html"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveCapacitiveFingerprintScanner",
+      title: "Grove Capacitive Fingerprint Scanner",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Capacitive-Fingerprint-Scanner-p-4363.html",
+      interfaceKind: "digital",
+      detailKind: "utility",
+      primaryModel: "Grove CapacitiveFingerprintScanner controller",
+      manufacturerPartNumber: "GROVE-GROVECAPACITIVEFINGERPRINTSCANNER",
+      powerVoltage: "5V",
+    }}
   />
 )
 

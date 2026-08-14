@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveDigitalLightSensor = () => (
-  <GroveCatalogueModule
-    name={"GroveDigitalLightSensor"}
-    title={"Grove - Digital Light Sensor"}
-    category={"Light"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveDigitalLightSensor",
+      title: "Grove - Digital Light Sensor",
+      category: "Light",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "Grove DigitalLightSensor controller",
+      manufacturerPartNumber: "GROVE-GROVEDIGITALLIGHTSENSOR",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveYellowLEDButton = () => (
-  <GroveCatalogueModule
-    name={"GroveYellowLEDButton"}
-    title={"Grove Yellow LED Button"}
-    category={"Light & LED"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Yellow-LED-Button.html"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveYellowLEDButton",
+      title: "Grove Yellow LED Button",
+      category: "Light & LED",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Yellow-LED-Button.html",
+      interfaceKind: "analog",
+      detailKind: "actuator",
+      primaryModel: "Grove YellowLEDButton controller",
+      manufacturerPartNumber: "GROVE-GROVEYELLOWLEDBUTTON",
+      powerVoltage: "5V",
+    }}
   />
 )
 

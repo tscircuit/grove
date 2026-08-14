@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveMiniCamera = () => (
-  <GroveCatalogueModule
-    name={"GroveMiniCamera"}
-    title={"Grove Mini Camera"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Mini-Camera-p-1578.html"}
-    interfaceKind={"uart"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveMiniCamera",
+      title: "Grove Mini Camera",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Mini-Camera-p-1578.html",
+      interfaceKind: "uart",
+      detailKind: "communications",
+      primaryModel: "Grove MiniCamera controller",
+      manufacturerPartNumber: "GROVE-GROVEMINICAMERA",
+      powerVoltage: "5V",
+    }}
   />
 )
 

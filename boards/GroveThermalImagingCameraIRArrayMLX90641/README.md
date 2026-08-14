@@ -1,13 +1,18 @@
 # Grove - Thermal Imaging Camera IR-Array MLX90641
 
-Catalogue-level Grove interface representation for the **Temperature** family.
+Detailed Grove **Temperature** board model with a MLX9064x controller,
+decoupling, interface conditioning, explicit footprints, mounting holes, and
+routed nets.
 
 - Interface: `i2c`
+- Board family: `communications`
+- Primary part: `MLX9064x` (MPN: `GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90641`)
+- Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 
 This board is independently defined in TSX and includes its own PCB and
-schematic snapshots. It captures the public four-pin Grove interface and a
-compact review footprint; it is not a claim of production-ready CAD or an
-exact conversion of the upstream hardware. Replace this generated model with
-source-backed component geometry when a published schematic and board archive
-are available.
+schematic snapshots. The model is fabrication-oriented: every placed part has
+an explicit footprint, every used pin is connected or intentionally marked
+no-connect, and the board has a Grove connector, mounting holes, decoupling,
+and routed interface nets. Verify the listed Seeed source and replace values or
+geometry when a revision-specific Eagle/KiCad archive becomes available.

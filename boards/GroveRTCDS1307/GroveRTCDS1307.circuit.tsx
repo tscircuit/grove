@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveRTCDS1307 = () => (
-  <GroveCatalogueModule
-    name={"GroveRTCDS1307"}
-    title={"Grove RTC DS1307"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-RTC-DS1307.html"}
-    interfaceKind={"i2c"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveRTCDS1307",
+      title: "Grove RTC DS1307",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-RTC-DS1307.html",
+      interfaceKind: "i2c",
+      detailKind: "utility",
+      primaryModel: "Grove RTCDS1307 controller",
+      manufacturerPartNumber: "GROVE-GROVERTCDS1307",
+      powerVoltage: "5V",
+    }}
   />
 )
 

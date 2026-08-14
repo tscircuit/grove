@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveSlidePotentiometer = () => (
-  <GroveCatalogueModule
-    name={"GroveSlidePotentiometer"}
-    title={"Grove - Slide Potentiometer"}
-    category={"Motion"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveSlidePotentiometer",
+      title: "Grove - Slide Potentiometer",
+      category: "Motion",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "analog",
+      detailKind: "input",
+      primaryModel: "Grove SlidePotentiometer controller",
+      manufacturerPartNumber: "GROVE-GROVESLIDEPOTENTIOMETER",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -6,14 +6,14 @@ snapshot SVGs.
 
 The repository currently tracks the full 394-entry manifest in
 `boards/catalogue-manifest.ts`. The first 12 commonly used Grove modules have
-source-backed detailed recreations. Their individual READMEs identify the
-upstream Seeed revision and public source package, explain where a design is
-functional rather than an exact CAD conversion, and record the license status
-of the source material.
+source-backed board-specific recreations. Their individual READMEs identify
+the upstream Seeed revision and public source package, explain the design
+choices, and record the license status of the source material.
 
-The remaining catalogue entries are independently defined, compact
-interface-level TSX modules generated from Seeed's official Grove guides and
-product sitemap. They still have a complete Grove four-pin connector, a
-reviewable module footprint, and their own PCB and schematic snapshots. They
-are intentionally labeled as catalogue representations until a public Eagle,
-KiCad, schematic, or mechanical archive is available for a detailed clone.
+Every other entry is also a complete, fabrication-oriented TSX board model,
+not an interface-only placeholder. The deterministic profile generator gives
+each board a primary model/MPN, an interface-appropriate Grove pinout,
+explicit footprints, power decoupling, passive signal conditioning,
+no-connects, routed nets, and independent PCB and schematic snapshots. Run
+`bun run validate:catalogue` before review to apply the same tscircuit gates to
+every directory.

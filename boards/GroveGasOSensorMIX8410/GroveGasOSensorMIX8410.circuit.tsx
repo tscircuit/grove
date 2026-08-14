@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveGasOSensorMIX8410 = () => (
-  <GroveCatalogueModule
-    name={"GroveGasOSensorMIX8410"}
-    title={"Grove - Gas O₂ Sensor(MIX8410)"}
-    category={"Gas"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveGasOSensorMIX8410",
+      title: "Grove - Gas O₂ Sensor(MIX8410)",
+      category: "Gas",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "Grove GasOSensorMIX8410 controller",
+      manufacturerPartNumber: "GROVE-GROVEGASOSENSORMIX8410",
+      powerVoltage: "5V",
+    }}
   />
 )
 

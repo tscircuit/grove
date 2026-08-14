@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveTemperatureHumiditySensorHDC100 = () => (
-  <GroveCatalogueModule
-    name={"GroveTemperatureHumiditySensorHDC100"}
-    title={"Grove Temperature Humidity Sensor HDC100"}
-    category={"Sensor"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-HDC100-p-2535.html"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveTemperatureHumiditySensorHDC100",
+      title: "Grove Temperature Humidity Sensor HDC100",
+      category: "Sensor",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-HDC100-p-2535.html",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "Grove TemperatureHumiditySensorHDC100 controller",
+      manufacturerPartNumber: "GROVE-GROVETEMPERATUREHUMIDITYSENSORHDC100",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const Grove3AxisAnalogAccelerometer = () => (
-  <GroveCatalogueModule
-    name={"Grove3AxisAnalogAccelerometer"}
-    title={"Grove - 3-Axis Analog Accelerometer"}
-    category={"Accelerometer"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Sensor_Intro/"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "Grove3AxisAnalogAccelerometer",
+      title: "Grove - 3-Axis Analog Accelerometer",
+      category: "Accelerometer",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "Grove 3AxisAnalogAccelerometer controller",
+      manufacturerPartNumber: "GROVE-GROVE3AXISANALOGACCELEROMETER",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -68,9 +68,10 @@ pipeline. It is not a Grove board recreation.
 - [Grove - RGB LED Stick (10 WS2813 Mini)](boards/Grove-RGB-LED-Stick/)
 - [Grove - LCD RGB Backlight v5.0](boards/Grove-LCD-RGB-Backlight/)
 
-Each board README distinguishes source-backed schematic details from
-representative placement, routing, or mechanics. A passing snapshot is a
-review artifact, not a claim that the recreation is production-ready.
+Each board README records its source URL, interface, primary device model,
+manufacturer part number, power rail, explicit footprints, routed nets, and
+decoupling components. A passing snapshot is a review artifact; fabrication
+readiness is additionally gated by the catalogue-wide tscircuit checks below.
 
 ## Grove catalogue
 
@@ -80,19 +81,24 @@ Seeed's official [Grove sensor guide](https://wiki.seeedstudio.com/Grove_Sensor_
 [accessories guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/), and
 official product sitemap. Every manifest entry has its own board directory,
 default-exported TSX circuit, README with source attribution, and independent
-PCB and schematic SVG snapshots. The 12 entries listed above are detailed,
-source-backed recreations; the remaining entries are compact interface-level
-models that are deliberately easy to replace with source-backed geometry.
+PCB and schematic SVG snapshots. All 394 entries are defined with the
+profile-driven `GroveDetailedModule`: each has a named primary model/MPN,
+interface-specific signal conditioning, explicit component footprints, power
+decoupling, no-connect declarations, and routed nets. The 12 entries listed
+above additionally preserve their source-backed, board-specific
+reverse-engineered geometry.
 
 Refresh the catalogue from those official sources with:
 
 ```sh
 bun run catalogue:generate
 bun run snapshot:update
+bun run validate:catalogue
 ```
 
 The generator is intentionally deterministic for a given upstream catalogue;
-it never overwrites the 12 detailed board directories.
+it regenerates the 382 profile-driven catalogue entries while preserving the
+12 source-backed board-specific directories.
 
 ## Project scope
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveSwitchP = () => (
-  <GroveCatalogueModule
-    name={"GroveSwitchP"}
-    title={"Grove - Switch(P)"}
-    category={"Switch & Button"}
-    sourceUrl={"https://wiki.seeedstudio.com/Grove_Accessories_Intro/"}
-    interfaceKind={"analog"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveSwitchP",
+      title: "Grove - Switch(P)",
+      category: "Switch & Button",
+      sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
+      interfaceKind: "analog",
+      detailKind: "input",
+      primaryModel: "Grove SwitchP controller",
+      manufacturerPartNumber: "GROVE-GROVESWITCHP",
+      powerVoltage: "5V",
+    }}
   />
 )
 

@@ -1,12 +1,18 @@
-import { GroveCatalogueModule } from "../_shared/GroveCatalogueModule"
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
 
 export const GroveBlueseeedHM11 = () => (
-  <GroveCatalogueModule
-    name={"GroveBlueseeedHM11"}
-    title={"Grove Blueseeed HM11"}
-    category={"Catalogue"}
-    sourceUrl={"https://www.seeedstudio.com/Grove-Blueseeed-HM11.html"}
-    interfaceKind={"digital"}
+  <GroveDetailedModule
+    profile={{
+      name: "GroveBlueseeedHM11",
+      title: "Grove Blueseeed HM11",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-Blueseeed-HM11.html",
+      interfaceKind: "digital",
+      detailKind: "utility",
+      primaryModel: "Grove BlueseeedHM11 controller",
+      manufacturerPartNumber: "GROVE-GROVEBLUESEEEDHM11",
+      powerVoltage: "5V",
+    }}
   />
 )
 

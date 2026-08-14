@@ -8,6 +8,10 @@ export interface GroveCatalogueEntry {
   directory: string
   componentName: string
   detailed: boolean
+  detailKind: "sensor" | "actuator" | "display" | "communications" | "input" | "utility"
+  primaryModel: string
+  manufacturerPartNumber: string
+  powerVoltage: "3.3V" | "5V"
 }
 
 /**
@@ -22,7 +26,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-Button",
     "componentName": "GroveButton",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "input",
+    "primaryModel": "Grove Button controller",
+    "manufacturerPartNumber": "GROVE-GROVEBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Buzzer v1.1b",
@@ -31,7 +39,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-Buzzer",
     "componentName": "GroveBuzzer",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Buzzer controller",
+    "manufacturerPartNumber": "GROVE-GROVEBUZZER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Capacitive Moisture Sensor (Corrosion Resistant)",
@@ -40,7 +52,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove-Capacitive-Moisture",
     "componentName": "GroveCapacitiveMoisture",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "sensor",
+    "primaryModel": "Grove CapacitiveMoisture controller",
+    "manufacturerPartNumber": "GROVE-GROVECAPACITIVEMOISTURE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature & Humidity Sensor DHT20 v2.1",
@@ -49,7 +65,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove-DHT20",
     "componentName": "GroveDht20",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "sensor",
+    "primaryModel": "DHT20",
+    "manufacturerPartNumber": "DHT20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Digital PIR Motion Sensor v1.0",
@@ -58,7 +78,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-Digital-PIR",
     "componentName": "GroveDigitalPir",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DigitalPir controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALPIR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - LCD RGB Backlight v5.0",
@@ -67,7 +91,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove-LCD-RGB-Backlight",
     "componentName": "GroveLcdRgbBacklight",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "display",
+    "primaryModel": "Grove LcdRgbBacklight controller",
+    "manufacturerPartNumber": "GROVE-GROVELCDRGBBACKLIGHT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Light Sensor v1.2",
@@ -76,7 +104,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove-Light-Sensor",
     "componentName": "GroveLightSensor",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "sensor",
+    "primaryModel": "Grove LightSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVELIGHTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - OLED Display 0.96 inch (SSD1315) v1.0",
@@ -85,7 +117,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove-OLED-SSD1315",
     "componentName": "GroveOledSsd1315",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "display",
+    "primaryModel": "SSD1315",
+    "manufacturerPartNumber": "SSD1315",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Relay v1.2",
@@ -94,7 +130,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-Relay",
     "componentName": "GroveRelay",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Relay controller",
+    "manufacturerPartNumber": "GROVE-GROVERELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - RGB LED Stick (10 WS2813 Mini)",
@@ -103,7 +143,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-RGB-LED-Stick",
     "componentName": "GroveRgbLedStick",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Rotary Angle Sensor v1.2",
@@ -112,7 +156,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove-Rotary-Angle-Sensor",
     "componentName": "GroveRotaryAngleSensor",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "input",
+    "primaryModel": "Grove RotaryAngleSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEROTARYANGLESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Ultrasonic Ranger v2.0",
@@ -121,7 +169,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove-Ultrasonic-Ranger",
     "componentName": "GroveUltrasonicRanger",
-    "detailed": true
+    "detailed": true,
+    "detailKind": "utility",
+    "primaryModel": "Grove UltrasonicRanger controller",
+    "manufacturerPartNumber": "GROVE-GROVEULTRASONICRANGER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - AHT20 I2C Industrial Grade Temperature&Humidity Sensor",
@@ -130,7 +182,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAHT20I2CIndustrialGradeTemperatureHumiditySensor",
     "componentName": "GroveAHT20I2CIndustrialGradeTemperatureHumiditySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "AHT20",
+    "manufacturerPartNumber": "AHT20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temp and Humi Sensor(SHT31)",
@@ -139,7 +195,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTempAndHumiSensorSHT31",
     "componentName": "GroveTempAndHumiSensorSHT31",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SHT31",
+    "manufacturerPartNumber": "SHT31",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C High Accuracy Temp&Humi Sensor(SHT35)",
@@ -148,7 +208,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CHighAccuracyTempHumiSensorSHT35",
     "componentName": "GroveI2CHighAccuracyTempHumiSensorSHT35",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SHT35",
+    "manufacturerPartNumber": "SHT35",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature&Humidity Sensor Pro(DHT22)",
@@ -157,7 +221,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorProDHT22",
     "componentName": "GroveTemperatureHumiditySensorProDHT22",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DHT22",
+    "manufacturerPartNumber": "DHT22",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature&Humidity Sensor (DHT11)",
@@ -166,7 +234,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorDHT11",
     "componentName": "GroveTemperatureHumiditySensorDHT11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DHT11",
+    "manufacturerPartNumber": "DHT11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature&Humidity Sensor(DHT20)",
@@ -175,7 +247,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorDHT20",
     "componentName": "GroveTemperatureHumiditySensorDHT20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DHT20",
+    "manufacturerPartNumber": "DHT20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature&Humidity Sensor (High-Accuracy &Mini) v1.0",
@@ -184,7 +260,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorHighAccuracyMiniV10",
     "componentName": "GroveTemperatureHumiditySensorHighAccuracyMiniV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureHumiditySensorHighAccuracyMiniV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATUREHUMIDITYSENSORHIGHACCURACYMINIV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature & Humidity Sensor",
@@ -193,7 +273,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensor",
     "componentName": "GroveTemperatureHumiditySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureHumiditySensor controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATUREHUMIDITYSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 1-Wire Thermocouple Amplifier(MAX31850K)",
@@ -202,7 +286,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove1WireThermocoupleAmplifierMAX31850K",
     "componentName": "Grove1WireThermocoupleAmplifierMAX31850K",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 1WireThermocoupleAmplifierMAX31850K controller",
+    "manufacturerPartNumber": "GROVE-GROVE1WIRETHERMOCOUPLEAMPLIFIERMAX31850K",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Thermocouple Amplifier (MCP9600)",
@@ -211,7 +299,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CThermocoupleAmplifierMCP9600",
     "componentName": "GroveI2CThermocoupleAmplifierMCP9600",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "MCP9600",
+    "manufacturerPartNumber": "MCP9600",
+    "powerVoltage": "5V"
   },
   {
     "title": "One Wire Temperature Sensor DS18B20",
@@ -220,7 +312,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOneWireTemperatureSensorDS18B20",
     "componentName": "GroveOneWireTemperatureSensorDS18B20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OneWireTemperatureSensorDS18B20 controller",
+    "manufacturerPartNumber": "GROVE-GROVEONEWIRETEMPERATURESENSORDS18B20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - High Temperature Sensor",
@@ -229,7 +325,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveHighTemperatureSensor",
     "componentName": "GroveHighTemperatureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove HighTemperatureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEHIGHTEMPERATURESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Thermal Imaging Camera IR-Array MLX90641",
@@ -238,7 +338,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraIRArrayMLX90641",
     "componentName": "GroveThermalImagingCameraIRArrayMLX90641",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9064x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90641",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Digital Infrared Temperature Sensor",
@@ -247,7 +351,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDigitalInfraredTemperatureSensor",
     "componentName": "GroveDigitalInfraredTemperatureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DigitalInfraredTemperatureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALINFRAREDTEMPERATURESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Infrared Temperature Sensor",
@@ -256,7 +364,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveInfraredTemperatureSensor",
     "componentName": "GroveInfraredTemperatureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove InfraredTemperatureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDTEMPERATURESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Infrared Temperature Sensor Array(AMG8833)",
@@ -265,7 +377,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveInfraredTemperatureSensorArrayAMG8833",
     "componentName": "GroveInfraredTemperatureSensorArrayAMG8833",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove InfraredTemperatureSensorArrayAMG8833 controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDTEMPERATURESENSORARRAYAMG8833",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-Temperature_Sensor",
@@ -274,7 +390,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveTemperatureSensor",
     "componentName": "GroveTemperatureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATURESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature Sensor V1.2",
@@ -283,7 +403,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureSensorV12",
     "componentName": "GroveTemperatureSensorV12",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureSensorV12 controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATURESENSORV12",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C High Accuracy Temperature Sensor(MCP9808)",
@@ -292,7 +416,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CHighAccuracyTemperatureSensorMCP9808",
     "componentName": "GroveI2CHighAccuracyTemperatureSensorMCP9808",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "MCP9808",
+    "manufacturerPartNumber": "MCP9808",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove SEN5X All in One",
@@ -301,7 +429,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveSEN5XAllInOne",
     "componentName": "GroveSEN5XAllInOne",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove SEN5XAllInOne controller",
+    "manufacturerPartNumber": "GROVE-GROVESEN5XALLINONE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Temperature Humidity Pressure Gas Sensor(BME680)",
@@ -310,7 +442,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTemperatureHumidityPressureGasSensorBME680",
     "componentName": "GroveTemperatureHumidityPressureGasSensorBME680",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BME680",
+    "manufacturerPartNumber": "BME680",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - CO2 & Temperature & Humidity Sensor (SCD41)",
@@ -319,7 +455,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveCO2TemperatureHumiditySensorSCD41",
     "componentName": "GroveCO2TemperatureHumiditySensorSCD41",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SCD41",
+    "manufacturerPartNumber": "SCD41",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - CO2 & Temperature & Humidity Sensor (SCD30)",
@@ -328,7 +468,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveCO2TemperatureHumiditySensorSCD30",
     "componentName": "GroveCO2TemperatureHumiditySensorSCD30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SCD30",
+    "manufacturerPartNumber": "SCD30",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Light Gesture Color Proximity Sensor (TMG39931)",
@@ -337,7 +481,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveLightGestureColorProximitySensorTMG39931",
     "componentName": "GroveLightGestureColorProximitySensorTMG39931",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "TMG39931",
+    "manufacturerPartNumber": "TMG39931",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Vision AI Module",
@@ -346,7 +494,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveVisionAIModule",
     "componentName": "GroveVisionAIModule",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove VisionAIModule controller",
+    "manufacturerPartNumber": "GROVE-GROVEVISIONAIMODULE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Vision AI Module V2",
@@ -355,7 +507,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveVisionAIModuleV2",
     "componentName": "GroveVisionAIModuleV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove VisionAIModuleV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEVISIONAIMODULEV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Smart IR Gesture Sensor (PAJ7660)",
@@ -364,7 +520,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSmartIRGestureSensorPAJ7660",
     "componentName": "GroveSmartIRGestureSensorPAJ7660",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "PAJ7620",
+    "manufacturerPartNumber": "PAJ7620",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Moisture Sensor",
@@ -373,7 +533,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMoistureSensor",
     "componentName": "GroveMoistureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MoistureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEMOISTURESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Ultrasonic Ranger",
@@ -382,7 +546,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveUltrasonicRanger2",
     "componentName": "GroveUltrasonicRanger2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove UltrasonicRanger2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEULTRASONICRANGER2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - IR Distance Interrupter v1.2",
@@ -391,7 +559,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIRDistanceInterrupterV12",
     "componentName": "GroveIRDistanceInterrupterV12",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IRDistanceInterrupterV12 controller",
+    "manufacturerPartNumber": "GROVE-GROVEIRDISTANCEINTERRUPTERV12",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - TF Mini LiDAR",
@@ -400,7 +572,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveTFMiniLiDAR",
     "componentName": "GroveTFMiniLiDAR",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove TFMiniLiDAR controller",
+    "manufacturerPartNumber": "GROVE-GROVETFMINILIDAR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-Doppler-Radar",
@@ -409,7 +585,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDopplerRadar",
     "componentName": "GroveDopplerRadar",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DopplerRadar controller",
+    "manufacturerPartNumber": "GROVE-GROVEDOPPLERRADAR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Time of Flight Distance Sensor VL53L0X",
@@ -418,7 +598,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTimeOfFlightDistanceSensorVL53L0X",
     "componentName": "GroveTimeOfFlightDistanceSensorVL53L0X",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "VL53L0X",
+    "manufacturerPartNumber": "VL53L0X",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 80cm Infrared Proximity Sensor",
@@ -427,7 +611,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove80cmInfraredProximitySensor",
     "componentName": "Grove80cmInfraredProximitySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 80cmInfraredProximitySensor controller",
+    "manufacturerPartNumber": "GROVE-GROVE80CMINFRAREDPROXIMITYSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Gesture V1.0",
@@ -436,7 +624,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGestureV10",
     "componentName": "GroveGestureV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove GestureV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGESTUREV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Adjustable PIR Motion Sensor",
@@ -445,7 +637,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveAdjustablePIRMotionSensor",
     "componentName": "GroveAdjustablePIRMotionSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove AdjustablePIRMotionSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEADJUSTABLEPIRMOTIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Laser PM2.5 Sensor (HM3301)",
@@ -454,7 +650,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveLaserPM25SensorHM3301",
     "componentName": "GroveLaserPM25SensorHM3301",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "HM3301",
+    "manufacturerPartNumber": "HM3301",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Dust Sensor",
@@ -463,7 +663,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDustSensor",
     "componentName": "GroveDustSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DustSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEDUSTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Air Quality Sensor v1.3",
@@ -472,7 +676,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveAirQualitySensorV13",
     "componentName": "GroveAirQualitySensorV13",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AirQualitySensorV13 controller",
+    "manufacturerPartNumber": "GROVE-GROVEAIRQUALITYSENSORV13",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Formaldehyde sensor",
@@ -481,7 +689,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveFormaldehydeSensor",
     "componentName": "GroveFormaldehydeSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FormaldehydeSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEFORMALDEHYDESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Gas Sensor V2(Multichannel)",
@@ -490,7 +702,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorV2Multichannel",
     "componentName": "GroveGasSensorV2Multichannel",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorV2Multichannel controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORV2MULTICHANNEL",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Gas Sensor module",
@@ -499,7 +715,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorModule",
     "componentName": "GroveGasSensorModule",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorModule controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORMODULE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Gas Sensor(O₂)",
@@ -508,7 +728,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorO",
     "componentName": "GroveGasSensorO",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorO controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Gas O₂ Sensor(MIX8410)",
@@ -517,7 +741,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasOSensorMIX8410",
     "componentName": "GroveGasOSensorMIX8410",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasOSensorMIX8410 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASOSENSORMIX8410",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Oxygen Sensor Pro(GGC2330-O2)",
@@ -526,7 +754,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOxygenSensorProGGC2330O2",
     "componentName": "GroveOxygenSensorProGGC2330O2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OxygenSensorProGGC2330O2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOXYGENSENSORPROGGC2330O2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Alcohol Sensor",
@@ -535,7 +767,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveAlcoholSensor",
     "componentName": "GroveAlcoholSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AlcoholSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEALCOHOLSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - CO2 Sensor",
@@ -544,7 +780,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveCO2Sensor",
     "componentName": "GroveCO2Sensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove CO2Sensor controller",
+    "manufacturerPartNumber": "GROVE-GROVECO2SENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove -Smart Air Quality Sensor (SGP41)",
@@ -553,7 +793,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveSmartAirQualitySensorSGP41",
     "componentName": "GroveSmartAirQualitySensorSGP41",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SGP41",
+    "manufacturerPartNumber": "SGP41",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-VOC and eCO2 Gas Sensor(SGP30)",
@@ -562,7 +806,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveVOCAndECO2GasSensorSGP30",
     "componentName": "GroveVOCAndECO2GasSensorSGP30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SGP30",
+    "manufacturerPartNumber": "SGP30",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - VOC Gas Sensor (SGP40)",
@@ -571,7 +819,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveVOCGasSensorSGP40",
     "componentName": "GroveVOCGasSensorSGP40",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SGP40",
+    "manufacturerPartNumber": "SGP40",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - HCHO Sensor",
@@ -580,7 +832,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveHCHOSensor",
     "componentName": "GroveHCHOSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove HCHOSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEHCHOSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Multichannel Gas Sensor",
@@ -589,7 +845,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMultichannelGasSensor",
     "componentName": "GroveMultichannelGasSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MultichannelGasSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEMULTICHANNELGASSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Barometer (High-Accuracy)",
@@ -598,7 +858,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveBarometerHighAccuracy",
     "componentName": "GroveBarometerHighAccuracy",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove BarometerHighAccuracy controller",
+    "manufacturerPartNumber": "GROVE-GROVEBAROMETERHIGHACCURACY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Barometer Sensor(BME280)",
@@ -607,7 +871,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveBarometerSensorBME280",
     "componentName": "GroveBarometerSensorBME280",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BME280",
+    "manufacturerPartNumber": "BME280",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Barometer Sensor (BMP280)",
@@ -616,7 +884,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveBarometerSensorBMP280",
     "componentName": "GroveBarometerSensorBMP280",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BMP280",
+    "manufacturerPartNumber": "BMP280",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - High Precision Barometric Pressure Sensor DPS310",
@@ -625,7 +897,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveHighPrecisionBarometricPressureSensorDPS310",
     "componentName": "GroveHighPrecisionBarometricPressureSensorDPS310",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DPS310",
+    "manufacturerPartNumber": "DPS310",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Integrated Pressure Sensor Kit",
@@ -634,7 +910,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveIntegratedPressureSensorKit",
     "componentName": "GroveIntegratedPressureSensorKit",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove IntegratedPressureSensorKit controller",
+    "manufacturerPartNumber": "GROVE-GROVEINTEGRATEDPRESSURESENSORKIT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - D7S Vibration Sensor",
@@ -643,7 +923,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveD7SVibrationSensor",
     "componentName": "GroveD7SVibrationSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove D7SVibrationSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVED7SVIBRATIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 3-Axis Digital Accelerometer",
@@ -652,7 +936,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer",
     "componentName": "Grove3AxisDigitalAccelerometer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 3-Axis Digital Accelerometer (LIS3DHTR)",
@@ -661,7 +949,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove3AxisDigitalAccelerometerLIS3DHTR",
     "componentName": "Grove3AxisDigitalAccelerometerLIS3DHTR",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "LIS3DHTR",
+    "manufacturerPartNumber": "LIS3DHTR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 3-Axis Analog Accelerometer",
@@ -670,7 +962,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisAnalogAccelerometer",
     "componentName": "Grove3AxisAnalogAccelerometer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisAnalogAccelerometer controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISANALOGACCELEROMETER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 3-Axis Digitial Compass v2.0",
@@ -679,7 +975,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove3AxisDigitialCompassV20",
     "componentName": "Grove3AxisDigitialCompassV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitialCompassV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITIALCOMPASSV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 3 Axis Digital Accelerometer±16g Ultra-low Power (BMA400)",
@@ -688,7 +988,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove3AxisDigitalAccelerometer16gUltraLowPowerBMA400",
     "componentName": "Grove3AxisDigitalAccelerometer16gUltraLowPowerBMA400",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BMA400",
+    "manufacturerPartNumber": "BMA400",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 6-Axis Accelerometer&Gyroscope",
@@ -697,7 +1001,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove6AxisAccelerometerGyroscope",
     "componentName": "Grove6AxisAccelerometerGyroscope",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 6AxisAccelerometerGyroscope controller",
+    "manufacturerPartNumber": "GROVE-GROVE6AXISACCELEROMETERGYROSCOPE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 6-Axis Accelerometer&Gyroscope(BMI088)",
@@ -706,7 +1014,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove6AxisAccelerometerGyroscopeBMI088",
     "componentName": "Grove6AxisAccelerometerGyroscopeBMI088",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BMI088",
+    "manufacturerPartNumber": "BMI088",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - IMU 9DOF(lcm20600+AK09918)",
@@ -715,7 +1027,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveIMU9DOFLcm20600AK09918",
     "componentName": "GroveIMU9DOFLcm20600AK09918",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove IMU9DOFLcm20600AK09918 controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU9DOFLCM20600AK09918",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Lightning Sensor AS3935",
@@ -724,7 +1040,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveLightningSensorAS3935",
     "componentName": "GroveLightningSensorAS3935",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "AS3935",
+    "manufacturerPartNumber": "AS3935",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Digital Light Sensor",
@@ -733,7 +1053,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDigitalLightSensor",
     "componentName": "GroveDigitalLightSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DigitalLightSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALLIGHTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Light Sensor",
@@ -742,7 +1066,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLightSensor2",
     "componentName": "GroveLightSensor2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove LightSensor2 controller",
+    "manufacturerPartNumber": "GROVE-GROVELIGHTSENSOR2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Sunlight Sensor",
@@ -751,7 +1079,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSunlightSensor",
     "componentName": "GroveSunlightSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove SunlightSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVESUNLIGHTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - UV Sensor",
@@ -760,7 +1092,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveUVSensor",
     "componentName": "GroveUVSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove UVSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEUVSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Infrared Receiver",
@@ -769,7 +1105,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveInfraredReceiver",
     "componentName": "GroveInfraredReceiver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove InfraredReceiver controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDRECEIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Line Finder V1.1",
@@ -778,7 +1118,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveLineFinderV11",
     "componentName": "GroveLineFinderV11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove LineFinderV11 controller",
+    "manufacturerPartNumber": "GROVE-GROVELINEFINDERV11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Flame Sensor",
@@ -787,7 +1131,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveFlameSensor",
     "componentName": "GroveFlameSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FlameSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEFLAMESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Infrared Reflective Sensor",
@@ -796,7 +1144,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveInfraredReflectiveSensor",
     "componentName": "GroveInfraredReflectiveSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove InfraredReflectiveSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDREFLECTIVESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Finger-clip Heart Rate Sensor",
@@ -805,7 +1157,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveFingerClipHeartRateSensor",
     "componentName": "GroveFingerClipHeartRateSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FingerClipHeartRateSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEFINGERCLIPHEARTRATESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - EMG Detector",
@@ -814,7 +1170,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveEMGDetector",
     "componentName": "GroveEMGDetector",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove EMGDetector controller",
+    "manufacturerPartNumber": "GROVE-GROVEEMGDETECTOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Ear-clip Heart Rate Sensor",
@@ -823,7 +1183,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveEarClipHeartRateSensor",
     "componentName": "GroveEarClipHeartRateSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove EarClipHeartRateSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEEARCLIPHEARTRATESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - GSR Sensor",
@@ -832,7 +1196,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGSRSensor",
     "componentName": "GroveGSRSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GSRSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEGSRSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Sound Sensor",
@@ -841,7 +1209,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSoundSensor",
     "componentName": "GroveSoundSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove SoundSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVESOUNDSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Loudness Sensor",
@@ -850,7 +1222,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLoudnessSensor",
     "componentName": "GroveLoudnessSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove LoudnessSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVELOUDNESSSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Analog Microphone",
@@ -859,7 +1235,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveAnalogMicrophone",
     "componentName": "GroveAnalogMicrophone",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AnalogMicrophone controller",
+    "manufacturerPartNumber": "GROVE-GROVEANALOGMICROPHONE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Recorder v2.0",
@@ -868,7 +1248,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveRecorderV20",
     "componentName": "GroveRecorderV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove RecorderV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVERECORDERV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Offline Voice Recognition",
@@ -877,7 +1261,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveOfflineVoiceRecognition",
     "componentName": "GroveOfflineVoiceRecognition",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OfflineVoiceRecognition controller",
+    "manufacturerPartNumber": "GROVE-GROVEOFFLINEVOICERECOGNITION",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Touch Sensor",
@@ -886,7 +1274,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTouchSensor",
     "componentName": "GroveTouchSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove TouchSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVETOUCHSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Rotary Angle Sensor",
@@ -895,7 +1287,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRotaryAngleSensor2",
     "componentName": "GroveRotaryAngleSensor2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove RotaryAngleSensor2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEROTARYANGLESENSOR2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Grove - Round Force Sensor FSR402",
@@ -904,7 +1300,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGroveRoundForceSensorFSR402",
     "componentName": "GroveGroveRoundForceSensorFSR402",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove GroveRoundForceSensorFSR402 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGROVEROUNDFORCESENSORFSR402",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 2-Channel Inductive Sensor(LDC1612)",
@@ -913,7 +1313,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove2ChannelInductiveSensorLDC1612",
     "componentName": "Grove2ChannelInductiveSensorLDC1612",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove 2ChannelInductiveSensorLDC1612 controller",
+    "manufacturerPartNumber": "GROVE-GROVE2CHANNELINDUCTIVESENSORLDC1612",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 12 Key Capacitive I2C Touch Sensor V3 (MPR121)",
@@ -922,7 +1326,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove12KeyCapacitiveI2CTouchSensorV3MPR121",
     "componentName": "Grove12KeyCapacitiveI2CTouchSensorV3MPR121",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "MPR121",
+    "manufacturerPartNumber": "MPR121",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 12 Channel Capacitive Touch Keypad (ATtiny1616)",
@@ -931,7 +1339,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove12ChannelCapacitiveTouchKeypadATtiny1616",
     "componentName": "Grove12ChannelCapacitiveTouchKeypadATtiny1616",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove 12ChannelCapacitiveTouchKeypadATtiny1616 controller",
+    "manufacturerPartNumber": "GROVE-GROVE12CHANNELCAPACITIVETOUCHKEYPADATTINY1616",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - ORP Sensor Kit Pro",
@@ -940,7 +1352,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveORPSensorKitPro",
     "componentName": "GroveORPSensorKitPro",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove ORPSensorKitPro controller",
+    "manufacturerPartNumber": "GROVE-GROVEORPSENSORKITPRO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Water Sensor",
@@ -949,7 +1365,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWaterSensor",
     "componentName": "GroveWaterSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove WaterSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEWATERSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Water Level Sensor",
@@ -958,7 +1378,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWaterLevelSensor",
     "componentName": "GroveWaterLevelSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove WaterLevelSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEWATERLEVELSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - TDS Sensor",
@@ -967,7 +1391,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTDSSensor",
     "componentName": "GroveTDSSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TDSSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVETDSSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Turbidity Sensor Meter for Arduino V1.0",
@@ -976,7 +1404,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTurbiditySensorMeterForArduinoV10",
     "componentName": "GroveTurbiditySensorMeterForArduinoV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TurbiditySensorMeterForArduinoV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVETURBIDITYSENSORMETERFORARDUINOV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - PIR Motion Sensor",
@@ -985,7 +1417,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GrovePIRMotionSensor",
     "componentName": "GrovePIRMotionSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove PIRMotionSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEPIRMOTIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Digital PIR Sensor",
@@ -994,7 +1430,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDigitalPIRSensor",
     "componentName": "GroveDigitalPIRSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DigitalPIRSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALPIRSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Tilt Switch",
@@ -1003,7 +1443,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTiltSwitch",
     "componentName": "GroveTiltSwitch",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove TiltSwitch controller",
+    "manufacturerPartNumber": "GROVE-GROVETILTSWITCH",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Piezo Vibration Sensor",
@@ -1012,7 +1456,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GrovePiezoVibrationSensor",
     "componentName": "GrovePiezoVibrationSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove PiezoVibrationSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEPIEZOVIBRATIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Slide Potentiometer",
@@ -1021,7 +1469,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSlidePotentiometer",
     "componentName": "GroveSlidePotentiometer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove SlidePotentiometer controller",
+    "manufacturerPartNumber": "GROVE-GROVESLIDEPOTENTIOMETER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Optical Rotary Encoder(TCUT1600X01)",
@@ -1030,7 +1482,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOpticalRotaryEncoderTCUT1600X01",
     "componentName": "GroveOpticalRotaryEncoderTCUT1600X01",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove OpticalRotaryEncoderTCUT1600X01 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOPTICALROTARYENCODERTCUT1600X01",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 12-bit Magnetic Rotary Position Sensor / Encoder (AS5600)",
@@ -1039,7 +1495,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove12BitMagneticRotaryPositionSensorEncoderAS5600",
     "componentName": "Grove12BitMagneticRotaryPositionSensorEncoderAS5600",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "AS5600",
+    "manufacturerPartNumber": "AS5600",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-Encoder",
@@ -1048,7 +1508,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveEncoder",
     "componentName": "GroveEncoder",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove Encoder controller",
+    "manufacturerPartNumber": "GROVE-GROVEENCODER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Step Counter(BMA456)",
@@ -1057,7 +1521,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveStepCounterBMA456",
     "componentName": "GroveStepCounterBMA456",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "BMA456",
+    "manufacturerPartNumber": "BMA456",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - ADC for Load Cell (HX711)",
@@ -1066,7 +1534,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveADCForLoadCellHX711",
     "componentName": "GroveADCForLoadCellHX711",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "HX711",
+    "manufacturerPartNumber": "HX711",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Wio-E5",
@@ -1075,7 +1547,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveWioE5",
     "componentName": "GroveWioE5",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove WioE5 controller",
+    "manufacturerPartNumber": "GROVE-GROVEWIOE5",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - BLE (dual model) v1.0",
@@ -1084,7 +1560,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveBLEDualModelV10",
     "componentName": "GroveBLEDualModelV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove BLEDualModelV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLEDUALMODELV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Serial Bluetooth v3.0",
@@ -1093,7 +1573,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSerialBluetoothV30",
     "componentName": "GroveSerialBluetoothV30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove SerialBluetoothV30 controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALBLUETOOTHV30",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - BLE v1",
@@ -1102,7 +1586,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveBLEV1",
     "componentName": "GroveBLEV1",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove BLEV1 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLEV1",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - UART Wifi V2",
@@ -1111,7 +1599,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveUARTWifiV2",
     "componentName": "GroveUARTWifiV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove UARTWifiV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEUARTWIFIV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - NFC (ST25DV64)",
@@ -1120,7 +1612,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveNFCST25DV64",
     "componentName": "GroveNFCST25DV64",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "ST25DV64",
+    "manufacturerPartNumber": "ST25DV64",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - NFC(PN532)",
@@ -1129,7 +1625,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveNFCPN532",
     "componentName": "GroveNFCPN532",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "PN532",
+    "manufacturerPartNumber": "PN532",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - NFC_tag",
@@ -1138,7 +1638,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveNFCTag",
     "componentName": "GroveNFCTag",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove NFCTag controller",
+    "manufacturerPartNumber": "GROVE-GROVENFCTAG",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - GPS (SIM28)",
@@ -1147,7 +1651,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveGPSSIM28",
     "componentName": "GroveGPSSIM28",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "SIM28",
+    "manufacturerPartNumber": "SIM28",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - GPS (Air530)",
@@ -1156,7 +1664,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveGPSAir530",
     "componentName": "GroveGPSAir530",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Air530",
+    "manufacturerPartNumber": "GROVE-GROVEGPSAIR530",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 125KHz RFID Reader",
@@ -1165,7 +1677,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "Grove125KHzRFIDReader",
     "componentName": "Grove125KHzRFIDReader",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove 125KHzRFIDReader controller",
+    "manufacturerPartNumber": "GROVE-GROVE125KHZRFIDREADER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 315MHz RF Kit",
@@ -1174,7 +1690,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "Grove315MHzRFKit",
     "componentName": "Grove315MHzRFKit",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove 315MHzRFKit controller",
+    "manufacturerPartNumber": "GROVE-GROVE315MHZRFKIT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 433MHz Simple RF Link Kit",
@@ -1183,7 +1703,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "Grove433MHzSimpleRFLinkKit",
     "componentName": "Grove433MHzSimpleRFLinkKit",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove 433MHzSimpleRFLinkKit controller",
+    "manufacturerPartNumber": "GROVE-GROVE433MHZSIMPLERFLINKKIT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Long Range",
@@ -1192,7 +1716,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveLongRange",
     "componentName": "GroveLongRange",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove LongRange controller",
+    "manufacturerPartNumber": "GROVE-GROVELONGRANGE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Serial RF Pro",
@@ -1201,7 +1729,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSerialRFPro",
     "componentName": "GroveSerialRFPro",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove SerialRFPro controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALRFPRO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - DMX512",
@@ -1210,7 +1742,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveDMX512",
     "componentName": "GroveDMX512",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove DMX512 controller",
+    "manufacturerPartNumber": "GROVE-GROVEDMX512",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove- I2C ADC",
@@ -1219,7 +1755,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CADC",
     "componentName": "GroveI2CADC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove I2CADC controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CADC",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C FM Receiver",
@@ -1228,7 +1768,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CFMReceiver",
     "componentName": "GroveI2CFMReceiver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove I2CFMReceiver controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CFMRECEIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Protoshield",
@@ -1237,7 +1781,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveProtoshield",
     "componentName": "GroveProtoshield",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove Protoshield controller",
+    "manufacturerPartNumber": "GROVE-GROVEPROTOSHIELD",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - RJ45 Adapter",
@@ -1246,7 +1794,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveRJ45Adapter",
     "componentName": "GroveRJ45Adapter",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove RJ45Adapter controller",
+    "manufacturerPartNumber": "GROVE-GROVERJ45ADAPTER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 1.2-inch IPS Display",
@@ -1255,7 +1807,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove12InchIPSDisplay",
     "componentName": "Grove12InchIPSDisplay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 12InchIPSDisplay controller",
+    "manufacturerPartNumber": "GROVE-GROVE12INCHIPSDISPLAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 4-Digit Display",
@@ -1264,7 +1820,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove4DigitDisplay",
     "componentName": "Grove4DigitDisplay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 4DigitDisplay controller",
+    "manufacturerPartNumber": "GROVE-GROVE4DIGITDISPLAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 0.54 inch Red Alphanumeric Display",
@@ -1273,7 +1833,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove054InchRedAlphanumericDisplay",
     "componentName": "Grove054InchRedAlphanumericDisplay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 054InchRedAlphanumericDisplay controller",
+    "manufacturerPartNumber": "GROVE-GROVE054INCHREDALPHANUMERICDISPLAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 16x2 LCD",
@@ -1282,7 +1846,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove16x2LCD",
     "componentName": "Grove16x2LCD",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 16x2LCD controller",
+    "manufacturerPartNumber": "GROVE-GROVE16X2LCD",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - LCD RGB Backlight",
@@ -1291,7 +1859,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveLCDRGBBacklight",
     "componentName": "GroveLCDRGBBacklight",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove LCDRGBBacklight controller",
+    "manufacturerPartNumber": "GROVE-GROVELCDRGBBACKLIGHT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - OLED Display 0.66\" (SSD1306)",
@@ -1300,7 +1872,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay066SSD1306",
     "componentName": "GroveOLEDDisplay066SSD1306",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SSD1306",
+    "manufacturerPartNumber": "SSD1306",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - OLED Display 0.96\" (SSD1315)",
@@ -1309,7 +1885,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay096SSD1315",
     "componentName": "GroveOLEDDisplay096SSD1315",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SSD1315",
+    "manufacturerPartNumber": "SSD1315",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - OLED Yellow&Blue Display 0.96(SSD1315) - SPI/IIC -3.3V/5V",
@@ -1318,7 +1898,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDYellowBlueDisplay096SSD1315SPIIIC33V5V",
     "componentName": "GroveOLEDYellowBlueDisplay096SSD1315SPIIIC33V5V",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SSD1315",
+    "manufacturerPartNumber": "SSD1315",
+    "powerVoltage": "3.3V"
   },
   {
     "title": "Grove - OLED Display 1.12&#34",
@@ -1327,7 +1911,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay11234",
     "componentName": "GroveOLEDDisplay11234",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove OLEDDisplay11234 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOLEDDISPLAY11234",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V",
@@ -1336,7 +1924,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay112SH1107V30SPIIIC33V5V",
     "componentName": "GroveOLEDDisplay112SH1107V30SPIIIC33V5V",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SH1107",
+    "manufacturerPartNumber": "SH1107",
+    "powerVoltage": "3.3V"
   },
   {
     "title": "Grove - 2-Coil Latching Relay",
@@ -1345,7 +1937,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove2CoilLatchingRelay",
     "componentName": "Grove2CoilLatchingRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 2CoilLatchingRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE2COILLATCHINGRELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Buzzer",
@@ -1354,7 +1950,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveBuzzer2",
     "componentName": "GroveBuzzer2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Buzzer2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBUZZER2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Passive Buzzer",
@@ -1363,7 +1963,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GrovePassiveBuzzer",
     "componentName": "GrovePassiveBuzzer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove PassiveBuzzer controller",
+    "manufacturerPartNumber": "GROVE-GROVEPASSIVEBUZZER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove – Chainable RGB LED V2.0",
@@ -1372,7 +1976,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveChainableRGBLEDV20",
     "componentName": "GroveChainableRGBLEDV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove ChainableRGBLEDV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVECHAINABLERGBLEDV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Motor Driver V1.3",
@@ -1381,7 +1989,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CMotorDriverV13",
     "componentName": "GroveI2CMotorDriverV13",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove I2CMotorDriverV13 controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CMOTORDRIVERV13",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Motor Driver (L298P)",
@@ -1390,7 +2002,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CMotorDriverL298P",
     "componentName": "GroveI2CMotorDriverL298P",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "L298P",
+    "manufacturerPartNumber": "L298P",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Infrared Emitter",
@@ -1399,7 +2015,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveInfraredEmitter",
     "componentName": "GroveInfraredEmitter",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove InfraredEmitter controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDEMITTER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - MP3 v4.0",
@@ -1408,7 +2028,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveMP3V40",
     "componentName": "GroveMP3V40",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MP3V40 controller",
+    "manufacturerPartNumber": "GROVE-GROVEMP3V40",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Mini Fan",
@@ -1417,7 +2041,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMiniFan",
     "componentName": "GroveMiniFan",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove MiniFan controller",
+    "manufacturerPartNumber": "GROVE-GROVEMINIFAN",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Recorder V3",
@@ -1426,7 +2054,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveRecorderV3",
     "componentName": "GroveRecorderV3",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove RecorderV3 controller",
+    "manufacturerPartNumber": "GROVE-GROVERECORDERV3",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Relay",
@@ -1435,7 +2067,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRelay2",
     "componentName": "GroveRelay2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Relay2 controller",
+    "manufacturerPartNumber": "GROVE-GROVERELAY2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 2-Channel SPDT Relay",
@@ -1444,7 +2080,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove2ChannelSPDTRelay",
     "componentName": "Grove2ChannelSPDTRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 2ChannelSPDTRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE2CHANNELSPDTRELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 4-Channel SPDT Relay",
@@ -1453,7 +2093,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove4ChannelSPDTRelay",
     "componentName": "Grove4ChannelSPDTRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 4ChannelSPDTRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE4CHANNELSPDTRELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 8-Channel Solid State Relay",
@@ -1462,7 +2106,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove8ChannelSolidStateRelay",
     "componentName": "Grove8ChannelSolidStateRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 8ChannelSolidStateRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE8CHANNELSOLIDSTATERELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Optocoupler Relay (M281)",
@@ -1471,7 +2119,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOptocouplerRelayM281",
     "componentName": "GroveOptocouplerRelayM281",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove OptocouplerRelayM281 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOPTOCOUPLERRELAYM281",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Servo",
@@ -1480,7 +2132,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveServo",
     "componentName": "GroveServo",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Servo controller",
+    "manufacturerPartNumber": "GROVE-GROVESERVO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Speaker",
@@ -1489,7 +2145,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSpeaker",
     "componentName": "GroveSpeaker",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Speaker controller",
+    "manufacturerPartNumber": "GROVE-GROVESPEAKER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Speaker Plus",
@@ -1498,7 +2158,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSpeakerPlus",
     "componentName": "GroveSpeakerPlus",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove SpeakerPlus controller",
+    "manufacturerPartNumber": "GROVE-GROVESPEAKERPLUS",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Vibration Motor",
@@ -1507,7 +2171,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveVibrationMotor",
     "componentName": "GroveVibrationMotor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove VibrationMotor controller",
+    "manufacturerPartNumber": "GROVE-GROVEVIBRATIONMOTOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Water Atomization",
@@ -1516,7 +2184,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWaterAtomization",
     "componentName": "GroveWaterAtomization",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove WaterAtomization controller",
+    "manufacturerPartNumber": "GROVE-GROVEWATERATOMIZATION",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 16 Channel PWM Driver (PCA9685)",
@@ -1525,7 +2197,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove16ChannelPWMDriverPCA9685",
     "componentName": "Grove16ChannelPWMDriverPCA9685",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "PCA9685",
+    "manufacturerPartNumber": "PCA9685",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Motor Driver (TB6612FNG)",
@@ -1534,7 +2210,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CMotorDriverTB6612FNG",
     "componentName": "GroveI2CMotorDriverTB6612FNG",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "TB6612FNG",
+    "manufacturerPartNumber": "TB6612FNG",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Hall Sensor",
@@ -1543,7 +2223,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveHallSensor",
     "componentName": "GroveHallSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove HallSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEHALLSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Voltage Divider",
@@ -1552,7 +2236,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveVoltageDivider",
     "componentName": "GroveVoltageDivider",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove VoltageDivider controller",
+    "manufacturerPartNumber": "GROVE-GROVEVOLTAGEDIVIDER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - DS1307 RTC (Real Time Clock) for Arduino",
@@ -1561,7 +2249,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveDS1307RTCRealTimeClockForArduino",
     "componentName": "GroveDS1307RTCRealTimeClockForArduino",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DS1307RTCRealTimeClockForArduino controller",
+    "manufacturerPartNumber": "GROVE-GROVEDS1307RTCREALTIMECLOCKFORARDUINO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - High Precision RTC (Real Time Clock)",
@@ -1570,7 +2262,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveHighPrecisionRTCRealTimeClock",
     "componentName": "GroveHighPrecisionRTCRealTimeClock",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove HighPrecisionRTCRealTimeClock controller",
+    "manufacturerPartNumber": "GROVE-GROVEHIGHPRECISIONRTCREALTIMECLOCK",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 10A DC Current Sensor (ACS725)",
@@ -1579,7 +2275,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove10ADCCurrentSensorACS725",
     "componentName": "Grove10ADCCurrentSensorACS725",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 10ADCCurrentSensorACS725 controller",
+    "manufacturerPartNumber": "GROVE-GROVE10ADCCURRENTSENSORACS725",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - ±5A DC/AC Current Sensor (ACS70331)",
@@ -1588,7 +2288,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove5ADCACCurrentSensorACS70331",
     "componentName": "Grove5ADCACCurrentSensorACS70331",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 5ADCACCurrentSensorACS70331 controller",
+    "manufacturerPartNumber": "GROVE-GROVE5ADCACCURRENTSENSORACS70331",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 2.5A DC Current Sensor(ACS70331)",
@@ -1597,7 +2301,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove25ADCCurrentSensorACS70331",
     "componentName": "Grove25ADCCurrentSensorACS70331",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 25ADCCurrentSensorACS70331 controller",
+    "manufacturerPartNumber": "GROVE-GROVE25ADCCURRENTSENSORACS70331",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Electricity Sensor",
@@ -1606,7 +2314,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveElectricitySensor",
     "componentName": "GroveElectricitySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove ElectricitySensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEELECTRICITYSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Coulomb Counter 3.3V to 5V (LTC2941)",
@@ -1615,7 +2327,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveCoulombCounter33VTo5VLTC2941",
     "componentName": "GroveCoulombCounter33VTo5VLTC2941",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove CoulombCounter33VTo5VLTC2941 controller",
+    "manufacturerPartNumber": "GROVE-GROVECOULOMBCOUNTER33VTO5VLTC2941",
+    "powerVoltage": "3.3V"
   },
   {
     "title": "Grove - MOSFET",
@@ -1624,7 +2340,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveMOSFET",
     "componentName": "GroveMOSFET",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MOSFET controller",
+    "manufacturerPartNumber": "GROVE-GROVEMOSFET",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - SPDT Relay(30A)",
@@ -1633,7 +2353,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSPDTRelay30A",
     "componentName": "GroveSPDTRelay30A",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove SPDTRelay30A controller",
+    "manufacturerPartNumber": "GROVE-GROVESPDTRELAY30A",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Screw Terminal",
@@ -1642,7 +2366,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveScrewTerminal",
     "componentName": "GroveScrewTerminal",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove ScrewTerminal controller",
+    "manufacturerPartNumber": "GROVE-GROVESCREWTERMINAL",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Electromagnet",
@@ -1651,7 +2379,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveElectromagnet",
     "componentName": "GroveElectromagnet",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove Electromagnet controller",
+    "manufacturerPartNumber": "GROVE-GROVEELECTROMAGNET",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Red LED",
@@ -1660,7 +2392,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRedLED",
     "componentName": "GroveRedLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove RedLED controller",
+    "manufacturerPartNumber": "GROVE-GROVEREDLED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Circular LED",
@@ -1669,7 +2405,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveCircularLED",
     "componentName": "GroveCircularLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove CircularLED controller",
+    "manufacturerPartNumber": "GROVE-GROVECIRCULARLED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - RGB LED Ring (20 - WS2813 Mini)",
@@ -1678,7 +2418,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDRing20WS2813Mini",
     "componentName": "GroveRGBLEDRing20WS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - LED String Light",
@@ -1687,7 +2431,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDStringLight",
     "componentName": "GroveLEDStringLight",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LEDStringLight controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDSTRINGLIGHT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - LED Strip Driver",
@@ -1696,7 +2444,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDStripDriver",
     "componentName": "GroveLEDStripDriver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LEDStripDriver controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDSTRIPDRIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - RGB LED Matrix w/Driver",
@@ -1705,7 +2457,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDMatrixWDriver",
     "componentName": "GroveRGBLEDMatrixWDriver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove RGBLEDMatrixWDriver controller",
+    "manufacturerPartNumber": "GROVE-GROVERGBLEDMATRIXWDRIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - LED Matrix Driver (HT16K33)",
@@ -1714,7 +2470,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveLEDMatrixDriverHT16K33",
     "componentName": "GroveLEDMatrixDriverHT16K33",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "HT16K33",
+    "manufacturerPartNumber": "HT16K33",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Red LED Matrix w/Driver",
@@ -1723,7 +2483,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRedLEDMatrixWDriver",
     "componentName": "GroveRedLEDMatrixWDriver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove RedLEDMatrixWDriver controller",
+    "manufacturerPartNumber": "GROVE-GROVEREDLEDMATRIXWDRIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Button",
@@ -1732,7 +2496,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveButton2",
     "componentName": "GroveButton2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove Button2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBUTTON2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Switch(P)",
@@ -1741,7 +2509,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSwitchP",
     "componentName": "GroveSwitchP",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove SwitchP controller",
+    "manufacturerPartNumber": "GROVE-GROVESWITCHP",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-LED Button",
@@ -1750,7 +2522,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDButton",
     "componentName": "GroveLEDButton",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LEDButton controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Dual Button",
@@ -1759,7 +2535,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDualButton",
     "componentName": "GroveDualButton",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove DualButton controller",
+    "manufacturerPartNumber": "GROVE-GROVEDUALBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove-Mech keycap",
@@ -1768,7 +2548,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveMechKeycap",
     "componentName": "GroveMechKeycap",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove MechKeycap controller",
+    "manufacturerPartNumber": "GROVE-GROVEMECHKEYCAP",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Thumb Joystick",
@@ -1777,7 +2561,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveThumbJoystick",
     "componentName": "GroveThumbJoystick",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove ThumbJoystick controller",
+    "manufacturerPartNumber": "GROVE-GROVETHUMBJOYSTICK",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Magnetic Switch",
@@ -1786,7 +2574,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMagneticSwitch",
     "componentName": "GroveMagneticSwitch",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove MagneticSwitch controller",
+    "manufacturerPartNumber": "GROVE-GROVEMAGNETICSWITCH",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Hub",
@@ -1795,7 +2587,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CHub",
     "componentName": "GroveI2CHub",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove I2CHub controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CHUB",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - I2C Hub(6 Port)",
@@ -1804,7 +2600,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CHub6Port",
     "componentName": "GroveI2CHub6Port",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove I2CHub6Port controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CHUB6PORT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 8 Channel I2C Multiplexer/I2C Hub (TCA9548A)",
@@ -1813,7 +2613,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove8ChannelI2CMultiplexerI2CHubTCA9548A",
     "componentName": "Grove8ChannelI2CMultiplexerI2CHubTCA9548A",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "TCA9548A",
+    "manufacturerPartNumber": "TCA9548A",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - 4-Channel 16-bit ADC(ADS1115)",
@@ -1822,7 +2626,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove4Channel16BitADCADS1115",
     "componentName": "Grove4Channel16BitADCADS1115",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "ADS1115",
+    "manufacturerPartNumber": "ADS1115",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove - Wrapper",
@@ -1831,7 +2639,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveWrapper",
     "componentName": "GroveWrapper",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove Wrapper controller",
+    "manufacturerPartNumber": "GROVE-GROVEWRAPPER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 16 x 2 LCD Black on Yellow",
@@ -1840,7 +2652,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove16X2LCDBlackOnYellow",
     "componentName": "Grove16X2LCDBlackOnYellow",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 16X2LCDBlackOnYellow controller",
+    "manufacturerPartNumber": "GROVE-GROVE16X2LCDBLACKONYELLOW",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 16 x 2 LCD Black on Red",
@@ -1849,7 +2665,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove16X2LCDBlackOnRed",
     "componentName": "Grove16X2LCDBlackOnRed",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 16X2LCDBlackOnRed controller",
+    "manufacturerPartNumber": "GROVE-GROVE16X2LCDBLACKONRED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 16x2 LCD White on Blue",
@@ -1858,7 +2678,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove16x2LCDWhiteOnBlue",
     "componentName": "Grove16x2LCDWhiteOnBlue",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 16x2LCDWhiteOnBlue controller",
+    "manufacturerPartNumber": "GROVE-GROVE16X2LCDWHITEONBLUE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C UV Sensor VEML6070",
@@ -1867,7 +2691,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CUVSensorVEML6070",
     "componentName": "GroveI2CUVSensorVEML6070",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove I2CUVSensorVEML6070 controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CUVSENSORVEML6070",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Capacitive Touch Slider Sensor CY8C4014LQI",
@@ -1876,7 +2704,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveCapacitiveTouchSliderSensorCY8C4014LQI",
     "componentName": "GroveCapacitiveTouchSliderSensorCY8C4014LQI",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove CapacitiveTouchSliderSensorCY8C4014LQI controller",
+    "manufacturerPartNumber": "GROVE-GROVECAPACITIVETOUCHSLIDERSENSORCY8C4014LQI",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Vibration Sensor SW 420",
@@ -1885,7 +2717,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveVibrationSensorSW420",
     "componentName": "GroveVibrationSensorSW420",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove VibrationSensorSW420 controller",
+    "manufacturerPartNumber": "GROVE-GROVEVIBRATIONSENSORSW420",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IMU 9DOF ICM20600 AK09918",
@@ -1894,7 +2730,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveIMU9DOFICM20600AK09918",
     "componentName": "GroveIMU9DOFICM20600AK09918",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IMU9DOFICM20600AK09918 controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU9DOFICM20600AK09918",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 12 Key Capacitive I2C Touch Sensor V2 MPR121",
@@ -1903,7 +2743,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove12KeyCapacitiveI2CTouchSensorV2MPR121",
     "componentName": "Grove12KeyCapacitiveI2CTouchSensorV2MPR121",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "MPR121",
+    "manufacturerPartNumber": "MPR121",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 6 Position DIP Switch",
@@ -1912,7 +2756,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove6PositionDIPSwitch",
     "componentName": "Grove6PositionDIPSwitch",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove 6PositionDIPSwitch controller",
+    "manufacturerPartNumber": "GROVE-GROVE6POSITIONDIPSWITCH",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 5 Way Switch",
@@ -1921,7 +2769,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove5WaySwitch",
     "componentName": "Grove5WaySwitch",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove 5WaySwitch controller",
+    "manufacturerPartNumber": "GROVE-GROVE5WAYSWITCH",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 4 Channel Solid State Relay",
@@ -1930,7 +2782,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove4ChannelSolidStateRelay",
     "componentName": "Grove4ChannelSolidStateRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 4ChannelSolidStateRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE4CHANNELSOLIDSTATERELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 2 Channel Solid State Relay",
@@ -1939,7 +2795,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove2ChannelSolidStateRelay",
     "componentName": "Grove2ChannelSolidStateRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove 2ChannelSolidStateRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVE2CHANNELSOLIDSTATERELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Solid State Relay V2",
@@ -1948,7 +2808,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSolidStateRelayV2",
     "componentName": "GroveSolidStateRelayV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove SolidStateRelayV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVESOLIDSTATERELAYV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove WS2813 RGB LED Strip Waterproof 60 LED m 1m",
@@ -1957,7 +2821,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWS2813RGBLEDStripWaterproof60LEDM1m",
     "componentName": "GroveWS2813RGBLEDStripWaterproof60LEDM1m",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove WS2813 RGB LED Strip Waterproof 30 LED m 1m",
@@ -1966,7 +2834,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWS2813RGBLEDStripWaterproof30LEDM1m",
     "componentName": "GroveWS2813RGBLEDStripWaterproof30LEDM1m",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Blue LED Button",
@@ -1975,7 +2847,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveBlueLEDButton",
     "componentName": "GroveBlueLEDButton",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove BlueLEDButton controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLUELEDBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Yellow LED Button",
@@ -1984,7 +2860,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveYellowLEDButton",
     "componentName": "GroveYellowLEDButton",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove YellowLEDButton controller",
+    "manufacturerPartNumber": "GROVE-GROVEYELLOWLEDBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Red LED Button",
@@ -1993,7 +2873,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRedLEDButton",
     "componentName": "GroveRedLEDButton",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove RedLEDButton controller",
+    "manufacturerPartNumber": "GROVE-GROVEREDLEDBUTTON",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Digital Distance Interrupter 0 5 to 5cm GP2Y0D805Z0F P",
@@ -2002,7 +2886,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDigitalDistanceInterrupter05To5cmGP2Y0D805Z0FP",
     "componentName": "GroveDigitalDistanceInterrupter05To5cmGP2Y0D805Z0FP",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DigitalDistanceInterrupter05To5cmGP2Y0D805Z0FP controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALDISTANCEINTERRUPTER05TO5CMGP2Y0D805Z0FP",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Digital Distance Interrupter 0 5 to 5cm GP2Y0D805Z0F",
@@ -2011,7 +2899,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDigitalDistanceInterrupter05To5cmGP2Y0D805Z0F",
     "componentName": "GroveDigitalDistanceInterrupter05To5cmGP2Y0D805Z0F",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DigitalDistanceInterrupter05To5cmGP2Y0D805Z0F controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALDISTANCEINTERRUPTER05TO5CMGP2Y0D805Z0F",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C FM Receiver v1 1",
@@ -2020,7 +2912,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CFMReceiverV11",
     "componentName": "GroveI2CFMReceiverV11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove I2CFMReceiverV11 controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CFMRECEIVERV11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove UART WiFi V2 ESP8285",
@@ -2029,7 +2925,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveUARTWiFiV2ESP8285",
     "componentName": "GroveUARTWiFiV2ESP8285",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "ESP8285",
+    "manufacturerPartNumber": "ESP8285",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Compass V2",
@@ -2038,7 +2938,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove3AxisDigitalCompassV2",
     "componentName": "Grove3AxisDigitalCompassV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove 3AxisDigitalCompassV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALCOMPASSV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Micro Switch",
@@ -2047,7 +2951,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMicroSwitch",
     "componentName": "GroveMicroSwitch",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove MicroSwitch controller",
+    "manufacturerPartNumber": "GROVE-GROVEMICROSWITCH",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Display 1 12 V2",
@@ -2056,7 +2964,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay112V2",
     "componentName": "GroveOLEDDisplay112V2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove OLEDDisplay112V2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOLEDDISPLAY112V2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Variable Color LED V1 1",
@@ -2065,7 +2977,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveVariableColorLEDV11",
     "componentName": "GroveVariableColorLEDV11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove VariableColorLEDV11 controller",
+    "manufacturerPartNumber": "GROVE-GROVEVARIABLECOLORLEDV11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove mini PIR motion sensor",
@@ -2074,7 +2990,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMiniPIRMotionSensor",
     "componentName": "GroveMiniPIRMotionSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MiniPIRMotionSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEMINIPIRMOTIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C Color Sensor V2",
@@ -2083,7 +3003,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CColorSensorV2",
     "componentName": "GroveI2CColorSensorV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove I2CColorSensorV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CCOLORSENSORV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Heelight Sensor",
@@ -2092,7 +3016,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveHeelightSensor",
     "componentName": "GroveHeelightSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove HeelightSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEHEELIGHTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Infrared Reflective Sensor v1 2",
@@ -2101,7 +3029,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveInfraredReflectiveSensorV12",
     "componentName": "GroveInfraredReflectiveSensorV12",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove InfraredReflectiveSensorV12 controller",
+    "manufacturerPartNumber": "GROVE-GROVEINFRAREDREFLECTIVESENSORV12",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LoRa Radio 433MHz",
@@ -2110,7 +3042,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveLoRaRadio433MHz",
     "componentName": "GroveLoRaRadio433MHz",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove LoRaRadio433MHz controller",
+    "manufacturerPartNumber": "GROVE-GROVELORARADIO433MHZ",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LoRa Radio 868MHz",
@@ -2119,7 +3055,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveLoRaRadio868MHz",
     "componentName": "GroveLoRaRadio868MHz",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove LoRaRadio868MHz controller",
+    "manufacturerPartNumber": "GROVE-GROVELORARADIO868MHZ",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove High Precision RTC",
@@ -2128,7 +3068,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveHighPrecisionRTC",
     "componentName": "GroveHighPrecisionRTC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove HighPrecisionRTC controller",
+    "manufacturerPartNumber": "GROVE-GROVEHIGHPRECISIONRTC",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Light Sensor v1 2 LS06 S phototransistor",
@@ -2137,7 +3081,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLightSensorV12LS06SPhototransistor",
     "componentName": "GroveLightSensorV12LS06SPhototransistor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LightSensorV12LS06SPhototransistor controller",
+    "manufacturerPartNumber": "GROVE-GROVELIGHTSENSORV12LS06SPHOTOTRANSISTOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Recorder v3 0",
@@ -2146,7 +3094,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveRecorderV30",
     "componentName": "GroveRecorderV30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove RecorderV30 controller",
+    "manufacturerPartNumber": "GROVE-GROVERECORDERV30",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Speech Recognizer",
@@ -2155,7 +3107,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSpeechRecognizer",
     "componentName": "GroveSpeechRecognizer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove SpeechRecognizer controller",
+    "manufacturerPartNumber": "GROVE-GROVESPEECHRECOGNIZER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Light Sensor P v1 1",
@@ -2164,7 +3120,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLightSensorPV11",
     "componentName": "GroveLightSensorPV11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LightSensorPV11 controller",
+    "manufacturerPartNumber": "GROVE-GROVELIGHTSENSORPV11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IMU 10DOF v2 0",
@@ -2173,7 +3133,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIMU10DOFV20",
     "componentName": "GroveIMU10DOFV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IMU10DOFV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU10DOFV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Mini Fan v1 1",
@@ -2182,7 +3146,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMiniFanV11",
     "componentName": "GroveMiniFanV11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove MiniFanV11 controller",
+    "manufacturerPartNumber": "GROVE-GROVEMINIFANV11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temperature Humidity Sensor SHT31",
@@ -2191,7 +3159,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTemperatureHumiditySensorSHT31",
     "componentName": "GroveTemperatureHumiditySensorSHT31",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SHT31",
+    "manufacturerPartNumber": "SHT31",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove BME280 Environmental Sensor Temperature Humidity Barometer",
@@ -2200,7 +3172,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveBME280EnvironmentalSensorTemperatureHumidityBarometer",
     "componentName": "GroveBME280EnvironmentalSensorTemperatureHumidityBarometer",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BME280",
+    "manufacturerPartNumber": "BME280",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LED Matrix Driver v1 0",
@@ -2209,7 +3185,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDMatrixDriverV10",
     "componentName": "GroveLEDMatrixDriverV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove LEDMatrixDriverV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDMATRIXDRIVERV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Mouse Encoder",
@@ -2218,7 +3198,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMouseEncoder",
     "componentName": "GroveMouseEncoder",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove MouseEncoder controller",
+    "manufacturerPartNumber": "GROVE-GROVEMOUSEENCODER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove MP3 v2 0",
@@ -2227,7 +3211,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveMP3V20",
     "componentName": "GroveMP3V20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MP3V20 controller",
+    "manufacturerPartNumber": "GROVE-GROVEMP3V20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Mini Track Ball",
@@ -2236,7 +3224,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveMiniTrackBall",
     "componentName": "GroveMiniTrackBall",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MiniTrackBall controller",
+    "manufacturerPartNumber": "GROVE-GROVEMINITRACKBALL",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Haptic Motor",
@@ -2245,7 +3237,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveHapticMotor",
     "componentName": "GroveHapticMotor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove HapticMotor controller",
+    "manufacturerPartNumber": "GROVE-GROVEHAPTICMOTOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Water Atomization v1 0",
@@ -2254,7 +3250,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWaterAtomizationV10",
     "componentName": "GroveWaterAtomizationV10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove WaterAtomizationV10 controller",
+    "manufacturerPartNumber": "GROVE-GROVEWATERATOMIZATIONV10",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temperature Humidity Sensor HDC100",
@@ -2263,7 +3263,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorHDC100",
     "componentName": "GroveTemperatureHumiditySensorHDC100",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureHumiditySensorHDC100 controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATUREHUMIDITYSENSORHDC100",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C Mini Motor Driver",
@@ -2272,7 +3276,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CMiniMotorDriver",
     "componentName": "GroveI2CMiniMotorDriver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove I2CMiniMotorDriver controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CMINIMOTORDRIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Uart Wifi",
@@ -2281,7 +3289,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveUartWifi",
     "componentName": "GroveUartWifi",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove UartWifi controller",
+    "manufacturerPartNumber": "GROVE-GROVEUARTWIFI",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 6 Axis Accelerometer Compass v2 0",
@@ -2290,7 +3302,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove6AxisAccelerometerCompassV20",
     "componentName": "Grove6AxisAccelerometerCompassV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 6AxisAccelerometerCompassV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVE6AXISACCELEROMETERCOMPASSV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Serial Blueseeed CSR BC417",
@@ -2299,7 +3315,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSerialBlueseeedCSRBC417",
     "componentName": "GroveSerialBlueseeedCSRBC417",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove SerialBlueseeedCSRBC417 controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALBLUESEEEDCSRBC417",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LED Bar v2 0",
@@ -2308,7 +3328,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDBarV20",
     "componentName": "GroveLEDBarV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LEDBarV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDBARV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Gesture PAJ7620U2",
@@ -2317,7 +3341,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGesturePAJ7620U2",
     "componentName": "GroveGesturePAJ7620U2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "PAJ7620",
+    "manufacturerPartNumber": "PAJ7620",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Finger clip Heart Rate Sensor with shell",
@@ -2326,7 +3354,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveFingerClipHeartRateSensorWithShell",
     "componentName": "GroveFingerClipHeartRateSensorWithShell",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FingerClipHeartRateSensorWithShell controller",
+    "manufacturerPartNumber": "GROVE-GROVEFINGERCLIPHEARTRATESENSORWITHSHELL",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Blueseeed Dual model HM13",
@@ -2335,7 +3367,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveBlueseeedDualModelHM13",
     "componentName": "GroveBlueseeedDualModelHM13",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove BlueseeedDualModelHM13 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLUESEEEDDUALMODELHM13",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IMU 9DOF v2 0",
@@ -2344,7 +3380,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIMU9DOFV20",
     "componentName": "GroveIMU9DOFV20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IMU9DOFV20 controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU9DOFV20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IMU 10DOF",
@@ -2353,7 +3393,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIMU10DOF",
     "componentName": "GroveIMU10DOF",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IMU10DOF controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU10DOF",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove EL Driver",
@@ -2362,7 +3406,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveELDriver",
     "componentName": "GroveELDriver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove ELDriver controller",
+    "manufacturerPartNumber": "GROVE-GROVEELDRIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Carbon Dioxide Sensor MH Z16",
@@ -2371,7 +3419,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveCarbonDioxideSensorMHZ16",
     "componentName": "GroveCarbonDioxideSensorMHZ16",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove CarbonDioxideSensorMHZ16 controller",
+    "manufacturerPartNumber": "GROVE-GROVECARBONDIOXIDESENSORMHZ16",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Q Touch Sensor",
@@ -2380,7 +3432,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveQTouchSensor",
     "componentName": "GroveQTouchSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove QTouchSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEQTOUCHSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove FM Receiver",
@@ -2389,7 +3445,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveFMReceiver",
     "componentName": "GroveFMReceiver",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove FMReceiver controller",
+    "manufacturerPartNumber": "GROVE-GROVEFMRECEIVER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Barometer Sensor BMP18",
@@ -2398,7 +3458,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveBarometerSensorBMP18",
     "componentName": "GroveBarometerSensorBMP18",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove BarometerSensorBMP18 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBAROMETERSENSORBMP18",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Recorder",
@@ -2407,7 +3471,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveRecorder",
     "componentName": "GroveRecorder",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove Recorder controller",
+    "manufacturerPartNumber": "GROVE-GROVERECORDER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove NFC",
@@ -2416,7 +3484,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveNFC",
     "componentName": "GroveNFC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove NFC controller",
+    "manufacturerPartNumber": "GROVE-GROVENFC",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IMU 9DOF",
@@ -2425,7 +3497,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIMU9DOF",
     "componentName": "GroveIMU9DOF",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IMU9DOF controller",
+    "manufacturerPartNumber": "GROVE-GROVEIMU9DOF",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Mini Camera",
@@ -2434,7 +3510,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveMiniCamera",
     "componentName": "GroveMiniCamera",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove MiniCamera controller",
+    "manufacturerPartNumber": "GROVE-GROVEMINICAMERA",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove PH Sensor",
@@ -2443,7 +3523,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GrovePHSensor",
     "componentName": "GrovePHSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove PHSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEPHSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Serial MP3 Player",
@@ -2452,7 +3536,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSerialMP3Player",
     "componentName": "GroveSerialMP3Player",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove SerialMP3Player controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALMP3PLAYER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Single Axis Analog Gyro",
@@ -2461,7 +3549,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSingleAxisAnalogGyro",
     "componentName": "GroveSingleAxisAnalogGyro",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove SingleAxisAnalogGyro controller",
+    "manufacturerPartNumber": "GROVE-GROVESINGLEAXISANALOGGYRO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 6 Axis Accelerometer Compass",
@@ -2470,7 +3562,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove6AxisAccelerometerCompass",
     "componentName": "Grove6AxisAccelerometerCompass",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 6AxisAccelerometerCompass controller",
+    "manufacturerPartNumber": "GROVE-GROVE6AXISACCELEROMETERCOMPASS",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Fingerprint Sensor",
@@ -2479,7 +3575,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveFingerprintSensor",
     "componentName": "GroveFingerprintSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FingerprintSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEFINGERPRINTSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Gas Sensor MQ9",
@@ -2488,7 +3588,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorMQ9",
     "componentName": "GroveGasSensorMQ9",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorMQ9 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORMQ9",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove MQ3 Grove Gas Sensor",
@@ -2497,7 +3601,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMQ3GroveGasSensor",
     "componentName": "GroveMQ3GroveGasSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MQ3GroveGasSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEMQ3GROVEGASSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Dry Reed Relay",
@@ -2506,7 +3614,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDryReedRelay",
     "componentName": "GroveDryReedRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove DryReedRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVEDRYREEDRELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Solid State Relay",
@@ -2515,7 +3627,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSolidStateRelay",
     "componentName": "GroveSolidStateRelay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove SolidStateRelay controller",
+    "manufacturerPartNumber": "GROVE-GROVESOLIDSTATERELAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LED Bar",
@@ -2524,7 +3640,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLEDBar",
     "componentName": "GroveLEDBar",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LEDBar controller",
+    "manufacturerPartNumber": "GROVE-GROVELEDBAR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Differential Amplifier",
@@ -2533,7 +3653,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDifferentialAmplifier",
     "componentName": "GroveDifferentialAmplifier",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DifferentialAmplifier controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIFFERENTIALAMPLIFIER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Digital Light Sensor TSL2561",
@@ -2542,7 +3666,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDigitalLightSensorTSL2561",
     "componentName": "GroveDigitalLightSensorTSL2561",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove DigitalLightSensorTSL2561 controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALLIGHTSENSORTSL2561",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove IR Distance Interrupter",
@@ -2551,7 +3679,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveIRDistanceInterrupter",
     "componentName": "GroveIRDistanceInterrupter",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove IRDistanceInterrupter controller",
+    "manufacturerPartNumber": "GROVE-GROVEIRDISTANCEINTERRUPTER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Button P",
@@ -2560,7 +3692,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveButtonP",
     "componentName": "GroveButtonP",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove ButtonP controller",
+    "manufacturerPartNumber": "GROVE-GROVEBUTTONP",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Rotary Angle Sensor P",
@@ -2569,7 +3705,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRotaryAngleSensorP",
     "componentName": "GroveRotaryAngleSensorP",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove RotaryAngleSensorP controller",
+    "manufacturerPartNumber": "GROVE-GROVEROTARYANGLESENSORP",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Barometer Sensor",
@@ -2578,7 +3718,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveBarometerSensor",
     "componentName": "GroveBarometerSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove BarometerSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEBAROMETERSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Serial Camera",
@@ -2587,7 +3731,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveSerialCamera",
     "componentName": "GroveSerialCamera",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove SerialCamera controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALCAMERA",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Gas Sensor MQ5",
@@ -2596,7 +3744,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorMQ5",
     "componentName": "GroveGasSensorMQ5",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorMQ5 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORMQ5",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Gas Sensor MQ2",
@@ -2605,7 +3757,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGasSensorMQ2",
     "componentName": "GroveGasSensorMQ2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove GasSensorMQ2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEGASSENSORMQ2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C Motor Driver with L298",
@@ -2614,7 +3770,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CMotorDriverWithL298",
     "componentName": "GroveI2CMotorDriverWithL298",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove I2CMotorDriverWithL298 controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CMOTORDRIVERWITHL298",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Sound Recorder",
@@ -2623,7 +3783,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSoundRecorder",
     "componentName": "GroveSoundRecorder",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove SoundRecorder controller",
+    "manufacturerPartNumber": "GROVE-GROVESOUNDRECORDER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Geiger Counter",
@@ -2632,7 +3796,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveGeigerCounter",
     "componentName": "GroveGeigerCounter",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove GeigerCounter controller",
+    "manufacturerPartNumber": "GROVE-GROVEGEIGERCOUNTER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C Color Sensor",
@@ -2641,7 +3809,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CColorSensor",
     "componentName": "GroveI2CColorSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove I2CColorSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CCOLORSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Variable Color LED",
@@ -2650,7 +3822,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveVariableColorLED",
     "componentName": "GroveVariableColorLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove VariableColorLED controller",
+    "manufacturerPartNumber": "GROVE-GROVEVARIABLECOLORLED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Chainable RGB LED",
@@ -2659,7 +3835,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveChainableRGBLED",
     "componentName": "GroveChainableRGBLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove ChainableRGBLED controller",
+    "manufacturerPartNumber": "GROVE-GROVECHAINABLERGBLED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove I2C Touch Sensor",
@@ -2668,7 +3848,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveI2CTouchSensor",
     "componentName": "GroveI2CTouchSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "Grove I2CTouchSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEI2CTOUCHSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temperature Humidity Sensor Pro AM2302 DHT22",
@@ -2677,7 +3861,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorProAM2302DHT22",
     "componentName": "GroveTemperatureHumiditySensorProAM2302DHT22",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DHT22",
+    "manufacturerPartNumber": "DHT22",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove BlinkM",
@@ -2686,7 +3874,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveBlinkM",
     "componentName": "GroveBlinkM",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove BlinkM controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLINKM",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Line Finder",
@@ -2695,7 +3887,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveLineFinder",
     "componentName": "GroveLineFinder",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove LineFinder controller",
+    "manufacturerPartNumber": "GROVE-GROVELINEFINDER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Display 1 12",
@@ -2704,7 +3900,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay112",
     "componentName": "GroveOLEDDisplay112",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove OLEDDisplay112 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOLEDDISPLAY112",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Display 0 96",
@@ -2713,7 +3913,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay096",
     "componentName": "GroveOLEDDisplay096",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove OLEDDisplay096 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOLEDDISPLAY096",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Serial LCD",
@@ -2722,7 +3926,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveSerialLCD",
     "componentName": "GroveSerialLCD",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove SerialLCD controller",
+    "manufacturerPartNumber": "GROVE-GROVESERIALLCD",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LED",
@@ -2731,7 +3939,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLED",
     "componentName": "GroveLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LED controller",
+    "manufacturerPartNumber": "GROVE-GROVELED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Accelerometer 1 5g",
@@ -2740,7 +3952,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer15g",
     "componentName": "Grove3AxisDigitalAccelerometer15g",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer15g controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER15G",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Compass",
@@ -2749,7 +3965,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove3AxisDigitalCompass",
     "componentName": "Grove3AxisDigitalCompass",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove 3AxisDigitalCompass controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALCOMPASS",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RTC DS1307",
@@ -2758,7 +3978,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveRTCDS1307",
     "componentName": "GroveRTCDS1307",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove RTCDS1307 controller",
+    "manufacturerPartNumber": "GROVE-GROVERTCDS1307",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Gyro",
@@ -2767,7 +3991,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "Grove3AxisDigitalGyro",
     "componentName": "Grove3AxisDigitalGyro",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove 3AxisDigitalGyro controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALGYRO",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Accelerometer 16g",
@@ -2776,7 +4004,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer16g",
     "componentName": "Grove3AxisDigitalAccelerometer16g",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer16g controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER16G",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Green LED",
@@ -2785,7 +4017,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveGreenLED",
     "componentName": "GroveGreenLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove GreenLED controller",
+    "manufacturerPartNumber": "GROVE-GROVEGREENLED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Purple LED 3mm",
@@ -2794,7 +4030,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GrovePurpleLED3mm",
     "componentName": "GrovePurpleLED3mm",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove PurpleLED3mm controller",
+    "manufacturerPartNumber": "GROVE-GROVEPURPLELED3MM",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Multi Color Flash LED 5mm",
@@ -2803,7 +4043,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMultiColorFlashLED5mm",
     "componentName": "GroveMultiColorFlashLED5mm",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove MultiColorFlashLED5mm controller",
+    "manufacturerPartNumber": "GROVE-GROVEMULTICOLORFLASHLED5MM",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove White LED",
@@ -2812,7 +4056,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWhiteLED",
     "componentName": "GroveWhiteLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove WhiteLED controller",
+    "manufacturerPartNumber": "GROVE-GROVEWHITELED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Blue LED",
@@ -2821,7 +4069,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveBlueLED",
     "componentName": "GroveBlueLED",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove BlueLED controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLUELED",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Collision Sensor",
@@ -2830,7 +4082,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveCollisionSensor",
     "componentName": "GroveCollisionSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove CollisionSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVECOLLISIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Dragrove Generic gateway for internet of things",
@@ -2839,7 +4095,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDragroveGenericGatewayForInternetOfThings",
     "componentName": "GroveDragroveGenericGatewayForInternetOfThings",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove DragroveGenericGatewayForInternetOfThings controller",
+    "manufacturerPartNumber": "GROVE-GROVEDRAGROVEGENERICGATEWAYFORINTERNETOFTHINGS",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Chest Strap Heart Rate Sensor",
@@ -2848,7 +4108,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveChestStrapHeartRateSensor",
     "componentName": "GroveChestStrapHeartRateSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove ChestStrapHeartRateSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVECHESTSTRAPHEARTRATESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "MilCandy the Easiest Grove Controller",
@@ -2857,7 +4121,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveMilCandyTheEasiestGroveController",
     "componentName": "GroveMilCandyTheEasiestGroveController",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MilCandyTheEasiestGroveController controller",
+    "manufacturerPartNumber": "GROVE-GROVEMILCANDYTHEEASIESTGROVECONTROLLER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Analog Accelerometer ADXL335",
@@ -2866,7 +4134,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisAnalogAccelerometerADXL335",
     "componentName": "Grove3AxisAnalogAccelerometerADXL335",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisAnalogAccelerometerADXL335 controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISANALOGACCELEROMETERADXL335",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Expansion NET Gadgeteer Compatible",
@@ -2875,7 +4147,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveExpansionNETGadgeteerCompatible",
     "componentName": "GroveExpansionNETGadgeteerCompatible",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove ExpansionNETGadgeteerCompatible controller",
+    "manufacturerPartNumber": "GROVE-GROVEEXPANSIONNETGADGETEERCOMPATIBLE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Air quality sensor",
@@ -2884,7 +4160,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveAirQualitySensor",
     "componentName": "GroveAirQualitySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AirQualitySensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEAIRQUALITYSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Dust Sensor PPD42NS",
@@ -2893,7 +4173,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDustSensorPPD42NS",
     "componentName": "GroveDustSensorPPD42NS",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DustSensorPPD42NS controller",
+    "manufacturerPartNumber": "GROVE-GROVEDUSTSENSORPPD42NS",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Ultrasonic Distance Sensor",
@@ -2902,7 +4186,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveUltrasonicDistanceSensor",
     "componentName": "GroveUltrasonicDistanceSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove UltrasonicDistanceSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEULTRASONICDISTANCESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Luminance Sensor",
@@ -2911,7 +4199,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveLuminanceSensor",
     "componentName": "GroveLuminanceSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove LuminanceSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVELUMINANCESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Blueseeed HM11",
@@ -2920,7 +4212,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveBlueseeedHM11",
     "componentName": "GroveBlueseeedHM11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove BlueseeedHM11 controller",
+    "manufacturerPartNumber": "GROVE-GROVEBLUESEEEDHM11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temperature Humidity Sensor High Accuracy Mini",
@@ -2929,7 +4225,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorHighAccuracyMini",
     "componentName": "GroveTemperatureHumiditySensorHighAccuracyMini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TemperatureHumiditySensorHighAccuracyMini controller",
+    "manufacturerPartNumber": "GROVE-GROVETEMPERATUREHUMIDITYSENSORHIGHACCURACYMINI",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Accelerometer 400g",
@@ -2938,7 +4238,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer400g",
     "componentName": "Grove3AxisDigitalAccelerometer400g",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer400g controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER400G",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove GPS Module",
@@ -2947,7 +4251,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveGPSModule",
     "componentName": "GroveGPSModule",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove GPSModule controller",
+    "manufacturerPartNumber": "GROVE-GROVEGPSMODULE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Oxygen Sensor ME2 O2 f20",
@@ -2956,7 +4264,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOxygenSensorME2O2F20",
     "componentName": "GroveOxygenSensorME2O2F20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OxygenSensorME2O2F20 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOXYGENSENSORME2O2F20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Human Presence Sensor AK9753",
@@ -2965,7 +4277,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveHumanPresenceSensorAK9753",
     "componentName": "GroveHumanPresenceSensorAK9753",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove HumanPresenceSensorAK9753 controller",
+    "manufacturerPartNumber": "GROVE-GROVEHUMANPRESENCESENSORAK9753",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RS232",
@@ -2974,7 +4290,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveRS232",
     "componentName": "GroveRS232",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove RS232 controller",
+    "manufacturerPartNumber": "GROVE-GROVERS232",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Light Color Proximity Sensor TMG39931",
@@ -2983,7 +4303,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveLightColorProximitySensorTMG39931",
     "componentName": "GroveLightColorProximitySensorTMG39931",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "TMG39931",
+    "manufacturerPartNumber": "TMG39931",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Triple Color E Ink Display 2 13",
@@ -2992,7 +4316,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTripleColorEInkDisplay213",
     "componentName": "GroveTripleColorEInkDisplay213",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove TripleColorEInkDisplay213 controller",
+    "manufacturerPartNumber": "GROVE-GROVETRIPLECOLOREINKDISPLAY213",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Triple Color E Ink Display 1 54",
@@ -3001,7 +4329,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTripleColorEInkDisplay154",
     "componentName": "GroveTripleColorEInkDisplay154",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove TripleColorEInkDisplay154 controller",
+    "manufacturerPartNumber": "GROVE-GROVETRIPLECOLOREINKDISPLAY154",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RS485",
@@ -3010,7 +4342,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveRS485",
     "componentName": "GroveRS485",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove RS485 controller",
+    "manufacturerPartNumber": "GROVE-GROVERS485",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Accelerometer 200g ADXL372",
@@ -3019,7 +4355,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer200gADXL372",
     "componentName": "Grove3AxisDigitalAccelerometer200gADXL372",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer200gADXL372 controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER200GADXL372",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Analog Accelerometer 20g ADXL356B",
@@ -3028,7 +4368,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisAnalogAccelerometer20gADXL356B",
     "componentName": "Grove3AxisAnalogAccelerometer20gADXL356B",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisAnalogAccelerometer20gADXL356B controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISANALOGACCELEROMETER20GADXL356B",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Digital Accelerometer 40g ADXL357",
@@ -3037,7 +4381,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisDigitalAccelerometer40gADXL357",
     "componentName": "Grove3AxisDigitalAccelerometer40gADXL357",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisDigitalAccelerometer40gADXL357 controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISDIGITALACCELEROMETER40GADXL357",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 3 Axis Analog Accelerometer 40g ADXL356C",
@@ -3046,7 +4394,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove3AxisAnalogAccelerometer40gADXL356C",
     "componentName": "Grove3AxisAnalogAccelerometer40gADXL356C",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 3AxisAnalogAccelerometer40gADXL356C controller",
+    "manufacturerPartNumber": "GROVE-GROVE3AXISANALOGACCELEROMETER40GADXL356C",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove W600",
@@ -3055,7 +4407,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveW600",
     "componentName": "GroveW600",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove W600 controller",
+    "manufacturerPartNumber": "GROVE-GROVEW600",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 0 54 Red Dual Alphanumeric Display",
@@ -3064,7 +4420,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove054RedDualAlphanumericDisplay",
     "componentName": "Grove054RedDualAlphanumericDisplay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 054RedDualAlphanumericDisplay controller",
+    "manufacturerPartNumber": "GROVE-GROVE054REDDUALALPHANUMERICDISPLAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 0 54 Red Quad Alphanumeric Display",
@@ -3073,7 +4433,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove054RedQuadAlphanumericDisplay",
     "componentName": "Grove054RedQuadAlphanumericDisplay",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove 054RedQuadAlphanumericDisplay controller",
+    "manufacturerPartNumber": "GROVE-GROVE054REDQUADALPHANUMERICDISPLAY",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Breadboard",
@@ -3082,7 +4446,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveBreadboard",
     "componentName": "GroveBreadboard",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove Breadboard controller",
+    "manufacturerPartNumber": "GROVE-GROVEBREADBOARD",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Single Axis Analog Accelerometer 100g ADXL1001",
@@ -3091,7 +4459,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSingleAxisAnalogAccelerometer100gADXL1001",
     "componentName": "GroveSingleAxisAnalogAccelerometer100gADXL1001",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove SingleAxisAnalogAccelerometer100gADXL1001 controller",
+    "manufacturerPartNumber": "GROVE-GROVESINGLEAXISANALOGACCELEROMETER100GADXL1001",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 6 Axis Digital Accelerometer Gyroscope 40g ADIS16470",
@@ -3100,7 +4472,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grove6AxisDigitalAccelerometerGyroscope40gADIS16470",
     "componentName": "Grove6AxisDigitalAccelerometerGyroscope40gADIS16470",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove 6AxisDigitalAccelerometerGyroscope40gADIS16470 controller",
+    "manufacturerPartNumber": "GROVE-GROVE6AXISDIGITALACCELEROMETERGYROSCOPE40GADIS16470",
+    "powerVoltage": "5V"
   },
   {
     "title": "MT3620 Grove Breakout",
@@ -3109,7 +4485,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveMT3620GroveBreakout",
     "componentName": "GroveMT3620GroveBreakout",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MT3620GroveBreakout controller",
+    "manufacturerPartNumber": "GROVE-GROVEMT3620GROVEBREAKOUT",
+    "powerVoltage": "5V"
   },
   {
     "title": "38mm 8 8 square matrix LED matched with Grove Green Common Anode",
@@ -3118,7 +4498,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grovemm88SquareMatrixLEDMatchedWithGroveGreenCommonAnode",
     "componentName": "Grovemm88SquareMatrixLEDMatchedWithGroveGreenCommonAnode",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove mm88SquareMatrixLEDMatchedWithGroveGreenCommonAnode controller",
+    "manufacturerPartNumber": "GROVE-GROVEMM88SQUAREMATRIXLEDMATCHEDWITHGROVEGREENCOMMONANODE",
+    "powerVoltage": "5V"
   },
   {
     "title": "38mm 8 8 square matrix LED matched with Grove Red Common Anode",
@@ -3127,7 +4511,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grovemm88SquareMatrixLEDMatchedWithGroveRedCommonAnode",
     "componentName": "Grovemm88SquareMatrixLEDMatchedWithGroveRedCommonAnode",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove mm88SquareMatrixLEDMatchedWithGroveRedCommonAnode controller",
+    "manufacturerPartNumber": "GROVE-GROVEMM88SQUAREMATRIXLEDMATCHEDWITHGROVEREDCOMMONANODE",
+    "powerVoltage": "5V"
   },
   {
     "title": "38mm 8 8 square matrix LED matched with Grove Blue Common Anode",
@@ -3136,7 +4524,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "Grovemm88SquareMatrixLEDMatchedWithGroveBlueCommonAnode",
     "componentName": "Grovemm88SquareMatrixLEDMatchedWithGroveBlueCommonAnode",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "Grove mm88SquareMatrixLEDMatchedWithGroveBlueCommonAnode controller",
+    "manufacturerPartNumber": "GROVE-GROVEMM88SQUAREMATRIXLEDMATCHEDWITHGROVEBLUECOMMONANODE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 12 bit Magnetic Rotary Position Sensor AS5600",
@@ -3145,7 +4537,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove12BitMagneticRotaryPositionSensorAS5600",
     "componentName": "Grove12BitMagneticRotaryPositionSensorAS5600",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "input",
+    "primaryModel": "AS5600",
+    "manufacturerPartNumber": "AS5600",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RGB LED Ring 16 WS2813 Mini",
@@ -3154,7 +4550,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDRing16WS2813Mini",
     "componentName": "GroveRGBLEDRing16WS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RGB LED Ring 24 WS2813 Mini",
@@ -3163,7 +4563,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDRing24WS2813Mini",
     "componentName": "GroveRGBLEDRing24WS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Ultimate RGB LED Ring",
@@ -3172,7 +4576,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveUltimateRGBLEDRing",
     "componentName": "GroveUltimateRGBLEDRing",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "Grove UltimateRGBLEDRing controller",
+    "manufacturerPartNumber": "GROVE-GROVEULTIMATERGBLEDRING",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RGB LED WS2813 Mini",
@@ -3181,7 +4589,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDWS2813Mini",
     "componentName": "GroveRGBLEDWS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RGB LED Stick 15 WS2813 Mini",
@@ -3190,7 +4602,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDStick15WS2813Mini",
     "componentName": "GroveRGBLEDStick15WS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove RGB LED Stick 20 WS2813 Mini",
@@ -3199,7 +4615,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveRGBLEDStick20WS2813Mini",
     "componentName": "GroveRGBLEDStick20WS2813Mini",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "actuator",
+    "primaryModel": "WS2813",
+    "manufacturerPartNumber": "WS2813",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove MP3 V3",
@@ -3208,7 +4628,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveMP3V3",
     "componentName": "GroveMP3V3",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove MP3V3 controller",
+    "manufacturerPartNumber": "GROVE-GROVEMP3V3",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera IR Array MLX90640 110 degree",
@@ -3217,7 +4641,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraIRArrayMLX90640110Degree",
     "componentName": "GroveThermalImagingCameraIRArrayMLX90640110Degree",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9064x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90640110DEGREE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera IR Array MLX90640 55 degree",
@@ -3226,7 +4654,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraIRArrayMLX9064055Degree",
     "componentName": "GroveThermalImagingCameraIRArrayMLX9064055Degree",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9064x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX9064055DEGREE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Arch Mix Grove Breakout",
@@ -3235,7 +4667,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveArchMixGroveBreakout",
     "componentName": "GroveArchMixGroveBreakout",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove ArchMixGroveBreakout controller",
+    "manufacturerPartNumber": "GROVE-GROVEARCHMIXGROVEBREAKOUT",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Capacitive Fingerprint Scanner",
@@ -3244,7 +4680,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveCapacitiveFingerprintScanner",
     "componentName": "GroveCapacitiveFingerprintScanner",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove CapacitiveFingerprintScanner controller",
+    "manufacturerPartNumber": "GROVE-GROVECAPACITIVEFINGERPRINTSCANNER",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove High Precision Barometer Sensor DPS310",
@@ -3253,7 +4693,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveHighPrecisionBarometerSensorDPS310",
     "componentName": "GroveHighPrecisionBarometerSensorDPS310",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DPS310",
+    "manufacturerPartNumber": "DPS310",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove 8 Channel I2C Hub TCA9548A",
@@ -3262,7 +4706,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "Grove8ChannelI2CHubTCA9548A",
     "componentName": "Grove8ChannelI2CHubTCA9548A",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "TCA9548A",
+    "manufacturerPartNumber": "TCA9548A",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Turbidity Sensor",
@@ -3271,7 +4719,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTurbiditySensor",
     "componentName": "GroveTurbiditySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove TurbiditySensor controller",
+    "manufacturerPartNumber": "GROVE-GROVETURBIDITYSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Water Level Sensor 10CM",
@@ -3280,7 +4732,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveWaterLevelSensor10CM",
     "componentName": "GroveWaterLevelSensor10CM",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove WaterLevelSensor10CM controller",
+    "manufacturerPartNumber": "GROVE-GROVEWATERLEVELSENSOR10CM",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove AHT20 I2C Industrial grade temperature and humidity sensor",
@@ -3289,7 +4745,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAHT20I2CIndustrialGradeTemperatureAndHumiditySensor",
     "componentName": "GroveAHT20I2CIndustrialGradeTemperatureAndHumiditySensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "AHT20",
+    "manufacturerPartNumber": "AHT20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Digital PIR Motion Sensor",
@@ -3298,7 +4758,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveDigitalPIRMotionSensor",
     "componentName": "GroveDigitalPIRMotionSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove DigitalPIRMotionSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEDIGITALPIRMOTIONSENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Qwiic Hub",
@@ -3307,7 +4771,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveQwiicHub",
     "componentName": "GroveQwiicHub",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove QwiicHub controller",
+    "manufacturerPartNumber": "GROVE-GROVEQWIICHUB",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Multichannel Gas Sensor v2",
@@ -3316,7 +4784,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveMultichannelGasSensorV2",
     "componentName": "GroveMultichannelGasSensorV2",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove MultichannelGasSensorV2 controller",
+    "manufacturerPartNumber": "GROVE-GROVEMULTICHANNELGASSENSORV2",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Doppler Radar BGT24LTR11",
@@ -3325,7 +4797,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveDopplerRadarBGT24LTR11",
     "componentName": "GroveDopplerRadarBGT24LTR11",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "BGT24LTR11",
+    "manufacturerPartNumber": "BGT24LTR11",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove ADS1115 16 bit ADC",
@@ -3334,7 +4810,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveADS111516BitADC",
     "componentName": "GroveADS111516BitADC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "ADS1115",
+    "manufacturerPartNumber": "ADS1115",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera IR Array MLX90641 110 degree",
@@ -3343,7 +4823,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraIRArrayMLX90641110Degree",
     "componentName": "GroveThermalImagingCameraIRArrayMLX90641110Degree",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9064x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90641110DEGREE",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera MLX90614 DCI IR Array with 5 FOV",
@@ -3352,7 +4836,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraMLX90614DCIIRArrayWith5FOV",
     "componentName": "GroveThermalImagingCameraMLX90614DCIIRArrayWith5FOV",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove ThermalImagingCameraMLX90614DCIIRArrayWith5FOV controller",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAMLX90614DCIIRARRAYWITH5FOV",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera MLX90621 BAA 16x4 IR Array with 25 FOV",
@@ -3361,7 +4849,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraMLX90621BAA16x4IRArrayWith25FOV",
     "componentName": "GroveThermalImagingCameraMLX90621BAA16x4IRArrayWith25FOV",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9062x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAMLX90621BAA16X4IRARRAYWITH25FOV",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera MLX90614 DCC IR Array with 35 FOV",
@@ -3370,7 +4862,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraMLX90614DCCIRArrayWith35FOV",
     "componentName": "GroveThermalImagingCameraMLX90614DCCIRArrayWith35FOV",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove ThermalImagingCameraMLX90614DCCIRArrayWith35FOV controller",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAMLX90614DCCIRARRAYWITH35FOV",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Oxygen Sensor MIX8410",
@@ -3379,7 +4875,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOxygenSensorMIX8410",
     "componentName": "GroveOxygenSensorMIX8410",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OxygenSensorMIX8410 controller",
+    "manufacturerPartNumber": "GROVE-GROVEOXYGENSENSORMIX8410",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove LoRa E5 STM32WLE5JC",
@@ -3388,7 +4888,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "uart",
     "directory": "GroveLoRaE5STM32WLE5JC",
     "componentName": "GroveLoRaE5STM32WLE5JC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "Grove LoRaE5STM32WLE5JC controller",
+    "manufacturerPartNumber": "GROVE-GROVELORAE5STM32WLE5JC",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Oxygen Sensor Pro Pre calibration",
@@ -3397,7 +4901,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveOxygenSensorProPreCalibration",
     "componentName": "GroveOxygenSensorProPreCalibration",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove OxygenSensorProPreCalibration controller",
+    "manufacturerPartNumber": "GROVE-GROVEOXYGENSENSORPROPRECALIBRATION",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temperature Humidity Sensor V2 0 DHT20",
@@ -3406,7 +4914,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveTemperatureHumiditySensorV20DHT20",
     "componentName": "GroveTemperatureHumiditySensorV20DHT20",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "DHT20",
+    "manufacturerPartNumber": "DHT20",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Yellow Blue Display 0 96 SSD1315 V1 0",
@@ -3415,7 +4927,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDYellowBlueDisplay096SSD1315V10",
     "componentName": "GroveOLEDYellowBlueDisplay096SSD1315V10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SSD1315",
+    "manufacturerPartNumber": "SSD1315",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Display 1 12 SH1107 V3 0",
@@ -3424,7 +4940,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay112SH1107V30",
     "componentName": "GroveOLEDDisplay112SH1107V30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SH1107",
+    "manufacturerPartNumber": "SH1107",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove OLED Display 0 66 SSD1306 v1 0",
@@ -3433,7 +4953,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveOLEDDisplay066SSD1306V10",
     "componentName": "GroveOLEDDisplay066SSD1306V10",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "display",
+    "primaryModel": "SSD1306",
+    "manufacturerPartNumber": "SSD1306",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Formaldehyde Sensor SFA30",
@@ -3442,7 +4966,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveFormaldehydeSensorSFA30",
     "componentName": "GroveFormaldehydeSensorSFA30",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove FormaldehydeSensorSFA30 controller",
+    "manufacturerPartNumber": "GROVE-GROVEFORMALDEHYDESENSORSFA30",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera MLX90641 BCB 16x12 IR Array with 55 FOV",
@@ -3451,7 +4979,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraMLX90641BCB16x12IRArrayWith55FOV",
     "componentName": "GroveThermalImagingCameraMLX90641BCB16x12IRArrayWith55FOV",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9064x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAMLX90641BCB16X12IRARRAYWITH55FOV",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Thermal Imaging Camera MLX90621 BAB 16x4 IR Array with 60 FOV",
@@ -3460,7 +4992,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveThermalImagingCameraMLX90621BAB16x4IRArrayWith60FOV",
     "componentName": "GroveThermalImagingCameraMLX90621BAB16x4IRArrayWith60FOV",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "MLX9062x",
+    "manufacturerPartNumber": "GROVE-GROVETHERMALIMAGINGCAMERAMLX90621BAB16X4IRARRAYWITH60FOV",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove All in one Environmental Sensor SEN55",
@@ -3469,7 +5005,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAllInOneEnvironmentalSensorSEN55",
     "componentName": "GroveAllInOneEnvironmentalSensorSEN55",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AllInOneEnvironmentalSensorSEN55 controller",
+    "manufacturerPartNumber": "GROVE-GROVEALLINONEENVIRONMENTALSENSORSEN55",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove All in one Environmental Sensor SEN54",
@@ -3478,7 +5018,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAllInOneEnvironmentalSensorSEN54",
     "componentName": "GroveAllInOneEnvironmentalSensorSEN54",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove AllInOneEnvironmentalSensorSEN54 controller",
+    "manufacturerPartNumber": "GROVE-GROVEALLINONEENVIRONMENTALSENSORSEN54",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temp Humi Sensor SHT41",
@@ -3487,7 +5031,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTempHumiSensorSHT41",
     "componentName": "GroveTempHumiSensorSHT41",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SHT4x",
+    "manufacturerPartNumber": "GROVE-GROVETEMPHUMISENSORSHT41",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Temp Humi Sensor SHT40",
@@ -3496,7 +5044,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveTempHumiSensorSHT40",
     "componentName": "GroveTempHumiSensorSHT40",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SHT4x",
+    "manufacturerPartNumber": "GROVE-GROVETEMPHUMISENSORSHT40",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Gas Sensor BME688",
@@ -3505,7 +5057,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveGasSensorBME688",
     "componentName": "GroveGasSensorBME688",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "BME688",
+    "manufacturerPartNumber": "BME688",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove AC Voltage sensor",
@@ -3514,7 +5070,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveACVoltageSensor",
     "componentName": "GroveACVoltageSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove ACVoltageSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVEACVOLTAGESENSOR",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Wizfi360",
@@ -3523,7 +5083,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "digital",
     "directory": "GroveWizfi360",
     "componentName": "GroveWizfi360",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "utility",
+    "primaryModel": "Grove Wizfi360 controller",
+    "manufacturerPartNumber": "GROVE-GROVEWIZFI360",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Air Quality Sensor SGP41",
@@ -3532,7 +5096,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAirQualitySensorSGP41",
     "componentName": "GroveAirQualitySensorSGP41",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SGP41",
+    "manufacturerPartNumber": "SGP41",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove NFC ST25DV64KC",
@@ -3541,7 +5109,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveNFCST25DV64KC",
     "componentName": "GroveNFCST25DV64KC",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "communications",
+    "primaryModel": "ST25DV64",
+    "manufacturerPartNumber": "ST25DV64",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Air Quality Sensor SGP40",
@@ -3550,7 +5122,11 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "i2c",
     "directory": "GroveAirQualitySensorSGP40",
     "componentName": "GroveAirQualitySensorSGP40",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "SGP40",
+    "manufacturerPartNumber": "SGP40",
+    "powerVoltage": "5V"
   },
   {
     "title": "Grove Smart IR Gesture Sensor",
@@ -3559,6 +5135,10 @@ export const groveCatalogueManifest: GroveCatalogueEntry[] = [
     "interfaceKind": "analog",
     "directory": "GroveSmartIRGestureSensor",
     "componentName": "GroveSmartIRGestureSensor",
-    "detailed": false
+    "detailed": false,
+    "detailKind": "sensor",
+    "primaryModel": "Grove SmartIRGestureSensor controller",
+    "manufacturerPartNumber": "GROVE-GROVESMARTIRGESTURESENSOR",
+    "powerVoltage": "5V"
   }
 ]
