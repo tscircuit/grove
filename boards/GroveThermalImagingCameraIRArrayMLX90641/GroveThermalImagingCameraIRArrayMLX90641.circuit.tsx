@@ -10,7 +10,7 @@ export const GroveThermalImagingCameraIRArrayMLX90641 = () => (
       interfaceKind: "i2c",
       detailKind: "communications",
       primaryModel: "MLX9064x",
-      manufacturerPartNumber: "GROVE-GROVETHERMALIMAGINGCAMERAIRARRAYMLX90641",
+      manufacturerPartNumber: "MLX9064x",
       powerVoltage: "5V",
     }}
   />

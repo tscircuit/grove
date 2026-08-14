@@ -1,12 +1,12 @@
 # Grove - Long Range
 
-Detailed Grove **RF** board model with a Grove LongRange controller controller,
+Detailed Grove **RF** board model with a RFM95 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `communications`
-- Primary part: `Grove LongRange controller` (MPN: `GROVE-GROVELONGRANGE`)
+- Primary part: `RFM95` (MPN: `RFM95`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

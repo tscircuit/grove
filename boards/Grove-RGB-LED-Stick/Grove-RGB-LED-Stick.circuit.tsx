@@ -4,7 +4,8 @@ import { Fragment } from "react"
 const Ws2813Mini = ({ name, pcbX, schX, isLast }: { name: string; pcbX: number; schX: number; isLast?: boolean }) => (
   <chip
     name={name}
-    displayName={name}
+    displayName="WS2813-MINI"
+    manufacturerPartNumber="WS2813-MINI"
     pinLabels={{ pin1: "VDD", pin2: "DO", pin3: "GND", pin4: "DIN", pin5: "BIN", pin6: "VCC" }}
     pinAttributes={{
       VDD: { requiresPower: true, mustBeConnected: true },

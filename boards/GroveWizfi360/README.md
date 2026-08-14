@@ -1,12 +1,12 @@
 # Grove Wizfi360
 
-Detailed Grove **Catalogue** board model with a Grove Wizfi360 controller controller,
+Detailed Grove **Catalogue** board model with a ESP8285 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove Wizfi360 controller` (MPN: `GROVE-GROVEWIZFI360`)
+- Primary part: `ESP8285` (MPN: `ESP8285`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Wizfi360-p-5541.html)
 

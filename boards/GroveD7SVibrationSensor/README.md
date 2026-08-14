@@ -1,12 +1,12 @@
 # Grove - D7S Vibration Sensor
 
-Detailed Grove **Accelerometer** board model with a Grove D7SVibrationSensor controller controller,
+Detailed Grove **Accelerometer** board model with a D7S controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove D7SVibrationSensor controller` (MPN: `GROVE-GROVED7SVIBRATIONSENSOR`)
+- Primary part: `D7S` (MPN: `D7S`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

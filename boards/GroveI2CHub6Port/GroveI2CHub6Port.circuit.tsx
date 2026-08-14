@@ -9,8 +9,8 @@ export const GroveI2CHub6Port = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove I2CHub6Port controller",
-      manufacturerPartNumber: "GROVE-GROVEI2CHUB6PORT",
+      primaryModel: "TCA9548A",
+      manufacturerPartNumber: "TCA9548A",
       powerVoltage: "5V",
     }}
   />

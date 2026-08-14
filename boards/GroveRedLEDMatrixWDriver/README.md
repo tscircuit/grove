@@ -1,12 +1,12 @@
 # Grove - Red LED Matrix w/Driver
 
-Detailed Grove **LED** board model with a Grove RedLEDMatrixWDriver controller controller,
+Detailed Grove **LED** board model with a P9813 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `analog`
+- Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove RedLEDMatrixWDriver controller` (MPN: `GROVE-GROVEREDLEDMATRIXWDRIVER`)
+- Primary part: `P9813` (MPN: `P9813`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

@@ -9,8 +9,8 @@ export const GroveOptocouplerRelayM281 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove OptocouplerRelayM281 controller",
-      manufacturerPartNumber: "GROVE-GROVEOPTOCOUPLERRELAYM281",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

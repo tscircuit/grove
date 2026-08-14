@@ -1,12 +1,12 @@
 # Grove - MOSFET
 
-Detailed Grove **Current** board model with a Grove MOSFET controller controller,
+Detailed Grove **Current** board model with a 2N7002 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove MOSFET controller` (MPN: `GROVE-GROVEMOSFET`)
+- Primary part: `2N7002` (MPN: `2N7002`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

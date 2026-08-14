@@ -8,9 +8,9 @@ export const GroveLightSensorV12LS06SPhototransistor = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove LightSensorV12LS06SPhototransistor controller",
-      manufacturerPartNumber: "GROVE-GROVELIGHTSENSORV12LS06SPHOTOTRANSISTOR",
+      detailKind: "sensor",
+      primaryModel: "GL5528",
+      manufacturerPartNumber: "GL5528",
       powerVoltage: "5V",
     }}
   />

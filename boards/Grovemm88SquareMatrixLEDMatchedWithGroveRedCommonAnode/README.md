@@ -1,12 +1,12 @@
 # 38mm 8 8 square matrix LED matched with Grove Red Common Anode
 
-Detailed Grove **Display** board model with a Grove mm88SquareMatrixLEDMatchedWithGroveRedCommonAnode controller controller,
+Detailed Grove **Display** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `analog`
+- Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove mm88SquareMatrixLEDMatchedWithGroveRedCommonAnode controller` (MPN: `GROVE-GROVEMM88SQUAREMATRIXLEDMATCHEDWITHGROVEREDCOMMONANODE`)
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/38mm-8-8-square-matrix-LED-matched-with-Grove-Red-Common-Anode-p-4051.html)
 

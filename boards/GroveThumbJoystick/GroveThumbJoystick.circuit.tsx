@@ -9,8 +9,8 @@ export const GroveThumbJoystick = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove ThumbJoystick controller",
-      manufacturerPartNumber: "GROVE-GROVETHUMBJOYSTICK",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

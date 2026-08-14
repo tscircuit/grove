@@ -9,8 +9,8 @@ export const GroveChestStrapHeartRateSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Chest-Strap-Heart-Rate-Sensor-p-1115.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove ChestStrapHeartRateSensor controller",
-      manufacturerPartNumber: "GROVE-GROVECHESTSTRAPHEARTRATESENSOR",
+      primaryModel: "MAX30100",
+      manufacturerPartNumber: "MAX30100",
       powerVoltage: "5V",
     }}
   />

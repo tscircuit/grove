@@ -9,8 +9,8 @@ export const GroveNFC = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-NFC.html",
       interfaceKind: "i2c",
       detailKind: "communications",
-      primaryModel: "Grove NFC controller",
-      manufacturerPartNumber: "GROVE-GROVENFC",
+      primaryModel: "PN532",
+      manufacturerPartNumber: "PN532",
       powerVoltage: "5V",
     }}
   />

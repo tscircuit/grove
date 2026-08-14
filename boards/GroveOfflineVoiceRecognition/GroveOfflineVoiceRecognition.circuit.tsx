@@ -9,8 +9,8 @@ export const GroveOfflineVoiceRecognition = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "uart",
       detailKind: "sensor",
-      primaryModel: "Grove OfflineVoiceRecognition controller",
-      manufacturerPartNumber: "GROVE-GROVEOFFLINEVOICERECOGNITION",
+      primaryModel: "M007",
+      manufacturerPartNumber: "M007",
       powerVoltage: "5V",
     }}
   />

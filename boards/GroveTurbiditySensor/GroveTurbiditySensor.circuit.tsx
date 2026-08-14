@@ -9,8 +9,8 @@ export const GroveTurbiditySensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Turbidity-Sensor-p-4399.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove TurbiditySensor controller",
-      manufacturerPartNumber: "GROVE-GROVETURBIDITYSENSOR",
+      primaryModel: "SEN0189",
+      manufacturerPartNumber: "SEN0189",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove Serial MP3 Player
 
-Detailed Grove **Communications** board model with a Grove SerialMP3Player controller controller,
+Detailed Grove **Communications** board model with a WT5001-48L controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove SerialMP3Player controller` (MPN: `GROVE-GROVESERIALMP3PLAYER`)
+- Primary part: `WT5001-48L` (MPN: `WT5001-48L`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Serial-MP3-Player-p-1542.html)
 

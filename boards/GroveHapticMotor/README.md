@@ -1,12 +1,12 @@
 # Grove Haptic Motor
 
-Detailed Grove **Actuator** board model with a Grove HapticMotor controller controller,
+Detailed Grove **Actuator** board model with a DRV2605 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove HapticMotor controller` (MPN: `GROVE-GROVEHAPTICMOTOR`)
+- Primary part: `DRV2605` (MPN: `DRV2605`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Haptic-Motor-p-2546.html)
 

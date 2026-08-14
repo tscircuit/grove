@@ -1,12 +1,12 @@
 # Grove Vision AI Module V2
 
-Detailed Grove **AI-powered** board model with a Grove VisionAIModuleV2 controller controller,
+Detailed Grove **AI-powered** board model with a WiseEye2 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove VisionAIModuleV2 controller` (MPN: `GROVE-GROVEVISIONAIMODULEV2`)
+- Primary part: `WiseEye2` (MPN: `WiseEye2`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

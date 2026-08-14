@@ -9,8 +9,8 @@ export const GroveVoltageDivider = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove VoltageDivider controller",
-      manufacturerPartNumber: "GROVE-GROVEVOLTAGEDIVIDER",
+      primaryModel: "LMV358",
+      manufacturerPartNumber: "LMV358",
       powerVoltage: "5V",
     }}
   />

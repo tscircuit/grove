@@ -8,9 +8,9 @@ export const GroveElectromagnet = () => (
       category: "Current",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove Electromagnet controller",
-      manufacturerPartNumber: "GROVE-GROVEELECTROMAGNET",
+      detailKind: "sensor",
+      primaryModel: "MOSFET-Driver",
+      manufacturerPartNumber: "MOSFET-Driver",
       powerVoltage: "5V",
     }}
   />

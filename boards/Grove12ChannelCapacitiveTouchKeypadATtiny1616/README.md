@@ -1,12 +1,12 @@
 # Grove 12 Channel Capacitive Touch Keypad (ATtiny1616)
 
-Detailed Grove **Touch** board model with a Grove 12ChannelCapacitiveTouchKeypadATtiny1616 controller controller,
+Detailed Grove **Touch** board model with a ATtiny1616 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove 12ChannelCapacitiveTouchKeypadATtiny1616 controller` (MPN: `GROVE-GROVE12CHANNELCAPACITIVETOUCHKEYPADATTINY1616`)
+- Primary part: `ATtiny1616` (MPN: `ATtiny1616`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

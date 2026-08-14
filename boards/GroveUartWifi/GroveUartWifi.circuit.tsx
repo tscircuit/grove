@@ -9,8 +9,8 @@ export const GroveUartWifi = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Uart-Wifi-p-2495.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove UartWifi controller",
-      manufacturerPartNumber: "GROVE-GROVEUARTWIFI",
+      primaryModel: "ESP8285",
+      manufacturerPartNumber: "ESP8285",
       powerVoltage: "5V",
     }}
   />

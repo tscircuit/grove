@@ -8,9 +8,9 @@ export const GroveInfraredReceiver = () => (
       category: "Light",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
-      detailKind: "sensor",
-      primaryModel: "Grove InfraredReceiver controller",
-      manufacturerPartNumber: "GROVE-GROVEINFRAREDRECEIVER",
+      detailKind: "utility",
+      primaryModel: "TSOP38238",
+      manufacturerPartNumber: "TSOP38238",
       powerVoltage: "5V",
     }}
   />

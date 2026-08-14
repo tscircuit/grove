@@ -1,12 +1,12 @@
 # Grove - Serial Bluetooth v3.0
 
-Detailed Grove **Bluetooth** board model with a Grove SerialBluetoothV30 controller controller,
+Detailed Grove **Bluetooth** board model with a BC417 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove SerialBluetoothV30 controller` (MPN: `GROVE-GROVESERIALBLUETOOTHV30`)
+- Primary part: `BC417` (MPN: `BC417`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

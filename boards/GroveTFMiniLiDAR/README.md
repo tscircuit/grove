@@ -1,12 +1,12 @@
 # Grove - TF Mini LiDAR
 
-Detailed Grove **Proximity** board model with a Grove TFMiniLiDAR controller controller,
+Detailed Grove **Proximity** board model with a TFMINI controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
-- Board family: `utility`
-- Primary part: `Grove TFMiniLiDAR controller` (MPN: `GROVE-GROVETFMINILIDAR`)
+- Board family: `sensor`
+- Primary part: `TFMINI` (MPN: `TFMINI`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

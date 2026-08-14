@@ -9,8 +9,8 @@ export const GroveORPSensorKitPro = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove ORPSensorKitPro controller",
-      manufacturerPartNumber: "GROVE-GROVEORPSENSORKITPRO",
+      primaryModel: "OPA333",
+      manufacturerPartNumber: "OPA333",
       powerVoltage: "5V",
     }}
   />

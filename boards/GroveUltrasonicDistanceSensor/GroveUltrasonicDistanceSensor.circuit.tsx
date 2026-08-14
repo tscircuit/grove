@@ -9,8 +9,8 @@ export const GroveUltrasonicDistanceSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Ultrasonic-Distance-Sensor.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove UltrasonicDistanceSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEULTRASONICDISTANCESENSOR",
+      primaryModel: "HC-SR04",
+      manufacturerPartNumber: "HC-SR04",
       powerVoltage: "5V",
     }}
   />

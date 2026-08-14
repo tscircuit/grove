@@ -1,12 +1,12 @@
 # Grove Blue LED Button
 
-Detailed Grove **Light & LED** board model with a Grove BlueLEDButton controller controller,
+Detailed Grove **Light & LED** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove BlueLEDButton controller` (MPN: `GROVE-GROVEBLUELEDBUTTON`)
+- Board family: `input`
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Blue-LED-Button.html)
 

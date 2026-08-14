@@ -1,12 +1,12 @@
 # Grove Wio-E5
 
-Detailed Grove **LoRa®** board model with a Grove WioE5 controller controller,
+Detailed Grove **LoRa®** board model with a Wio-E5 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `communications`
-- Primary part: `Grove WioE5 controller` (MPN: `GROVE-GROVEWIOE5`)
+- Primary part: `Wio-E5` (MPN: `Wio-E5`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

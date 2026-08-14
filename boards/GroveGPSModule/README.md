@@ -1,12 +1,12 @@
 # Grove GPS Module
 
-Detailed Grove **Communications** board model with a Grove GPSModule controller controller,
+Detailed Grove **Communications** board model with a NEO-6M controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove GPSModule controller` (MPN: `GROVE-GROVEGPSMODULE`)
+- Primary part: `NEO-6M` (MPN: `NEO-6M`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-GPS-Module.html)
 

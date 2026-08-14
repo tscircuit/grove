@@ -1,12 +1,12 @@
 # Grove - Coulomb Counter 3.3V to 5V (LTC2941)
 
-Detailed Grove **Current** board model with a Grove CoulombCounter33VTo5VLTC2941 controller controller,
+Detailed Grove **Current** board model with a LTC2941 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove CoulombCounter33VTo5VLTC2941 controller` (MPN: `GROVE-GROVECOULOMBCOUNTER33VTO5VLTC2941`)
+- Primary part: `LTC2941` (MPN: `LTC2941`)
 - Power rail: `3.3V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

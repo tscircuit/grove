@@ -9,8 +9,8 @@ export const GroveWizfi360 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Wizfi360-p-5541.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove Wizfi360 controller",
-      manufacturerPartNumber: "GROVE-GROVEWIZFI360",
+      primaryModel: "ESP8285",
+      manufacturerPartNumber: "ESP8285",
       powerVoltage: "5V",
     }}
   />

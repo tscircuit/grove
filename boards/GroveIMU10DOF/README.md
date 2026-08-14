@@ -1,12 +1,12 @@
 # Grove IMU 10DOF
 
-Detailed Grove **Catalogue** board model with a Grove IMU10DOF controller controller,
+Detailed Grove **Catalogue** board model with a MPU-9250 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove IMU10DOF controller` (MPN: `GROVE-GROVEIMU10DOF`)
+- Primary part: `MPU-9250` (MPN: `MPU-9250`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-IMU-10DOF-p-2386.html)
 

@@ -1,12 +1,12 @@
 # Grove - ±5A DC/AC Current Sensor (ACS70331)
 
-Detailed Grove **Current** board model with a Grove 5ADCACCurrentSensorACS70331 controller controller,
+Detailed Grove **Current** board model with a ACS70331 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 5ADCACCurrentSensorACS70331 controller` (MPN: `GROVE-GROVE5ADCACCURRENTSENSORACS70331`)
+- Primary part: `ACS70331` (MPN: `ACS70331`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

@@ -1,12 +1,12 @@
 # Grove - I2C FM Receiver
 
-Detailed Grove **Other Standard Protocol** board model with a Grove I2CFMReceiver controller controller,
+Detailed Grove **Other Standard Protocol** board model with a RDA5807M controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove I2CFMReceiver controller` (MPN: `GROVE-GROVEI2CFMRECEIVER`)
+- Primary part: `RDA5807M` (MPN: `RDA5807M`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

@@ -9,8 +9,8 @@ export const GroveELDriver = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-EL-Driver.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove ELDriver controller",
-      manufacturerPartNumber: "GROVE-GROVEELDRIVER",
+      primaryModel: "SX1301",
+      manufacturerPartNumber: "SX1301",
       powerVoltage: "5V",
     }}
   />

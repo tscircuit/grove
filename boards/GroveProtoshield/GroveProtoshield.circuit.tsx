@@ -9,8 +9,8 @@ export const GroveProtoshield = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove Protoshield controller",
-      manufacturerPartNumber: "GROVE-GROVEPROTOSHIELD",
+      primaryModel: "Grove-Prototyping",
+      manufacturerPartNumber: "Grove-Prototyping",
       powerVoltage: "5V",
     }}
   />

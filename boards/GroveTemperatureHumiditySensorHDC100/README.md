@@ -1,12 +1,12 @@
 # Grove Temperature Humidity Sensor HDC100
 
-Detailed Grove **Sensor** board model with a Grove TemperatureHumiditySensorHDC100 controller controller,
+Detailed Grove **Sensor** board model with a DHT11 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TemperatureHumiditySensorHDC100 controller` (MPN: `GROVE-GROVETEMPERATUREHUMIDITYSENSORHDC100`)
+- Primary part: `DHT11` (MPN: `DHT11`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-HDC100-p-2535.html)
 

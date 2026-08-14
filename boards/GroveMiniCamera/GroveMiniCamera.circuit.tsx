@@ -9,8 +9,8 @@ export const GroveMiniCamera = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Mini-Camera-p-1578.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove MiniCamera controller",
-      manufacturerPartNumber: "GROVE-GROVEMINICAMERA",
+      primaryModel: "OV2640",
+      manufacturerPartNumber: "OV2640",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Accelerometer 1 5g
 
-Detailed Grove **Sensor** board model with a Grove 3AxisDigitalAccelerometer15g controller controller,
+Detailed Grove **Sensor** board model with a MMA7660FC controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisDigitalAccelerometer15g controller` (MPN: `GROVE-GROVE3AXISDIGITALACCELEROMETER15G`)
+- Primary part: `MMA7660FC` (MPN: `MMA7660FC`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-1-5g.html)
 

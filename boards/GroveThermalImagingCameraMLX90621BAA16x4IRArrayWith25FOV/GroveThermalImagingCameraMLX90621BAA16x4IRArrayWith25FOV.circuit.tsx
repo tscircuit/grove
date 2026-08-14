@@ -10,7 +10,7 @@ export const GroveThermalImagingCameraMLX90621BAA16x4IRArrayWith25FOV = () => (
       interfaceKind: "i2c",
       detailKind: "communications",
       primaryModel: "MLX9062x",
-      manufacturerPartNumber: "GROVE-GROVETHERMALIMAGINGCAMERAMLX90621BAA16X4IRARRAYWITH25FOV",
+      manufacturerPartNumber: "MLX9062x",
       powerVoltage: "5V",
     }}
   />

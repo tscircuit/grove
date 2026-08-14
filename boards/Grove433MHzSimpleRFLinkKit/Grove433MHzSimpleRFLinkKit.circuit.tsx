@@ -9,8 +9,8 @@ export const Grove433MHzSimpleRFLinkKit = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove 433MHzSimpleRFLinkKit controller",
-      manufacturerPartNumber: "GROVE-GROVE433MHZSIMPLERFLINKKIT",
+      primaryModel: "FS1000A",
+      manufacturerPartNumber: "FS1000A",
       powerVoltage: "5V",
     }}
   />

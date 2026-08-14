@@ -1,12 +1,12 @@
 # Grove Heelight Sensor
 
-Detailed Grove **Light & LED** board model with a Grove HeelightSensor controller controller,
+Detailed Grove **Light & LED** board model with a GL5528 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove HeelightSensor controller` (MPN: `GROVE-GROVEHEELIGHTSENSOR`)
+- Board family: `sensor`
+- Primary part: `GL5528` (MPN: `GL5528`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Heelight-Sensor.html)
 

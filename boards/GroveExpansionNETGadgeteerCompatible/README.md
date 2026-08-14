@@ -1,12 +1,12 @@
 # Grove Expansion NET Gadgeteer Compatible
 
-Detailed Grove **Communications** board model with a Grove ExpansionNETGadgeteerCompatible controller controller,
+Detailed Grove **Communications** board model with a Grove-Expansion controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `uart`
-- Board family: `communications`
-- Primary part: `Grove ExpansionNETGadgeteerCompatible controller` (MPN: `GROVE-GROVEEXPANSIONNETGADGETEERCOMPATIBLE`)
+- Interface: `digital`
+- Board family: `utility`
+- Primary part: `Grove-Expansion` (MPN: `Grove-Expansion`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Expansion-NET-Gadgeteer-Compatible-p-1084.html)
 

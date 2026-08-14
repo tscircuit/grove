@@ -1,12 +1,12 @@
 # Grove - BLE (dual model) v1.0
 
-Detailed Grove **Bluetooth** board model with a Grove BLEDualModelV10 controller controller,
+Detailed Grove **Bluetooth** board model with a HM-13 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove BLEDualModelV10 controller` (MPN: `GROVE-GROVEBLEDUALMODELV10`)
+- Primary part: `HM-13` (MPN: `HM-13`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

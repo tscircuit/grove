@@ -9,8 +9,8 @@ export const GroveTurbiditySensorMeterForArduinoV10 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove TurbiditySensorMeterForArduinoV10 controller",
-      manufacturerPartNumber: "GROVE-GROVETURBIDITYSENSORMETERFORARDUINOV10",
+      primaryModel: "SEN0189",
+      manufacturerPartNumber: "SEN0189",
       powerVoltage: "5V",
     }}
   />

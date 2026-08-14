@@ -9,8 +9,8 @@ export const Grove3AxisDigitalCompass = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Digital-Compass.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove 3AxisDigitalCompass controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITALCOMPASS",
+      primaryModel: "HMC5883",
+      manufacturerPartNumber: "HMC5883",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove Digital Light Sensor TSL2561
 
-Detailed Grove **Light & LED** board model with a Grove DigitalLightSensorTSL2561 controller controller,
+Detailed Grove **Light & LED** board model with a TSL2561 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove DigitalLightSensorTSL2561 controller` (MPN: `GROVE-GROVEDIGITALLIGHTSENSORTSL2561`)
+- Board family: `sensor`
+- Primary part: `TSL2561` (MPN: `TSL2561`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Digital-Light-Sensor-TSL2561.html)
 

@@ -9,8 +9,8 @@ export const GroveInfraredEmitter = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove InfraredEmitter controller",
-      manufacturerPartNumber: "GROVE-GROVEINFRAREDEMITTER",
+      primaryModel: "IR333-A",
+      manufacturerPartNumber: "IR333-A",
       powerVoltage: "5V",
     }}
   />

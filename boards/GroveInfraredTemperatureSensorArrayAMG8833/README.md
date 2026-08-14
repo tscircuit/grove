@@ -1,12 +1,12 @@
 # Grove - Infrared Temperature Sensor Array(AMG8833)
 
-Detailed Grove **Temperature** board model with a Grove InfraredTemperatureSensorArrayAMG8833 controller controller,
+Detailed Grove **Temperature** board model with a AMG8833 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `Grove InfraredTemperatureSensorArrayAMG8833 controller` (MPN: `GROVE-GROVEINFRAREDTEMPERATURESENSORARRAYAMG8833`)
+- Primary part: `AMG8833` (MPN: `AMG8833`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

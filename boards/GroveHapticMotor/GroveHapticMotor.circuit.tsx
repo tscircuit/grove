@@ -9,8 +9,8 @@ export const GroveHapticMotor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Haptic-Motor-p-2546.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove HapticMotor controller",
-      manufacturerPartNumber: "GROVE-GROVEHAPTICMOTOR",
+      primaryModel: "DRV2605",
+      manufacturerPartNumber: "DRV2605",
       powerVoltage: "5V",
     }}
   />

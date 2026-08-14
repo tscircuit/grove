@@ -1,12 +1,12 @@
 # Grove - TDS Sensor
 
-Detailed Grove **Liquid** board model with a Grove TDSSensor controller controller,
+Detailed Grove **Liquid** board model with a TDS-SENSOR controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TDSSensor controller` (MPN: `GROVE-GROVETDSSENSOR`)
+- Primary part: `TDS-SENSOR` (MPN: `TDS-SENSOR`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

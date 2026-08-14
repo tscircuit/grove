@@ -9,8 +9,8 @@ export const GroveTripleColorEInkDisplay213 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Triple-Color-E-Ink-Display-2-13-p-2889.html",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove TripleColorEInkDisplay213 controller",
-      manufacturerPartNumber: "GROVE-GROVETRIPLECOLOREINKDISPLAY213",
+      primaryModel: "IL0373",
+      manufacturerPartNumber: "IL0373",
       powerVoltage: "5V",
     }}
   />

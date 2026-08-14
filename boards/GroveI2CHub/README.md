@@ -1,12 +1,12 @@
 # Grove - I2C Hub
 
-Detailed Grove **Input Output** board model with a Grove I2CHub controller controller,
+Detailed Grove **Input Output** board model with a TCA9548A controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove I2CHub controller` (MPN: `GROVE-GROVEI2CHUB`)
+- Primary part: `TCA9548A` (MPN: `TCA9548A`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

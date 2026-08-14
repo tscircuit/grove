@@ -1,12 +1,12 @@
 # Grove - UART Wifi V2
 
-Detailed Grove **Wi-Fi** board model with a Grove UARTWifiV2 controller controller,
+Detailed Grove **Wi-Fi** board model with a ESP8285 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove UARTWifiV2 controller` (MPN: `GROVE-GROVEUARTWIFIV2`)
+- Primary part: `ESP8285` (MPN: `ESP8285`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

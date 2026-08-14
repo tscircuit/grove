@@ -1,12 +1,12 @@
 # Grove - Electromagnet
 
-Detailed Grove **Current** board model with a Grove Electromagnet controller controller,
+Detailed Grove **Current** board model with a MOSFET-Driver controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove Electromagnet controller` (MPN: `GROVE-GROVEELECTROMAGNET`)
+- Board family: `sensor`
+- Primary part: `MOSFET-Driver` (MPN: `MOSFET-Driver`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

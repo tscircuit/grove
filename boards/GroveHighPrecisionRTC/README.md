@@ -1,12 +1,12 @@
 # Grove High Precision RTC
 
-Detailed Grove **Catalogue** board model with a Grove HighPrecisionRTC controller controller,
+Detailed Grove **Catalogue** board model with a DS1307 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove HighPrecisionRTC controller` (MPN: `GROVE-GROVEHIGHPRECISIONRTC`)
+- Primary part: `DS1307` (MPN: `DS1307`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-High-Precision-RTC.html)
 

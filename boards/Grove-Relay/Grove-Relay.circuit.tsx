@@ -4,6 +4,7 @@ const Relay = () => (
   <chip
     name="K1"
     displayName="HLS8L-DC3V-S-C"
+    manufacturerPartNumber="HLS8L-DC3V-S-C"
     pinLabels={{
       pin1: "COIL_POS",
       pin2: "COIL_NEG",
@@ -40,6 +41,7 @@ const RelayTerminal = () => (
   <connector
     name="J2"
     displayName="NO / COM / NC"
+    manufacturerPartNumber="KF128-3.5-3P"
     pinLabels={{ pin1: "NO", pin2: "COM", pin3: "NC" }}
     footprint={
       <footprint insertionDirection="from_top">
@@ -67,6 +69,7 @@ export const GroveRelay = () => (
     <chip
       name="U1"
       displayName="XC6206P302MR"
+      manufacturerPartNumber="XC6206P302MR"
       pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }}
       pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }}
       footprint="sot23"
@@ -76,13 +79,13 @@ export const GroveRelay = () => (
       schY={2}
       schHeight="0.4mm"
     />
-    <transistor name="Q1" displayName="S8050TL" type="npn" footprint="sot23" pcbX={-7} pcbY={-3.5} schX={0} schY={-2.5} />
+    <transistor name="Q1" displayName="S8050TL" manufacturerPartNumber="S8050TL" type="npn" footprint="sot23" pcbX={-7} pcbY={-3.5} schX={0} schY={-2.5} />
     <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={-11} pcbY={-3} schX={-3.5} schY={-2.5} />
     <resistor name="R2" resistance="470" footprint="0603" pcbX={11} pcbY={-4.5} schX={1} schY={4} />
     <resistor name="R3" resistance="47k" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
     <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-11} pcbY={5.5} pcbRotation={-90} schX={-4} schY={4} schOrientation="vertical" maxDecouplingTraceLength="5mm" />
-    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={12} pcbY={5.5} schX={4} schY={2.5} />
-    <led name="D2" color="red" footprint="0603" pcbX={15} pcbY={5.5} schX={4} schY={4} />
+    <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={12} pcbY={5.5} schX={4} schY={2.5} />
+    <led name="D2" displayName="Red LED 0603" manufacturerPartNumber="LED-RED-0603" color="red" footprint="0603" pcbX={15} pcbY={5.5} schX={4} schY={4} />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="U1.GND" to="J1.GND" />
     <trace from="U1.VOUT" to="K1.COIL_POS" />

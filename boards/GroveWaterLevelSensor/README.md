@@ -1,12 +1,12 @@
 # Grove - Water Level Sensor
 
-Detailed Grove **Liquid** board model with a Grove WaterLevelSensor controller controller,
+Detailed Grove **Liquid** board model with a LM393 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove WaterLevelSensor controller` (MPN: `GROVE-GROVEWATERLEVELSENSOR`)
+- Primary part: `LM393` (MPN: `LM393`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

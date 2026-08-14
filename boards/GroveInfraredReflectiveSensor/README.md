@@ -1,12 +1,12 @@
 # Grove - Infrared Reflective Sensor
 
-Detailed Grove **Light** board model with a Grove InfraredReflectiveSensor controller controller,
+Detailed Grove **Light** board model with a LM393 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove InfraredReflectiveSensor controller` (MPN: `GROVE-GROVEINFRAREDREFLECTIVESENSOR`)
+- Primary part: `LM393` (MPN: `LM393`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

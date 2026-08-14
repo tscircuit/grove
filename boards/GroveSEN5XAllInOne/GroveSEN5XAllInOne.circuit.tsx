@@ -9,8 +9,8 @@ export const GroveSEN5XAllInOne = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove SEN5XAllInOne controller",
-      manufacturerPartNumber: "GROVE-GROVESEN5XALLINONE",
+      primaryModel: "SEN55",
+      manufacturerPartNumber: "SEN55",
       powerVoltage: "5V",
     }}
   />

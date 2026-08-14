@@ -9,8 +9,8 @@ export const GroveThermalImagingCameraMLX90614DCIIRArrayWith5FOV = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Thermal-Imaging-Camera-MLX90614-DCI-IR-Array-with-5-FOV-p-4654.html",
       interfaceKind: "i2c",
       detailKind: "communications",
-      primaryModel: "Grove ThermalImagingCameraMLX90614DCIIRArrayWith5FOV controller",
-      manufacturerPartNumber: "GROVE-GROVETHERMALIMAGINGCAMERAMLX90614DCIIRARRAYWITH5FOV",
+      primaryModel: "MLX90614",
+      manufacturerPartNumber: "MLX90614",
       powerVoltage: "5V",
     }}
   />

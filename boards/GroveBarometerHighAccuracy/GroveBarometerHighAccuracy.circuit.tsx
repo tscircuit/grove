@@ -8,9 +8,9 @@ export const GroveBarometerHighAccuracy = () => (
       category: "Barometer",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
-      detailKind: "utility",
-      primaryModel: "Grove BarometerHighAccuracy controller",
-      manufacturerPartNumber: "GROVE-GROVEBAROMETERHIGHACCURACY",
+      detailKind: "sensor",
+      primaryModel: "HP206C",
+      manufacturerPartNumber: "HP206C",
       powerVoltage: "5V",
     }}
   />

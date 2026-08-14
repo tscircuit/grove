@@ -9,8 +9,8 @@ export const GroveLEDStringLight = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove LEDStringLight controller",
-      manufacturerPartNumber: "GROVE-GROVELEDSTRINGLIGHT",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const Grove4DigitDisplay = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove 4DigitDisplay controller",
-      manufacturerPartNumber: "GROVE-GROVE4DIGITDISPLAY",
+      primaryModel: "TM1637",
+      manufacturerPartNumber: "TM1637",
       powerVoltage: "5V",
     }}
   />

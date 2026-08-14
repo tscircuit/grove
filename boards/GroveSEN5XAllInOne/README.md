@@ -1,12 +1,12 @@
 # Grove SEN5X All in One
 
-Detailed Grove **Multiple in one** board model with a Grove SEN5XAllInOne controller controller,
+Detailed Grove **Multiple in one** board model with a SEN55 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove SEN5XAllInOne controller` (MPN: `GROVE-GROVESEN5XALLINONE`)
+- Primary part: `SEN55` (MPN: `SEN55`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

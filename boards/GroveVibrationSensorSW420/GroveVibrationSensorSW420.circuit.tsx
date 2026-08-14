@@ -9,8 +9,8 @@ export const GroveVibrationSensorSW420 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Vibration-Sensor-SW-420.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove VibrationSensorSW420 controller",
-      manufacturerPartNumber: "GROVE-GROVEVIBRATIONSENSORSW420",
+      primaryModel: "SW-420",
+      manufacturerPartNumber: "SW-420",
       powerVoltage: "5V",
     }}
   />

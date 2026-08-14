@@ -1,12 +1,12 @@
 # Grove - Integrated Pressure Sensor Kit
 
-Detailed Grove **Barometer** board model with a Grove IntegratedPressureSensorKit controller controller,
+Detailed Grove **Barometer** board model with a BMP180 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove IntegratedPressureSensorKit controller` (MPN: `GROVE-GROVEINTEGRATEDPRESSURESENSORKIT`)
+- Primary part: `BMP180` (MPN: `BMP180`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

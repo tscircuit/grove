@@ -1,12 +1,12 @@
 # Grove Serial LCD
 
-Detailed Grove **Display** board model with a Grove SerialLCD controller controller,
+Detailed Grove **Display** board model with a ST7066U controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove SerialLCD controller` (MPN: `GROVE-GROVESERIALLCD`)
+- Primary part: `ST7066U` (MPN: `ST7066U`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Serial-LCD-p-773.html)
 

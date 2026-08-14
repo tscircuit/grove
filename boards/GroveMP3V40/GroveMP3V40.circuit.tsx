@@ -9,8 +9,8 @@ export const GroveMP3V40 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "uart",
       detailKind: "utility",
-      primaryModel: "Grove MP3V40 controller",
-      manufacturerPartNumber: "GROVE-GROVEMP3V40",
+      primaryModel: "WT5001-48L",
+      manufacturerPartNumber: "WT5001-48L",
       powerVoltage: "5V",
     }}
   />

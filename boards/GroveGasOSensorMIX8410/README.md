@@ -1,12 +1,12 @@
 # Grove - Gas O₂ Sensor(MIX8410)
 
-Detailed Grove **Gas** board model with a Grove GasOSensorMIX8410 controller controller,
+Detailed Grove **Gas** board model with a MIX8410 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove GasOSensorMIX8410 controller` (MPN: `GROVE-GROVEGASOSENSORMIX8410`)
+- Primary part: `MIX8410` (MPN: `MIX8410`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

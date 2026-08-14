@@ -9,8 +9,8 @@ export const GroveMultichannelGasSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove MultichannelGasSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEMULTICHANNELGASSENSOR",
+      primaryModel: "MiCS-6814",
+      manufacturerPartNumber: "MiCS-6814",
       powerVoltage: "5V",
     }}
   />

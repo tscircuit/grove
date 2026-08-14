@@ -1,12 +1,12 @@
 # Grove Uart Wifi
 
-Detailed Grove **Communications** board model with a Grove UartWifi controller controller,
+Detailed Grove **Communications** board model with a ESP8285 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove UartWifi controller` (MPN: `GROVE-GROVEUARTWIFI`)
+- Primary part: `ESP8285` (MPN: `ESP8285`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Uart-Wifi-p-2495.html)
 

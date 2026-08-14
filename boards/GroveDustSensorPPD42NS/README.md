@@ -1,12 +1,12 @@
 # Grove Dust Sensor PPD42NS
 
-Detailed Grove **Sensor** board model with a Grove DustSensorPPD42NS controller controller,
+Detailed Grove **Sensor** board model with a PPD42NS controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove DustSensorPPD42NS controller` (MPN: `GROVE-GROVEDUSTSENSORPPD42NS`)
+- Primary part: `PPD42NS` (MPN: `PPD42NS`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Dust-Sensor-PPD42NS.html)
 

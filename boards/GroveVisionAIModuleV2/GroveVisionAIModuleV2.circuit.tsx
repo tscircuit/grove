@@ -9,8 +9,8 @@ export const GroveVisionAIModuleV2 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove VisionAIModuleV2 controller",
-      manufacturerPartNumber: "GROVE-GROVEVISIONAIMODULEV2",
+      primaryModel: "WiseEye2",
+      manufacturerPartNumber: "WiseEye2",
       powerVoltage: "5V",
     }}
   />

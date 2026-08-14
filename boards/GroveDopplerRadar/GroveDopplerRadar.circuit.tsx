@@ -8,9 +8,9 @@ export const GroveDopplerRadar = () => (
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
-      detailKind: "utility",
-      primaryModel: "Grove DopplerRadar controller",
-      manufacturerPartNumber: "GROVE-GROVEDOPPLERRADAR",
+      detailKind: "sensor",
+      primaryModel: "HB100",
+      manufacturerPartNumber: "HB100",
       powerVoltage: "5V",
     }}
   />

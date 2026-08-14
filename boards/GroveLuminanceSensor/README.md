@@ -1,12 +1,12 @@
 # Grove Luminance Sensor
 
-Detailed Grove **Light & LED** board model with a Grove LuminanceSensor controller controller,
+Detailed Grove **Light & LED** board model with a APDS-9002 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove LuminanceSensor controller` (MPN: `GROVE-GROVELUMINANCESENSOR`)
+- Board family: `sensor`
+- Primary part: `APDS-9002` (MPN: `APDS-9002`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Luminance-Sensor.html)
 

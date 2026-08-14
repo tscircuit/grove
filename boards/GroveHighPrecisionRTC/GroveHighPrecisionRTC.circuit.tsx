@@ -9,8 +9,8 @@ export const GroveHighPrecisionRTC = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-High-Precision-RTC.html",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove HighPrecisionRTC controller",
-      manufacturerPartNumber: "GROVE-GROVEHIGHPRECISIONRTC",
+      primaryModel: "DS1307",
+      manufacturerPartNumber: "DS1307",
       powerVoltage: "5V",
     }}
   />

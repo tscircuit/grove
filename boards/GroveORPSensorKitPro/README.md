@@ -1,12 +1,12 @@
 # Grove - ORP Sensor Kit Pro
 
-Detailed Grove **Liquid** board model with a Grove ORPSensorKitPro controller controller,
+Detailed Grove **Liquid** board model with a OPA333 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove ORPSensorKitPro controller` (MPN: `GROVE-GROVEORPSENSORKITPRO`)
+- Primary part: `OPA333` (MPN: `OPA333`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

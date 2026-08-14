@@ -1,12 +1,12 @@
 # Grove Gas Sensor MQ9
 
-Detailed Grove **Sensor** board model with a Grove GasSensorMQ9 controller controller,
+Detailed Grove **Sensor** board model with a MQ-9 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove GasSensorMQ9 controller` (MPN: `GROVE-GROVEGASSENSORMQ9`)
+- Primary part: `MQ-9` (MPN: `MQ-9`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Gas-Sensor-MQ9.html)
 

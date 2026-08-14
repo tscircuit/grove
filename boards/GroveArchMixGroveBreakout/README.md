@@ -1,12 +1,12 @@
 # Arch Mix Grove Breakout
 
-Detailed Grove **Catalogue** board model with a Grove ArchMixGroveBreakout controller controller,
+Detailed Grove **Catalogue** board model with a ESP32 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove ArchMixGroveBreakout controller` (MPN: `GROVE-GROVEARCHMIXGROVEBREAKOUT`)
+- Primary part: `ESP32` (MPN: `ESP32`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Arch-Mix-Grove-Breakout-p-4362.html)
 

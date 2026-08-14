@@ -9,8 +9,8 @@ export const GroveDustSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove DustSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEDUSTSENSOR",
+      primaryModel: "PPD42NS",
+      manufacturerPartNumber: "PPD42NS",
       powerVoltage: "5V",
     }}
   />

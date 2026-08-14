@@ -1,12 +1,12 @@
 # Grove Rotary Angle Sensor P
 
-Detailed Grove **Input** board model with a Grove RotaryAngleSensorP controller controller,
+Detailed Grove **Input** board model with a WH09-2-103 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove RotaryAngleSensorP controller` (MPN: `GROVE-GROVEROTARYANGLESENSORP`)
+- Primary part: `WH09-2-103` (MPN: `WH09-2-103`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Rotary-Angle-Sensor-P.html)
 

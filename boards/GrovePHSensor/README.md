@@ -1,12 +1,12 @@
 # Grove PH Sensor
 
-Detailed Grove **Sensor** board model with a Grove PHSensor controller controller,
+Detailed Grove **Sensor** board model with a OPA333 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove PHSensor controller` (MPN: `GROVE-GROVEPHSENSOR`)
+- Primary part: `OPA333` (MPN: `OPA333`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-PH-Sensor.html)
 

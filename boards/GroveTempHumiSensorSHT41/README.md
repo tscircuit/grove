@@ -6,7 +6,7 @@ routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `SHT4x` (MPN: `GROVE-GROVETEMPHUMISENSORSHT41`)
+- Primary part: `SHT4x` (MPN: `SHT4x`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Temp-Humi-Sensor-SHT41-p-5383.html)
 

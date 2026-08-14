@@ -9,8 +9,8 @@ export const GroveMechKeycap = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "input",
-      primaryModel: "Grove MechKeycap controller",
-      manufacturerPartNumber: "GROVE-GROVEMECHKEYCAP",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

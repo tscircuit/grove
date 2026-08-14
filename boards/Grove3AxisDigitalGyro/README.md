@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Gyro
 
-Detailed Grove **Catalogue** board model with a Grove 3AxisDigitalGyro controller controller,
+Detailed Grove **Catalogue** board model with a ITG-3205 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove 3AxisDigitalGyro controller` (MPN: `GROVE-GROVE3AXISDIGITALGYRO`)
+- Primary part: `ITG-3205` (MPN: `ITG-3205`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Gyro.html)
 

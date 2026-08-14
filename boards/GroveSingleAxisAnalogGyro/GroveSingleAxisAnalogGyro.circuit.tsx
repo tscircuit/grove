@@ -9,8 +9,8 @@ export const GroveSingleAxisAnalogGyro = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Single-Axis-Analog-Gyro-p-1451.html",
       interfaceKind: "analog",
       detailKind: "utility",
-      primaryModel: "Grove SingleAxisAnalogGyro controller",
-      manufacturerPartNumber: "GROVE-GROVESINGLEAXISANALOGGYRO",
+      primaryModel: "ENC-03R",
+      manufacturerPartNumber: "ENC-03R",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveI2CColorSensorV2 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-I2C-Color-Sensor-V2.html",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove I2CColorSensorV2 controller",
-      manufacturerPartNumber: "GROVE-GROVEI2CCOLORSENSORV2",
+      primaryModel: "TCS3414CS",
+      manufacturerPartNumber: "TCS3414CS",
       powerVoltage: "5V",
     }}
   />

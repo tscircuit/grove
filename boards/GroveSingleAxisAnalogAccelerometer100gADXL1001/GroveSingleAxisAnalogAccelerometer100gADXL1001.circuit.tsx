@@ -9,8 +9,8 @@ export const GroveSingleAxisAnalogAccelerometer100gADXL1001 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Single-Axis-Analog-Accelerometer-100g-ADXL1001-p-4035.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove SingleAxisAnalogAccelerometer100gADXL1001 controller",
-      manufacturerPartNumber: "GROVE-GROVESINGLEAXISANALOGACCELEROMETER100GADXL1001",
+      primaryModel: "ADXL1001",
+      manufacturerPartNumber: "ADXL1001",
       powerVoltage: "5V",
     }}
   />

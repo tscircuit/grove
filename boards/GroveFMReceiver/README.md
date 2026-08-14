@@ -1,12 +1,12 @@
 # Grove FM Receiver
 
-Detailed Grove **Catalogue** board model with a Grove FMReceiver controller controller,
+Detailed Grove **Catalogue** board model with a SX6119 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove FMReceiver controller` (MPN: `GROVE-GROVEFMRECEIVER`)
+- Primary part: `SX6119` (MPN: `SX6119`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-FM-Receiver.html)
 

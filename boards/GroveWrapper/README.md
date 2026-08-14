@@ -1,12 +1,12 @@
 # Grove - Wrapper
 
-Detailed Grove **Case** board model with a Grove Wrapper controller controller,
+Detailed Grove **Case** board model with a Grove-Wrapper controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove Wrapper controller` (MPN: `GROVE-GROVEWRAPPER`)
+- Primary part: `Grove-Wrapper` (MPN: `Grove-Wrapper`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

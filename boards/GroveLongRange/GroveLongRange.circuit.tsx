@@ -9,8 +9,8 @@ export const GroveLongRange = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "digital",
       detailKind: "communications",
-      primaryModel: "Grove LongRange controller",
-      manufacturerPartNumber: "GROVE-GROVELONGRANGE",
+      primaryModel: "RFM95",
+      manufacturerPartNumber: "RFM95",
       powerVoltage: "5V",
     }}
   />

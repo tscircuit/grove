@@ -1,12 +1,12 @@
 # Grove - Barometer (High-Accuracy)
 
-Detailed Grove **Barometer** board model with a Grove BarometerHighAccuracy controller controller,
+Detailed Grove **Barometer** board model with a HP206C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `utility`
-- Primary part: `Grove BarometerHighAccuracy controller` (MPN: `GROVE-GROVEBAROMETERHIGHACCURACY`)
+- Board family: `sensor`
+- Primary part: `HP206C` (MPN: `HP206C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

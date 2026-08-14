@@ -9,8 +9,8 @@ export const GroveLineFinder = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Line-Finder-p-825.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove LineFinder controller",
-      manufacturerPartNumber: "GROVE-GROVELINEFINDER",
+      primaryModel: "LM393",
+      manufacturerPartNumber: "LM393",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # One Wire Temperature Sensor DS18B20
 
-Detailed Grove **Temperature** board model with a Grove OneWireTemperatureSensorDS18B20 controller controller,
+Detailed Grove **Temperature** board model with a DS18B20 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove OneWireTemperatureSensorDS18B20 controller` (MPN: `GROVE-GROVEONEWIRETEMPERATURESENSORDS18B20`)
+- Primary part: `DS18B20` (MPN: `DS18B20`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

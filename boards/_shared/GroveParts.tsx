@@ -1,6 +1,7 @@
 export interface GroveConnectorProps {
   name?: string
   kind?: "digital" | "analog" | "i2c" | "uart"
+  powerVoltage?: "3.3V" | "5V"
   pcbX?: number
   pcbY?: number
   pcbRotation?: number
@@ -44,6 +45,7 @@ export const TactileButton = ({
   <chip
     name={name}
     displayName="6 mm tactile button"
+    manufacturerPartNumber="B3F-1000"
     pinLabels={{ pin1: "A", pin2: "B" }}
     pinAttributes={{
       A: { requiresPower: true, mustBeConnected: true },
@@ -66,6 +68,7 @@ export const TactileButton = ({
 export const GroveConnector = ({
   name = "J1",
   kind = "digital",
+  powerVoltage = "5V",
   pcbX,
   pcbY,
   pcbRotation,
@@ -95,7 +98,7 @@ export const GroveConnector = ({
         [signal2]: signal2IsActive
           ? { mustBeConnected: true, isGpio: true }
           : { doNotConnect: true },
-        VCC: { requiresPower: true, requiresVoltage: "5V" },
+        VCC: { requiresPower: true, requiresVoltage: powerVoltage },
         GND: { requiresGround: true },
       }}
       footprint={<GroveConnectorFootprint />}
@@ -135,6 +138,7 @@ export const GroveMountingHoles = ({
 export const TwoPinModule = ({
   name,
   label,
+  manufacturerPartNumber,
   width,
   height,
   pcbX,
@@ -144,6 +148,7 @@ export const TwoPinModule = ({
 }: {
   name: string
   label: string
+  manufacturerPartNumber?: string
   width: number
   height: number
   pcbX: number
@@ -154,6 +159,7 @@ export const TwoPinModule = ({
   <chip
     name={name}
     displayName={label}
+    manufacturerPartNumber={manufacturerPartNumber}
     pinLabels={{ pin1: "POS", pin2: "NEG" }}
     pinAttributes={{
       POS: { requiresPower: true, mustBeConnected: true },

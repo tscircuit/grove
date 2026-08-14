@@ -5,7 +5,7 @@ decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
-- Board family: `actuator`
+- Board family: `sensor`
 - Primary part: `TMG39931` (MPN: `TMG39931`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Light-Color-Proximity-Sensor-TMG39931-p-2879.html)

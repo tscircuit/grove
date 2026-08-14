@@ -14,6 +14,7 @@ export const GroveLightSensor = () => (
     <resistor
       name="LIGHT"
       displayName="GL5528 photoresistor"
+      manufacturerPartNumber="GL5528"
       resistance="10k"
       footprint={
         <footprint>
@@ -39,6 +40,7 @@ export const GroveLightSensor = () => (
     <opamp
       name="U1"
       displayName="LM358"
+      manufacturerPartNumber="LM358"
       footprint="soic8"
       pcbX={-3.5}
       pcbY={0}

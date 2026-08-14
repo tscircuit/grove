@@ -1,12 +1,12 @@
 # Grove Vision AI Module
 
-Detailed Grove **AI-powered** board model with a Grove VisionAIModule controller controller,
+Detailed Grove **AI-powered** board model with a Himax WE1 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove VisionAIModule controller` (MPN: `GROVE-GROVEVISIONAIMODULE`)
+- Primary part: `Himax WE1` (MPN: `Himax WE1`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

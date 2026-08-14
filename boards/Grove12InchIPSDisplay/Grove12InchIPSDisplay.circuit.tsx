@@ -9,8 +9,8 @@ export const Grove12InchIPSDisplay = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove 12InchIPSDisplay controller",
-      manufacturerPartNumber: "GROVE-GROVE12INCHIPSDISPLAY",
+      primaryModel: "ST7789",
+      manufacturerPartNumber: "ST7789",
       powerVoltage: "5V",
     }}
   />

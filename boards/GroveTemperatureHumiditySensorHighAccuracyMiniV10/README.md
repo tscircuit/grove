@@ -1,12 +1,12 @@
 # Grove - Temperature&Humidity Sensor (High-Accuracy &Mini) v1.0
 
-Detailed Grove **Temp & Humi** board model with a Grove TemperatureHumiditySensorHighAccuracyMiniV10 controller controller,
+Detailed Grove **Temp & Humi** board model with a TH02 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TemperatureHumiditySensorHighAccuracyMiniV10 controller` (MPN: `GROVE-GROVETEMPERATUREHUMIDITYSENSORHIGHACCURACYMINIV10`)
+- Primary part: `TH02` (MPN: `TH02`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

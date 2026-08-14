@@ -1,12 +1,12 @@
 # Grove I2C Motor Driver with L298
 
-Detailed Grove **Actuator** board model with a Grove I2CMotorDriverWithL298 controller controller,
+Detailed Grove **Actuator** board model with a L298N controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `actuator`
-- Primary part: `Grove I2CMotorDriverWithL298 controller` (MPN: `GROVE-GROVEI2CMOTORDRIVERWITHL298`)
+- Primary part: `L298N` (MPN: `L298N`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-I2C-Motor-Driver-with-L298.html)
 

@@ -9,8 +9,8 @@ export const Grove3AxisDigitalGyro = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Digital-Gyro.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove 3AxisDigitalGyro controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITALGYRO",
+      primaryModel: "ITG-3205",
+      manufacturerPartNumber: "ITG-3205",
       powerVoltage: "5V",
     }}
   />

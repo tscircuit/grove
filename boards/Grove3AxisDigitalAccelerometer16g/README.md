@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Accelerometer 16g
 
-Detailed Grove **Sensor** board model with a Grove 3AxisDigitalAccelerometer16g controller controller,
+Detailed Grove **Sensor** board model with a ADXL345 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisDigitalAccelerometer16g controller` (MPN: `GROVE-GROVE3AXISDIGITALACCELEROMETER16G`)
+- Primary part: `ADXL345` (MPN: `ADXL345`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-16g.html)
 

@@ -9,8 +9,8 @@ export const GroveAlcoholSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove AlcoholSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEALCOHOLSENSOR",
+      primaryModel: "MQ-3",
+      manufacturerPartNumber: "MQ-3",
       powerVoltage: "5V",
     }}
   />

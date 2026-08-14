@@ -1,12 +1,12 @@
 # Grove 5 Way Switch
 
-Detailed Grove **Input** board model with a Grove 5WaySwitch controller controller,
+Detailed Grove **Input** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove 5WaySwitch controller` (MPN: `GROVE-GROVE5WAYSWITCH`)
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-5-Way-Switch.html)
 

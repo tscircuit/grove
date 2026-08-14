@@ -1,12 +1,12 @@
 # Grove - HCHO Sensor
 
-Detailed Grove **Gas** board model with a Grove HCHOSensor controller controller,
+Detailed Grove **Gas** board model with a WSP2110 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove HCHOSensor controller` (MPN: `GROVE-GROVEHCHOSENSOR`)
+- Primary part: `WSP2110` (MPN: `WSP2110`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

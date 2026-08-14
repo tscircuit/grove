@@ -8,9 +8,9 @@ export const GroveSPDTRelay30A = () => (
       category: "Current",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove SPDTRelay30A controller",
-      manufacturerPartNumber: "GROVE-GROVESPDTRELAY30A",
+      detailKind: "sensor",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

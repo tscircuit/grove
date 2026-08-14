@@ -9,8 +9,8 @@ export const GroveOxygenSensorProGGC2330O2 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove OxygenSensorProGGC2330O2 controller",
-      manufacturerPartNumber: "GROVE-GROVEOXYGENSENSORPROGGC2330O2",
+      primaryModel: "GGC2330-O2",
+      manufacturerPartNumber: "GGC2330-O2",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveLEDStripDriver = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove LEDStripDriver controller",
-      manufacturerPartNumber: "GROVE-GROVELEDSTRIPDRIVER",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

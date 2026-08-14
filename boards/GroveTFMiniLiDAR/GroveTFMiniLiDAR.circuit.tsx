@@ -8,9 +8,9 @@ export const GroveTFMiniLiDAR = () => (
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
-      detailKind: "utility",
-      primaryModel: "Grove TFMiniLiDAR controller",
-      manufacturerPartNumber: "GROVE-GROVETFMINILIDAR",
+      detailKind: "sensor",
+      primaryModel: "TFMINI",
+      manufacturerPartNumber: "TFMINI",
       powerVoltage: "5V",
     }}
   />

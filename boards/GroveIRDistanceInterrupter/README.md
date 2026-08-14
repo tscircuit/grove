@@ -1,12 +1,12 @@
 # Grove IR Distance Interrupter
 
-Detailed Grove **Catalogue** board model with a Grove IRDistanceInterrupter controller controller,
+Detailed Grove **Catalogue** board model with a LM393 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove IRDistanceInterrupter controller` (MPN: `GROVE-GROVEIRDISTANCEINTERRUPTER`)
+- Primary part: `LM393` (MPN: `LM393`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-IR-Distance-Interrupter-p-1278.html)
 

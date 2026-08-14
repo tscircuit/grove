@@ -1,12 +1,12 @@
 # Grove 16x2 LCD White on Blue
 
-Detailed Grove **Display** board model with a Grove 16x2LCDWhiteOnBlue controller controller,
+Detailed Grove **Display** board model with a HD44780 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove 16x2LCDWhiteOnBlue controller` (MPN: `GROVE-GROVE16X2LCDWHITEONBLUE`)
+- Primary part: `HD44780` (MPN: `HD44780`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-16x2-LCD-White-on-Blue.html)
 

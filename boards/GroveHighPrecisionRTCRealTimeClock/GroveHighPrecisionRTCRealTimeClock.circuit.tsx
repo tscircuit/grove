@@ -9,8 +9,8 @@ export const GroveHighPrecisionRTCRealTimeClock = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove HighPrecisionRTCRealTimeClock controller",
-      manufacturerPartNumber: "GROVE-GROVEHIGHPRECISIONRTCREALTIMECLOCK",
+      primaryModel: "DS1307",
+      manufacturerPartNumber: "DS1307",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove Collision Sensor
 
-Detailed Grove **Sensor** board model with a Grove CollisionSensor controller controller,
+Detailed Grove **Sensor** board model with a MVS0608.02 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove CollisionSensor controller` (MPN: `GROVE-GROVECOLLISIONSENSOR`)
+- Primary part: `MVS0608.02` (MPN: `MVS0608.02`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Collision-Sensor.html)
 

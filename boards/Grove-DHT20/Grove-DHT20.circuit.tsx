@@ -4,6 +4,7 @@ const Dht20 = () => (
   <chip
     name="U2"
     displayName="DHT20"
+    manufacturerPartNumber="DHT20"
     pinLabels={{ pin1: "SDA", pin2: "GND", pin3: "VDD", pin4: "SCL" }}
     pinAttributes={{ SDA: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true }, VDD: { requiresPower: true, requiresVoltage: "5V" }, SCL: { mustBeConnected: true, isGpio: true } }}
     footprint={
@@ -27,9 +28,9 @@ export const GroveDht20 = () => (
     <GroveMountingHoles x={18} y={8} />
     <GroveConnector kind="i2c" pcbX={-14} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
     <Dht20 />
-    <chip name="U1" displayName="XC6206P332MR-G" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-7} pcbY={0} schX={-5} schY={4} schHeight="0.4mm" />
-    <mosfet name="Q1" displayName="2N7002" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={1} pcbY={2.5} schX={1} schY={2.5} />
-    <mosfet name="Q2" displayName="2N7002" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={1} pcbY={-2.5} schX={1} schY={-2.5} />
+    <chip name="U1" displayName="XC6206P332MR-G" manufacturerPartNumber="XC6206P332MR-G" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-7} pcbY={0} schX={-5} schY={4} schHeight="0.4mm" />
+    <mosfet name="Q1" displayName="2N7002" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={1} pcbY={2.5} schX={1} schY={2.5} />
+    <mosfet name="Q2" displayName="2N7002" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={1} pcbY={-2.5} schX={1} schY={-2.5} />
     <resistor name="R1" resistance="10k" footprint="0402" pcbX={-3} pcbY={4.5} schX={-2} schY={5.5} />
     <resistor name="R2" resistance="10k" footprint="0402" pcbX={4} pcbY={4.5} schX={4} schY={5.5} />
     <resistor name="R3" resistance="10k" footprint="0402" pcbX={-3} pcbY={-4.5} schX={-2} schY={-5.5} />

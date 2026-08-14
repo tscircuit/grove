@@ -1,12 +1,12 @@
 # Grove I2C Color Sensor
 
-Detailed Grove **Sensor** board model with a Grove I2CColorSensor controller controller,
+Detailed Grove **Sensor** board model with a TCS3414CS controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `Grove I2CColorSensor controller` (MPN: `GROVE-GROVEI2CCOLORSENSOR`)
+- Primary part: `TCS3414CS` (MPN: `TCS3414CS`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-I2C-Color-Sensor-p-854.html)
 

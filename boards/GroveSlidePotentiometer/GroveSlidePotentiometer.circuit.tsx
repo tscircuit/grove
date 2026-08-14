@@ -9,8 +9,8 @@ export const GroveSlidePotentiometer = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove SlidePotentiometer controller",
-      manufacturerPartNumber: "GROVE-GROVESLIDEPOTENTIOMETER",
+      primaryModel: "WH09-2-103",
+      manufacturerPartNumber: "WH09-2-103",
       powerVoltage: "5V",
     }}
   />

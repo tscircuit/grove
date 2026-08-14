@@ -9,8 +9,8 @@ export const GroveSerialBlueseeedCSRBC417 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Serial-Blueseeed-CSR-BC417.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove SerialBlueseeedCSRBC417 controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALBLUESEEEDCSRBC417",
+      primaryModel: "BC417",
+      manufacturerPartNumber: "BC417",
       powerVoltage: "5V",
     }}
   />

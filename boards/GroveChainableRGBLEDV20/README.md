@@ -1,12 +1,12 @@
 # Grove – Chainable RGB LED V2.0
 
-Detailed Grove **Actuator** board model with a Grove ChainableRGBLEDV20 controller controller,
+Detailed Grove **Actuator** board model with a P9813 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `uart`
+- Interface: `digital`
 - Board family: `actuator`
-- Primary part: `Grove ChainableRGBLEDV20 controller` (MPN: `GROVE-GROVECHAINABLERGBLEDV20`)
+- Primary part: `P9813` (MPN: `P9813`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

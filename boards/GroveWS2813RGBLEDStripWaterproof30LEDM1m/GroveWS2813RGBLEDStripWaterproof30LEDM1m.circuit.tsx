@@ -8,7 +8,7 @@ export const GroveWS2813RGBLEDStripWaterproof30LEDM1m = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-WS2813-RGB-LED-Strip-Waterproof-30-LED-m-1m.html",
       interfaceKind: "analog",
-      detailKind: "actuator",
+      detailKind: "sensor",
       primaryModel: "WS2813",
       manufacturerPartNumber: "WS2813",
       powerVoltage: "5V",

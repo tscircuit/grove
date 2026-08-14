@@ -7,10 +7,10 @@ export const GroveAdjustablePIRMotionSensor = () => (
       title: "Grove - Adjustable PIR Motion Sensor",
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
-      interfaceKind: "uart",
-      detailKind: "communications",
-      primaryModel: "Grove AdjustablePIRMotionSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEADJUSTABLEPIRMOTIONSENSOR",
+      interfaceKind: "analog",
+      detailKind: "sensor",
+      primaryModel: "BISS0001",
+      manufacturerPartNumber: "BISS0001",
       powerVoltage: "5V",
     }}
   />

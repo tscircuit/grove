@@ -9,8 +9,8 @@ export const Grove2CoilLatchingRelay = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove 2CoilLatchingRelay controller",
-      manufacturerPartNumber: "GROVE-GROVE2COILLATCHINGRELAY",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveTemperatureHumiditySensorHighAccuracyMini = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-High-Accuracy-Mini.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove TemperatureHumiditySensorHighAccuracyMini controller",
-      manufacturerPartNumber: "GROVE-GROVETEMPERATUREHUMIDITYSENSORHIGHACCURACYMINI",
+      primaryModel: "DHT11",
+      manufacturerPartNumber: "DHT11",
       powerVoltage: "5V",
     }}
   />

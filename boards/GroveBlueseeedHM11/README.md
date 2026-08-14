@@ -1,12 +1,12 @@
 # Grove Blueseeed HM11
 
-Detailed Grove **Catalogue** board model with a Grove BlueseeedHM11 controller controller,
+Detailed Grove **Catalogue** board model with a HM-11 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove BlueseeedHM11 controller` (MPN: `GROVE-GROVEBLUESEEEDHM11`)
+- Primary part: `HM-11` (MPN: `HM-11`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Blueseeed-HM11.html)
 

@@ -1,12 +1,12 @@
 # Grove - Adjustable PIR Motion Sensor
 
-Detailed Grove **Proximity** board model with a Grove AdjustablePIRMotionSensor controller controller,
+Detailed Grove **Proximity** board model with a BISS0001 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `uart`
-- Board family: `communications`
-- Primary part: `Grove AdjustablePIRMotionSensor controller` (MPN: `GROVE-GROVEADJUSTABLEPIRMOTIONSENSOR`)
+- Interface: `analog`
+- Board family: `sensor`
+- Primary part: `BISS0001` (MPN: `BISS0001`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

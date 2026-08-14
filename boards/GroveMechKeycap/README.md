@@ -1,12 +1,12 @@
 # Grove-Mech keycap
 
-Detailed Grove **Switch & Button** board model with a Grove MechKeycap controller controller,
+Detailed Grove **Switch & Button** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `input`
-- Primary part: `Grove MechKeycap controller` (MPN: `GROVE-GROVEMECHKEYCAP`)
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

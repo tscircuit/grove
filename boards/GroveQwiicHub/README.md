@@ -1,12 +1,12 @@
 # Grove Qwiic Hub
 
-Detailed Grove **Catalogue** board model with a Grove QwiicHub controller controller,
+Detailed Grove **Catalogue** board model with a TCA9548A controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove QwiicHub controller` (MPN: `GROVE-GROVEQWIICHUB`)
+- Primary part: `TCA9548A` (MPN: `TCA9548A`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Qwiic-Hub-p-4531.html)
 

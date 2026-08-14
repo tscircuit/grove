@@ -9,8 +9,8 @@ export const GroveNFCTag = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "i2c",
       detailKind: "communications",
-      primaryModel: "Grove NFCTag controller",
-      manufacturerPartNumber: "GROVE-GROVENFCTAG",
+      primaryModel: "PN532",
+      manufacturerPartNumber: "PN532",
       powerVoltage: "5V",
     }}
   />

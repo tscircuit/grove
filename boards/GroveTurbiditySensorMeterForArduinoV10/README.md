@@ -1,12 +1,12 @@
 # Grove - Turbidity Sensor Meter for Arduino V1.0
 
-Detailed Grove **Liquid** board model with a Grove TurbiditySensorMeterForArduinoV10 controller controller,
+Detailed Grove **Liquid** board model with a SEN0189 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TurbiditySensorMeterForArduinoV10 controller` (MPN: `GROVE-GROVETURBIDITYSENSORMETERFORARDUINOV10`)
+- Primary part: `SEN0189` (MPN: `SEN0189`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -9,8 +9,8 @@ export const GroveTDSSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove TDSSensor controller",
-      manufacturerPartNumber: "GROVE-GROVETDSSENSOR",
+      primaryModel: "TDS-SENSOR",
+      manufacturerPartNumber: "TDS-SENSOR",
       powerVoltage: "5V",
     }}
   />

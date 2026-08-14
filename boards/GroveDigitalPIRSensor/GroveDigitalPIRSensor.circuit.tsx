@@ -9,8 +9,8 @@ export const GroveDigitalPIRSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove DigitalPIRSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEDIGITALPIRSENSOR",
+      primaryModel: "BISS0001",
+      manufacturerPartNumber: "BISS0001",
       powerVoltage: "5V",
     }}
   />

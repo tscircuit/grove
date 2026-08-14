@@ -9,8 +9,8 @@ export const GroveLoRaRadio868MHz = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-LoRa-Radio-868MHz.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove LoRaRadio868MHz controller",
-      manufacturerPartNumber: "GROVE-GROVELORARADIO868MHZ",
+      primaryModel: "RFM95",
+      manufacturerPartNumber: "RFM95",
       powerVoltage: "5V",
     }}
   />

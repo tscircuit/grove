@@ -14,6 +14,7 @@ export const GroveRotaryAngleSensor = () => (
     <potentiometer
       name="ROTATION"
       displayName="WH09-2-103"
+      manufacturerPartNumber="WH09-2-103"
       maxResistance="10k"
       pinVariant="three_pin"
       footprint="potentiometer_pth_9mm"

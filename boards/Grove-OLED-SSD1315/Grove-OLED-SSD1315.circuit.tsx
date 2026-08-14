@@ -4,6 +4,7 @@ const OledPanel = () => (
   <chip
     name="U2"
     displayName="SSD1315 128x64 OLED"
+    manufacturerPartNumber="SSD1315"
     pinLabels={{
       pin1: "VSS",
       pin2: "VDD",
@@ -68,9 +69,9 @@ export const GroveOledSsd1315 = () => (
     <GroveMountingHoles x={18} y={8} />
     <GroveConnector kind="i2c" pcbX={-14} pcbY={0} pcbRotation={-90} schX={-11} schY={0} />
     <OledPanel />
-    <chip name="U1" displayName="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { requiresPower: true, requiresVoltage: "3.3V" }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-8} pcbY={0} schX={-6} schY={5} schHeight="0.4mm" />
-    <mosfet name="Q1" displayName="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={3} schX={0} schY={3} />
-    <mosfet name="Q2" displayName="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={-3} schX={0} schY={-3} />
+    <chip name="U1" displayName="XC6206P332MR" manufacturerPartNumber="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { requiresPower: true, requiresVoltage: "3.3V" }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-8} pcbY={0} schX={-6} schY={5} schHeight="0.4mm" />
+    <mosfet name="Q1" displayName="CJ2102" manufacturerPartNumber="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={3} schX={0} schY={3} />
+    <mosfet name="Q2" displayName="CJ2102" manufacturerPartNumber="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={-3} schX={0} schY={-3} />
     <resistor name="R1" resistance="4.7k" footprint="0402" pcbX={-6} pcbY={6} schX={-3} schY={6} />
     <resistor name="R2" resistance="4.7k" footprint="0402" pcbX={-2} pcbY={6} schX={3} schY={6} />
     <resistor name="R3" resistance="4.7k" footprint="0402" pcbX={-6} pcbY={-6} schX={-3} schY={-6} />

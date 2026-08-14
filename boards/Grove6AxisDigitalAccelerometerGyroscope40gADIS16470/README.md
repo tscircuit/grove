@@ -1,12 +1,12 @@
 # Grove 6 Axis Digital Accelerometer Gyroscope 40g ADIS16470
 
-Detailed Grove **Sensor** board model with a Grove 6AxisDigitalAccelerometerGyroscope40gADIS16470 controller controller,
+Detailed Grove **Sensor** board model with a ADIS16470 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 6AxisDigitalAccelerometerGyroscope40gADIS16470 controller` (MPN: `GROVE-GROVE6AXISDIGITALACCELEROMETERGYROSCOPE40GADIS16470`)
+- Primary part: `ADIS16470` (MPN: `ADIS16470`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-6-Axis-Digital-Accelerometer-Gyroscope-40g-ADIS16470-p-4036.html)
 

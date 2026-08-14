@@ -9,8 +9,8 @@ export const GrovePiezoVibrationSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove PiezoVibrationSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEPIEZOVIBRATIONSENSOR",
+      primaryModel: "LM2904",
+      manufacturerPartNumber: "LM2904",
       powerVoltage: "5V",
     }}
   />

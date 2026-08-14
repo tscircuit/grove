@@ -8,9 +8,9 @@ export const GroveIRDistanceInterrupterV12 = () => (
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
-      detailKind: "utility",
-      primaryModel: "Grove IRDistanceInterrupterV12 controller",
-      manufacturerPartNumber: "GROVE-GROVEIRDISTANCEINTERRUPTERV12",
+      detailKind: "sensor",
+      primaryModel: "LM393",
+      manufacturerPartNumber: "LM393",
       powerVoltage: "5V",
     }}
   />

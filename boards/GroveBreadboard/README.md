@@ -1,12 +1,12 @@
 # Grove Breadboard
 
-Detailed Grove **Catalogue** board model with a Grove Breadboard controller controller,
+Detailed Grove **Catalogue** board model with a Grove-Prototyping controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove Breadboard controller` (MPN: `GROVE-GROVEBREADBOARD`)
+- Primary part: `Grove-Prototyping` (MPN: `Grove-Prototyping`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Breadboard-p-4034.html)
 

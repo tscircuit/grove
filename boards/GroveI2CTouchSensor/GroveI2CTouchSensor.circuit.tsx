@@ -9,8 +9,8 @@ export const GroveI2CTouchSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-I2C-Touch-Sensor-p-840.html",
       interfaceKind: "i2c",
       detailKind: "input",
-      primaryModel: "Grove I2CTouchSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEI2CTOUCHSENSOR",
+      primaryModel: "AT42QT1070",
+      manufacturerPartNumber: "AT42QT1070",
       powerVoltage: "5V",
     }}
   />

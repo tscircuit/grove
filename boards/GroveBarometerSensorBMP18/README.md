@@ -1,12 +1,12 @@
 # Grove Barometer Sensor BMP18
 
-Detailed Grove **Sensor** board model with a Grove BarometerSensorBMP18 controller controller,
+Detailed Grove **Sensor** board model with a BMP180 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `Grove BarometerSensorBMP18 controller` (MPN: `GROVE-GROVEBAROMETERSENSORBMP18`)
+- Primary part: `BMP180` (MPN: `BMP180`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Barometer-Sensor-BMP18-p-1840.html)
 

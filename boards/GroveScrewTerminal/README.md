@@ -1,12 +1,12 @@
 # Grove - Screw Terminal
 
-Detailed Grove **Current** board model with a Grove ScrewTerminal controller controller,
+Detailed Grove **Current** board model with a Screw-Terminal controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove ScrewTerminal controller` (MPN: `GROVE-GROVESCREWTERMINAL`)
+- Primary part: `Screw-Terminal` (MPN: `Screw-Terminal`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

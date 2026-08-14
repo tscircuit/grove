@@ -9,8 +9,8 @@ export const GroveServo = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove Servo controller",
-      manufacturerPartNumber: "GROVE-GROVESERVO",
+      primaryModel: "SG90",
+      manufacturerPartNumber: "SG90",
       powerVoltage: "5V",
     }}
   />

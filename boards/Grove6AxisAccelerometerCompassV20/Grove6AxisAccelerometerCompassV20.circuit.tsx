@@ -9,8 +9,8 @@ export const Grove6AxisAccelerometerCompassV20 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-6-Axis-Accelerometer-Compass-v2-0.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 6AxisAccelerometerCompassV20 controller",
-      manufacturerPartNumber: "GROVE-GROVE6AXISACCELEROMETERCOMPASSV20",
+      primaryModel: "LSM6DS3",
+      manufacturerPartNumber: "LSM6DS3",
       powerVoltage: "5V",
     }}
   />

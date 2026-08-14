@@ -1,12 +1,12 @@
 # Grove Chest Strap Heart Rate Sensor
 
-Detailed Grove **Sensor** board model with a Grove ChestStrapHeartRateSensor controller controller,
+Detailed Grove **Sensor** board model with a MAX30100 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove ChestStrapHeartRateSensor controller` (MPN: `GROVE-GROVECHESTSTRAPHEARTRATESENSOR`)
+- Primary part: `MAX30100` (MPN: `MAX30100`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Chest-Strap-Heart-Rate-Sensor-p-1115.html)
 

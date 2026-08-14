@@ -9,8 +9,8 @@ export const GroveUARTWifiV2 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove UARTWifiV2 controller",
-      manufacturerPartNumber: "GROVE-GROVEUARTWIFIV2",
+      primaryModel: "ESP8285",
+      manufacturerPartNumber: "ESP8285",
       powerVoltage: "5V",
     }}
   />

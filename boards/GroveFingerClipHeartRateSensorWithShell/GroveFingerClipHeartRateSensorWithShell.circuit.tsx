@@ -9,8 +9,8 @@ export const GroveFingerClipHeartRateSensorWithShell = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Finger-clip-Heart-Rate-Sensor-with-shell.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove FingerClipHeartRateSensorWithShell controller",
-      manufacturerPartNumber: "GROVE-GROVEFINGERCLIPHEARTRATESENSORWITHSHELL",
+      primaryModel: "MAX30100",
+      manufacturerPartNumber: "MAX30100",
       powerVoltage: "5V",
     }}
   />

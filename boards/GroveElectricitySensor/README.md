@@ -1,12 +1,12 @@
 # Grove - Electricity Sensor
 
-Detailed Grove **Current** board model with a Grove ElectricitySensor controller controller,
+Detailed Grove **Current** board model with a ACS712 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove ElectricitySensor controller` (MPN: `GROVE-GROVEELECTRICITYSENSOR`)
+- Primary part: `ACS712` (MPN: `ACS712`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

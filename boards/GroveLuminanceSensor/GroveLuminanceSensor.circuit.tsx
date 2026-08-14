@@ -8,9 +8,9 @@ export const GroveLuminanceSensor = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Luminance-Sensor.html",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove LuminanceSensor controller",
-      manufacturerPartNumber: "GROVE-GROVELUMINANCESENSOR",
+      detailKind: "sensor",
+      primaryModel: "APDS-9002",
+      manufacturerPartNumber: "APDS-9002",
       powerVoltage: "5V",
     }}
   />

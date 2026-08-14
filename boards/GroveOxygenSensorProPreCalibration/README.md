@@ -1,12 +1,12 @@
 # Grove Oxygen Sensor Pro Pre calibration
 
-Detailed Grove **Sensor** board model with a Grove OxygenSensorProPreCalibration controller controller,
+Detailed Grove **Sensor** board model with a GGC2330-O2 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove OxygenSensorProPreCalibration controller` (MPN: `GROVE-GROVEOXYGENSENSORPROPRECALIBRATION`)
+- Primary part: `GGC2330-O2` (MPN: `GGC2330-O2`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Oxygen-Sensor-Pro-Pre-calibration-p-4896.html)
 

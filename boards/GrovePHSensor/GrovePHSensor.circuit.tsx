@@ -9,8 +9,8 @@ export const GrovePHSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-PH-Sensor.html",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove PHSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEPHSENSOR",
+      primaryModel: "OPA333",
+      manufacturerPartNumber: "OPA333",
       powerVoltage: "5V",
     }}
   />

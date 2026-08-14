@@ -1,12 +1,12 @@
 # Dragrove Generic gateway for internet of things
 
-Detailed Grove **Catalogue** board model with a Grove DragroveGenericGatewayForInternetOfThings controller controller,
+Detailed Grove **Catalogue** board model with a ESP8266 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove DragroveGenericGatewayForInternetOfThings controller` (MPN: `GROVE-GROVEDRAGROVEGENERICGATEWAYFORINTERNETOFTHINGS`)
+- Primary part: `ESP8266` (MPN: `ESP8266`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Dragrove-Generic-gateway-for-internet-of-things-p-1118.html)
 

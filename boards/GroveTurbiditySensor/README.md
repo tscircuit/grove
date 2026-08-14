@@ -1,12 +1,12 @@
 # Grove Turbidity Sensor
 
-Detailed Grove **Sensor** board model with a Grove TurbiditySensor controller controller,
+Detailed Grove **Sensor** board model with a SEN0189 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TurbiditySensor controller` (MPN: `GROVE-GROVETURBIDITYSENSOR`)
+- Primary part: `SEN0189` (MPN: `SEN0189`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Turbidity-Sensor-p-4399.html)
 

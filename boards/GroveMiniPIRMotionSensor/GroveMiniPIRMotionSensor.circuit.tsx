@@ -9,8 +9,8 @@ export const GroveMiniPIRMotionSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-mini-PIR-motion-sensor-p-2930.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove MiniPIRMotionSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEMINIPIRMOTIONSENSOR",
+      primaryModel: "BISS0001",
+      manufacturerPartNumber: "BISS0001",
       powerVoltage: "5V",
     }}
   />

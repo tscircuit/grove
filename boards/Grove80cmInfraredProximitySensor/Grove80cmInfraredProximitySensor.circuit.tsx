@@ -9,8 +9,8 @@ export const Grove80cmInfraredProximitySensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 80cmInfraredProximitySensor controller",
-      manufacturerPartNumber: "GROVE-GROVE80CMINFRAREDPROXIMITYSENSOR",
+      primaryModel: "GP2Y0A21YK",
+      manufacturerPartNumber: "GP2Y0A21YK",
       powerVoltage: "5V",
     }}
   />

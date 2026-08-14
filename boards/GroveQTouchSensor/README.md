@@ -1,12 +1,12 @@
 # Grove Q Touch Sensor
 
-Detailed Grove **Input** board model with a Grove QTouchSensor controller controller,
+Detailed Grove **Input** board model with a AT42QT1070 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove QTouchSensor controller` (MPN: `GROVE-GROVEQTOUCHSENSOR`)
+- Primary part: `AT42QT1070` (MPN: `AT42QT1070`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Q-Touch-Sensor.html)
 

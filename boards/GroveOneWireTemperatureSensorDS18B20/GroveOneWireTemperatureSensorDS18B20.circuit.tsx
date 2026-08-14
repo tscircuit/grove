@@ -9,8 +9,8 @@ export const GroveOneWireTemperatureSensorDS18B20 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove OneWireTemperatureSensorDS18B20 controller",
-      manufacturerPartNumber: "GROVE-GROVEONEWIRETEMPERATURESENSORDS18B20",
+      primaryModel: "DS18B20",
+      manufacturerPartNumber: "DS18B20",
       powerVoltage: "5V",
     }}
   />

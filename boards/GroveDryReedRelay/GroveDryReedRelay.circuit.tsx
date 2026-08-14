@@ -9,8 +9,8 @@ export const GroveDryReedRelay = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Dry-Reed-Relay.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove DryReedRelay controller",
-      manufacturerPartNumber: "GROVE-GROVEDRYREEDRELAY",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

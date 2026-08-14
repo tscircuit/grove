@@ -1,12 +1,12 @@
 # MT3620 Grove Breakout
 
-Detailed Grove **Catalogue** board model with a Grove MT3620GroveBreakout controller controller,
+Detailed Grove **Catalogue** board model with a MT3620 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove MT3620GroveBreakout controller` (MPN: `GROVE-GROVEMT3620GROVEBREAKOUT`)
+- Primary part: `MT3620` (MPN: `MT3620`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/MT3620-Grove-Breakout-p-4043.html)
 

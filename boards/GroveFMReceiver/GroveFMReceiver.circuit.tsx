@@ -9,8 +9,8 @@ export const GroveFMReceiver = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-FM-Receiver.html",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove FMReceiver controller",
-      manufacturerPartNumber: "GROVE-GROVEFMRECEIVER",
+      primaryModel: "SX6119",
+      manufacturerPartNumber: "SX6119",
       powerVoltage: "5V",
     }}
   />

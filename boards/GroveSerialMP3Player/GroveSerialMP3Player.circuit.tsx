@@ -9,8 +9,8 @@ export const GroveSerialMP3Player = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Serial-MP3-Player-p-1542.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove SerialMP3Player controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALMP3PLAYER",
+      primaryModel: "WT5001-48L",
+      manufacturerPartNumber: "WT5001-48L",
       powerVoltage: "5V",
     }}
   />

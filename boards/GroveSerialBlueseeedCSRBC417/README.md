@@ -1,12 +1,12 @@
 # Grove Serial Blueseeed CSR BC417
 
-Detailed Grove **Communications** board model with a Grove SerialBlueseeedCSRBC417 controller controller,
+Detailed Grove **Communications** board model with a BC417 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove SerialBlueseeedCSRBC417 controller` (MPN: `GROVE-GROVESERIALBLUESEEEDCSRBC417`)
+- Primary part: `BC417` (MPN: `BC417`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Serial-Blueseeed-CSR-BC417.html)
 

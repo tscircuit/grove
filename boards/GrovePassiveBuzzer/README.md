@@ -1,12 +1,12 @@
 # Grove - Passive Buzzer
 
-Detailed Grove **Actuator** board model with a Grove PassiveBuzzer controller controller,
+Detailed Grove **Actuator** board model with a YMD12065 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove PassiveBuzzer controller` (MPN: `GROVE-GROVEPASSIVEBUZZER`)
+- Primary part: `YMD12065` (MPN: `YMD12065`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

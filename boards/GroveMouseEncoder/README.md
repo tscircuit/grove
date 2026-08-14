@@ -1,12 +1,12 @@
 # Grove Mouse Encoder
 
-Detailed Grove **Input** board model with a Grove MouseEncoder controller controller,
+Detailed Grove **Input** board model with a TCUT1600X01 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove MouseEncoder controller` (MPN: `GROVE-GROVEMOUSEENCODER`)
+- Primary part: `TCUT1600X01` (MPN: `TCUT1600X01`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Mouse-Encoder.html)
 

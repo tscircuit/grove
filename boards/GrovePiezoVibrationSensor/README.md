@@ -1,12 +1,12 @@
 # Grove - Piezo Vibration Sensor
 
-Detailed Grove **Motion** board model with a Grove PiezoVibrationSensor controller controller,
+Detailed Grove **Motion** board model with a LM2904 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove PiezoVibrationSensor controller` (MPN: `GROVE-GROVEPIEZOVIBRATIONSENSOR`)
+- Primary part: `LM2904` (MPN: `LM2904`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

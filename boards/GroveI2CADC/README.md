@@ -1,12 +1,12 @@
 # Grove- I2C ADC
 
-Detailed Grove **Other Standard Protocol** board model with a Grove I2CADC controller controller,
+Detailed Grove **Other Standard Protocol** board model with a ADC121C021 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove I2CADC controller` (MPN: `GROVE-GROVEI2CADC`)
+- Primary part: `ADC121C021` (MPN: `ADC121C021`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

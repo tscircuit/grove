@@ -9,8 +9,8 @@ export const GroveFingerprintSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Fingerprint-Sensor.html",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove FingerprintSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEFINGERPRINTSENSOR",
+      primaryModel: "AS608",
+      manufacturerPartNumber: "AS608",
       powerVoltage: "5V",
     }}
   />

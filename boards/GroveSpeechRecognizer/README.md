@@ -1,12 +1,12 @@
 # Grove Speech Recognizer
 
-Detailed Grove **Catalogue** board model with a Grove SpeechRecognizer controller controller,
+Detailed Grove **Catalogue** board model with a M007 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `utility`
-- Primary part: `Grove SpeechRecognizer controller` (MPN: `GROVE-GROVESPEECHRECOGNIZER`)
+- Primary part: `M007` (MPN: `M007`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Speech-Recognizer.html)
 

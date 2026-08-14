@@ -1,12 +1,12 @@
 # Grove - Recorder v2.0
 
-Detailed Grove **Sound** board model with a Grove RecorderV20 controller controller,
+Detailed Grove **Sound** board model with a ISD1820P controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove RecorderV20 controller` (MPN: `GROVE-GROVERECORDERV20`)
+- Primary part: `ISD1820P` (MPN: `ISD1820P`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

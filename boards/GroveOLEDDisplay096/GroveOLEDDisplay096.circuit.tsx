@@ -9,8 +9,8 @@ export const GroveOLEDDisplay096 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-OLED-Display-0-96.html",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove OLEDDisplay096 controller",
-      manufacturerPartNumber: "GROVE-GROVEOLEDDISPLAY096",
+      primaryModel: "SSD1306",
+      manufacturerPartNumber: "SSD1306",
       powerVoltage: "5V",
     }}
   />

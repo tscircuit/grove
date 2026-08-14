@@ -1,12 +1,12 @@
 # Grove - 10A DC Current Sensor (ACS725)
 
-Detailed Grove **Current** board model with a Grove 10ADCCurrentSensorACS725 controller controller,
+Detailed Grove **Current** board model with a ACS725 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 10ADCCurrentSensorACS725 controller` (MPN: `GROVE-GROVE10ADCCURRENTSENSORACS725`)
+- Primary part: `ACS725` (MPN: `ACS725`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

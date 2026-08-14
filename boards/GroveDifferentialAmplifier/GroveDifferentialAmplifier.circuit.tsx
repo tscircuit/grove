@@ -9,8 +9,8 @@ export const GroveDifferentialAmplifier = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Differential-Amplifier.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove DifferentialAmplifier controller",
-      manufacturerPartNumber: "GROVE-GROVEDIFFERENTIALAMPLIFIER",
+      primaryModel: "INA125",
+      manufacturerPartNumber: "INA125",
       powerVoltage: "5V",
     }}
   />

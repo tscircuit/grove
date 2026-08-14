@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Accelerometer 400g
 
-Detailed Grove **Sensor** board model with a Grove 3AxisDigitalAccelerometer400g controller controller,
+Detailed Grove **Sensor** board model with a H3LIS331DL controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisDigitalAccelerometer400g controller` (MPN: `GROVE-GROVE3AXISDIGITALACCELEROMETER400G`)
+- Primary part: `H3LIS331DL` (MPN: `H3LIS331DL`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-400g.html)
 

@@ -1,12 +1,12 @@
 # Grove Water Atomization v1 0
 
-Detailed Grove **Actuator** board model with a Grove WaterAtomizationV10 controller controller,
+Detailed Grove **Actuator** board model with a Atomizer-Driver controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove WaterAtomizationV10 controller` (MPN: `GROVE-GROVEWATERATOMIZATIONV10`)
+- Board family: `sensor`
+- Primary part: `Atomizer-Driver` (MPN: `Atomizer-Driver`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Water-Atomization-v1-0.html)
 

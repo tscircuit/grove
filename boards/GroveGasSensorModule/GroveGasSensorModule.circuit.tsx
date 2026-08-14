@@ -9,8 +9,8 @@ export const GroveGasSensorModule = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove GasSensorModule controller",
-      manufacturerPartNumber: "GROVE-GROVEGASSENSORMODULE",
+      primaryModel: "MQ-2",
+      manufacturerPartNumber: "MQ-2",
       powerVoltage: "5V",
     }}
   />

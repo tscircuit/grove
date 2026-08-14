@@ -1,12 +1,12 @@
 # Grove Light Sensor P v1 1
 
-Detailed Grove **Light & LED** board model with a Grove LightSensorPV11 controller controller,
+Detailed Grove **Light & LED** board model with a GL5528 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove LightSensorPV11 controller` (MPN: `GROVE-GROVELIGHTSENSORPV11`)
+- Board family: `sensor`
+- Primary part: `GL5528` (MPN: `GL5528`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Light-Sensor-P-v1-1.html)
 

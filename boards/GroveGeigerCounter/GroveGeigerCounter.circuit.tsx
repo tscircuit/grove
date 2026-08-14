@@ -9,8 +9,8 @@ export const GroveGeigerCounter = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Geiger-Counter-p-867.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove GeigerCounter controller",
-      manufacturerPartNumber: "GROVE-GROVEGEIGERCOUNTER",
+      primaryModel: "M4011",
+      manufacturerPartNumber: "M4011",
       powerVoltage: "5V",
     }}
   />

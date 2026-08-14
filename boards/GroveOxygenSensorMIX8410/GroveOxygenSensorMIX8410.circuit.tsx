@@ -9,8 +9,8 @@ export const GroveOxygenSensorMIX8410 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Oxygen-Sensor-MIX8410-p-4697.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove OxygenSensorMIX8410 controller",
-      manufacturerPartNumber: "GROVE-GROVEOXYGENSENSORMIX8410",
+      primaryModel: "MIX8410",
+      manufacturerPartNumber: "MIX8410",
       powerVoltage: "5V",
     }}
   />

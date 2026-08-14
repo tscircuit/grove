@@ -9,8 +9,8 @@ export const GroveRJ45Adapter = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove RJ45Adapter controller",
-      manufacturerPartNumber: "GROVE-GROVERJ45ADAPTER",
+      primaryModel: "Grove-Prototyping",
+      manufacturerPartNumber: "Grove-Prototyping",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveDigitalDistanceInterrupter05To5cmGP2Y0D805Z0FP = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Digital-Distance-Interrupter-0-5-to-5cm-GP2Y0D805Z0F-P.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove DigitalDistanceInterrupter05To5cmGP2Y0D805Z0FP controller",
-      manufacturerPartNumber: "GROVE-GROVEDIGITALDISTANCEINTERRUPTER05TO5CMGP2Y0D805Z0FP",
+      primaryModel: "GP2Y0D805Z0F",
+      manufacturerPartNumber: "GP2Y0D805Z0F",
       powerVoltage: "5V",
     }}
   />

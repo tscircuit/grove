@@ -9,8 +9,8 @@ export const GroveFlameSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove FlameSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEFLAMESENSOR",
+      primaryModel: "YG1006",
+      manufacturerPartNumber: "YG1006",
       powerVoltage: "5V",
     }}
   />

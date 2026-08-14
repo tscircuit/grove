@@ -1,12 +1,12 @@
 # Grove - Multichannel Gas Sensor
 
-Detailed Grove **Gas** board model with a Grove MultichannelGasSensor controller controller,
+Detailed Grove **Gas** board model with a MiCS-6814 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove MultichannelGasSensor controller` (MPN: `GROVE-GROVEMULTICHANNELGASSENSOR`)
+- Primary part: `MiCS-6814` (MPN: `MiCS-6814`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

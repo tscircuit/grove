@@ -9,8 +9,8 @@ export const Grove3AxisDigitalAccelerometer400g = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-400g.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 3AxisDigitalAccelerometer400g controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITALACCELEROMETER400G",
+      primaryModel: "H3LIS331DL",
+      manufacturerPartNumber: "H3LIS331DL",
       powerVoltage: "5V",
     }}
   />

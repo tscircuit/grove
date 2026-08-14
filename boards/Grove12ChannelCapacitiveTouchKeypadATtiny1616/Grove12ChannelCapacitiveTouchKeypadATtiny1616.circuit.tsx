@@ -9,8 +9,8 @@ export const Grove12ChannelCapacitiveTouchKeypadATtiny1616 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove 12ChannelCapacitiveTouchKeypadATtiny1616 controller",
-      manufacturerPartNumber: "GROVE-GROVE12CHANNELCAPACITIVETOUCHKEYPADATTINY1616",
+      primaryModel: "ATtiny1616",
+      manufacturerPartNumber: "ATtiny1616",
       powerVoltage: "5V",
     }}
   />

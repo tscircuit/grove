@@ -9,8 +9,8 @@ export const GroveMiniFanV11 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Mini-Fan-v1-1.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove MiniFanV11 controller",
-      manufacturerPartNumber: "GROVE-GROVEMINIFANV11",
+      primaryModel: "ATMEGA168PV-10MU",
+      manufacturerPartNumber: "ATMEGA168PV-10MU",
       powerVoltage: "5V",
     }}
   />

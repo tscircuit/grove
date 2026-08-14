@@ -1,12 +1,12 @@
 # Grove Button P
 
-Detailed Grove **Input** board model with a Grove ButtonP controller controller,
+Detailed Grove **Input** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove ButtonP controller` (MPN: `GROVE-GROVEBUTTONP`)
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Button-P.html)
 

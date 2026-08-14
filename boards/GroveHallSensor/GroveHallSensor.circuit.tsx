@@ -9,8 +9,8 @@ export const GroveHallSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove HallSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEHALLSENSOR",
+      primaryModel: "A3144",
+      manufacturerPartNumber: "A3144",
       powerVoltage: "5V",
     }}
   />

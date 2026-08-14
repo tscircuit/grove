@@ -1,12 +1,12 @@
 # Grove Single Axis Analog Gyro
 
-Detailed Grove **Catalogue** board model with a Grove SingleAxisAnalogGyro controller controller,
+Detailed Grove **Catalogue** board model with a ENC-03R controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `utility`
-- Primary part: `Grove SingleAxisAnalogGyro controller` (MPN: `GROVE-GROVESINGLEAXISANALOGGYRO`)
+- Primary part: `ENC-03R` (MPN: `ENC-03R`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Single-Axis-Analog-Gyro-p-1451.html)
 

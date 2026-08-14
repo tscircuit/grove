@@ -9,8 +9,8 @@ export const GroveCoulombCounter33VTo5VLTC2941 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove CoulombCounter33VTo5VLTC2941 controller",
-      manufacturerPartNumber: "GROVE-GROVECOULOMBCOUNTER33VTO5VLTC2941",
+      primaryModel: "LTC2941",
+      manufacturerPartNumber: "LTC2941",
       powerVoltage: "3.3V",
     }}
   />

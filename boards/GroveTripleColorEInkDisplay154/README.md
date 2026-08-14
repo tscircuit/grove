@@ -1,12 +1,12 @@
 # Grove Triple Color E Ink Display 1 54
 
-Detailed Grove **Display** board model with a Grove TripleColorEInkDisplay154 controller controller,
+Detailed Grove **Display** board model with a IL0373 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove TripleColorEInkDisplay154 controller` (MPN: `GROVE-GROVETRIPLECOLOREINKDISPLAY154`)
+- Primary part: `IL0373` (MPN: `IL0373`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Triple-Color-E-Ink-Display-1-54-p-2890.html)
 

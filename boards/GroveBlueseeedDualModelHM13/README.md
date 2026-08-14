@@ -1,12 +1,12 @@
 # Grove Blueseeed Dual model HM13
 
-Detailed Grove **Catalogue** board model with a Grove BlueseeedDualModelHM13 controller controller,
+Detailed Grove **Catalogue** board model with a HM-13 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove BlueseeedDualModelHM13 controller` (MPN: `GROVE-GROVEBLUESEEEDDUALMODELHM13`)
+- Primary part: `HM-13` (MPN: `HM-13`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Blueseeed-Dual-model-HM13.html)
 

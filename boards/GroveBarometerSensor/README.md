@@ -1,12 +1,12 @@
 # Grove Barometer Sensor
 
-Detailed Grove **Sensor** board model with a Grove BarometerSensor controller controller,
+Detailed Grove **Sensor** board model with a BMP180 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove BarometerSensor controller` (MPN: `GROVE-GROVEBAROMETERSENSOR`)
+- Primary part: `BMP180` (MPN: `BMP180`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Barometer-Sensor.html)
 

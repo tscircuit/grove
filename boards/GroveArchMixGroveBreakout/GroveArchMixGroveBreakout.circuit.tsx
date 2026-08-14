@@ -9,8 +9,8 @@ export const GroveArchMixGroveBreakout = () => (
       sourceUrl: "https://www.seeedstudio.com/Arch-Mix-Grove-Breakout-p-4362.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove ArchMixGroveBreakout controller",
-      manufacturerPartNumber: "GROVE-GROVEARCHMIXGROVEBREAKOUT",
+      primaryModel: "ESP32",
+      manufacturerPartNumber: "ESP32",
       powerVoltage: "5V",
     }}
   />

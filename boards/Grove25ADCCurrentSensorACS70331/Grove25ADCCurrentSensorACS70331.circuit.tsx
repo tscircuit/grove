@@ -9,8 +9,8 @@ export const Grove25ADCCurrentSensorACS70331 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 25ADCCurrentSensorACS70331 controller",
-      manufacturerPartNumber: "GROVE-GROVE25ADCCURRENTSENSORACS70331",
+      primaryModel: "ACS70331",
+      manufacturerPartNumber: "ACS70331",
       powerVoltage: "5V",
     }}
   />

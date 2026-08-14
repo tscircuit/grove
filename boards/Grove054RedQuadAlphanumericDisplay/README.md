@@ -1,12 +1,12 @@
 # Grove 0 54 Red Quad Alphanumeric Display
 
-Detailed Grove **Display** board model with a Grove 054RedQuadAlphanumericDisplay controller controller,
+Detailed Grove **Display** board model with a TM1637 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove 054RedQuadAlphanumericDisplay controller` (MPN: `GROVE-GROVE054REDQUADALPHANUMERICDISPLAY`)
+- Primary part: `TM1637` (MPN: `TM1637`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-0-54-Red-Quad-Alphanumeric-Display-p-4032.html)
 

@@ -9,8 +9,8 @@ export const GroveQwiicHub = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Qwiic-Hub-p-4531.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove QwiicHub controller",
-      manufacturerPartNumber: "GROVE-GROVEQWIICHUB",
+      primaryModel: "TCA9548A",
+      manufacturerPartNumber: "TCA9548A",
       powerVoltage: "5V",
     }}
   />

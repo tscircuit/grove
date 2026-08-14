@@ -1,12 +1,12 @@
 # Grove - 315MHz RF Kit
 
-Detailed Grove **RF** board model with a Grove 315MHzRFKit controller controller,
+Detailed Grove **RF** board model with a FS1000A controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove 315MHzRFKit controller` (MPN: `GROVE-GROVE315MHZRFKIT`)
+- Primary part: `FS1000A` (MPN: `FS1000A`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

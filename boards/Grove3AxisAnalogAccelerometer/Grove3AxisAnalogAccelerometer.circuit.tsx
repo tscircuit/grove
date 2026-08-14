@@ -9,8 +9,8 @@ export const Grove3AxisAnalogAccelerometer = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 3AxisAnalogAccelerometer controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISANALOGACCELEROMETER",
+      primaryModel: "ADXL335",
+      manufacturerPartNumber: "ADXL335",
       powerVoltage: "5V",
     }}
   />

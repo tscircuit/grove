@@ -9,8 +9,8 @@ export const GroveI2CMotorDriverV13 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "actuator",
-      primaryModel: "Grove I2CMotorDriverV13 controller",
-      manufacturerPartNumber: "GROVE-GROVEI2CMOTORDRIVERV13",
+      primaryModel: "L298N",
+      manufacturerPartNumber: "L298N",
       powerVoltage: "5V",
     }}
   />

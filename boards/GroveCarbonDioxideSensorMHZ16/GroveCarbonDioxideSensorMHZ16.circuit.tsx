@@ -9,8 +9,8 @@ export const GroveCarbonDioxideSensorMHZ16 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Carbon-Dioxide-Sensor-MH-Z16.html",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove CarbonDioxideSensorMHZ16 controller",
-      manufacturerPartNumber: "GROVE-GROVECARBONDIOXIDESENSORMHZ16",
+      primaryModel: "MH-Z16",
+      manufacturerPartNumber: "MH-Z16",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove - Speaker Plus
 
-Detailed Grove **Actuator** board model with a Grove SpeakerPlus controller controller,
+Detailed Grove **Actuator** board model with a LM386 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove SpeakerPlus controller` (MPN: `GROVE-GROVESPEAKERPLUS`)
+- Primary part: `LM386` (MPN: `LM386`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

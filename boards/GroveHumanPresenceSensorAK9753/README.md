@@ -1,12 +1,12 @@
 # Grove Human Presence Sensor AK9753
 
-Detailed Grove **Sensor** board model with a Grove HumanPresenceSensorAK9753 controller controller,
+Detailed Grove **Sensor** board model with a AK9753 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove HumanPresenceSensorAK9753 controller` (MPN: `GROVE-GROVEHUMANPRESENCESENSORAK9753`)
+- Primary part: `AK9753` (MPN: `AK9753`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Human-Presence-Sensor-AK9753.html)
 

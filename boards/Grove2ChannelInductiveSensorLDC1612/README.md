@@ -1,12 +1,12 @@
 # Grove - 2-Channel Inductive Sensor(LDC1612)
 
-Detailed Grove **Touch** board model with a Grove 2ChannelInductiveSensorLDC1612 controller controller,
+Detailed Grove **Touch** board model with a LDC1612 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `input`
-- Primary part: `Grove 2ChannelInductiveSensorLDC1612 controller` (MPN: `GROVE-GROVE2CHANNELINDUCTIVESENSORLDC1612`)
+- Primary part: `LDC1612` (MPN: `LDC1612`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

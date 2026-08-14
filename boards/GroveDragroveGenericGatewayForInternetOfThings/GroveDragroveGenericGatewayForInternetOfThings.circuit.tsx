@@ -9,8 +9,8 @@ export const GroveDragroveGenericGatewayForInternetOfThings = () => (
       sourceUrl: "https://www.seeedstudio.com/Dragrove-Generic-gateway-for-internet-of-things-p-1118.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove DragroveGenericGatewayForInternetOfThings controller",
-      manufacturerPartNumber: "GROVE-GROVEDRAGROVEGENERICGATEWAYFORINTERNETOFTHINGS",
+      primaryModel: "ESP8266",
+      manufacturerPartNumber: "ESP8266",
       powerVoltage: "5V",
     }}
   />

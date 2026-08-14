@@ -9,8 +9,8 @@ export const GrovePassiveBuzzer = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove PassiveBuzzer controller",
-      manufacturerPartNumber: "GROVE-GROVEPASSIVEBUZZER",
+      primaryModel: "YMD12065",
+      manufacturerPartNumber: "YMD12065",
       powerVoltage: "5V",
     }}
   />

@@ -7,10 +7,10 @@ export const Grovemm88SquareMatrixLEDMatchedWithGroveBlueCommonAnode = () => (
       title: "38mm 8 8 square matrix LED matched with Grove Blue Common Anode",
       category: "Display",
       sourceUrl: "https://www.seeedstudio.com/38mm-8-8-square-matrix-LED-matched-with-Grove-Blue-Common-Anode-p-4052.html",
-      interfaceKind: "analog",
+      interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove mm88SquareMatrixLEDMatchedWithGroveBlueCommonAnode controller",
-      manufacturerPartNumber: "GROVE-GROVEMM88SQUAREMATRIXLEDMATCHEDWITHGROVEBLUECOMMONANODE",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

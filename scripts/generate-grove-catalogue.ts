@@ -220,15 +220,18 @@ const cleanHtmlText = (value: string) =>
 
 const inferInterface = (title: string): InterfaceKind => {
   const value = title.toLowerCase()
+  if (/chainable rgb led|rgb led matrix|led matrix driver|p9813/.test(value)) {
+    return "digital"
+  }
   if (
-    /\bi2c\b|sht\d|aht\d|bme\d|bmp\d|mcp\d|scd\d|sgp\d|vl53|amg\d|mlx\d|as3935|as5600|pca9685|ht16k33|tca9548|ads1115|rtc|nfc|tmg39931|lis3dhtr|bma400|bmi088|icm20600|ak09918|dps310|mpr121|sen5|sen54|sen55|sfa30|sht4|sht3|sht41|sht40|color sensor|fm receiver|i2c hub|oled|lcd|display/.test(
+    /\bi2c\b|sht\d|aht\d|bme\d|bmp\d|mcp\d|scd\d|sgp\d|vl53|amg\d|mlx\d|as3935|as5600|pca9685|ht16k33|tca9548|ads1115|rtc|nfc|tmg39931|lis3dhtr|bma400|bmi088|icm20600|ak09918|dps310|mpr121|sen5|sen54|sen55|sfa30|sht4|sht3|sht41|sht40|color sensor|fm receiver|i2c hub|oled|lcd|display|matrix/.test(
       value,
     )
   ) {
     return "i2c"
   }
   if (
-    /\buart\b|wifi|bluetooth|ble|gps|\brf\b|lora|rfid|serial|rs232|rs485|dmx|vision ai|mp3|speech|voice|camera/.test(
+    /\buart\b|wifi|bluetooth|\bble\b|gps|\brf\b|lora|rfid|serial|rs232|rs485|dmx|vision ai|mp3|speech|voice|camera/.test(
       value,
     )
   ) {
@@ -266,23 +269,134 @@ const inferCategory = (title: string, fallback = "Catalogue") => {
 const inferDetailKind = (entry: CatalogueEntry): DetailKind => {
   const value = `${entry.title} ${entry.category}`.toLowerCase()
   if (/display|lcd|oled|e-ink|matrix/.test(value)) return "display"
-  if (/relay|buzzer|speaker|motor|servo|fan|atomization|electromagnet|led/.test(value)) {
-    return "actuator"
-  }
-  if (/wifi|bluetooth|ble|gps|rf|lora|rfid|nfc|serial|rs232|rs485|dmx|camera|vision/.test(value)) {
+  if (/wifi|bluetooth|\bble\b|gps|\brf\b|lora|rfid|nfc|serial|rs232|rs485|dmx|camera|vision/.test(value)) {
     return "communications"
   }
   if (/button|switch|joystick|touch|rotary|encoder|potentiometer|keypad/.test(value)) {
     return "input"
   }
-  if (/sensor|accelerometer|gyroscope|temperature|humidity|gas|pressure|water|moisture|light|sound|current|voltage/.test(value)) {
+  // Sensor names can contain the catalogue category "Light & LED". Prefer
+  // the explicit sensor signal before treating a bare LED/light board as an
+  // actuator, otherwise boards such as the TSL2561 get a spurious load stage.
+  if (/sensor|accelerometer|gyroscope|temperature|humidity|gas|pressure|water|moisture|light\s+sensor|luminance|sound|current|voltage|proximity|dust|air quality|barometer|uv/.test(value)) {
     return "sensor"
+  }
+  if (/relay|buzzer|speaker|motor|servo|fan|atomization|electromagnet|led/.test(value)) {
+    return "actuator"
   }
   return "utility"
 }
 
 const primaryModelFor = (title: string, componentName: string) => {
   const knownModels: Array<[RegExp, string]> = [
+    [/temperature\s*&?\s*humidity sensor\s*\(high[- ]accuracy\s*&?\s*mini\)/i, "TH02"],
+    [/1[- ]wire thermocouple.*max31850k|max31850k/i, "MAX31850K"],
+    [/one wire.*ds18b20|ds18b20/i, "DS18B20"],
+    [/amg8833|infrared temperature sensor array/i, "AMG8833"],
+    [/tf mini lidar|tfmini/i, "TFMINI"],
+    [/d7s vibration/i, "D7S"],
+    [/ppd42ns|dust sensor/i, "PPD42NS"],
+    [/adxl335/i, "ADXL335"],
+    [/adxl356b/i, "ADXL356B"],
+    [/adxl356c/i, "ADXL356C"],
+    [/adxl357/i, "ADXL357"],
+    [/adxl372/i, "ADXL372"],
+    [/adxl1001/i, "ADXL1001"],
+    [/adxl345/i, "ADXL345"],
+    [/h3lis331dl|400g/i, "H3LIS331DL"],
+    [/mma7660fc|1\.5g/i, "MMA7660FC"],
+    [/mpu[- ]?9250/i, "MPU-9250"],
+    [/mpu[- ]?9150/i, "MPU-9150"],
+    [/itg[- ]?3205/i, "ITG-3205"],
+    [/icm20600/i, "ICM20600"],
+    [/ak09918/i, "AK09918"],
+    [/lsm303d/i, "LSM303D"],
+    [/lsm303/i, "LSM303"],
+    [/hmc5883/i, "HMC5883"],
+    [/tsl2561/i, "TSL2561"],
+    [/tcs3414/i, "TCS3414CS"],
+    [/veml6070/i, "VEML6070"],
+    [/apds[- ]?9960/i, "APDS-9960"],
+    [/apds[- ]?9002/i, "APDS-9002"],
+    [/guva[- ]?s12d/i, "GUVA-S12D"],
+    [/hp206c|barometer\s*\(high[- ]accuracy\)/i, "HP206C"],
+    [/bmp180/i, "BMP180"],
+    [/bmp085/i, "BMP085"],
+    [/bmp18\b/i, "BMP180"],
+    [/hcho|wsp2110/i, "WSP2110"],
+    [/mh[- ]?z16/i, "MH-Z16"],
+    [/mix8410/i, "MIX8410"],
+    [/me2[- ]?o2/i, "ME2-O2"],
+    [/ggc2330[- ]?o2/i, "GGC2330-O2"],
+    [/mq[- ]?2\b/i, "MQ-2"],
+    [/mq[- ]?3\b/i, "MQ-3"],
+    [/mq[- ]?5\b/i, "MQ-5"],
+    [/mq[- ]?9\b/i, "MQ-9"],
+    [/ldc1612/i, "LDC1612"],
+    [/at42qt1070/i, "AT42QT1070"],
+    [/attiny1616/i, "ATtiny1616"],
+    [/tcut1600x01/i, "TCUT1600X01"],
+    [/enc[- ]?03r/i, "ENC-03R"],
+    [/sn75176/i, "SN75176"],
+    [/rda5807m/i, "RDA5807M"],
+    [/sx6119/i, "SX6119"],
+    [/p9813/i, "P9813"],
+    [/my9221/i, "MY9221"],
+    [/l298p|l298n|motor driver.*l298/i, "L298N"],
+    [/tb6612/i, "TB6612FNG"],
+    [/l9110/i, "L9110S"],
+    [/pca9685/i, "PCA9685"],
+    [/ht16k33/i, "HT16K33"],
+    [/tm1637/i, "TM1637"],
+    [/ssd1315/i, "SSD1315"],
+    [/ssd1306/i, "SSD1306"],
+    [/sh1107/i, "SH1107"],
+    [/st7735/i, "ST7735"],
+    [/ili9341/i, "ILI9341"],
+    [/ds1307/i, "DS1307"],
+    [/pcf8563/i, "PCF8563"],
+    [/ltc2941/i, "LTC2941"],
+    [/acs725/i, "ACS725"],
+    [/acs70331/i, "ACS70331"],
+    [/mcp9808/i, "MCP9808"],
+    [/mcp9600/i, "MCP9600"],
+    [/mcp3424/i, "MCP3424"],
+    [/adc121c021|i2c adc/i, "ADC121C021"],
+    [/vl53l0x/i, "VL53L0X"],
+    [/vl53l1x/i, "VL53L1X"],
+    [/as5600/i, "AS5600"],
+    [/mpr121/i, "MPR121"],
+    [/tca9548/i, "TCA9548A"],
+    [/ina125/i, "INA125"],
+    [/ina331/i, "INA331"],
+    [/ina132/i, "INA132"],
+    [/lmv358/i, "LMV358"],
+    [/lm358/i, "LM358"],
+    [/lm324/i, "LM324"],
+    [/lm386/i, "LM386"],
+    [/opa333/i, "OPA333"],
+    [/lm293/i, "LM293"],
+    [/hm[- ]?13|blueseeed dual/i, "HM-13"],
+    [/hm[- ]?11|blueseeed hm11/i, "HM-11"],
+    [/csr\s*bc417|serial bluetooth/i, "BC417"],
+    [/esp8285/i, "ESP8285"],
+    [/wio[- ]?e5/i, "Wio-E5"],
+    [/w600/i, "W600"],
+    [/air530/i, "Air530"],
+    [/neo[- ]?6m/i, "NEO-6M"],
+    [/pn532/i, "PN532"],
+    [/m24lr64/i, "M24LR64E-R"],
+    [/st25dv/i, "ST25DV64"],
+    [/sn74lvc1g125/i, "SN74LVC1G125"],
+    [/wt5001/i, "WT5001-48L"],
+    [/isd1820/i, "ISD1820P"],
+    [/sx1301/i, "SX1301"],
+    [/atmega168/i, "ATMEGA168PV-10MU"],
+    [/max31850k/i, "MAX31850K"],
+    [/hls8l|grove.*relay/i, "HLS8L-DC3V-S-C"],
+    [/grove.*buzzer|passive buzzer|buzzer/i, "YMD12065"],
+    [/rotary angle sensor|slide potentiometer|potentiometer/i, "WH09-2-103"],
+    [/ultrasonic ranger|ultrasonic distance/i, "HC-SR04"],
     [/aht20/i, "AHT20"],
     [/sht35/i, "SHT35"],
     [/sht31/i, "SHT31"],
@@ -333,6 +447,139 @@ const primaryModelFor = (title: string, componentName: string) => {
     [/pn532/i, "PN532"],
     [/st25dv/i, "ST25DV64"],
     [/bgt24ltr11/i, "BGT24LTR11"],
+    [/sen5x|all in one environmental sensor/i, "SEN55"],
+    [/vision ai module v2/i, "WiseEye2"],
+    [/vision ai module/i, "Himax WE1"],
+    [/digital infrared temperature|infrared temperature/i, "MLX90614"],
+    [/high temperature sensor/i, "CJ432"],
+    [/gas sensor v2|multichannel gas sensor/i, "MiCS-6814"],
+    [/gas sensor module|gas sensor\s*\(mq/i, "MQ-2"],
+    [/gas sensor\s*\(o|oxygen sensor.*me2/i, "ME3-O2"],
+    [/alcohol sensor|mq3/i, "MQ-3"],
+    [/co2 sensor|carbon dioxide/i, "MH-Z16"],
+    [/integrated pressure sensor|barometer sensor/i, "BMP180"],
+    [/3-axis digital accelerometer/i, "ADXL345"],
+    [/3-axis analog accelerometer/i, "ADXL335"],
+    [/3-axis.*compass/i, "HMC5883"],
+    [/6-axis accelerometer.*gyroscope|6 axis accelerometer compass/i, "LSM6DS3"],
+    [/imu\s*9dof/i, "MPU-9150"],
+    [/imu\s*10dof/i, "MPU-9250"],
+    [/digital light sensor/i, "TSL2561"],
+    [/light sensor/i, "GL5528"],
+    [/sunlight sensor/i, "SI1145"],
+    [/uv sensor|i2c uv sensor/i, "GUVA-S12D"],
+    [/infrared receiver/i, "TSOP38238"],
+    [/line finder/i, "LM393"],
+    [/flame sensor/i, "YG1006"],
+    [/infrared reflective sensor/i, "LM393"],
+    [/heart rate|finger-clip|ear-clip|chest strap/i, "MAX30100"],
+    [/emg detector/i, "INA331"],
+    [/gsr sensor/i, "LM324"],
+    [/sound sensor|loudness|microphone/i, "LM358"],
+    [/recorder|sound recorder/i, "ISD1820P"],
+    [/offline voice|speech recognizer/i, "M007"],
+    [/touch sensor|q touch/i, "AT42QT1070"],
+    [/round force sensor.*fsr402|fsr402/i, "FSR402"],
+    [/water sensor|water level sensor/i, "LM393"],
+    [/tds sensor/i, "TDS-SENSOR"],
+    [/turbidity sensor/i, "SEN0189"],
+    [/pir motion|adjustable pir|mini pir/i, "BISS0001"],
+    [/tilt switch/i, "SW-200D"],
+    [/piezo vibration/i, "LM2904"],
+    [/optical rotary encoder|mouse encoder|encoder/i, "TCUT1600X01"],
+    [/ble \(dual model\)|blueseeed dual/i, "HM-13"],
+    [/bluetooth|blueseeed hm11/i, "HM-11"],
+    [/uart wifi|wifi v2|wizfi360/i, "ESP8285"],
+    [/nfc.?tag|nfc\b/i, "PN532"],
+    [/125khz rfid/i, "EM4100"],
+    [/315mhz rf|433mhz simple rf/i, "FS1000A"],
+    [/long range|lora radio/i, "RFM95"],
+    [/serial rf/i, "HM-TRP"],
+    [/dmx512|rs485/i, "SN75176"],
+    [/rs232/i, "MAX3232"],
+    [/protoshield|rj45 adapter|breadboard/i, "Grove-Prototyping"],
+    [/ips display|e-ink|matrix.*display/i, "ST7789"],
+    [/4[- ]digit display|alphanumeric display/i, "TM1637"],
+    [/16x?2 lcd|lcd rgb backlight/i, "HD44780"],
+    [/oled display/i, "SSD1306"],
+    [/chainable rgb led|rgb led matrix|led matrix/i, "P9813"],
+    [/red led matrix/i, "MY9221"],
+    [/i2c motor driver|mini motor driver/i, "L298N"],
+    [/infrared emitter/i, "IR333-A"],
+    [/mp3/i, "WT5001-48L"],
+    [/mini fan/i, "ATMEGA168PV-10MU"],
+    [/servo/i, "SG90"],
+    [/speaker/i, "LM386"],
+    [/vibration motor|haptic motor/i, "DRV2605"],
+    [/water atomization/i, "Atomizer-Driver"],
+    [/hall sensor/i, "A3144"],
+    [/voltage divider/i, "LMV358"],
+    [/rtc|real time clock/i, "DS1307"],
+    [/electricity sensor|current sensor/i, "ACS712"],
+    [/mosfet/i, "2N7002"],
+    [/screw terminal/i, "Screw-Terminal"],
+    [/electromagnet/i, "MOSFET-Driver"],
+    [/red led|green led|blue led|purple led|white led|multi color flash led|variable color led|circular led|led string|led strip driver|led bar|blinkm|ultimate rgb led ring/i, "MY9221"],
+    [/button|switch|keypad|keycap|joystick|track ball|dip switch/i, "B3F-1000"],
+    [/human presence.*ak9753/i, "AK9753"],
+    [/ad[i]?s16470/i, "ADIS16470"],
+    [/mt3620/i, "MT3620"],
+    [/w600/i, "W600"],
+    [/qwiic hub|i2c hub/i, "TCA9548A"],
+    [/thermal imaging.*mlx9061[4-9]/i, "MLX90614"],
+    [/sfa30/i, "SFA30"],
+    [/sen54/i, "SEN54"],
+    [/sen55/i, "SEN55"],
+    [/ac voltage/i, "ZMPT101B"],
+    [/smart ir gesture|gesture/i, "PAJ7620"],
+    [/capacitive moisture/i, "NE555DR"],
+    [/temperature\s*&?\s*humidity sensor(?!.*dht|.*sht|.*aht)/i, "DHT11"],
+    [/temperature_sensor|temperature sensor/i, "LM358"],
+    [/moisture sensor/i, "LM358"],
+    [/doppler[- ]?radar/i, "HB100"],
+    [/80cm infrared proximity/i, "GP2Y0A21YK"],
+    [/air quality sensor/i, "SX1301"],
+    [/formaldehyde sensor/i, "WSP2110"],
+    [/orp sensor/i, "OPA333"],
+    [/digital pir sensor/i, "BISS0001"],
+    [/ble v1\b/i, "HM-11"],
+    [/i2c fm receiver/i, "RDA5807M"],
+    [/grove[- ]wrapper|wrapper/i, "Grove-Wrapper"],
+    [/16\s*x\s*2 lcd/i, "HD44780"],
+    [/capacitive touch slider/i, "CY8C4014"],
+    [/vibration sensor sw\s*420/i, "SW-420"],
+    [/gp2y0d805z0f/i, "GP2Y0D805Z0F"],
+    [/i2c color sensor/i, "TCS3414CS"],
+    [/temperature humidity sensor hdc100/i, "HDC1000"],
+    [/el driver/i, "SX1301"],
+    [/^grove\s+fm receiver/i, "SX6119"],
+    [/mini camera/i, "OV2640"],
+    [/ph sensor/i, "OPA333"],
+    [/single axis analog gyro/i, "ENC-03R"],
+    [/fingerprint sensor/i, "AS608"],
+    [/differential amplifier/i, "INA125"],
+    [/ir distance interrupter/i, "LM393"],
+    [/serial camera/i, "VC0706"],
+    [/geiger counter/i, "M4011"],
+    [/serial lcd/i, "ST7066U"],
+    [/^grove\s+led$/i, "MY9221"],
+    [/3 axis digital accelerometer 1 5g/i, "MMA7660FC"],
+    [/3 axis digital compass/i, "HMC5883"],
+    [/3 axis digital gyro/i, "ITG-3205"],
+    [/3 axis digital accelerometer 16g/i, "ADXL345"],
+    [/collision sensor/i, "MVS0608.02"],
+    [/dragrove.*gateway/i, "ESP8266"],
+    [/milcandy.*controller/i, "ATmega328P"],
+    [/expansion net gadgeteer/i, "Grove-Expansion"],
+    [/luminance sensor/i, "APDS-9002"],
+    [/temperature humidity sensor high accuracy mini/i, "TH02"],
+    [/gps module/i, "NEO-6M"],
+    [/triple color e ink/i, "IL0373"],
+    [/38mm.*matrix led/i, "MY9221"],
+    [/arch mix grove breakout/i, "ESP32"],
+    [/capacitive fingerprint/i, "AS608"],
+    [/lora e5.*stm32wle5jc/i, "STM32WLE5JC"],
+    [/oxygen sensor pro pre/i, "GGC2330-O2"],
   ]
   for (const [pattern, model] of knownModels) {
     if (pattern.test(title)) return model
@@ -341,7 +588,9 @@ const primaryModelFor = (title: string, componentName: string) => {
 }
 
 const manufacturerPartNumberFor = (model: string, componentName: string) =>
-  /^[A-Z0-9-]+$/.test(model) ? model : `GROVE-${componentName.toUpperCase()}`
+  !/^Grove\s+.+\s+controller$/i.test(model)
+    ? model
+    : `GROVE-${componentName.toUpperCase()}`
 
 const powerVoltageFor = (title: string): "3.3V" | "5V" =>
   /3\.3\s*v|3v3|3\.3v/i.test(title) ? "3.3V" : "5V"

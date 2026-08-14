@@ -9,8 +9,8 @@ export const GroveRotaryAngleSensor2 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove RotaryAngleSensor2 controller",
-      manufacturerPartNumber: "GROVE-GROVEROTARYANGLESENSOR2",
+      primaryModel: "WH09-2-103",
+      manufacturerPartNumber: "WH09-2-103",
       powerVoltage: "5V",
     }}
   />

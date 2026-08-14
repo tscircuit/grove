@@ -1,12 +1,12 @@
 # Grove - Loudness Sensor
 
-Detailed Grove **Sound** board model with a Grove LoudnessSensor controller controller,
+Detailed Grove **Sound** board model with a LM358 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove LoudnessSensor controller` (MPN: `GROVE-GROVELOUDNESSSENSOR`)
+- Primary part: `LM358` (MPN: `LM358`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

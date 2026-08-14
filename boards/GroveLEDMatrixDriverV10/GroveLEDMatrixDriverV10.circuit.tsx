@@ -7,10 +7,10 @@ export const GroveLEDMatrixDriverV10 = () => (
       title: "Grove LED Matrix Driver v1 0",
       category: "Display",
       sourceUrl: "https://www.seeedstudio.com/Grove-LED-Matrix-Driver-v1-0.html",
-      interfaceKind: "analog",
+      interfaceKind: "digital",
       detailKind: "display",
-      primaryModel: "Grove LEDMatrixDriverV10 controller",
-      manufacturerPartNumber: "GROVE-GROVELEDMATRIXDRIVERV10",
+      primaryModel: "P9813",
+      manufacturerPartNumber: "P9813",
       powerVoltage: "5V",
     }}
   />

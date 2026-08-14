@@ -1,12 +1,12 @@
 # Grove Differential Amplifier
 
-Detailed Grove **Catalogue** board model with a Grove DifferentialAmplifier controller controller,
+Detailed Grove **Catalogue** board model with a INA125 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove DifferentialAmplifier controller` (MPN: `GROVE-GROVEDIFFERENTIALAMPLIFIER`)
+- Primary part: `INA125` (MPN: `INA125`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Differential-Amplifier.html)
 

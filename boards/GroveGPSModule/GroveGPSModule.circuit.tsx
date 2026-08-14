@@ -9,8 +9,8 @@ export const GroveGPSModule = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-GPS-Module.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove GPSModule controller",
-      manufacturerPartNumber: "GROVE-GROVEGPSMODULE",
+      primaryModel: "NEO-6M",
+      manufacturerPartNumber: "NEO-6M",
       powerVoltage: "5V",
     }}
   />

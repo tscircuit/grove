@@ -8,9 +8,9 @@ export const GroveLEDButton = () => (
       category: "Switch & Button",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove LEDButton controller",
-      manufacturerPartNumber: "GROVE-GROVELEDBUTTON",
+      detailKind: "input",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

@@ -7,10 +7,10 @@ export const GroveChainableRGBLED = () => (
       title: "Grove Chainable RGB LED",
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Chainable-RGB-LED.html",
-      interfaceKind: "uart",
+      interfaceKind: "digital",
       detailKind: "actuator",
-      primaryModel: "Grove ChainableRGBLED controller",
-      manufacturerPartNumber: "GROVE-GROVECHAINABLERGBLED",
+      primaryModel: "P9813",
+      manufacturerPartNumber: "P9813",
       powerVoltage: "5V",
     }}
   />

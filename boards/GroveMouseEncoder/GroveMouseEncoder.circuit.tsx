@@ -9,8 +9,8 @@ export const GroveMouseEncoder = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Mouse-Encoder.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove MouseEncoder controller",
-      manufacturerPartNumber: "GROVE-GROVEMOUSEENCODER",
+      primaryModel: "TCUT1600X01",
+      manufacturerPartNumber: "TCUT1600X01",
       powerVoltage: "5V",
     }}
   />

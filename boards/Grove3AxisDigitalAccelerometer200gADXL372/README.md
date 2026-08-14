@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Accelerometer 200g ADXL372
 
-Detailed Grove **Sensor** board model with a Grove 3AxisDigitalAccelerometer200gADXL372 controller controller,
+Detailed Grove **Sensor** board model with a ADXL372 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisDigitalAccelerometer200gADXL372 controller` (MPN: `GROVE-GROVE3AXISDIGITALACCELEROMETER200GADXL372`)
+- Primary part: `ADXL372` (MPN: `ADXL372`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-200g-ADXL372-p-4003.html)
 

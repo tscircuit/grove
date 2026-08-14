@@ -1,12 +1,12 @@
 # Grove - Serial RF Pro
 
-Detailed Grove **RF** board model with a Grove SerialRFPro controller controller,
+Detailed Grove **RF** board model with a HM-TRP controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove SerialRFPro controller` (MPN: `GROVE-GROVESERIALRFPRO`)
+- Primary part: `HM-TRP` (MPN: `HM-TRP`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

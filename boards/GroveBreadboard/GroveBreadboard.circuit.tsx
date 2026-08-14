@@ -9,8 +9,8 @@ export const GroveBreadboard = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Breadboard-p-4034.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove Breadboard controller",
-      manufacturerPartNumber: "GROVE-GROVEBREADBOARD",
+      primaryModel: "Grove-Prototyping",
+      manufacturerPartNumber: "Grove-Prototyping",
       powerVoltage: "5V",
     }}
   />

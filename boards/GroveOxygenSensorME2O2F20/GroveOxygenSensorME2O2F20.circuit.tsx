@@ -9,8 +9,8 @@ export const GroveOxygenSensorME2O2F20 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Oxygen-Sensor-ME2-O2-f20.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove OxygenSensorME2O2F20 controller",
-      manufacturerPartNumber: "GROVE-GROVEOXYGENSENSORME2O2F20",
+      primaryModel: "ME2-O2",
+      manufacturerPartNumber: "ME2-O2",
       powerVoltage: "5V",
     }}
   />

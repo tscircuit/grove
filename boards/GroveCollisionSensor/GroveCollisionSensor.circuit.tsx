@@ -9,8 +9,8 @@ export const GroveCollisionSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Collision-Sensor.html",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove CollisionSensor controller",
-      manufacturerPartNumber: "GROVE-GROVECOLLISIONSENSOR",
+      primaryModel: "MVS0608.02",
+      manufacturerPartNumber: "MVS0608.02",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveSerialBluetoothV30 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove SerialBluetoothV30 controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALBLUETOOTHV30",
+      primaryModel: "BC417",
+      manufacturerPartNumber: "BC417",
       powerVoltage: "5V",
     }}
   />

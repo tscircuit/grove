@@ -1,12 +1,12 @@
 # Grove - GSR Sensor
 
-Detailed Grove **Biometric** board model with a Grove GSRSensor controller controller,
+Detailed Grove **Biometric** board model with a LM324 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove GSRSensor controller` (MPN: `GROVE-GROVEGSRSENSOR`)
+- Primary part: `LM324` (MPN: `LM324`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -1,12 +1,12 @@
 # Grove-LED Button
 
-Detailed Grove **Switch & Button** board model with a Grove LEDButton controller controller,
+Detailed Grove **Switch & Button** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove LEDButton controller` (MPN: `GROVE-GROVELEDBUTTON`)
+- Board family: `input`
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

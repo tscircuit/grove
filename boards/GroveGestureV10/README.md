@@ -1,12 +1,12 @@
 # Grove - Gesture V1.0
 
-Detailed Grove **Proximity** board model with a Grove GestureV10 controller controller,
+Detailed Grove **Proximity** board model with a PAJ7620 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `utility`
-- Primary part: `Grove GestureV10 controller` (MPN: `GROVE-GROVEGESTUREV10`)
+- Board family: `sensor`
+- Primary part: `PAJ7620` (MPN: `PAJ7620`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

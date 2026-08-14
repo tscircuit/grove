@@ -6,7 +6,7 @@ routed nets.
 
 - Interface: `i2c`
 - Board family: `communications`
-- Primary part: `MLX9062x` (MPN: `GROVE-GROVETHERMALIMAGINGCAMERAMLX90621BAA16X4IRARRAYWITH25FOV`)
+- Primary part: `MLX9062x` (MPN: `MLX9062x`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Thermal-Imaging-Camera-MLX90621-BAA-16x4-IR-Array-with-25-FOV-p-4655.html)
 

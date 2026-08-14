@@ -9,8 +9,8 @@ export const GroveSerialRFPro = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove SerialRFPro controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALRFPRO",
+      primaryModel: "HM-TRP",
+      manufacturerPartNumber: "HM-TRP",
       powerVoltage: "5V",
     }}
   />

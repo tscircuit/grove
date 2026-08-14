@@ -8,9 +8,9 @@ export const GroveWaterAtomization = () => (
       category: "Actuator",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove WaterAtomization controller",
-      manufacturerPartNumber: "GROVE-GROVEWATERATOMIZATION",
+      detailKind: "sensor",
+      primaryModel: "Atomizer-Driver",
+      manufacturerPartNumber: "Atomizer-Driver",
       powerVoltage: "5V",
     }}
   />

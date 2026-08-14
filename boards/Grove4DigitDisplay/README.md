@@ -1,12 +1,12 @@
 # Grove - 4-Digit Display
 
-Detailed Grove **Display** board model with a Grove 4DigitDisplay controller controller,
+Detailed Grove **Display** board model with a TM1637 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove 4DigitDisplay controller` (MPN: `GROVE-GROVE4DIGITDISPLAY`)
+- Primary part: `TM1637` (MPN: `TM1637`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

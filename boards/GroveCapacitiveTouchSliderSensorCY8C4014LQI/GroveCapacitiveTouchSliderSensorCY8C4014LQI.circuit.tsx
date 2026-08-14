@@ -9,8 +9,8 @@ export const GroveCapacitiveTouchSliderSensorCY8C4014LQI = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Capacitive-Touch-Slider-Sensor-CY8C4014LQI.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove CapacitiveTouchSliderSensorCY8C4014LQI controller",
-      manufacturerPartNumber: "GROVE-GROVECAPACITIVETOUCHSLIDERSENSORCY8C4014LQI",
+      primaryModel: "CY8C4014",
+      manufacturerPartNumber: "CY8C4014",
       powerVoltage: "5V",
     }}
   />

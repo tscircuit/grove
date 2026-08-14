@@ -1,12 +1,12 @@
 # Grove - High Temperature Sensor
 
-Detailed Grove **Temperature** board model with a Grove HighTemperatureSensor controller controller,
+Detailed Grove **Temperature** board model with a CJ432 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove HighTemperatureSensor controller` (MPN: `GROVE-GROVEHIGHTEMPERATURESENSOR`)
+- Primary part: `CJ432` (MPN: `CJ432`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

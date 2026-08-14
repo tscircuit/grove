@@ -1,12 +1,12 @@
 # Grove - SPDT Relay(30A)
 
-Detailed Grove **Current** board model with a Grove SPDTRelay30A controller controller,
+Detailed Grove **Current** board model with a HLS8L-DC3V-S-C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove SPDTRelay30A controller` (MPN: `GROVE-GROVESPDTRELAY30A`)
+- Board family: `sensor`
+- Primary part: `HLS8L-DC3V-S-C` (MPN: `HLS8L-DC3V-S-C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

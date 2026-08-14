@@ -6,7 +6,7 @@ routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Air530` (MPN: `GROVE-GROVEGPSAIR530`)
+- Primary part: `Air530` (MPN: `Air530`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

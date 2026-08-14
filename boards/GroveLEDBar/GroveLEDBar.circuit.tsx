@@ -9,8 +9,8 @@ export const GroveLEDBar = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-LED-Bar.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove LEDBar controller",
-      manufacturerPartNumber: "GROVE-GROVELEDBAR",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove - 125KHz RFID Reader
 
-Detailed Grove **RF** board model with a Grove 125KHzRFIDReader controller controller,
+Detailed Grove **RF** board model with a EM4100 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove 125KHzRFIDReader controller` (MPN: `GROVE-GROVE125KHZRFIDREADER`)
+- Primary part: `EM4100` (MPN: `EM4100`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

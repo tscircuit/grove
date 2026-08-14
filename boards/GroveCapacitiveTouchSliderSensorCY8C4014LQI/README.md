@@ -1,12 +1,12 @@
 # Grove Capacitive Touch Slider Sensor CY8C4014LQI
 
-Detailed Grove **Input** board model with a Grove CapacitiveTouchSliderSensorCY8C4014LQI controller controller,
+Detailed Grove **Input** board model with a CY8C4014 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove CapacitiveTouchSliderSensorCY8C4014LQI controller` (MPN: `GROVE-GROVECAPACITIVETOUCHSLIDERSENSORCY8C4014LQI`)
+- Primary part: `CY8C4014` (MPN: `CY8C4014`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Capacitive-Touch-Slider-Sensor-CY8C4014LQI.html)
 

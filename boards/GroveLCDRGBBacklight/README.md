@@ -1,12 +1,12 @@
 # Grove - LCD RGB Backlight
 
-Detailed Grove **Display** board model with a Grove LCDRGBBacklight controller controller,
+Detailed Grove **Display** board model with a HD44780 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove LCDRGBBacklight controller` (MPN: `GROVE-GROVELCDRGBBACKLIGHT`)
+- Primary part: `HD44780` (MPN: `HD44780`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

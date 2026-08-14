@@ -9,8 +9,8 @@ export const Grove16X2LCDBlackOnRed = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-16-x-2-LCD-Black-on-Red.html",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove 16X2LCDBlackOnRed controller",
-      manufacturerPartNumber: "GROVE-GROVE16X2LCDBLACKONRED",
+      primaryModel: "HD44780",
+      manufacturerPartNumber: "HD44780",
       powerVoltage: "5V",
     }}
   />

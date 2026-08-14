@@ -9,8 +9,8 @@ export const GroveVibrationMotor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove VibrationMotor controller",
-      manufacturerPartNumber: "GROVE-GROVEVIBRATIONMOTOR",
+      primaryModel: "DRV2605",
+      manufacturerPartNumber: "DRV2605",
       powerVoltage: "5V",
     }}
   />

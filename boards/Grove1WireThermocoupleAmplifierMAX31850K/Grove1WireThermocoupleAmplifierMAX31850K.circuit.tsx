@@ -9,8 +9,8 @@ export const Grove1WireThermocoupleAmplifierMAX31850K = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove 1WireThermocoupleAmplifierMAX31850K controller",
-      manufacturerPartNumber: "GROVE-GROVE1WIRETHERMOCOUPLEAMPLIFIERMAX31850K",
+      primaryModel: "MAX31850K",
+      manufacturerPartNumber: "MAX31850K",
       powerVoltage: "5V",
     }}
   />

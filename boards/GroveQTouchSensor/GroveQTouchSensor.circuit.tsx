@@ -9,8 +9,8 @@ export const GroveQTouchSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Q-Touch-Sensor.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove QTouchSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEQTOUCHSENSOR",
+      primaryModel: "AT42QT1070",
+      manufacturerPartNumber: "AT42QT1070",
       powerVoltage: "5V",
     }}
   />

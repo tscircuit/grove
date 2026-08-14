@@ -1,12 +1,12 @@
 # Grove - Ultrasonic Ranger
 
-Detailed Grove **Proximity** board model with a Grove UltrasonicRanger2 controller controller,
+Detailed Grove **Proximity** board model with a HC-SR04 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `utility`
-- Primary part: `Grove UltrasonicRanger2 controller` (MPN: `GROVE-GROVEULTRASONICRANGER2`)
+- Board family: `sensor`
+- Primary part: `HC-SR04` (MPN: `HC-SR04`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

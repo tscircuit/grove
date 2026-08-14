@@ -9,8 +9,8 @@ export const GroveSolidStateRelayV2 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Solid-State-Relay-V2-p-3128.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove SolidStateRelayV2 controller",
-      manufacturerPartNumber: "GROVE-GROVESOLIDSTATERELAYV2",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

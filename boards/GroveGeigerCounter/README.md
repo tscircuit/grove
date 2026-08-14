@@ -1,12 +1,12 @@
 # Grove Geiger Counter
 
-Detailed Grove **Catalogue** board model with a Grove GeigerCounter controller controller,
+Detailed Grove **Catalogue** board model with a M4011 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove GeigerCounter controller` (MPN: `GROVE-GROVEGEIGERCOUNTER`)
+- Primary part: `M4011` (MPN: `M4011`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Geiger-Counter-p-867.html)
 

@@ -7,7 +7,7 @@ export const GroveLEDMatrixDriverHT16K33 = () => (
       title: "Grove - LED Matrix Driver (HT16K33)",
       category: "LED",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
-      interfaceKind: "i2c",
+      interfaceKind: "digital",
       detailKind: "display",
       primaryModel: "HT16K33",
       manufacturerPartNumber: "HT16K33",

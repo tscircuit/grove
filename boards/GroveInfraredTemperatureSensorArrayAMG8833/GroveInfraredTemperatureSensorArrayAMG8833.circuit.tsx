@@ -9,8 +9,8 @@ export const GroveInfraredTemperatureSensorArrayAMG8833 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove InfraredTemperatureSensorArrayAMG8833 controller",
-      manufacturerPartNumber: "GROVE-GROVEINFRAREDTEMPERATURESENSORARRAYAMG8833",
+      primaryModel: "AMG8833",
+      manufacturerPartNumber: "AMG8833",
       powerVoltage: "5V",
     }}
   />

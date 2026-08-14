@@ -9,8 +9,8 @@ export const GroveGroveRoundForceSensorFSR402 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove GroveRoundForceSensorFSR402 controller",
-      manufacturerPartNumber: "GROVE-GROVEGROVEROUNDFORCESENSORFSR402",
+      primaryModel: "FSR402",
+      manufacturerPartNumber: "FSR402",
       powerVoltage: "5V",
     }}
   />

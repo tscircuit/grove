@@ -9,8 +9,8 @@ export const GroveRTCDS1307 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-RTC-DS1307.html",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove RTCDS1307 controller",
-      manufacturerPartNumber: "GROVE-GROVERTCDS1307",
+      primaryModel: "DS1307",
+      manufacturerPartNumber: "DS1307",
       powerVoltage: "5V",
     }}
   />

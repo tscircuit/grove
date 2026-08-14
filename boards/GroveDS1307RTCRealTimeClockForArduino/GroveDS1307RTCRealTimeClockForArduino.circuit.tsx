@@ -9,8 +9,8 @@ export const GroveDS1307RTCRealTimeClockForArduino = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove DS1307RTCRealTimeClockForArduino controller",
-      manufacturerPartNumber: "GROVE-GROVEDS1307RTCREALTIMECLOCKFORARDUINO",
+      primaryModel: "DS1307",
+      manufacturerPartNumber: "DS1307",
       powerVoltage: "5V",
     }}
   />

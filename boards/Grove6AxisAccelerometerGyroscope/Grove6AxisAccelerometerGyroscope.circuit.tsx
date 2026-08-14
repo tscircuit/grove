@@ -9,8 +9,8 @@ export const Grove6AxisAccelerometerGyroscope = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 6AxisAccelerometerGyroscope controller",
-      manufacturerPartNumber: "GROVE-GROVE6AXISACCELEROMETERGYROSCOPE",
+      primaryModel: "LSM6DS3",
+      manufacturerPartNumber: "LSM6DS3",
       powerVoltage: "5V",
     }}
   />

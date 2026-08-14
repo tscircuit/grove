@@ -1,12 +1,12 @@
 # Grove LED Matrix Driver v1 0
 
-Detailed Grove **Display** board model with a Grove LEDMatrixDriverV10 controller controller,
+Detailed Grove **Display** board model with a P9813 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `analog`
+- Interface: `digital`
 - Board family: `display`
-- Primary part: `Grove LEDMatrixDriverV10 controller` (MPN: `GROVE-GROVELEDMATRIXDRIVERV10`)
+- Primary part: `P9813` (MPN: `P9813`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-LED-Matrix-Driver-v1-0.html)
 

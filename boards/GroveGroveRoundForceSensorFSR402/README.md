@@ -1,12 +1,12 @@
 # Grove - Grove - Round Force Sensor FSR402
 
-Detailed Grove **Touch** board model with a Grove GroveRoundForceSensorFSR402 controller controller,
+Detailed Grove **Touch** board model with a FSR402 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove GroveRoundForceSensorFSR402 controller` (MPN: `GROVE-GROVEGROVEROUNDFORCESENSORFSR402`)
+- Primary part: `FSR402` (MPN: `FSR402`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -1,12 +1,12 @@
 # Grove Serial Camera
 
-Detailed Grove **Communications** board model with a Grove SerialCamera controller controller,
+Detailed Grove **Communications** board model with a VC0706 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove SerialCamera controller` (MPN: `GROVE-GROVESERIALCAMERA`)
+- Primary part: `VC0706` (MPN: `VC0706`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Serial-Camera-p-945.html)
 

@@ -9,8 +9,8 @@ export const GroveScrewTerminal = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove ScrewTerminal controller",
-      manufacturerPartNumber: "GROVE-GROVESCREWTERMINAL",
+      primaryModel: "Screw-Terminal",
+      manufacturerPartNumber: "Screw-Terminal",
       powerVoltage: "5V",
     }}
   />

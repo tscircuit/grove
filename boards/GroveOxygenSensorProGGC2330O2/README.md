@@ -1,12 +1,12 @@
 # Grove - Oxygen Sensor Pro(GGC2330-O2)
 
-Detailed Grove **Gas** board model with a Grove OxygenSensorProGGC2330O2 controller controller,
+Detailed Grove **Gas** board model with a GGC2330-O2 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove OxygenSensorProGGC2330O2 controller` (MPN: `GROVE-GROVEOXYGENSENSORPROGGC2330O2`)
+- Primary part: `GGC2330-O2` (MPN: `GGC2330-O2`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

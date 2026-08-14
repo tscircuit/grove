@@ -10,7 +10,7 @@ export const GroveTempHumiSensorSHT40 = () => (
       interfaceKind: "i2c",
       detailKind: "sensor",
       primaryModel: "SHT4x",
-      manufacturerPartNumber: "GROVE-GROVETEMPHUMISENSORSHT40",
+      manufacturerPartNumber: "SHT4x",
       powerVoltage: "5V",
     }}
   />

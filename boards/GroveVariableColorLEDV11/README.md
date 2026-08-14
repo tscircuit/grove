@@ -1,12 +1,12 @@
 # Grove Variable Color LED V1 1
 
-Detailed Grove **Light & LED** board model with a Grove VariableColorLEDV11 controller controller,
+Detailed Grove **Light & LED** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `uart`
+- Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove VariableColorLEDV11 controller` (MPN: `GROVE-GROVEVARIABLECOLORLEDV11`)
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Variable-Color-LED-V1-1.html)
 

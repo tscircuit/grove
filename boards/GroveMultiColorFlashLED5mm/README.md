@@ -1,12 +1,12 @@
 # Grove Multi Color Flash LED 5mm
 
-Detailed Grove **Light & LED** board model with a Grove MultiColorFlashLED5mm controller controller,
+Detailed Grove **Light & LED** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove MultiColorFlashLED5mm controller` (MPN: `GROVE-GROVEMULTICOLORFLASHLED5MM`)
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
 

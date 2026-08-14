@@ -1,12 +1,12 @@
 # Grove - Tilt Switch
 
-Detailed Grove **Motion** board model with a Grove TiltSwitch controller controller,
+Detailed Grove **Motion** board model with a SW-200D controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove TiltSwitch controller` (MPN: `GROVE-GROVETILTSWITCH`)
+- Primary part: `SW-200D` (MPN: `SW-200D`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

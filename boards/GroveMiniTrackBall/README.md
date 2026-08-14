@@ -1,12 +1,12 @@
 # Grove Mini Track Ball
 
-Detailed Grove **Catalogue** board model with a Grove MiniTrackBall controller controller,
+Detailed Grove **Catalogue** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove MiniTrackBall controller` (MPN: `GROVE-GROVEMINITRACKBALL`)
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Mini-Track-Ball.html)
 

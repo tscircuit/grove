@@ -9,8 +9,8 @@ export const GroveBarometerSensorBMP18 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Barometer-Sensor-BMP18-p-1840.html",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove BarometerSensorBMP18 controller",
-      manufacturerPartNumber: "GROVE-GROVEBAROMETERSENSORBMP18",
+      primaryModel: "BMP180",
+      manufacturerPartNumber: "BMP180",
       powerVoltage: "5V",
     }}
   />

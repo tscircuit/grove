@@ -1,12 +1,12 @@
 # Grove LoRa Radio 433MHz
 
-Detailed Grove **Communications** board model with a Grove LoRaRadio433MHz controller controller,
+Detailed Grove **Communications** board model with a RFM95 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove LoRaRadio433MHz controller` (MPN: `GROVE-GROVELORARADIO433MHZ`)
+- Primary part: `RFM95` (MPN: `RFM95`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-LoRa-Radio-433MHz-p-2777.html)
 

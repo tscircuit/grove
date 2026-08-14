@@ -9,8 +9,8 @@ export const GroveACVoltageSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-AC-Voltage-sensor-p-5540.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove ACVoltageSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEACVOLTAGESENSOR",
+      primaryModel: "ZMPT101B",
+      manufacturerPartNumber: "ZMPT101B",
       powerVoltage: "5V",
     }}
   />

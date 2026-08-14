@@ -1,12 +1,12 @@
 # Grove BlinkM
 
-Detailed Grove **Catalogue** board model with a Grove BlinkM controller controller,
+Detailed Grove **Catalogue** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove BlinkM controller` (MPN: `GROVE-GROVEBLINKM`)
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-BlinkM-p-826.html)
 

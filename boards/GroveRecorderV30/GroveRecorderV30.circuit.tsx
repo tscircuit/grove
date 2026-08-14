@@ -9,8 +9,8 @@ export const GroveRecorderV30 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Recorder-v3-0.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove RecorderV30 controller",
-      manufacturerPartNumber: "GROVE-GROVERECORDERV30",
+      primaryModel: "ISD1820P",
+      manufacturerPartNumber: "ISD1820P",
       powerVoltage: "5V",
     }}
   />

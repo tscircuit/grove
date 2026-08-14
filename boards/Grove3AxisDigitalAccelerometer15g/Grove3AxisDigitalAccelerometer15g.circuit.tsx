@@ -9,8 +9,8 @@ export const Grove3AxisDigitalAccelerometer15g = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-1-5g.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 3AxisDigitalAccelerometer15g controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITALACCELEROMETER15G",
+      primaryModel: "MMA7660FC",
+      manufacturerPartNumber: "MMA7660FC",
       powerVoltage: "5V",
     }}
   />

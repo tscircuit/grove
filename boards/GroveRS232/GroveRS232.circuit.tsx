@@ -9,8 +9,8 @@ export const GroveRS232 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-RS232.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove RS232 controller",
-      manufacturerPartNumber: "GROVE-GROVERS232",
+      primaryModel: "MAX3232",
+      manufacturerPartNumber: "MAX3232",
       powerVoltage: "5V",
     }}
   />

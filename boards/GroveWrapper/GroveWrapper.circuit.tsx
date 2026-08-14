@@ -9,8 +9,8 @@ export const GroveWrapper = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove Wrapper controller",
-      manufacturerPartNumber: "GROVE-GROVEWRAPPER",
+      primaryModel: "Grove-Wrapper",
+      manufacturerPartNumber: "Grove-Wrapper",
       powerVoltage: "5V",
     }}
   />

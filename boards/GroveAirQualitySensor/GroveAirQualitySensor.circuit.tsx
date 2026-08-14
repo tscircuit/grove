@@ -9,8 +9,8 @@ export const GroveAirQualitySensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Air-quality-sensor-p-1065.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove AirQualitySensor controller",
-      manufacturerPartNumber: "GROVE-GROVEAIRQUALITYSENSOR",
+      primaryModel: "SX1301",
+      manufacturerPartNumber: "SX1301",
       powerVoltage: "5V",
     }}
   />

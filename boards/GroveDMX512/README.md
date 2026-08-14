@@ -1,12 +1,12 @@
 # Grove - DMX512
 
-Detailed Grove **Other Standard Protocol** board model with a Grove DMX512 controller controller,
+Detailed Grove **Other Standard Protocol** board model with a SN75176 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove DMX512 controller` (MPN: `GROVE-GROVEDMX512`)
+- Primary part: `SN75176` (MPN: `SN75176`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

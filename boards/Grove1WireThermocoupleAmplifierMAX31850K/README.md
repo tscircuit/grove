@@ -1,12 +1,12 @@
 # Grove - 1-Wire Thermocouple Amplifier(MAX31850K)
 
-Detailed Grove **Temperature** board model with a Grove 1WireThermocoupleAmplifierMAX31850K controller controller,
+Detailed Grove **Temperature** board model with a MAX31850K controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove 1WireThermocoupleAmplifierMAX31850K controller` (MPN: `GROVE-GROVE1WIRETHERMOCOUPLEAMPLIFIERMAX31850K`)
+- Primary part: `MAX31850K` (MPN: `MAX31850K`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

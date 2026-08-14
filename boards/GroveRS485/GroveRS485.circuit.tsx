@@ -9,8 +9,8 @@ export const GroveRS485 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-RS485-p-2924.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove RS485 controller",
-      manufacturerPartNumber: "GROVE-GROVERS485",
+      primaryModel: "SN75176",
+      manufacturerPartNumber: "SN75176",
       powerVoltage: "5V",
     }}
   />

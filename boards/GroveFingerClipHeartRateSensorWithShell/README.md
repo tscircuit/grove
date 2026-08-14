@@ -1,12 +1,12 @@
 # Grove Finger clip Heart Rate Sensor with shell
 
-Detailed Grove **Sensor** board model with a Grove FingerClipHeartRateSensorWithShell controller controller,
+Detailed Grove **Sensor** board model with a MAX30100 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove FingerClipHeartRateSensorWithShell controller` (MPN: `GROVE-GROVEFINGERCLIPHEARTRATESENSORWITHSHELL`)
+- Primary part: `MAX30100` (MPN: `MAX30100`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Finger-clip-Heart-Rate-Sensor-with-shell.html)
 

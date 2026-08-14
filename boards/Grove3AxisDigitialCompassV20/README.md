@@ -1,12 +1,12 @@
 # Grove - 3-Axis Digitial Compass v2.0
 
-Detailed Grove **Accelerometer** board model with a Grove 3AxisDigitialCompassV20 controller controller,
+Detailed Grove **Accelerometer** board model with a HMC5883 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisDigitialCompassV20 controller` (MPN: `GROVE-GROVE3AXISDIGITIALCOMPASSV20`)
+- Primary part: `HMC5883` (MPN: `HMC5883`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -9,8 +9,8 @@ export const GroveSpeechRecognizer = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Speech-Recognizer.html",
       interfaceKind: "uart",
       detailKind: "utility",
-      primaryModel: "Grove SpeechRecognizer controller",
-      manufacturerPartNumber: "GROVE-GROVESPEECHRECOGNIZER",
+      primaryModel: "M007",
+      manufacturerPartNumber: "M007",
       powerVoltage: "5V",
     }}
   />

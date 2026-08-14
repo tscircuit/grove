@@ -1,12 +1,12 @@
 # Grove Vibration Sensor SW 420
 
-Detailed Grove **Sensor** board model with a Grove VibrationSensorSW420 controller controller,
+Detailed Grove **Sensor** board model with a SW-420 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove VibrationSensorSW420 controller` (MPN: `GROVE-GROVEVIBRATIONSENSORSW420`)
+- Primary part: `SW-420` (MPN: `SW-420`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Vibration-Sensor-SW-420.html)
 

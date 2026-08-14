@@ -9,8 +9,8 @@ export const GroveSmartIRGestureSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Smart-IR-Gesture-Sensor-p-5721.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove SmartIRGestureSensor controller",
-      manufacturerPartNumber: "GROVE-GROVESMARTIRGESTURESENSOR",
+      primaryModel: "PAJ7620",
+      manufacturerPartNumber: "PAJ7620",
       powerVoltage: "5V",
     }}
   />

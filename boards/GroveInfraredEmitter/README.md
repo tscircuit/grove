@@ -1,12 +1,12 @@
 # Grove - Infrared Emitter
 
-Detailed Grove **Actuator** board model with a Grove InfraredEmitter controller controller,
+Detailed Grove **Actuator** board model with a IR333-A controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove InfraredEmitter controller` (MPN: `GROVE-GROVEINFRAREDEMITTER`)
+- Primary part: `IR333-A` (MPN: `IR333-A`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

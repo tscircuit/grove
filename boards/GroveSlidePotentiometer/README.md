@@ -1,12 +1,12 @@
 # Grove - Slide Potentiometer
 
-Detailed Grove **Motion** board model with a Grove SlidePotentiometer controller controller,
+Detailed Grove **Motion** board model with a WH09-2-103 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove SlidePotentiometer controller` (MPN: `GROVE-GROVESLIDEPOTENTIOMETER`)
+- Primary part: `WH09-2-103` (MPN: `WH09-2-103`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

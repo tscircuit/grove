@@ -1,12 +1,12 @@
 # Grove - BLE v1
 
-Detailed Grove **Bluetooth** board model with a Grove BLEV1 controller controller,
+Detailed Grove **Bluetooth** board model with a HM-11 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove BLEV1 controller` (MPN: `GROVE-GROVEBLEV1`)
+- Primary part: `HM-11` (MPN: `HM-11`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

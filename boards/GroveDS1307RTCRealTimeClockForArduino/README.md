@@ -1,12 +1,12 @@
 # Grove - DS1307 RTC (Real Time Clock) for Arduino
 
-Detailed Grove **Time** board model with a Grove DS1307RTCRealTimeClockForArduino controller controller,
+Detailed Grove **Time** board model with a DS1307 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove DS1307RTCRealTimeClockForArduino controller` (MPN: `GROVE-GROVEDS1307RTCREALTIMECLOCKFORARDUINO`)
+- Primary part: `DS1307` (MPN: `DS1307`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

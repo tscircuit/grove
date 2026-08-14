@@ -1,12 +1,12 @@
 # Grove Carbon Dioxide Sensor MH Z16
 
-Detailed Grove **Sensor** board model with a Grove CarbonDioxideSensorMHZ16 controller controller,
+Detailed Grove **Sensor** board model with a MH-Z16 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove CarbonDioxideSensorMHZ16 controller` (MPN: `GROVE-GROVECARBONDIOXIDESENSORMHZ16`)
+- Primary part: `MH-Z16` (MPN: `MH-Z16`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Carbon-Dioxide-Sensor-MH-Z16.html)
 

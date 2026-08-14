@@ -9,8 +9,8 @@ export const GroveSpeakerPlus = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove SpeakerPlus controller",
-      manufacturerPartNumber: "GROVE-GROVESPEAKERPLUS",
+      primaryModel: "LM386",
+      manufacturerPartNumber: "LM386",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove Recorder v3 0
 
-Detailed Grove **Catalogue** board model with a Grove RecorderV30 controller controller,
+Detailed Grove **Catalogue** board model with a ISD1820P controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove RecorderV30 controller` (MPN: `GROVE-GROVERECORDERV30`)
+- Primary part: `ISD1820P` (MPN: `ISD1820P`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Recorder-v3-0.html)
 

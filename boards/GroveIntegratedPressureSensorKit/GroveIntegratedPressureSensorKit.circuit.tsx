@@ -9,8 +9,8 @@ export const GroveIntegratedPressureSensorKit = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove IntegratedPressureSensorKit controller",
-      manufacturerPartNumber: "GROVE-GROVEINTEGRATEDPRESSURESENSORKIT",
+      primaryModel: "BMP180",
+      manufacturerPartNumber: "BMP180",
       powerVoltage: "5V",
     }}
   />

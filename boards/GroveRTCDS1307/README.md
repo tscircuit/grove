@@ -1,12 +1,12 @@
 # Grove RTC DS1307
 
-Detailed Grove **Catalogue** board model with a Grove RTCDS1307 controller controller,
+Detailed Grove **Catalogue** board model with a DS1307 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `utility`
-- Primary part: `Grove RTCDS1307 controller` (MPN: `GROVE-GROVERTCDS1307`)
+- Primary part: `DS1307` (MPN: `DS1307`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-RTC-DS1307.html)
 

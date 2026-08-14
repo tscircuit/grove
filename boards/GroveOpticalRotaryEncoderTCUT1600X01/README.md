@@ -1,12 +1,12 @@
 # Grove - Optical Rotary Encoder(TCUT1600X01)
 
-Detailed Grove **Motion** board model with a Grove OpticalRotaryEncoderTCUT1600X01 controller controller,
+Detailed Grove **Motion** board model with a TCUT1600X01 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove OpticalRotaryEncoderTCUT1600X01 controller` (MPN: `GROVE-GROVEOPTICALROTARYENCODERTCUT1600X01`)
+- Primary part: `TCUT1600X01` (MPN: `TCUT1600X01`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -1,12 +1,12 @@
 # Grove - Circular LED
 
-Detailed Grove **LED** board model with a Grove CircularLED controller controller,
+Detailed Grove **LED** board model with a MY9221 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove CircularLED controller` (MPN: `GROVE-GROVECIRCULARLED`)
+- Primary part: `MY9221` (MPN: `MY9221`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

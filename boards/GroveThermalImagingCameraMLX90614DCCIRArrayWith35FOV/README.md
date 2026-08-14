@@ -1,12 +1,12 @@
 # Grove Thermal Imaging Camera MLX90614 DCC IR Array with 35 FOV
 
-Detailed Grove **Catalogue** board model with a Grove ThermalImagingCameraMLX90614DCCIRArrayWith35FOV controller controller,
+Detailed Grove **Catalogue** board model with a MLX90614 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `communications`
-- Primary part: `Grove ThermalImagingCameraMLX90614DCCIRArrayWith35FOV controller` (MPN: `GROVE-GROVETHERMALIMAGINGCAMERAMLX90614DCCIRARRAYWITH35FOV`)
+- Primary part: `MLX90614` (MPN: `MLX90614`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Thermal-Imaging-Camera-MLX90614-DCC-IR-Array-with-35-FOV-p-4657.html)
 

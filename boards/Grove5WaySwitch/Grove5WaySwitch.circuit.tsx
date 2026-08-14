@@ -9,8 +9,8 @@ export const Grove5WaySwitch = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-5-Way-Switch.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove 5WaySwitch controller",
-      manufacturerPartNumber: "GROVE-GROVE5WAYSWITCH",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

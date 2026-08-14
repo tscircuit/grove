@@ -9,8 +9,8 @@ export const Grove3AxisDigitialCompassV20 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove 3AxisDigitialCompassV20 controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITIALCOMPASSV20",
+      primaryModel: "HMC5883",
+      manufacturerPartNumber: "HMC5883",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveVisionAIModule = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove VisionAIModule controller",
-      manufacturerPartNumber: "GROVE-GROVEVISIONAIMODULE",
+      primaryModel: "Himax WE1",
+      manufacturerPartNumber: "Himax WE1",
       powerVoltage: "5V",
     }}
   />

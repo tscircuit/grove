@@ -9,8 +9,8 @@ export const GroveI2CADC = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "i2c",
       detailKind: "utility",
-      primaryModel: "Grove I2CADC controller",
-      manufacturerPartNumber: "GROVE-GROVEI2CADC",
+      primaryModel: "ADC121C021",
+      manufacturerPartNumber: "ADC121C021",
       powerVoltage: "5V",
     }}
   />

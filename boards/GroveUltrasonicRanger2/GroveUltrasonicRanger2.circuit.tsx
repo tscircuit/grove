@@ -8,9 +8,9 @@ export const GroveUltrasonicRanger2 = () => (
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
-      detailKind: "utility",
-      primaryModel: "Grove UltrasonicRanger2 controller",
-      manufacturerPartNumber: "GROVE-GROVEULTRASONICRANGER2",
+      detailKind: "sensor",
+      primaryModel: "HC-SR04",
+      manufacturerPartNumber: "HC-SR04",
       powerVoltage: "5V",
     }}
   />

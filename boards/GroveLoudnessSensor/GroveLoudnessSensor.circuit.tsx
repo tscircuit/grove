@@ -9,8 +9,8 @@ export const GroveLoudnessSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove LoudnessSensor controller",
-      manufacturerPartNumber: "GROVE-GROVELOUDNESSSENSOR",
+      primaryModel: "LM358",
+      manufacturerPartNumber: "LM358",
       powerVoltage: "5V",
     }}
   />

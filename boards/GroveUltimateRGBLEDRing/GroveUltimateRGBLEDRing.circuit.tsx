@@ -9,8 +9,8 @@ export const GroveUltimateRGBLEDRing = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Ultimate-RGB-LED-Ring-p-4203.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove UltimateRGBLEDRing controller",
-      manufacturerPartNumber: "GROVE-GROVEULTIMATERGBLEDRING",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

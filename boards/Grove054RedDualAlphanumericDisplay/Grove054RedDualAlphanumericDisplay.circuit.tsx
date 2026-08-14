@@ -9,8 +9,8 @@ export const Grove054RedDualAlphanumericDisplay = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-0-54-Red-Dual-Alphanumeric-Display-p-4031.html",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove 054RedDualAlphanumericDisplay controller",
-      manufacturerPartNumber: "GROVE-GROVE054REDDUALALPHANUMERICDISPLAY",
+      primaryModel: "TM1637",
+      manufacturerPartNumber: "TM1637",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove RS232
 
-Detailed Grove **Communications** board model with a Grove RS232 controller controller,
+Detailed Grove **Communications** board model with a MAX3232 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove RS232 controller` (MPN: `GROVE-GROVERS232`)
+- Primary part: `MAX3232` (MPN: `MAX3232`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-RS232.html)
 

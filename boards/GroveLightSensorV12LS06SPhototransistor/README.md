@@ -1,12 +1,12 @@
 # Grove Light Sensor v1 2 LS06 S phototransistor
 
-Detailed Grove **Light & LED** board model with a Grove LightSensorV12LS06SPhototransistor controller controller,
+Detailed Grove **Light & LED** board model with a GL5528 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
-- Board family: `actuator`
-- Primary part: `Grove LightSensorV12LS06SPhototransistor controller` (MPN: `GROVE-GROVELIGHTSENSORV12LS06SPHOTOTRANSISTOR`)
+- Board family: `sensor`
+- Primary part: `GL5528` (MPN: `GL5528`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html)
 

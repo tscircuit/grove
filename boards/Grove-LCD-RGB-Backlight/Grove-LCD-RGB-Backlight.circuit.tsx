@@ -4,6 +4,7 @@ const LcdPanel = () => (
   <chip
     name="LCD1"
     displayName="16x2 RGB LCD"
+    manufacturerPartNumber="JHD1313"
     pinLabels={{
       pin1: "GND",
       pin2: "VCC",
@@ -74,6 +75,7 @@ export const GroveLcdRgbBacklight = () => (
     <chip
       name="U1"
       displayName="JHD1313 LCD controller"
+      manufacturerPartNumber="JHD1313"
       pinLabels={{
         pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW",
         pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST",
@@ -91,6 +93,7 @@ export const GroveLcdRgbBacklight = () => (
     <chip
       name="U2"
       displayName="SGM31323 RGB driver"
+      manufacturerPartNumber="SGM31323"
       pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }}
       pinAttributes={{
         GND: { requiresGround: true }, VCC: { requiresPower: true, requiresVoltage: "5V" },

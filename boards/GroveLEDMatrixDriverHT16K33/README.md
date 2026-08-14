@@ -4,7 +4,7 @@ Detailed Grove **LED** board model with a HT16K33 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
-- Interface: `i2c`
+- Interface: `digital`
 - Board family: `display`
 - Primary part: `HT16K33` (MPN: `HT16K33`)
 - Power rail: `5V`

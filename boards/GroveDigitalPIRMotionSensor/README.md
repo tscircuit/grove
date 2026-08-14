@@ -1,12 +1,12 @@
 # Grove Digital PIR Motion Sensor
 
-Detailed Grove **Sensor** board model with a Grove DigitalPIRMotionSensor controller controller,
+Detailed Grove **Sensor** board model with a BISS0001 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove DigitalPIRMotionSensor controller` (MPN: `GROVE-GROVEDIGITALPIRMOTIONSENSOR`)
+- Primary part: `BISS0001` (MPN: `BISS0001`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Digital-PIR-Motion-Sensor-p-4524.html)
 

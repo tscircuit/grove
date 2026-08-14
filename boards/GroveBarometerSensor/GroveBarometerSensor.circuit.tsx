@@ -9,8 +9,8 @@ export const GroveBarometerSensor = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Barometer-Sensor.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove BarometerSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEBAROMETERSENSOR",
+      primaryModel: "BMP180",
+      manufacturerPartNumber: "BMP180",
       powerVoltage: "5V",
     }}
   />

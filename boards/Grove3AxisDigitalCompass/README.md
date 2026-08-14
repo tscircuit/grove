@@ -1,12 +1,12 @@
 # Grove 3 Axis Digital Compass
 
-Detailed Grove **Catalogue** board model with a Grove 3AxisDigitalCompass controller controller,
+Detailed Grove **Catalogue** board model with a HMC5883 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove 3AxisDigitalCompass controller` (MPN: `GROVE-GROVE3AXISDIGITALCOMPASS`)
+- Primary part: `HMC5883` (MPN: `HMC5883`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Digital-Compass.html)
 

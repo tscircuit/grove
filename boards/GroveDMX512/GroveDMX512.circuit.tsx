@@ -9,8 +9,8 @@ export const GroveDMX512 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove DMX512 controller",
-      manufacturerPartNumber: "GROVE-GROVEDMX512",
+      primaryModel: "SN75176",
+      manufacturerPartNumber: "SN75176",
       powerVoltage: "5V",
     }}
   />

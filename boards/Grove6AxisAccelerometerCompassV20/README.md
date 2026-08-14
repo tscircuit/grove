@@ -1,12 +1,12 @@
 # Grove 6 Axis Accelerometer Compass v2 0
 
-Detailed Grove **Sensor** board model with a Grove 6AxisAccelerometerCompassV20 controller controller,
+Detailed Grove **Sensor** board model with a LSM6DS3 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 6AxisAccelerometerCompassV20 controller` (MPN: `GROVE-GROVE6AXISACCELEROMETERCOMPASSV20`)
+- Primary part: `LSM6DS3` (MPN: `LSM6DS3`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer-Compass-v2-0.html)
 

@@ -9,8 +9,8 @@ export const GroveD7SVibrationSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove D7SVibrationSensor controller",
-      manufacturerPartNumber: "GROVE-GROVED7SVIBRATIONSENSOR",
+      primaryModel: "D7S",
+      manufacturerPartNumber: "D7S",
       powerVoltage: "5V",
     }}
   />

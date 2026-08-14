@@ -9,8 +9,8 @@ export const Grove4ChannelSPDTRelay = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove 4ChannelSPDTRelay controller",
-      manufacturerPartNumber: "GROVE-GROVE4CHANNELSPDTRELAY",
+      primaryModel: "HLS8L-DC3V-S-C",
+      manufacturerPartNumber: "HLS8L-DC3V-S-C",
       powerVoltage: "5V",
     }}
   />

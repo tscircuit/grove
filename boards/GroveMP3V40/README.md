@@ -1,12 +1,12 @@
 # Grove - MP3 v4.0
 
-Detailed Grove **Actuator** board model with a Grove MP3V40 controller controller,
+Detailed Grove **Actuator** board model with a WT5001-48L controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `utility`
-- Primary part: `Grove MP3V40 controller` (MPN: `GROVE-GROVEMP3V40`)
+- Primary part: `WT5001-48L` (MPN: `WT5001-48L`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

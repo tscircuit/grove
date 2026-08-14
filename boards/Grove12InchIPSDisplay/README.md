@@ -1,12 +1,12 @@
 # Grove 1.2-inch IPS Display
 
-Detailed Grove **Display** board model with a Grove 12InchIPSDisplay controller controller,
+Detailed Grove **Display** board model with a ST7789 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove 12InchIPSDisplay controller` (MPN: `GROVE-GROVE12INCHIPSDISPLAY`)
+- Primary part: `ST7789` (MPN: `ST7789`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

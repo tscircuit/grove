@@ -9,8 +9,8 @@ export const Grove2ChannelInductiveSensorLDC1612 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
       detailKind: "input",
-      primaryModel: "Grove 2ChannelInductiveSensorLDC1612 controller",
-      manufacturerPartNumber: "GROVE-GROVE2CHANNELINDUCTIVESENSORLDC1612",
+      primaryModel: "LDC1612",
+      manufacturerPartNumber: "LDC1612",
       powerVoltage: "5V",
     }}
   />

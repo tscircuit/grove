@@ -9,8 +9,8 @@ export const GroveHighTemperatureSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove HighTemperatureSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEHIGHTEMPERATURESENSOR",
+      primaryModel: "CJ432",
+      manufacturerPartNumber: "CJ432",
       powerVoltage: "5V",
     }}
   />

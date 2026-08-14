@@ -1,12 +1,12 @@
 # Grove - Sunlight Sensor
 
-Detailed Grove **Light** board model with a Grove SunlightSensor controller controller,
+Detailed Grove **Light** board model with a GL5528 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove SunlightSensor controller` (MPN: `GROVE-GROVESUNLIGHTSENSOR`)
+- Primary part: `GL5528` (MPN: `GL5528`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

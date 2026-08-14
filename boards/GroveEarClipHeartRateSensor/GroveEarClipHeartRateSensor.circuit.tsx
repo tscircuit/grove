@@ -9,8 +9,8 @@ export const GroveEarClipHeartRateSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove EarClipHeartRateSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEEARCLIPHEARTRATESENSOR",
+      primaryModel: "MAX30100",
+      manufacturerPartNumber: "MAX30100",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveCapacitiveFingerprintScanner = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Capacitive-Fingerprint-Scanner-p-4363.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove CapacitiveFingerprintScanner controller",
-      manufacturerPartNumber: "GROVE-GROVECAPACITIVEFINGERPRINTSCANNER",
+      primaryModel: "AS608",
+      manufacturerPartNumber: "AS608",
       powerVoltage: "5V",
     }}
   />

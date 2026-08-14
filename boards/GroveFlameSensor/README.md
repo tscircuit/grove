@@ -1,12 +1,12 @@
 # Grove - Flame Sensor
 
-Detailed Grove **Light** board model with a Grove FlameSensor controller controller,
+Detailed Grove **Light** board model with a YG1006 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove FlameSensor controller` (MPN: `GROVE-GROVEFLAMESENSOR`)
+- Primary part: `YG1006` (MPN: `YG1006`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

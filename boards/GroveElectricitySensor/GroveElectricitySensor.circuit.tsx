@@ -9,8 +9,8 @@ export const GroveElectricitySensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove ElectricitySensor controller",
-      manufacturerPartNumber: "GROVE-GROVEELECTRICITYSENSOR",
+      primaryModel: "ACS712",
+      manufacturerPartNumber: "ACS712",
       powerVoltage: "5V",
     }}
   />

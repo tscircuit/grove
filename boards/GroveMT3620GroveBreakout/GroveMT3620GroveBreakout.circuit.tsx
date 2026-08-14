@@ -9,8 +9,8 @@ export const GroveMT3620GroveBreakout = () => (
       sourceUrl: "https://www.seeedstudio.com/MT3620-Grove-Breakout-p-4043.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove MT3620GroveBreakout controller",
-      manufacturerPartNumber: "GROVE-GROVEMT3620GROVEBREAKOUT",
+      primaryModel: "MT3620",
+      manufacturerPartNumber: "MT3620",
       powerVoltage: "5V",
     }}
   />

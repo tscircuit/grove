@@ -1,12 +1,12 @@
 # Grove - CO2 Sensor
 
-Detailed Grove **Gas** board model with a Grove CO2Sensor controller controller,
+Detailed Grove **Gas** board model with a MH-Z16 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove CO2Sensor controller` (MPN: `GROVE-GROVECO2SENSOR`)
+- Primary part: `MH-Z16` (MPN: `MH-Z16`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

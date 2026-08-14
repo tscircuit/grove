@@ -9,8 +9,8 @@ export const GroveButtonP = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Button-P.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove ButtonP controller",
-      manufacturerPartNumber: "GROVE-GROVEBUTTONP",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

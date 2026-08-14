@@ -9,8 +9,8 @@ export const GroveWioE5 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "digital",
       detailKind: "communications",
-      primaryModel: "Grove WioE5 controller",
-      manufacturerPartNumber: "GROVE-GROVEWIOE5",
+      primaryModel: "Wio-E5",
+      manufacturerPartNumber: "Wio-E5",
       powerVoltage: "5V",
     }}
   />

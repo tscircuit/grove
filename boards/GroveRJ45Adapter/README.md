@@ -1,12 +1,12 @@
 # Grove - RJ45 Adapter
 
-Detailed Grove **Other Standard Protocol** board model with a Grove RJ45Adapter controller controller,
+Detailed Grove **Other Standard Protocol** board model with a Grove-Prototyping controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove RJ45Adapter controller` (MPN: `GROVE-GROVERJ45ADAPTER`)
+- Primary part: `Grove-Prototyping` (MPN: `Grove-Prototyping`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

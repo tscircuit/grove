@@ -1,12 +1,12 @@
 # MilCandy the Easiest Grove Controller
 
-Detailed Grove **Catalogue** board model with a Grove MilCandyTheEasiestGroveController controller controller,
+Detailed Grove **Catalogue** board model with a ATmega328P controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove MilCandyTheEasiestGroveController controller` (MPN: `GROVE-GROVEMILCANDYTHEEASIESTGROVECONTROLLER`)
+- Primary part: `ATmega328P` (MPN: `ATmega328P`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/MilCandy-the-Easiest-Grove-Controller-p-1104.html)
 

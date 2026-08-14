@@ -1,12 +1,12 @@
 # Grove - Gas Sensor(O₂)
 
-Detailed Grove **Gas** board model with a Grove GasSensorO controller controller,
+Detailed Grove **Gas** board model with a ME3-O2 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove GasSensorO controller` (MPN: `GROVE-GROVEGASSENSORO`)
+- Primary part: `ME3-O2` (MPN: `ME3-O2`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

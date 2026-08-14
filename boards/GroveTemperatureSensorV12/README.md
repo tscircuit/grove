@@ -1,12 +1,12 @@
 # Grove - Temperature Sensor V1.2
 
-Detailed Grove **Temperature** board model with a Grove TemperatureSensorV12 controller controller,
+Detailed Grove **Temperature** board model with a LM358 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TemperatureSensorV12 controller` (MPN: `GROVE-GROVETEMPERATURESENSORV12`)
+- Primary part: `LM358` (MPN: `LM358`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

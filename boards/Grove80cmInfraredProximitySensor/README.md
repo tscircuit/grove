@@ -1,12 +1,12 @@
 # Grove - 80cm Infrared Proximity Sensor
 
-Detailed Grove **Proximity** board model with a Grove 80cmInfraredProximitySensor controller controller,
+Detailed Grove **Proximity** board model with a GP2Y0A21YK controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 80cmInfraredProximitySensor controller` (MPN: `GROVE-GROVE80CMINFRAREDPROXIMITYSENSOR`)
+- Primary part: `GP2Y0A21YK` (MPN: `GP2Y0A21YK`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

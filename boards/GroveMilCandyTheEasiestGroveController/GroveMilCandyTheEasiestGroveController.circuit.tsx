@@ -9,8 +9,8 @@ export const GroveMilCandyTheEasiestGroveController = () => (
       sourceUrl: "https://www.seeedstudio.com/MilCandy-the-Easiest-Grove-Controller-p-1104.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove MilCandyTheEasiestGroveController controller",
-      manufacturerPartNumber: "GROVE-GROVEMILCANDYTHEEASIESTGROVECONTROLLER",
+      primaryModel: "ATmega328P",
+      manufacturerPartNumber: "ATmega328P",
       powerVoltage: "5V",
     }}
   />

@@ -1,12 +1,12 @@
 # Grove - NFC_tag
 
-Detailed Grove **NFC** board model with a Grove NFCTag controller controller,
+Detailed Grove **NFC** board model with a PN532 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `communications`
-- Primary part: `Grove NFCTag controller` (MPN: `GROVE-GROVENFCTAG`)
+- Primary part: `PN532` (MPN: `PN532`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_network_module_intro/)
 

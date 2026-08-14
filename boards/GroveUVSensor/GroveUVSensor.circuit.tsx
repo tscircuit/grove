@@ -9,8 +9,8 @@ export const GroveUVSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove UVSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEUVSENSOR",
+      primaryModel: "GUVA-S12D",
+      manufacturerPartNumber: "GUVA-S12D",
       powerVoltage: "5V",
     }}
   />

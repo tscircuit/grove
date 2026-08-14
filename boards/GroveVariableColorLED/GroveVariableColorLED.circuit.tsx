@@ -7,10 +7,10 @@ export const GroveVariableColorLED = () => (
       title: "Grove Variable Color LED",
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Variable-Color-LED-p-852.html",
-      interfaceKind: "uart",
+      interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove VariableColorLED controller",
-      manufacturerPartNumber: "GROVE-GROVEVARIABLECOLORLED",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

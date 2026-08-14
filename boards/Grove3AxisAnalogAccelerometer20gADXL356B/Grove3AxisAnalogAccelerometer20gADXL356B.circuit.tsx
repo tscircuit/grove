@@ -9,8 +9,8 @@ export const Grove3AxisAnalogAccelerometer20gADXL356B = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Analog-Accelerometer-20g-ADXL356B-p-4004.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove 3AxisAnalogAccelerometer20gADXL356B controller",
-      manufacturerPartNumber: "GROVE-GROVE3AXISANALOGACCELEROMETER20GADXL356B",
+      primaryModel: "ADXL356B",
+      manufacturerPartNumber: "ADXL356B",
       powerVoltage: "5V",
     }}
   />

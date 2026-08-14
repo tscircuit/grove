@@ -9,8 +9,8 @@ export const GrovePurpleLED3mm = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Purple-LED-3mm.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove PurpleLED3mm controller",
-      manufacturerPartNumber: "GROVE-GROVEPURPLELED3MM",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

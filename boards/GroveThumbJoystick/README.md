@@ -1,12 +1,12 @@
 # Grove - Thumb Joystick
 
-Detailed Grove **Switch & Button** board model with a Grove ThumbJoystick controller controller,
+Detailed Grove **Switch & Button** board model with a B3F-1000 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove ThumbJoystick controller` (MPN: `GROVE-GROVETHUMBJOYSTICK`)
+- Primary part: `B3F-1000` (MPN: `B3F-1000`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

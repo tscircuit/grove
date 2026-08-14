@@ -9,8 +9,8 @@ export const GroveLCDRGBBacklight = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove LCDRGBBacklight controller",
-      manufacturerPartNumber: "GROVE-GROVELCDRGBBACKLIGHT",
+      primaryModel: "HD44780",
+      manufacturerPartNumber: "HD44780",
       powerVoltage: "5V",
     }}
   />

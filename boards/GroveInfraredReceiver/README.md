@@ -1,12 +1,12 @@
 # Grove - Infrared Receiver
 
-Detailed Grove **Light** board model with a Grove InfraredReceiver controller controller,
+Detailed Grove **Light** board model with a TSOP38238 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
-- Board family: `sensor`
-- Primary part: `Grove InfraredReceiver controller` (MPN: `GROVE-GROVEINFRAREDRECEIVER`)
+- Board family: `utility`
+- Primary part: `TSOP38238` (MPN: `TSOP38238`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

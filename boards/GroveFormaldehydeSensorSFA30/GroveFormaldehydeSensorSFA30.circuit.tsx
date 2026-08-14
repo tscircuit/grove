@@ -9,8 +9,8 @@ export const GroveFormaldehydeSensorSFA30 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Formaldehyde-Sensor-SFA30-p-5204.html",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove FormaldehydeSensorSFA30 controller",
-      manufacturerPartNumber: "GROVE-GROVEFORMALDEHYDESENSORSFA30",
+      primaryModel: "SFA30",
+      manufacturerPartNumber: "SFA30",
       powerVoltage: "5V",
     }}
   />

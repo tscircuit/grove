@@ -9,8 +9,8 @@ export const Grove6PositionDIPSwitch = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-6-Position-DIP-Switch.html",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove 6PositionDIPSwitch controller",
-      manufacturerPartNumber: "GROVE-GROVE6POSITIONDIPSWITCH",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

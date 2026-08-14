@@ -1,12 +1,12 @@
 # Grove - Servo
 
-Detailed Grove **Actuator** board model with a Grove Servo controller controller,
+Detailed Grove **Actuator** board model with a SG90 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove Servo controller` (MPN: `GROVE-GROVESERVO`)
+- Primary part: `SG90` (MPN: `SG90`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

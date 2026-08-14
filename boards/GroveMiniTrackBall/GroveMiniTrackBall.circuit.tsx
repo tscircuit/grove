@@ -9,8 +9,8 @@ export const GroveMiniTrackBall = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Mini-Track-Ball.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove MiniTrackBall controller",
-      manufacturerPartNumber: "GROVE-GROVEMINITRACKBALL",
+      primaryModel: "B3F-1000",
+      manufacturerPartNumber: "B3F-1000",
       powerVoltage: "5V",
     }}
   />

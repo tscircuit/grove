@@ -7,6 +7,7 @@ export const GroveDigitalPir = () => (
     <chip
       name="U2"
       displayName="AS312 PIR"
+      manufacturerPartNumber="AS312"
       pinLabels={{ pin1: "VDD", pin2: "REL", pin3: "VSS" }}
       pinAttributes={{ VDD: { requiresPower: true, requiresVoltage: "5V" }, REL: { mustBeConnected: true, isGpio: true }, VSS: { requiresGround: true } }}
       footprint="to92"
@@ -16,8 +17,8 @@ export const GroveDigitalPir = () => (
       schY={0}
       schHeight="0.4mm"
     />
-    <chip name="U1" displayName="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-4.5} pcbY={0} schX={-4} schY={3} schHeight="0.4mm" />
-    <mosfet name="Q1" displayName="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={4} pcbY={0} schX={4} schY={-3.5} />
+    <chip name="U1" displayName="XC6206P332MR" manufacturerPartNumber="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-4.5} pcbY={0} schX={-4} schY={3} schHeight="0.4mm" />
+    <mosfet name="Q1" displayName="CJ2102" manufacturerPartNumber="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={4} pcbY={0} schX={4} schY={-3.5} />
     <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={0} pcbY={0} schX={0} schY={-4.5} />
     <resistor name="R2" resistance="4.7k" footprint="0603" pcbX={5} pcbY={-3.5} schX={7} schY={-4.5} />
     <capacitor name="C1" capacitance="100nF" footprint="0603" pcbX={-7.5} pcbY={0} pcbRotation={-90} schX={-4} schY={6} schOrientation="vertical" maxDecouplingTraceLength="10mm" />

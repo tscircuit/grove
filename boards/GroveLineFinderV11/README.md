@@ -1,12 +1,12 @@
 # Grove - Line Finder V1.1
 
-Detailed Grove **Light** board model with a Grove LineFinderV11 controller controller,
+Detailed Grove **Light** board model with a LM393 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
-- Board family: `sensor`
-- Primary part: `Grove LineFinderV11 controller` (MPN: `GROVE-GROVELINEFINDERV11`)
+- Board family: `utility`
+- Primary part: `LM393` (MPN: `LM393`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

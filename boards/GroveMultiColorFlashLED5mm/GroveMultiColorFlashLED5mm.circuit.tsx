@@ -9,8 +9,8 @@ export const GroveMultiColorFlashLED5mm = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove MultiColorFlashLED5mm controller",
-      manufacturerPartNumber: "GROVE-GROVEMULTICOLORFLASHLED5MM",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

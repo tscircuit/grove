@@ -1,12 +1,12 @@
 # Grove - Temperature & Humidity Sensor
 
-Detailed Grove **Temp & Humi** board model with a Grove TemperatureHumiditySensor controller controller,
+Detailed Grove **Temp & Humi** board model with a DHT11 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove TemperatureHumiditySensor controller` (MPN: `GROVE-GROVETEMPERATUREHUMIDITYSENSOR`)
+- Primary part: `DHT11` (MPN: `DHT11`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

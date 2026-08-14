@@ -1,12 +1,12 @@
 # Grove-Doppler-Radar
 
-Detailed Grove **Proximity** board model with a Grove DopplerRadar controller controller,
+Detailed Grove **Proximity** board model with a HB100 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
-- Board family: `utility`
-- Primary part: `Grove DopplerRadar controller` (MPN: `GROVE-GROVEDOPPLERRADAR`)
+- Board family: `sensor`
+- Primary part: `HB100` (MPN: `HB100`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

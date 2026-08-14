@@ -9,8 +9,8 @@ export const GroveEncoder = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove Encoder controller",
-      manufacturerPartNumber: "GROVE-GROVEENCODER",
+      primaryModel: "TCUT1600X01",
+      manufacturerPartNumber: "TCUT1600X01",
       powerVoltage: "5V",
     }}
   />

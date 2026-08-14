@@ -8,9 +8,9 @@ export const GroveLightSensorPV11 = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Light-Sensor-P-v1-1.html",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove LightSensorPV11 controller",
-      manufacturerPartNumber: "GROVE-GROVELIGHTSENSORPV11",
+      detailKind: "sensor",
+      primaryModel: "GL5528",
+      manufacturerPartNumber: "GL5528",
       powerVoltage: "5V",
     }}
   />

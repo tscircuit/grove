@@ -9,8 +9,8 @@ export const GroveHCHOSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove HCHOSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEHCHOSENSOR",
+      primaryModel: "WSP2110",
+      manufacturerPartNumber: "WSP2110",
       powerVoltage: "5V",
     }}
   />

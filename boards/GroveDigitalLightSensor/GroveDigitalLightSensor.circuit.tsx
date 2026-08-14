@@ -9,8 +9,8 @@ export const GroveDigitalLightSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove DigitalLightSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEDIGITALLIGHTSENSOR",
+      primaryModel: "TSL2561",
+      manufacturerPartNumber: "TSL2561",
       powerVoltage: "5V",
     }}
   />

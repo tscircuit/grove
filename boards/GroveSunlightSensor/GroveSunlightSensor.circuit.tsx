@@ -9,8 +9,8 @@ export const GroveSunlightSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove SunlightSensor controller",
-      manufacturerPartNumber: "GROVE-GROVESUNLIGHTSENSOR",
+      primaryModel: "GL5528",
+      manufacturerPartNumber: "GL5528",
       powerVoltage: "5V",
     }}
   />

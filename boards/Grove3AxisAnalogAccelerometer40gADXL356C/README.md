@@ -1,12 +1,12 @@
 # Grove 3 Axis Analog Accelerometer 40g ADXL356C
 
-Detailed Grove **Sensor** board model with a Grove 3AxisAnalogAccelerometer40gADXL356C controller controller,
+Detailed Grove **Sensor** board model with a ADXL356C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove 3AxisAnalogAccelerometer40gADXL356C controller` (MPN: `GROVE-GROVE3AXISANALOGACCELEROMETER40GADXL356C`)
+- Primary part: `ADXL356C` (MPN: `ADXL356C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-3-Axis-Analog-Accelerometer-40g-ADXL356C-p-4006.html)
 

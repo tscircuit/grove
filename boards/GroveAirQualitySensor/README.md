@@ -1,12 +1,12 @@
 # Grove Air quality sensor
 
-Detailed Grove **Sensor** board model with a Grove AirQualitySensor controller controller,
+Detailed Grove **Sensor** board model with a SX1301 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove AirQualitySensor controller` (MPN: `GROVE-GROVEAIRQUALITYSENSOR`)
+- Primary part: `SX1301` (MPN: `SX1301`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Air-quality-sensor-p-1065.html)
 

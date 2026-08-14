@@ -9,8 +9,8 @@ export const GroveAllInOneEnvironmentalSensorSEN54 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-All-in-one-Environmental-Sensor-SEN54-p-5374.html",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove AllInOneEnvironmentalSensorSEN54 controller",
-      manufacturerPartNumber: "GROVE-GROVEALLINONEENVIRONMENTALSENSORSEN54",
+      primaryModel: "SEN55",
+      manufacturerPartNumber: "SEN55",
       powerVoltage: "5V",
     }}
   />

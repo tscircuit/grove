@@ -9,8 +9,8 @@ export const GroveW600 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-W600-p-4019.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove W600 controller",
-      manufacturerPartNumber: "GROVE-GROVEW600",
+      primaryModel: "W600",
+      manufacturerPartNumber: "W600",
       powerVoltage: "5V",
     }}
   />

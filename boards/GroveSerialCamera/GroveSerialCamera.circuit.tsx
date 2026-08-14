@@ -9,8 +9,8 @@ export const GroveSerialCamera = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Serial-Camera-p-945.html",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove SerialCamera controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALCAMERA",
+      primaryModel: "VC0706",
+      manufacturerPartNumber: "VC0706",
       powerVoltage: "5V",
     }}
   />

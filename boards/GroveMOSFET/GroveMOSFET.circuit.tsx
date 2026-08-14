@@ -9,8 +9,8 @@ export const GroveMOSFET = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "digital",
       detailKind: "sensor",
-      primaryModel: "Grove MOSFET controller",
-      manufacturerPartNumber: "GROVE-GROVEMOSFET",
+      primaryModel: "2N7002",
+      manufacturerPartNumber: "2N7002",
       powerVoltage: "5V",
     }}
   />

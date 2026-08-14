@@ -9,8 +9,8 @@ export const GroveOxygenSensorProPreCalibration = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Oxygen-Sensor-Pro-Pre-calibration-p-4896.html",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove OxygenSensorProPreCalibration controller",
-      manufacturerPartNumber: "GROVE-GROVEOXYGENSENSORPROPRECALIBRATION",
+      primaryModel: "GGC2330-O2",
+      manufacturerPartNumber: "GGC2330-O2",
       powerVoltage: "5V",
     }}
   />

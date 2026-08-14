@@ -8,9 +8,9 @@ export const GroveLineFinderV11 = () => (
       category: "Light",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "digital",
-      detailKind: "sensor",
-      primaryModel: "Grove LineFinderV11 controller",
-      manufacturerPartNumber: "GROVE-GROVELINEFINDERV11",
+      detailKind: "utility",
+      primaryModel: "LM393",
+      manufacturerPartNumber: "LM393",
       powerVoltage: "5V",
     }}
   />

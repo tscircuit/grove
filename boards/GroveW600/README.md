@@ -1,12 +1,12 @@
 # Grove W600
 
-Detailed Grove **Catalogue** board model with a Grove W600 controller controller,
+Detailed Grove **Catalogue** board model with a W600 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `utility`
-- Primary part: `Grove W600 controller` (MPN: `GROVE-GROVEW600`)
+- Primary part: `W600` (MPN: `W600`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-W600-p-4019.html)
 

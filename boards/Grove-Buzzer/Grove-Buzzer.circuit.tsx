@@ -14,6 +14,7 @@ export const GroveBuzzer = () => (
     <transistor
       name="Q1"
       displayName="S9013"
+      manufacturerPartNumber="S9013"
       type="npn"
       footprint="sot23"
       pcbX={4.5}
@@ -33,6 +34,7 @@ export const GroveBuzzer = () => (
     <TwoPinModule
       name="BUZ1"
       label="YMD12065 buzzer"
+      manufacturerPartNumber="YMD12065"
       width={9}
       height={9}
       pcbX={0}

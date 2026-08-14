@@ -1,12 +1,12 @@
 # Grove MP3 V3
 
-Detailed Grove **Catalogue** board model with a Grove MP3V3 controller controller,
+Detailed Grove **Catalogue** board model with a WT5001-48L controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `utility`
-- Primary part: `Grove MP3V3 controller` (MPN: `GROVE-GROVEMP3V3`)
+- Primary part: `WT5001-48L` (MPN: `WT5001-48L`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-MP3-V3-p-4297.html)
 

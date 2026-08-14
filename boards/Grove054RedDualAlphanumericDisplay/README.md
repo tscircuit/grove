@@ -1,12 +1,12 @@
 # Grove 0 54 Red Dual Alphanumeric Display
 
-Detailed Grove **Display** board model with a Grove 054RedDualAlphanumericDisplay controller controller,
+Detailed Grove **Display** board model with a TM1637 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove 054RedDualAlphanumericDisplay controller` (MPN: `GROVE-GROVE054REDDUALALPHANUMERICDISPLAY`)
+- Primary part: `TM1637` (MPN: `TM1637`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-0-54-Red-Dual-Alphanumeric-Display-p-4031.html)
 

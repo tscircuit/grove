@@ -1,12 +1,12 @@
 # Grove OLED Display 1 12
 
-Detailed Grove **Display** board model with a Grove OLEDDisplay112 controller controller,
+Detailed Grove **Display** board model with a SSD1306 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `display`
-- Primary part: `Grove OLEDDisplay112 controller` (MPN: `GROVE-GROVEOLEDDISPLAY112`)
+- Primary part: `SSD1306` (MPN: `SSD1306`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-OLED-Display-1-12.html)
 

@@ -8,9 +8,9 @@ export const GroveGestureV10 = () => (
       category: "Proximity",
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
-      detailKind: "utility",
-      primaryModel: "Grove GestureV10 controller",
-      manufacturerPartNumber: "GROVE-GROVEGESTUREV10",
+      detailKind: "sensor",
+      primaryModel: "PAJ7620",
+      manufacturerPartNumber: "PAJ7620",
       powerVoltage: "5V",
     }}
   />

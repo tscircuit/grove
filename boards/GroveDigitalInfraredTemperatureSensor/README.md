@@ -1,12 +1,12 @@
 # Grove - Digital Infrared Temperature Sensor
 
-Detailed Grove **Temperature** board model with a Grove DigitalInfraredTemperatureSensor controller controller,
+Detailed Grove **Temperature** board model with a MLX90614 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove DigitalInfraredTemperatureSensor controller` (MPN: `GROVE-GROVEDIGITALINFRAREDTEMPERATURESENSOR`)
+- Primary part: `MLX90614` (MPN: `MLX90614`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

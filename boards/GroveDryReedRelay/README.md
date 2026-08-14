@@ -1,12 +1,12 @@
 # Grove Dry Reed Relay
 
-Detailed Grove **Actuator** board model with a Grove DryReedRelay controller controller,
+Detailed Grove **Actuator** board model with a HLS8L-DC3V-S-C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove DryReedRelay controller` (MPN: `GROVE-GROVEDRYREEDRELAY`)
+- Primary part: `HLS8L-DC3V-S-C` (MPN: `HLS8L-DC3V-S-C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Dry-Reed-Relay.html)
 

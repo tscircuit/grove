@@ -9,8 +9,8 @@ export const GroveIMU9DOFLcm20600AK09918 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "i2c",
       detailKind: "sensor",
-      primaryModel: "Grove IMU9DOFLcm20600AK09918 controller",
-      manufacturerPartNumber: "GROVE-GROVEIMU9DOFLCM20600AK09918",
+      primaryModel: "AK09918",
+      manufacturerPartNumber: "AK09918",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveCircularLED = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Accessories_Intro/",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove CircularLED controller",
-      manufacturerPartNumber: "GROVE-GROVECIRCULARLED",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

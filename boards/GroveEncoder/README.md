@@ -1,12 +1,12 @@
 # Grove-Encoder
 
-Detailed Grove **Motion** board model with a Grove Encoder controller controller,
+Detailed Grove **Motion** board model with a TCUT1600X01 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `input`
-- Primary part: `Grove Encoder controller` (MPN: `GROVE-GROVEENCODER`)
+- Primary part: `TCUT1600X01` (MPN: `TCUT1600X01`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

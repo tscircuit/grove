@@ -9,8 +9,8 @@ export const GroveSerialLCD = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Serial-LCD-p-773.html",
       interfaceKind: "i2c",
       detailKind: "display",
-      primaryModel: "Grove SerialLCD controller",
-      manufacturerPartNumber: "GROVE-GROVESERIALLCD",
+      primaryModel: "ST7066U",
+      manufacturerPartNumber: "ST7066U",
       powerVoltage: "5V",
     }}
   />

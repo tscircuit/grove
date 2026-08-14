@@ -9,8 +9,8 @@ export const GroveBLEV1 = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove BLEV1 controller",
-      manufacturerPartNumber: "GROVE-GROVEBLEV1",
+      primaryModel: "HM-11",
+      manufacturerPartNumber: "HM-11",
       powerVoltage: "5V",
     }}
   />

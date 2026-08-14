@@ -1,12 +1,12 @@
 # Grove All in one Environmental Sensor SEN55
 
-Detailed Grove **Sensor** board model with a Grove AllInOneEnvironmentalSensorSEN55 controller controller,
+Detailed Grove **Sensor** board model with a SEN55 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `Grove AllInOneEnvironmentalSensorSEN55 controller` (MPN: `GROVE-GROVEALLINONEENVIRONMENTALSENSORSEN55`)
+- Primary part: `SEN55` (MPN: `SEN55`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-All-in-one-Environmental-Sensor-SEN55-p-5373.html)
 

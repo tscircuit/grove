@@ -1,12 +1,12 @@
 # Grove LoRa E5 STM32WLE5JC
 
-Detailed Grove **Communications** board model with a Grove LoRaE5STM32WLE5JC controller controller,
+Detailed Grove **Communications** board model with a STM32WLE5JC controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove LoRaE5STM32WLE5JC controller` (MPN: `GROVE-GROVELORAE5STM32WLE5JC`)
+- Primary part: `STM32WLE5JC` (MPN: `STM32WLE5JC`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-LoRa-E5-STM32WLE5JC-p-4867.html)
 

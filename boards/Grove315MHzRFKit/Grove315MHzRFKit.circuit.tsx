@@ -9,8 +9,8 @@ export const Grove315MHzRFKit = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove 315MHzRFKit controller",
-      manufacturerPartNumber: "GROVE-GROVE315MHZRFKIT",
+      primaryModel: "FS1000A",
+      manufacturerPartNumber: "FS1000A",
       powerVoltage: "5V",
     }}
   />

@@ -8,9 +8,9 @@ export const GroveHeelightSensor = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Heelight-Sensor.html",
       interfaceKind: "analog",
-      detailKind: "actuator",
-      primaryModel: "Grove HeelightSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEHEELIGHTSENSOR",
+      detailKind: "sensor",
+      primaryModel: "GL5528",
+      manufacturerPartNumber: "GL5528",
       powerVoltage: "5V",
     }}
   />

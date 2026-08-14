@@ -1,12 +1,12 @@
 # Grove - 2-Channel SPDT Relay
 
-Detailed Grove **Actuator** board model with a Grove 2ChannelSPDTRelay controller controller,
+Detailed Grove **Actuator** board model with a HLS8L-DC3V-S-C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove 2ChannelSPDTRelay controller` (MPN: `GROVE-GROVE2CHANNELSPDTRELAY`)
+- Primary part: `HLS8L-DC3V-S-C` (MPN: `HLS8L-DC3V-S-C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
 

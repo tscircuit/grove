@@ -1,12 +1,12 @@
 # Grove Formaldehyde Sensor SFA30
 
-Detailed Grove **Sensor** board model with a Grove FormaldehydeSensorSFA30 controller controller,
+Detailed Grove **Sensor** board model with a SFA30 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `i2c`
 - Board family: `sensor`
-- Primary part: `Grove FormaldehydeSensorSFA30 controller` (MPN: `GROVE-GROVEFORMALDEHYDESENSORSFA30`)
+- Primary part: `SFA30` (MPN: `SFA30`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Formaldehyde-Sensor-SFA30-p-5204.html)
 

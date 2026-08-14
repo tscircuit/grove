@@ -1,12 +1,12 @@
 # Grove LoRa Radio 868MHz
 
-Detailed Grove **Communications** board model with a Grove LoRaRadio868MHz controller controller,
+Detailed Grove **Communications** board model with a RFM95 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `communications`
-- Primary part: `Grove LoRaRadio868MHz controller` (MPN: `GROVE-GROVELORARADIO868MHZ`)
+- Primary part: `RFM95` (MPN: `RFM95`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-LoRa-Radio-868MHz.html)
 

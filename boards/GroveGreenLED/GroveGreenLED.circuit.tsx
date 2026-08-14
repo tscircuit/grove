@@ -9,8 +9,8 @@ export const GroveGreenLED = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Green-LED.html",
       interfaceKind: "analog",
       detailKind: "actuator",
-      primaryModel: "Grove GreenLED controller",
-      manufacturerPartNumber: "GROVE-GROVEGREENLED",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

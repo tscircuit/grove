@@ -1,12 +1,12 @@
 # Grove Offline Voice Recognition
 
-Detailed Grove **Sound** board model with a Grove OfflineVoiceRecognition controller controller,
+Detailed Grove **Sound** board model with a M007 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `uart`
 - Board family: `sensor`
-- Primary part: `Grove OfflineVoiceRecognition controller` (MPN: `GROVE-GROVEOFFLINEVOICERECOGNITION`)
+- Primary part: `M007` (MPN: `M007`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

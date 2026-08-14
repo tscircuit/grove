@@ -9,8 +9,8 @@ export const GroveWaterLevelSensor = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove WaterLevelSensor controller",
-      manufacturerPartNumber: "GROVE-GROVEWATERLEVELSENSOR",
+      primaryModel: "LM393",
+      manufacturerPartNumber: "LM393",
       powerVoltage: "5V",
     }}
   />

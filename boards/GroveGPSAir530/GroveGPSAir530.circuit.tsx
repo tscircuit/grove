@@ -10,7 +10,7 @@ export const GroveGPSAir530 = () => (
       interfaceKind: "uart",
       detailKind: "communications",
       primaryModel: "Air530",
-      manufacturerPartNumber: "GROVE-GROVEGPSAIR530",
+      manufacturerPartNumber: "Air530",
       powerVoltage: "5V",
     }}
   />

@@ -9,8 +9,8 @@ export const GroveBlueseeedDualModelHM13 = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-Blueseeed-Dual-model-HM13.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove BlueseeedDualModelHM13 controller",
-      manufacturerPartNumber: "GROVE-GROVEBLUESEEEDDUALMODELHM13",
+      primaryModel: "HM-13",
+      manufacturerPartNumber: "HM-13",
       powerVoltage: "5V",
     }}
   />

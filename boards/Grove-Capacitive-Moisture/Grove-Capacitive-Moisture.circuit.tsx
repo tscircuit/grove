@@ -26,6 +26,7 @@ export const GroveCapacitiveMoisture = () => (
     <chip
       name="U1"
       displayName="NE555DR"
+      manufacturerPartNumber="NE555DR"
       pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }}
       pinAttributes={{
         GND: { requiresGround: true },
@@ -43,7 +44,7 @@ export const GroveCapacitiveMoisture = () => (
       schX={-4}
       schY={2}
     />
-    <opamp name="U2" displayName="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
+    <opamp name="U2" displayName="LMV358ID" manufacturerPartNumber="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
     <resistor name="R1" resistance="1.5k" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
     <resistor name="R2" resistance="2.4k" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />
     <resistor name="R3" resistance="10k" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={2} />
@@ -54,7 +55,7 @@ export const GroveCapacitiveMoisture = () => (
     <capacitor name="C2" capacitance="100nF" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} schOrientation="vertical" />
     <capacitor name="C3" capacitance="10nF" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} schOrientation="vertical" />
     <capacitor name="C4" capacitance="4.7uF" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} schOrientation="vertical" />
-    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={0} pcbY={-25} schX={3} schY={2} />
+    <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={0} pcbY={-25} schX={3} schY={2} />
     <trace from="J1.VCC" to="U1.VCC" />
     <trace from="J1.VCC" to="U1.RESET" />
     <trace from="J1.VCC" to="U2.positive_supply" />

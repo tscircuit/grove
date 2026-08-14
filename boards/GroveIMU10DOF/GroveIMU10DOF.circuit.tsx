@@ -9,8 +9,8 @@ export const GroveIMU10DOF = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-IMU-10DOF-p-2386.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove IMU10DOF controller",
-      manufacturerPartNumber: "GROVE-GROVEIMU10DOF",
+      primaryModel: "MPU-9250",
+      manufacturerPartNumber: "MPU-9250",
       powerVoltage: "5V",
     }}
   />

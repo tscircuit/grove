@@ -1,12 +1,12 @@
 # Grove Fingerprint Sensor
 
-Detailed Grove **Sensor** board model with a Grove FingerprintSensor controller controller,
+Detailed Grove **Sensor** board model with a AS608 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove FingerprintSensor controller` (MPN: `GROVE-GROVEFINGERPRINTSENSOR`)
+- Primary part: `AS608` (MPN: `AS608`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Fingerprint-Sensor.html)
 

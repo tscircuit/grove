@@ -9,8 +9,8 @@ export const GroveEMGDetector = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "utility",
-      primaryModel: "Grove EMGDetector controller",
-      manufacturerPartNumber: "GROVE-GROVEEMGDETECTOR",
+      primaryModel: "INA331",
+      manufacturerPartNumber: "INA331",
       powerVoltage: "5V",
     }}
   />

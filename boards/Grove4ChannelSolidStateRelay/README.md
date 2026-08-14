@@ -1,12 +1,12 @@
 # Grove 4 Channel Solid State Relay
 
-Detailed Grove **Actuator** board model with a Grove 4ChannelSolidStateRelay controller controller,
+Detailed Grove **Actuator** board model with a HLS8L-DC3V-S-C controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove 4ChannelSolidStateRelay controller` (MPN: `GROVE-GROVE4CHANNELSOLIDSTATERELAY`)
+- Primary part: `HLS8L-DC3V-S-C` (MPN: `HLS8L-DC3V-S-C`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-4-Channel-Solid-State-Relay.html)
 

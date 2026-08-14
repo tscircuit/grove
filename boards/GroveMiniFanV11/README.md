@@ -1,12 +1,12 @@
 # Grove Mini Fan v1 1
 
-Detailed Grove **Actuator** board model with a Grove MiniFanV11 controller controller,
+Detailed Grove **Actuator** board model with a ATMEGA168PV-10MU controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `actuator`
-- Primary part: `Grove MiniFanV11 controller` (MPN: `GROVE-GROVEMINIFANV11`)
+- Primary part: `ATMEGA168PV-10MU` (MPN: `ATMEGA168PV-10MU`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Mini-Fan-v1-1.html)
 

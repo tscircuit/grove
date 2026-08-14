@@ -9,8 +9,8 @@ export const GroveTiltSwitch = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "input",
-      primaryModel: "Grove TiltSwitch controller",
-      manufacturerPartNumber: "GROVE-GROVETILTSWITCH",
+      primaryModel: "SW-200D",
+      manufacturerPartNumber: "SW-200D",
       powerVoltage: "5V",
     }}
   />

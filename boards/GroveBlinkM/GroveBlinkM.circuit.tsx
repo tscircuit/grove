@@ -9,8 +9,8 @@ export const GroveBlinkM = () => (
       sourceUrl: "https://www.seeedstudio.com/Grove-BlinkM-p-826.html",
       interfaceKind: "digital",
       detailKind: "utility",
-      primaryModel: "Grove BlinkM controller",
-      manufacturerPartNumber: "GROVE-GROVEBLINKM",
+      primaryModel: "MY9221",
+      manufacturerPartNumber: "MY9221",
       powerVoltage: "5V",
     }}
   />

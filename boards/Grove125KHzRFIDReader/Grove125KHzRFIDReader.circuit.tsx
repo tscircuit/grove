@@ -9,8 +9,8 @@ export const Grove125KHzRFIDReader = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_network_module_intro/",
       interfaceKind: "uart",
       detailKind: "communications",
-      primaryModel: "Grove 125KHzRFIDReader controller",
-      manufacturerPartNumber: "GROVE-GROVE125KHZRFIDREADER",
+      primaryModel: "EM4100",
+      manufacturerPartNumber: "EM4100",
       powerVoltage: "5V",
     }}
   />

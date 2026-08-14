@@ -1,12 +1,12 @@
 # Grove - UV Sensor
 
-Detailed Grove **Light** board model with a Grove UVSensor controller controller,
+Detailed Grove **Light** board model with a GUVA-S12D controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove UVSensor controller` (MPN: `GROVE-GROVEUVSENSOR`)
+- Primary part: `GUVA-S12D` (MPN: `GUVA-S12D`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 

@@ -9,8 +9,8 @@ export const GroveAnalogMicrophone = () => (
       sourceUrl: "https://wiki.seeedstudio.com/Grove_Sensor_Intro/",
       interfaceKind: "analog",
       detailKind: "sensor",
-      primaryModel: "Grove AnalogMicrophone controller",
-      manufacturerPartNumber: "GROVE-GROVEANALOGMICROPHONE",
+      primaryModel: "LM358",
+      manufacturerPartNumber: "LM358",
       powerVoltage: "5V",
     }}
   />

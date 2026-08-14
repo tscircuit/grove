@@ -1,12 +1,12 @@
 # Grove Gas Sensor MQ5
 
-Detailed Grove **Sensor** board model with a Grove GasSensorMQ5 controller controller,
+Detailed Grove **Sensor** board model with a MQ-5 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `analog`
 - Board family: `sensor`
-- Primary part: `Grove GasSensorMQ5 controller` (MPN: `GROVE-GROVEGASSENSORMQ5`)
+- Primary part: `MQ-5` (MPN: `MQ-5`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Gas-Sensor-MQ5.html)
 

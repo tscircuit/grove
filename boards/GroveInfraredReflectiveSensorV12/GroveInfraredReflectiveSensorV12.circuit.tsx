@@ -8,9 +8,9 @@ export const GroveInfraredReflectiveSensorV12 = () => (
       category: "Light & LED",
       sourceUrl: "https://www.seeedstudio.com/Grove-Infrared-Reflective-Sensor-v1-2.html",
       interfaceKind: "digital",
-      detailKind: "actuator",
-      primaryModel: "Grove InfraredReflectiveSensorV12 controller",
-      manufacturerPartNumber: "GROVE-GROVEINFRAREDREFLECTIVESENSORV12",
+      detailKind: "sensor",
+      primaryModel: "LM393",
+      manufacturerPartNumber: "LM393",
       powerVoltage: "5V",
     }}
   />

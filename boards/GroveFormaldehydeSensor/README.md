@@ -1,12 +1,12 @@
 # Grove - Formaldehyde sensor
 
-Detailed Grove **Air Quality** board model with a Grove FormaldehydeSensor controller controller,
+Detailed Grove **Air Quality** board model with a WSP2110 controller,
 decoupling, interface conditioning, explicit footprints, mounting holes, and
 routed nets.
 
 - Interface: `digital`
 - Board family: `sensor`
-- Primary part: `Grove FormaldehydeSensor controller` (MPN: `GROVE-GROVEFORMALDEHYDESENSOR`)
+- Primary part: `WSP2110` (MPN: `WSP2110`)
 - Power rail: `5V`
 - Source: [Seeed Studio catalogue or Grove guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 
