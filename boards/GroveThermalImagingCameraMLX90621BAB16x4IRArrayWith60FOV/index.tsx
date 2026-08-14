@@ -1,0 +1,1 @@
+export { default, GroveThermalImagingCameraMLX90621BAB16x4IRArrayWith60FOV } from "./GroveThermalImagingCameraMLX90621BAB16x4IRArrayWith60FOV.circuit"

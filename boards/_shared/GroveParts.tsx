@@ -1,6 +1,6 @@
 export interface GroveConnectorProps {
   name?: string
-  kind?: "digital" | "analog" | "i2c"
+  kind?: "digital" | "analog" | "i2c" | "uart"
   pcbX?: number
   pcbY?: number
   pcbRotation?: number
@@ -69,8 +69,10 @@ export const GroveConnector = ({
   schY,
   schRotation,
 }: GroveConnectorProps) => {
-  const signal1 = kind === "i2c" ? "SCL" : "SIG"
-  const signal2 = kind === "i2c" ? "SDA" : "NC"
+  const signal1 =
+    kind === "i2c" ? "SCL" : kind === "uart" ? "RX" : "SIG"
+  const signal2 =
+    kind === "i2c" ? "SDA" : kind === "uart" ? "TX" : "NC"
 
   return (
     <jumper
@@ -90,6 +92,11 @@ export const GroveConnector = ({
       schX={schX}
       schY={schY}
       schRotation={schRotation}
+      schWidth="3.5mm"
+      schHeight="2.5mm"
+      schPinArrangement={{
+        rightSide: [signal1, signal2, "VCC", "GND"],
+      }}
       schDirection="right"
     />
   )

@@ -1,0 +1,13 @@
+# Grove Digital Distance Interrupter 0 5 to 5cm GP2Y0D805Z0F P
+
+Catalogue-level Grove interface representation for the **Catalogue** family.
+
+- Interface: `digital`
+- Source: [Seeed Studio catalogue or Grove guide](https://www.seeedstudio.com/Grove-Digital-Distance-Interrupter-0-5-to-5cm-GP2Y0D805Z0F-P.html)
+
+This board is independently defined in TSX and includes its own PCB and
+schematic snapshots. It captures the public four-pin Grove interface and a
+compact review footprint; it is not a claim of production-ready CAD or an
+exact conversion of the upstream hardware. Replace this generated model with
+source-backed component geometry when a published schematic and board archive
+are available.

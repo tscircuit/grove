@@ -72,6 +72,28 @@ Each board README distinguishes source-backed schematic details from
 representative placement, routing, or mechanics. A passing snapshot is a
 review artifact, not a claim that the recreation is production-ready.
 
+## Grove catalogue
+
+`boards/catalogue-manifest.ts` records 394 unique entries collected from
+Seeed's official [Grove sensor guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/),
+[network-module guide](https://wiki.seeedstudio.com/Grove_network_module_intro/),
+[accessories guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/), and
+official product sitemap. Every manifest entry has its own board directory,
+default-exported TSX circuit, README with source attribution, and independent
+PCB and schematic SVG snapshots. The 12 entries listed above are detailed,
+source-backed recreations; the remaining entries are compact interface-level
+models that are deliberately easy to replace with source-backed geometry.
+
+Refresh the catalogue from those official sources with:
+
+```sh
+bun run catalogue:generate
+bun run snapshot:update
+```
+
+The generator is intentionally deterministic for a given upstream catalogue;
+it never overwrites the 12 detailed board directories.
+
 ## Project scope
 
 This is an independent recreation project and is not affiliated with or
