@@ -12,11 +12,14 @@
   ],
   "scripts": {
     "dev": "tsci dev",
-    "build": "tsci build --concurrency 4",
-    "snapshot:generate": "tsci snapshot --update --force-update --concurrency 4",
-    "snapshot:normalize": "bun scripts/normalize-snapshots.ts",
-    "snapshot": "bun run snapshot:generate && bun run snapshot:normalize && git diff --exit-code -- ':(glob)**/__snapshots__/*.snap.svg'",
+    "build": "tsci build --concurrency 1",
+    "snapshot:generate": "tsci snapshot --update --force-update --concurrency 1",
+    "snapshot:normalize": "bun scripts/normalize-snapshots.ts && bun scripts/normalize-snapshots.ts",
+    "snapshot:check": "bun scripts/check-snapshots.ts",
+    "snapshot": "bun run snapshot:generate && bun run snapshot:normalize && bun run snapshot:check",
     "snapshot:update": "bun run snapshot:generate && bun run snapshot:normalize",
+    "catalogue:generate": "bun scripts/generate-grove-catalogue.ts",
+    "validate:catalogue": "bun scripts/validate-catalogue.ts",
     "typecheck": "tsc --noEmit",
     "check": "bun run typecheck && bun run build && bun run snapshot"
   },

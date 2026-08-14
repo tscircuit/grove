@@ -20,6 +20,22 @@ const LcdPanel = () => (
       pin13: "BL_G",
       pin14: "BL_B",
     }}
+    pinAttributes={{
+      GND: { requiresGround: true },
+      VCC: { requiresPower: true, requiresVoltage: "5V" },
+      CONTRAST: { mustBeConnected: true },
+      RS: { mustBeConnected: true, isGpio: true },
+      RW: { mustBeConnected: true, isGpio: true },
+      E: { mustBeConnected: true, isGpio: true },
+      D4: { mustBeConnected: true, isGpio: true },
+      D5: { mustBeConnected: true, isGpio: true },
+      D6: { mustBeConnected: true, isGpio: true },
+      D7: { mustBeConnected: true, isGpio: true },
+      BL_COM: { mustBeConnected: true },
+      BL_R: { mustBeConnected: true },
+      BL_G: { mustBeConnected: true },
+      BL_B: { mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-16.51} pcbY={-14.5} portHints={["pin1"]} />
@@ -53,17 +69,47 @@ export const GroveLcdRgbBacklight = () => (
     <net name="VCC" isPowerNet />
     <net name="GND" isGroundNet />
     <GroveMountingHoles x={37} y={15} diameter="2.8mm" />
-    <GroveConnector kind="i2c" pcbX={-34} pcbY={0} pcbRotation={90} schX={-12} schY={0} />
+    <GroveConnector kind="i2c" pcbX={-34} pcbY={0} pcbRotation={-90} schX={-12} schY={0} />
     <LcdPanel />
-    <chip name="U1" displayName="JHD1313 LCD controller" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW", pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST" }} footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={1} />
-    <chip name="U2" displayName="SGM31323 RGB driver" pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }} footprint="qfn16" layer="bottom" pcbX={8} pcbY={9} schX={3} schY={-6} schPinArrangement={{ leftSide: ["SCL", "SDA"], rightSide: ["R", "G", "B"], topSide: ["VCC"], bottomSide: ["GND"] }} noConnect={["pin8", "pin9", "pin10", "pin11", "pin12", "pin13", "pin14", "pin15", "pin16"]} />
+    <chip
+      name="U1"
+      displayName="JHD1313 LCD controller"
+      pinLabels={{
+        pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW",
+        pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST",
+      }}
+      pinAttributes={{
+        GND: { requiresGround: true }, VCC: { requiresPower: true, requiresVoltage: "5V" },
+        SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true },
+        RS: { mustBeConnected: true, isGpio: true }, RW: { mustBeConnected: true, isGpio: true },
+        E: { mustBeConnected: true, isGpio: true }, D4: { mustBeConnected: true, isGpio: true },
+        D5: { mustBeConnected: true, isGpio: true }, D6: { mustBeConnected: true, isGpio: true },
+        D7: { mustBeConnected: true, isGpio: true }, CONTRAST: { mustBeConnected: true },
+      }}
+      footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={1}
+    />
+    <chip
+      name="U2"
+      displayName="SGM31323 RGB driver"
+      pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }}
+      pinAttributes={{
+        GND: { requiresGround: true }, VCC: { requiresPower: true, requiresVoltage: "5V" },
+        SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true },
+        R: { mustBeConnected: true }, G: { mustBeConnected: true }, B: { mustBeConnected: true },
+      }}
+      footprint="qfn16" layer="bottom" pcbX={8} pcbY={9} schX={3} schY={-6}
+      schPinArrangement={{ leftSide: ["SCL", "SDA", "VCC"], rightSide: ["R", "G", "B", "GND"] }}
+      schWidth="1.2mm"
+      schHeight="0.8mm"
+      noConnect={["pin8", "pin9", "pin10", "pin11", "pin12", "pin13", "pin14", "pin15", "pin16"]}
+    />
     <resistor name="R1" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={4} />
     <resistor name="R2" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={4} />
     <resistor name="RR" resistance="100" footprint="0603" layer="bottom" pcbX={16} pcbY={11} schX={7} schY={-4} />
     <resistor name="RG" resistance="100" footprint="0603" layer="bottom" pcbX={20} pcbY={11} schX={8} schY={-6} />
     <resistor name="RB" resistance="100" footprint="0603" layer="bottom" pcbX={24} pcbY={11} schX={7} schY={-8} />
-    <capacitor name="C1" capacitance="100nF" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} />
-    <capacitor name="C2" capacitance="1uF" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} />
+    <capacitor name="C1" capacitance="100nF" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} schOrientation="vertical" />
+    <capacitor name="C2" capacitance="1uF" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} schOrientation="vertical" />
     <trace from="J1.VCC" to="net.VCC" />
     <trace from="U1.VCC" to="net.VCC" />
     <trace from="U2.VCC" to="net.VCC" />

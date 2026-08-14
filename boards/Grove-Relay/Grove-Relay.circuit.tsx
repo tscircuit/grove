@@ -11,6 +11,13 @@ const Relay = () => (
       pin4: "NO",
       pin5: "NC",
     }}
+    pinAttributes={{
+      COIL_POS: { requiresPower: true, mustBeConnected: true },
+      COIL_NEG: { requiresGround: true, mustBeConnected: true },
+      COM: { mustBeConnected: true },
+      NO: { mustBeConnected: true },
+      NC: { mustBeConnected: true },
+    }}
     footprint={
       <footprint>
         <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-6} pcbY={-4} portHints={["pin1"]} />
@@ -21,6 +28,7 @@ const Relay = () => (
         <silkscreenrect width="15mm" height="10mm" stroke="solid" strokeWidth="0.25mm" filled={false} />
       </footprint>
     }
+    schHeight="0.6mm"
     pcbX={2}
     pcbY={1.8}
     schX={4}
@@ -42,35 +50,39 @@ const RelayTerminal = () => (
       </footprint>
     }
     pcbX={10}
-    pcbY={-6}
+    pcbY={-7}
+    pcbRotation={180}
     schX={9}
     schY={0}
+    schHeight="0.4mm"
   />
 )
 
 export const GroveRelay = () => (
-  <board name="GroveRelay" title="Grove - Relay v1.2" width="40mm" height="20mm" borderRadius="1mm" solderMaskColor="blue" placementDrcChecksDisabled>
+  <board name="GroveRelay" title="Grove - Relay v1.2" width="40mm" height="20mm" borderRadius="1mm" solderMaskColor="blue">
     <GroveMountingHoles x={18} y={8} />
-    <GroveConnector pcbX={-14} pcbY={0} pcbRotation={90} schX={-9} schY={0} />
+    <GroveConnector pcbX={-14} pcbY={0} pcbRotation={-90} schX={-9} schY={0} />
     <Relay />
     <RelayTerminal />
     <chip
       name="U1"
       displayName="XC6206P302MR"
       pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }}
+      pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }}
       footprint="sot23"
       pcbX={-8}
       pcbY={4}
       schX={-4}
       schY={2}
+      schHeight="0.4mm"
     />
-    <transistor name="Q1" displayName="S8050TL" type="npn" footprint="sot23" pcbX={-4} pcbY={-3.5} schX={0} schY={-2.5} />
-    <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={-8} pcbY={-3} schX={-3.5} schY={-2.5} />
-    <resistor name="R2" resistance="470" footprint="0603" pcbX={7} pcbY={-3.5} schX={1} schY={4} />
+    <transistor name="Q1" displayName="S8050TL" type="npn" footprint="sot23" pcbX={-7} pcbY={-3.5} schX={0} schY={-2.5} />
+    <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={-11} pcbY={-3} schX={-3.5} schY={-2.5} />
+    <resistor name="R2" resistance="470" footprint="0603" pcbX={11} pcbY={-4.5} schX={1} schY={4} />
     <resistor name="R3" resistance="47k" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
-    <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-9.1375} pcbY={4} pcbRotation={-90} schX={-4} schY={4} />
-    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={6} pcbY={5.5} schX={4} schY={2.5} />
-    <led name="D2" color="red" footprint="0603" pcbX={10} pcbY={5.5} schX={4} schY={4} />
+    <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-11} pcbY={5.5} pcbRotation={-90} schX={-4} schY={4} schOrientation="vertical" maxDecouplingTraceLength="5mm" />
+    <diode name="D1" displayName="1N4148" footprint="0603" pcbX={12} pcbY={5.5} schX={4} schY={2.5} />
+    <led name="D2" color="red" footprint="0603" pcbX={15} pcbY={5.5} schX={4} schY={4} />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="U1.GND" to="J1.GND" />
     <trace from="U1.VOUT" to="K1.COIL_POS" />

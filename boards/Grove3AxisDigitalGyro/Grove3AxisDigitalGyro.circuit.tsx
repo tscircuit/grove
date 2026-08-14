@@ -1,0 +1,19 @@
+import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
+
+export const Grove3AxisDigitalGyro = () => (
+  <GroveDetailedModule
+    profile={{
+      name: "Grove3AxisDigitalGyro",
+      title: "Grove 3 Axis Digital Gyro",
+      category: "Catalogue",
+      sourceUrl: "https://www.seeedstudio.com/Grove-3-Axis-Digital-Gyro.html",
+      interfaceKind: "digital",
+      detailKind: "utility",
+      primaryModel: "Grove 3AxisDigitalGyro controller",
+      manufacturerPartNumber: "GROVE-GROVE3AXISDIGITALGYRO",
+      powerVoltage: "5V",
+    }}
+  />
+)
+
+export default Grove3AxisDigitalGyro

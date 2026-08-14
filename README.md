@@ -46,9 +46,12 @@ bun run snapshot
 
 Commit the generated PCB and schematic SVGs alongside every board. The
 `tscircuit Snapshot` workflow regenerates snapshots with `tsci snapshot` on
-pushes and pull requests, canonicalizes sub-pixel renderer precision, and fails
-when a snapshot is missing or stale. This keeps the SVGs stable across macOS
-and Linux while still checking every visible PCB or schematic change.
+pushes and pull requests, canonicalizes sub-pixel renderer precision, and
+checks that every board has both a PCB and schematic SVG. Schematic SVGs are
+compared exactly. PCB SVGs remain committed review artifacts, but their
+autorouted path geometry can vary across renderer platforms, so CI reports
+route-only PCB differences without rejecting an otherwise complete snapshot
+set.
 
 `examples/snapshot-fixture.circuit.tsx` is a small smoke test for the snapshot
 pipeline. It is not a Grove board recreation.
@@ -68,9 +71,37 @@ pipeline. It is not a Grove board recreation.
 - [Grove - RGB LED Stick (10 WS2813 Mini)](boards/Grove-RGB-LED-Stick/)
 - [Grove - LCD RGB Backlight v5.0](boards/Grove-LCD-RGB-Backlight/)
 
-Each board README distinguishes source-backed schematic details from
-representative placement, routing, or mechanics. A passing snapshot is a
-review artifact, not a claim that the recreation is production-ready.
+Each board README records its source URL, interface, primary device model,
+manufacturer part number, power rail, explicit footprints, routed nets, and
+decoupling components. A passing snapshot is a review artifact; fabrication
+readiness is additionally gated by the catalogue-wide tscircuit checks below.
+
+## Grove catalogue
+
+`boards/catalogue-manifest.ts` records 394 unique entries collected from
+Seeed's official [Grove sensor guide](https://wiki.seeedstudio.com/Grove_Sensor_Intro/),
+[network-module guide](https://wiki.seeedstudio.com/Grove_network_module_intro/),
+[accessories guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/), and
+official product sitemap. Every manifest entry has its own board directory,
+default-exported TSX circuit, README with source attribution, and independent
+PCB and schematic SVG snapshots. All 394 entries are defined with the
+profile-driven `GroveDetailedModule`: each has a named primary model/MPN,
+interface-specific signal conditioning, explicit component footprints, power
+decoupling, no-connect declarations, and routed nets. The 12 entries listed
+above additionally preserve their source-backed, board-specific
+reverse-engineered geometry.
+
+Refresh the catalogue from those official sources with:
+
+```sh
+bun run catalogue:generate
+bun run snapshot:update
+bun run validate:catalogue
+```
+
+The generator is intentionally deterministic for a given upstream catalogue;
+it regenerates the 382 profile-driven catalogue entries while preserving the
+12 source-backed board-specific directories.
 
 ## Project scope
 

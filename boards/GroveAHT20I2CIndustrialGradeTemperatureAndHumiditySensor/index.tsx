@@ -1,0 +1,1 @@
+export { default, GroveAHT20I2CIndustrialGradeTemperatureAndHumiditySensor } from "./GroveAHT20I2CIndustrialGradeTemperatureAndHumiditySensor.circuit"

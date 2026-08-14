@@ -1,8 +1,8 @@
 import { GroveConnector } from "../_shared/GroveParts"
 
 const ProbeElectrodes = () => (
-  <capacitor
-    name="CSENSE"
+    <capacitor
+      name="CSENSE"
     displayName="Capacitive soil probe"
     capacitance="100pF"
     footprint={
@@ -11,10 +11,11 @@ const ProbeElectrodes = () => (
         <smtpad shape="rect" width="6mm" height="55mm" pcbX={4} pcbY={0} portHints={["pin2"]} coveredWithSolderMask={false} />
       </footprint>
     }
-    pcbX={0}
-    pcbY={15}
-    schX={1}
-    schY={5}
+      pcbX={0}
+      pcbY={15}
+      schX={1}
+      schY={5}
+      schOrientation="vertical"
   />
 )
 
@@ -22,18 +23,37 @@ export const GroveCapacitiveMoisture = () => (
   <board name="GroveCapacitiveMoisture" title="Grove - Capacitive Moisture Sensor (Corrosion Resistant)" width="23.5mm" height="92.1mm" borderRadius="2mm" solderMaskColor="blue">
     <GroveConnector kind="analog" pcbX={0} pcbY={-41} schX={-11} schY={0} />
     <ProbeElectrodes />
-    <chip name="U1" displayName="NE555DR" pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }} footprint="soic8" pcbX={-4} pcbY={-29} schX={-4} schY={2} />
+    <chip
+      name="U1"
+      displayName="NE555DR"
+      pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }}
+      pinAttributes={{
+        GND: { requiresGround: true },
+        TRIG: { mustBeConnected: true, isGpio: true },
+        OUT: { mustBeConnected: true, isGpio: true },
+        RESET: { mustBeConnected: true },
+        CTRL: { mustBeConnected: true },
+        THRESH: { mustBeConnected: true },
+        DISCH: { mustBeConnected: true },
+        VCC: { requiresPower: true, requiresVoltage: "5V" },
+      }}
+      footprint="soic8"
+      pcbX={-4}
+      pcbY={-29}
+      schX={-4}
+      schY={2}
+    />
     <opamp name="U2" displayName="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
     <resistor name="R1" resistance="1.5k" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
     <resistor name="R2" resistance="2.4k" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />
-    <resistor name="R3" resistance="10k" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={3} />
+    <resistor name="R3" resistance="10k" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={2} />
     <resistor name="R4" resistance="0" footprint="0603" pcbX={7} pcbY={-35} schX={5} schY={-3} />
-    <resistor name="R5" resistance="1M" footprint="0603" pcbX={8} pcbY={-25} schX={4} schY={4} />
+    <resistor name="R5" resistance="1M" footprint="0603" pcbX={8} pcbY={-25} schX={5} schY={2} />
     <resistor name="R6" resistance="100" footprint="0603" pcbX={8} pcbY={-21} schX={11} schY={-2} />
-    <capacitor name="C1" capacitance="470pF" footprint="0603" pcbX={-7} pcbY={-25} schX={-5} schY={8} />
-    <capacitor name="C2" capacitance="100nF" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} />
-    <capacitor name="C3" capacitance="10nF" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} />
-    <capacitor name="C4" capacitance="4.7uF" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} />
+    <capacitor name="C1" capacitance="470pF" footprint="0603" pcbX={-7} pcbY={-25} schX={-5} schY={8} schOrientation="vertical" />
+    <capacitor name="C2" capacitance="100nF" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} schOrientation="vertical" />
+    <capacitor name="C3" capacitance="10nF" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} schOrientation="vertical" />
+    <capacitor name="C4" capacitance="4.7uF" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} schOrientation="vertical" />
     <diode name="D1" displayName="1N4148" footprint="0603" pcbX={0} pcbY={-25} schX={3} schY={2} />
     <trace from="J1.VCC" to="U1.VCC" />
     <trace from="J1.VCC" to="U1.RESET" />
