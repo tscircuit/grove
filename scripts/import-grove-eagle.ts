@@ -348,6 +348,7 @@ const parseBoard = (source: string, relativePath: string): EagleSpec => {
       // overlap the connector copper when normalized into a PCB footprint.
       !/(?:DIM|MARK).*DRILL/i.test(element.package) &&
       !/^dnp$/i.test(element.value) &&
+      !/\(\s*dnp\s*\)/i.test(element.value) &&
       !/^(?:SILK|LOGO|MARK)/i.test(element.value),
     )
   // A number of Seeed files encode the actual board outline in a hidden

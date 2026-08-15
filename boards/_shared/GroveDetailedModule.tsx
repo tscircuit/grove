@@ -3,6 +3,67 @@ import { GroveConnector, GroveMountingHoles } from "./GroveParts"
 import { EagleBoardModule } from "./EagleBoardModule"
 import { groveEagleSpecs } from "./groveEagleSpecs"
 
+/**
+ * The public catalogue contains several revisions and regional names for the
+ * same Grove PCB.  Reuse the official Eagle layout when the electrical core is
+ * genuinely shared instead of silently falling back to the one-chip mock.  A
+ * profile-specific entry always wins; these aliases only fill gaps where the
+ * catalogue name differs from the archive directory.
+ */
+const sharedEagleSpecFor = (profile: GroveDetailedProfile) => {
+  if (groveEagleSpecs[profile.name]) return groveEagleSpecs[profile.name]
+  const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
+  const target =
+    /buzzer/.test(text)
+      ? "GroveBuzzer2"
+      : /pir/.test(text)
+        ? "GrovePIRMotionSensor"
+        : /(?:light sensor|sunlight sensor|gl5528)/.test(text)
+          ? "GroveLightSensor2"
+          : /formaldehyde.*wsp2110/.test(text)
+            ? "GroveHCHOSensor"
+            : /digital infrared temperature|infrared temperature sensor(?! array)/.test(text)
+              ? "GroveDigitalInfraredTemperatureSensor"
+              : /adxl345/.test(text)
+                ? "Grove3AxisDigitalAccelerometer16g"
+                : /(?:hmc5883|3-axis.*compass)/.test(text)
+                  ? "Grove3AxisDigitalCompassV2"
+                  : /(?:lsm6ds3|6-axis accelerometer.*gyroscope)/.test(text)
+                    ? "Grove6AxisAccelerometerCompassV20"
+                    : /infrared reflective.*lm393/.test(text)
+                      ? "GroveInfraredReflectiveSensor"
+                      : /at42qt1070/.test(text) && !/mpr121/.test(text)
+                        ? "GroveQTouchSensor"
+                        : /(?:tcut1600x01|optical rotary encoder|mouse encoder)/.test(text)
+                          ? "GroveEncoder"
+                          : /hm-13|blueseeed dual/.test(text)
+                            ? "GroveBLEDualModelV10"
+                            : /hm-11|blueseeed hm11/.test(text)
+                              ? "GroveBLEV1"
+                              : /(?:sn75176|rs485|dmx512)/.test(text)
+                                ? "GroveDMX512"
+                                : /(?:tm1637|4.?digit|alphanumeric display)/.test(text)
+                                  ? "Grove4DigitDisplay"
+                                  : /(?:l298n|l298p|i2c.*motor driver|mini motor driver)/.test(text)
+                                    ? "GroveI2CMotorDriverV13"
+                                    : /(?:tca9548|i2c hub|qwiic hub)/.test(text)
+                                      ? "GroveI2CHub"
+                                      : /(?:p9813|chainable rgb|rgb led matrix|led matrix driver)/.test(text)
+                                        ? "GroveChainableRGBLED"
+                                        : /(?:variable color led|led bar|led string)/.test(text)
+                                          ? "GroveLEDBar"
+                                          : /(?:dht11|temperature.?humidity sensor(?!.*dht20|.*dht22|.*sht|.*aht))/.test(text)
+                                            ? "GroveTemperatureHumiditySensor"
+                                            : /(?:mlx90614|digital infrared temperature)/.test(text)
+                                              ? "GroveDigitalInfraredTemperatureSensor"
+                                              : /(?:bmp180|integrated pressure|barometer sensor bmp18)/.test(text)
+                                                ? "GroveBarometerSensor"
+                                                : /(?:rotary angle|slide potentiometer)/.test(text)
+                                                    ? "GroveRotaryAngleSensor2"
+                                                    : undefined
+  return target ? groveEagleSpecs[target] : undefined
+}
+
 export type GroveInterfaceKind = "digital" | "analog" | "i2c" | "uart"
 export type GroveDetailKind =
   | "sensor"
@@ -261,7 +322,7 @@ const packageFor = (text: string, family: ModuleFamily, pinCount: number) => {
   return "DFN"
 }
 
-const resolveSpec = (profile: GroveDetailedProfile): ModuleSpec => {
+const resolveSpecBase = (profile: GroveDetailedProfile): ModuleSpec => {
   const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
   const importedModel = importedModelFor(profile.primaryModel)
   const interfaceKind = effectiveInterface(profile, text)
@@ -387,6 +448,49 @@ const resolveSpec = (profile: GroveDetailedProfile): ModuleSpec => {
   }
 }
 
+const resolveSpec = (profile: GroveDetailedProfile): ModuleSpec => {
+  const base = resolveSpecBase(profile)
+  const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
+  // Grove boards span tiny 20 mm sensors, long LED strips, relay/power
+  // boards, and display carrier cards.  Keep the fallback geometry faithful
+  // to the product class so its imported footprints have room to breathe.
+  if (/\bgas\b|mq[- ]?\d|\boxygen\b|\bco2\b|\bhcho\b|air quality|\bdust\b|formaldehyde|sen5[45]|bme688/.test(text)) {
+    return { ...base, boardWidth: 60, boardHeight: 38 }
+  }
+  if (/thermal imaging|ir array|camera|vision ai|fingerprint|nfc|rfid|lora|wifi|bluetooth|serial rf/.test(text)) {
+    return { ...base, boardWidth: 52, boardHeight: 30 }
+  }
+  if (/relay|motor driver|mini motor|servo|speaker|buzzer|fan|atomization|electromagnet/.test(text)) {
+    return { ...base, boardWidth: 52, boardHeight: 28 }
+  }
+  if (/lcd|oled|e-ink|ips display|display/.test(text)) {
+    return {
+      ...base,
+      boardWidth: /16x?2|lcd/.test(text) ? 80 : 32,
+      boardHeight: /16x?2|lcd/.test(text) ? 36 : 30,
+    }
+  }
+  if (/joystick|keypad|keycap|touch slider|track ball|dip switch/.test(text)) {
+    return { ...base, boardWidth: 42, boardHeight: 32 }
+  }
+  if (/ring/.test(text)) {
+    return { ...base, boardWidth: 48, boardHeight: 48 }
+  }
+  if (/distance|proximity|ultrasonic|lidar|radar/.test(text)) {
+    return { ...base, boardWidth: Math.max(base.boardWidth, 40), boardHeight: Math.max(base.boardHeight, 26) }
+  }
+  if (/strip|stick|bar/.test(text)) {
+    return { ...base, boardWidth: Math.max(base.boardWidth, 72), boardHeight: 16 }
+  }
+  if (/accelerometer|gyroscope|compass|imu|motion|step counter/.test(text)) {
+    return { ...base, boardWidth: 34, boardHeight: 28 }
+  }
+  if (/temperature|humidity|pressure|barometer|environmental|light sensor|color sensor|proximity/.test(text)) {
+    return { ...base, boardWidth: 30, boardHeight: 24 }
+  }
+  return base
+}
+
 const packageFootprint = ({
   packageName,
   pinCount,
@@ -401,11 +505,15 @@ const packageFootprint = ({
   const bodyWidth = packageName === "DISPLAY-MODULE"
     ? 12
     : packageName === "LED-ADDRESSABLE"
-      ? 4.5
+      ? 3.4
       : pinCount >= 12
         ? 6.5
         : 5.5
-  const bodyHeight = packageName === "DISPLAY-MODULE" ? 8 : Math.max(4, (perSide - 1) * spacing + 2)
+  const bodyHeight = packageName === "DISPLAY-MODULE"
+    ? 8
+    : packageName === "LED-ADDRESSABLE"
+      ? 2.2
+      : Math.max(4, (perSide - 1) * spacing + 2)
   const pads = Array.from({ length: pinCount }, (_, index) => {
     const onLeft = index < perSide
     const sideIndex = onLeft ? index : index - perSide
@@ -433,6 +541,133 @@ const packageFootprint = ({
         strokeWidth="0.18mm"
         filled={false}
       />
+    </footprint>
+  )
+}
+
+type VisualFamily =
+  | "environmental"
+  | "gas"
+  | "motion"
+  | "optical"
+  | "distance"
+  | "wireless"
+  | "audio"
+  | "display"
+  | "power"
+  | "input"
+  | "led"
+  | "generic"
+
+const visualFamilyFor = (profile: GroveDetailedProfile, text: string): VisualFamily => {
+  if (/display|lcd|oled|e-ink|matrix/.test(text)) return "display"
+  // A button/switch board may also have an indicator LED in its title, but
+  // the tactile/switch mechanism is the part that should drive the primary
+  // footprint and placement family.
+  if (profile.detailKind === "input" || /button|switch|joystick|keypad|touch|rotary|encoder|potentiometer/.test(text)) return "input"
+  if (/ws2813|rgb led|led ring|led strip|led bar|my9221|p9813/.test(text)) return "led"
+  if (/relay|motor|servo|fan|speaker|buzzer|atomization|electromagnet|current sensor|coulomb/.test(text)) return "power"
+  if (/wifi|bluetooth|ble|gps|rfid|nfc|lora|serial|camera|vision|voice|speech/.test(text) || profile.detailKind === "communications") return "wireless"
+  if (/\bgas\b|mq[- ]?\d|\boxygen\b|\bco2\b|\bhcho\b|formaldehyde|sen5[45]|bme688/.test(text)) return "gas"
+  if (/microphone|loudness|sound|recorder|audio|heart rate|emg|gsr/.test(text)) return "audio"
+  if (/ultrasonic|lidar|distance|proximity|radar|pir|motion|presence/.test(text)) return "distance"
+  if (/light|color|uv|infrared|flame|gesture|phototransistor|luminance/.test(text)) return "optical"
+  if (/accelerometer|gyroscope|compass|imu|step counter|magnetic|hall/.test(text)) return "motion"
+  if (/temperature|humidity|pressure|barometer|environmental|aht|sht|dht|bme|bmp/.test(text)) return "environmental"
+  return "generic"
+}
+
+const genericResistorMpn = (resistance: string, packageName = "0603") => {
+  const key = resistance.toLowerCase().replace(/\s+/g, "")
+  const values: Record<string, string> = {
+    "0": "RC0603JR-070RL",
+    "0r": "RC0603JR-070RL",
+    "1k": "RC0603FR-071KL",
+    "2k2": "RC0603FR-072K2L",
+    "4.7k": "RC0603FR-074K7L",
+    "10k": "RC0603FR-0710KL",
+    "22k": "RC0603FR-0722KL",
+    "33": "RC0603JR-0733RL",
+    "100": "RC0603JR-07100RL",
+    "220": "RC0603JR-07220RL",
+    "330": "RC0603JR-07330RL",
+    "470": "RC0603JR-07470RL",
+    "1m": "RC0603FR-071ML",
+  }
+  return values[key] ?? `RC${packageName.replace(/[^0-9]/g, "").padStart(4, "0")}FR-${key.toUpperCase()}`
+}
+
+const genericCapacitorMpn = (capacitance: string, packageName = "0603") => {
+  const key = capacitance.toLowerCase().replace(/\s+/g, "")
+  const values: Record<string, string> = {
+    "100nf": "CC0603KRX7R9BB104",
+    "1uf": "CC0603ZRY5V8BB105",
+    "4.7uf": "CC0603ZRY5V8BB475",
+    "10uf": "CC0805ZRY5V8BB106",
+    "22uf": "CC0805ZRY5V8BB226",
+    "100uf": "EEH-ZA1E101P",
+  }
+  return values[key] ?? `CC${packageName.replace(/[^0-9]/g, "").padStart(4, "0")}X7R-${key.toUpperCase()}`
+}
+
+const visualFootprint = (
+  family: VisualFamily,
+  pinCount: number,
+  packageName: string,
+) => {
+  if (family === "generic") return packageFootprint({ packageName, pinCount })
+  const body = family === "display"
+    ? { width: 20, height: 16 }
+    : family === "wireless"
+      ? { width: 18, height: 14 }
+      : family === "gas"
+        ? { width: 18, height: 16 }
+      : family === "power"
+          ? { width: 16, height: 12 }
+          : family === "distance" && /^(TX|RX)$/i.test(packageName)
+            ? { width: 8, height: 5 }
+          : family === "input"
+            ? { width: 10, height: 10 }
+            : { width: 8, height: 7 }
+  const perSide = Math.ceil(pinCount / 2)
+  const pitch = pinCount > 12 ? 1 : 1.27
+  const pads = Array.from({ length: pinCount }, (_, index) => {
+    const left = index < perSide
+    const row = left ? index : index - perSide
+    return (
+      <Fragment key={`pad-${index + 1}`}>
+        <smtpad
+          shape="rect"
+          width={`${pinCount > 12 ? 0.55 : 0.8}mm`}
+          height={`${pinCount > 12 ? 0.65 : 0.9}mm`}
+          pcbX={left ? -body.width / 2 : body.width / 2}
+          pcbY={((perSide - 1) / 2 - row) * pitch}
+          portHints={[`pin${index + 1}`]}
+        />
+      </Fragment>
+    )
+  })
+  return (
+    <footprint name={`${family.toUpperCase()}-${packageName}`}>
+      {pads}
+      <silkscreenrect
+        width={`${body.width}mm`}
+        height={`${body.height}mm`}
+        stroke="solid"
+        strokeWidth="0.18mm"
+        filled={false}
+      />
+      {family === "gas" && <silkscreencircle pcbX={2} pcbY={0} radius="6mm" strokeWidth="0.2mm" isOutline />}
+      {family === "optical" && <silkscreencircle pcbX={0} pcbY={0} radius="2.6mm" strokeWidth="0.2mm" isOutline />}
+      {family === "distance" && /^(TX|RX)$/i.test(packageName) && (
+        <silkscreencircle pcbX={0} pcbY={0} radius="2mm" strokeWidth="0.2mm" isOutline />
+      )}
+      {family === "wireless" && (
+        <silkscreenrect pcbX={5} pcbY={0} width="7mm" height="5mm" stroke="solid" strokeWidth="0.15mm" filled={false} />
+      )}
+      {family === "audio" && <silkscreencircle pcbX={0} pcbY={0} radius="3mm" strokeWidth="0.2mm" isOutline />}
+      {family === "input" && <silkscreencircle pcbX={0} pcbY={0} radius="3.5mm" strokeWidth="0.2mm" isOutline />}
+      {family === "display" && <silkscreenrect pcbX={0} pcbY={0} width="14mm" height="10mm" stroke="solid" strokeWidth="0.15mm" filled={false} />}
     </footprint>
   )
 }
@@ -489,12 +724,324 @@ const loadPartFor = (text: string) => {
   return "Grove-Actuator-Load"
 }
 
+interface FamilySupportProps {
+  family: VisualFamily
+  profile: GroveDetailedProfile
+  spec: ModuleSpec
+  interfaceKind: GroveInterfaceKind
+  signal1: string
+  signal2: string
+  mainAt: (label: string) => string
+}
+
+/** Add the recognizable transducer/driver stage that differentiates a board
+ * from its controller IC.  These parts are intentionally conservative: they
+ * use standard, orderable components and keep the connector-facing nets
+ * explicit, while the profile's primary MPN remains the board's actual IC or
+ * sensor element. */
+const FamilySupport = ({
+  family,
+  profile,
+  spec,
+  interfaceKind,
+  signal1,
+  mainAt,
+}: FamilySupportProps) => {
+  const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
+  if (family === "audio") {
+    return (
+      <>
+        <chip
+          name="MIC1"
+          displayName="Electret microphone capsule"
+          manufacturerPartNumber="CMA-4544PF-W"
+          pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }}
+          pinAttributes={{
+            VCC: { requiresPower: true, mustBeConnected: true },
+            OUT: { mustBeConnected: true, isGpio: true },
+            GND: { requiresGround: true, mustBeConnected: true },
+          }}
+          footprint={visualFootprint("audio", 3, "MIC")}
+          pcbX={-5}
+          pcbY={4}
+          schX={-4}
+          schY={3}
+        />
+        <capacitor
+          name="C_AUDIO"
+          capacitance="100nF"
+          manufacturerPartNumber={genericCapacitorMpn("100nF", "0603")}
+          pinAttributes={passivePinAttributes}
+          connections={{ pin1: "net.VCC", pin2: "net.GND" }}
+          maxDecouplingTraceLength="30mm"
+          footprint="0603"
+          pcbX={-1}
+          pcbY={6}
+          schX={-1}
+          schY={4}
+          schOrientation="vertical"
+        />
+        <trace name="MIC_BIAS" from="J1.VCC" to="MIC1.VCC" />
+        <trace name="MIC_SIGNAL" from="MIC1.OUT" to={mainAt(signal1)} />
+        <trace name="MIC_RETURN" from="MIC1.GND" to="J1.GND" />
+        <trace name="MIC_DECOUPLE" from="MIC1.VCC" to="C_AUDIO.pin1" />
+        <trace name="MIC_DECOUPLE_RETURN" from="C_AUDIO.pin2" to="J1.GND" />
+      </>
+    )
+  }
+
+  if (family === "optical") {
+    const infrared = /infrared|ir |proximity|flame/.test(text)
+    return (
+      <>
+        <led
+          name="D_EMITTER"
+          displayName={infrared ? "IR emitter 940nm" : "Indicator LED"
+          }
+          manufacturerPartNumber={infrared ? "IR333-A" : "LTST-C190KRKT"}
+          color={infrared ? "infrared" : "red"}
+          connections={{ pin1: "net.EMITTER", pin2: "net.GND" }}
+          footprint="0603"
+          pcbX={-5}
+          // Keep the optical pair above the I²C pull-ups and decoupler on
+          // compact AS3935/gesture boards.  The earlier y=6 placement put
+          // the emitter courtyard directly over R1 on 20–24 mm cards.
+          pcbY={6.75}
+          schX={-4}
+          schY={3}
+        />
+        <resistor
+          name="R_EMITTER"
+          resistance={infrared ? "100" : "220"}
+          tolerance="1%"
+          manufacturerPartNumber={genericResistorMpn(infrared ? "100" : "220", "0603")}
+          pinAttributes={{
+            pin1: { requiresPower: true, mustBeConnected: true },
+            pin2: { mustBeConnected: true },
+          }}
+          footprint="0603"
+          connections={{ pin1: "net.VCC", pin2: "net.EMITTER" }}
+          pcbX={0}
+          pcbY={6.75}
+          schX={-1}
+          schY={3}
+        />
+        {interfaceKind === "i2c" && (
+          <capacitor
+            name="C_OPTICAL"
+            capacitance="100nF"
+            manufacturerPartNumber={genericCapacitorMpn("100nF", "0402")}
+            pinAttributes={passivePinAttributes}
+            connections={{ pin1: "net.VCC", pin2: "net.GND" }}
+            footprint="0402"
+            pcbX={5}
+            pcbY={8}
+            schX={2}
+            schY={3}
+            schOrientation="vertical"
+          />
+        )}
+      </>
+    )
+  }
+
+  if (family === "distance") {
+    const ultrasonic = /ultrasonic/.test(text)
+    return (
+      <>
+        <chip
+          name="TX1"
+          displayName={ultrasonic ? "40 kHz ultrasonic transmitter" : "IR transmitter"}
+          manufacturerPartNumber={ultrasonic ? "TCT40-16T" : "VSMY1850"}
+          pinLabels={{ pin1: "IN", pin2: "GND" }}
+          pinAttributes={{ IN: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }}
+          footprint={visualFootprint("distance", 2, "TX")}
+          // Put the transducer bodies along the upper edge, clear of the
+          // controller footprint and the connector-side decoupler.
+          pcbX={-4}
+          pcbY={8}
+          schX={-4}
+          schY={2}
+        />
+        <chip
+          name="RX1"
+          displayName={ultrasonic ? "40 kHz ultrasonic receiver" : "IR receiver"}
+          manufacturerPartNumber={ultrasonic ? "TCT40-16R" : "GP1UXC41QS"}
+          pinLabels={{ pin1: "OUT", pin2: "GND" }}
+          pinAttributes={{ OUT: { requiresPower: true, mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }}
+          footprint={visualFootprint("distance", 2, "RX")}
+          pcbX={10}
+          pcbY={8}
+          schX={1}
+          schY={2}
+        />
+        <trace name="DISTANCE_DRIVE" from={mainAt(signal1)} to="TX1.IN" />
+        <trace name="DISTANCE_SENSE" from="RX1.OUT" to={mainAt(signal1)} />
+        <trace name="DISTANCE_TX_GND" from="TX1.GND" to="J1.GND" />
+        <trace name="DISTANCE_RX_GND" from="RX1.GND" to="J1.GND" />
+      </>
+    )
+  }
+
+  if (family === "gas" && interfaceKind === "i2c") {
+    return (
+      <capacitor
+        name="C_SENSOR"
+        capacitance="100nF"
+        manufacturerPartNumber={genericCapacitorMpn("100nF", "0402")}
+        pinAttributes={passivePinAttributes}
+        connections={{ pin1: "net.VDD", pin2: "net.GND" }}
+        footprint="0402"
+        pcbX={10}
+        pcbY={6}
+        schX={7}
+        schY={4}
+        schOrientation="vertical"
+      />
+    )
+  }
+
+  if (family === "gas") {
+    return (
+      <>
+        <opamp
+          name="U3"
+          displayName="LM358B signal conditioner"
+          manufacturerPartNumber="LM358B"
+          footprint="soic8"
+          pcbX={14}
+          pcbY={-10}
+          schX={6}
+          schY={-4}
+        />
+        <resistor
+          name="R_SENSE"
+          resistance="10k"
+          tolerance="1%"
+          manufacturerPartNumber={genericResistorMpn("10k", "0603")}
+          pinAttributes={passivePinAttributes}
+          connections={{ pin2: "net.GND" }}
+          footprint="0603"
+          pcbX={14}
+          pcbY={-5}
+          schX={6}
+          schY={-1}
+        />
+        <led
+          name="D_STATUS"
+          displayName="Gas sensor status LED"
+          manufacturerPartNumber="LTST-C190KRKT"
+          color="red"
+          connections={{ pin2: "net.GND" }}
+          footprint="0603"
+          pcbX={19}
+          pcbY={-5}
+          schX={8}
+          schY={-1}
+        />
+        <trace name="GAS_SIGNAL_STAGE" from={mainAt(signal1)} to="U3.non_inverting_input" />
+        <trace name="GAS_OUTPUT" from="U3.output" to="J1.SIG" />
+        <trace name="GAS_STATUS_FEED" from="U3.output" to="R_SENSE.pin1" />
+      </>
+    )
+  }
+
+  if (family === "display") {
+    const rgb = /rgb|backlight|color/.test(text)
+    return (
+      <>
+        {rgb ? (
+          <>
+            <resistor name="R_BL_R" resistance="100" tolerance="1%" manufacturerPartNumber={genericResistorMpn("100", "0603")} footprint="0603" pcbX={-4} pcbY={-7} schX={-4} schY={-3} />
+            <resistor name="R_BL_G" resistance="100" tolerance="1%" manufacturerPartNumber={genericResistorMpn("100", "0603")} footprint="0603" pcbX={0} pcbY={-7} schX={0} schY={-3} />
+            <resistor name="R_BL_B" resistance="100" tolerance="1%" manufacturerPartNumber={genericResistorMpn("100", "0603")} footprint="0603" pcbX={4} pcbY={-7} schX={4} schY={-3} />
+            <trace name="BACKLIGHT_R" from="J1.VCC" to="R_BL_R.pin1" />
+            <trace name="BACKLIGHT_G" from="J1.VCC" to="R_BL_G.pin1" />
+            <trace name="BACKLIGHT_B" from="J1.VCC" to="R_BL_B.pin1" />
+          </>
+        ) : (
+          <>
+            <capacitor
+              name="C_DISPLAY"
+              capacitance="10uF"
+              manufacturerPartNumber={genericCapacitorMpn("10uF", "0805")}
+              pinAttributes={passivePinAttributes}
+              connections={{ pin1: "net.VCC", pin2: "net.GND" }}
+              footprint="0805"
+              pcbX={10}
+              pcbY={-7}
+              schX={7}
+              schY={-3}
+              schOrientation="vertical"
+            />
+          </>
+        )}
+      </>
+    )
+  }
+
+  if (family === "input" && /joystick|track ball/.test(text)) {
+    return (
+      <>
+        <potentiometer
+          name="RV2"
+          displayName="Joystick Y axis"
+          manufacturerPartNumber="WH09-2-103"
+          maxResistance="10k"
+          pinVariant="three_pin"
+          footprint="potentiometer_pth_9mm"
+          pcbX={0}
+          pcbY={9}
+          schX={5}
+          schY={3}
+        />
+        <trace name="JOYSTICK_Y_VCC" from="J1.VCC" to="RV2.pin1" />
+        <trace name="JOYSTICK_Y" from="RV2.pin2" to="J1.SIG" />
+        <trace name="JOYSTICK_Y_GND" from="RV2.pin3" to="J1.GND" />
+      </>
+    )
+  }
+
+  if (family === "power") {
+    return (
+      <>
+        <led
+          name="D_STATUS"
+          displayName="Power/status LED"
+          manufacturerPartNumber="LTST-C190KRKT"
+          color="red"
+          connections={{ pin1: "net.STATUS", pin2: "net.GND" }}
+          footprint="0603"
+          pcbX={-2}
+          pcbY={7}
+          schX={-1}
+          schY={-4}
+        />
+        <resistor
+          name="R_STATUS"
+          resistance="1k"
+          tolerance="1%"
+          manufacturerPartNumber={genericResistorMpn("1k", "0603")}
+          footprint="0603"
+          pcbX={2}
+          pcbY={7}
+          schX={2}
+          schY={-4}
+          connections={{ pin1: "net.VCC", pin2: "net.STATUS" }}
+        />
+      </>
+    )
+  }
+
+  return null
+}
+
 export const GroveDetailedModule = ({
   profile,
 }: {
   profile: GroveDetailedProfile
 }) => {
-  const eagleSpec = groveEagleSpecs[profile.name]
+  const eagleSpec = sharedEagleSpecFor(profile)
   if (eagleSpec) {
     return <EagleBoardModule profile={profile} spec={eagleSpec} />
   }
@@ -507,6 +1054,8 @@ export const GroveDetailedModule = ({
   const [signal1, signal2] = signalLabels(interfaceKind)
   const boardLabel = compactLabel(profile.title, 32)
   const categoryLabel = compactLabel(profile.category, 20)
+  const profileText = `${profile.title} ${profile.primaryModel}`.toLowerCase()
+  const visualFamily = visualFamilyFor(profile, profileText)
   const mainPinAttributes = pinAttributesFor(
     spec.pinLabels,
     spec.mainNeeds3v3 ? "3.3V" : profile.powerVoltage,
@@ -540,27 +1089,36 @@ export const GroveDetailedModule = ({
     spec.pinLabels.map((label) => {
       const netName = /^(?:GND|VSS|GND\d+|EP|EPAD)$/i.test(label)
         ? "GND"
-        : /^(?:VCC|VDD|VDDIO|VDDH|VIN)$/i.test(label)
+        : /^(?:VDD|VDDIO|VDDH)$/i.test(label)
           ? "VDD"
+          : /^(?:VCC|VIN)$/i.test(label)
+            ? (spec.mainNeeds3v3 ? "VDD" : "VCC")
           : /^(?:SCL|SCK)$/i.test(label)
             ? "SCL"
             : /^(?:SDA|SDI)$/i.test(label)
               ? "SDA"
               : /^(?:RX|TX)$/i.test(label)
                 ? label
-                : undefined
+                : /^(?:SIG|DIN|DOUT|OUT|IN)$/i.test(label)
+                  ? "SIG"
+                  : undefined
       return [label, netName ? `net.${netName}` : undefined]
     }).filter((entry): entry is [string, string] => !!entry[1]),
   )
-  const decouplingX = importedModel?.supplierPartNumber === "C3012627"
-      ? -8
+    const decouplingX = spec.family === "input"
+      ? 7
+      : importedModel?.supplierPartNumber === "C3012627"
+        ? -11.5
       : importedModel?.supplierPartNumber === "C490604"
-        ? -6
+        ? -12
+        : visualFamily === "gas" || visualFamily === "wireless" || visualFamily === "power"
+          ? -11
         : -5
-  const regulatorCapX = importedModel?.supplierPartNumber === "C490604" ? -8 : -1.1
+  const regulatorCapX = importedModel?.supplierPartNumber === "C490604" ? -12 : -1.1
   // Keep I²C pull-ups clear of the regulator footprint on 3.3 V boards.
   const pullupX = spec.mainNeeds3v3 || importedModel?.supplierPartNumber === "C91322" ? -10 : -6
   const powerNet = spec.mainNeeds3v3 ? "U2.VOUT" : "J1.VCC"
+  const mainPowerNetName = spec.mainNeeds3v3 ? "net.VDD" : "net.VCC"
   const mainPowerY = spec.pinLabels.length >= 8
     ? -0.7
     : spec.pinLabels.length >= 6 || spec.pinLabels.includes("VDD")
@@ -577,6 +1135,11 @@ export const GroveDetailedModule = ({
       solderMaskColor="blue"
       minViaEdgeToPadEdgeClearance="0.05mm"
       minPadEdgeToPadEdgeClearance="0.03mm"
+      // Long addressable chains are deliberately represented as a complete
+      // schematic plus placed footprints.  Autorouting 10+ devices on a
+      // single-row Grove card tends to drop escape vias into LED pads; leave
+      // those source nets unrouted until a board-specific copper plan exists.
+      routingDisabled={!!spec.channelCount && spec.channelCount >= 10}
     >
       <net name="VCC" isPowerNet />
       <net name="VDD" isPowerNet />
@@ -585,6 +1148,9 @@ export const GroveDetailedModule = ({
       <net name="SDA" />
       <net name="RX" />
       <net name="TX" />
+      <net name="SIG" />
+      <net name="EMITTER" />
+      <net name="STATUS" />
       <GroveMountingHoles
         x={boardHoleX(spec.boardWidth)}
         y={boardHoleY(spec.boardHeight)}
@@ -603,9 +1169,14 @@ export const GroveDetailedModule = ({
         <>
           {Array.from({ length: spec.channelCount }, (_, index) => {
             const name = `LED${index + 1}`
-            const pcbX = -spec.boardWidth / 2 + 12 + index * 6
             const isRing = /ring/.test(profile.title.toLowerCase())
-            const pcbY = isRing ? 0 : spec.boardHeight > 20 ? (index % 2 === 0 ? 8 : -8) : 0
+            const angle = (index / spec.channelCount!) * Math.PI * 2 - Math.PI / 2
+            const radius = Math.min(spec.boardWidth, spec.boardHeight) / 2 - 5
+            const ringCenterX = 3
+            const pcbX = isRing
+              ? ringCenterX + Math.cos(angle) * radius
+              : -spec.boardWidth / 2 + 12 + index * 6
+            const pcbY = isRing ? Math.sin(angle) * radius : spec.boardHeight > 20 ? (index % 2 === 0 ? 5 : -5) : 0
             // Leave a full symbol-width gap after the connector so the first
             // addressable LED does not overlap the Grove jumper in the
             // schematic.
@@ -632,9 +1203,10 @@ export const GroveDetailedModule = ({
                   GND: { requiresGround: true },
                 }}
                 noConnect={isLast ? ["DOUT"] : []}
-                footprint={packageFootprint({ packageName: spec.packageName, pinCount: 4 })}
+                footprint={packageFootprint({ packageName: "LED-ADDRESSABLE", pinCount: 4 })}
                 pcbX={pcbX}
                 pcbY={pcbY}
+                pcbRotation={isRing ? (angle * 180) / Math.PI + 90 : 0}
                 schX={schX}
                 schY={0}
                 schPinArrangement={{
@@ -648,19 +1220,25 @@ export const GroveDetailedModule = ({
           })}
           {Array.from({ length: spec.channelCount }, (_, index) => {
             const name = `C${index + 1}`
-            const pcbX = -spec.boardWidth / 2 + 12 + index * 6
             const isRing = /ring/.test(profile.title.toLowerCase())
-            const ledY = isRing ? 0 : spec.boardHeight > 20 ? (index % 2 === 0 ? 8 : -8) : 0
+            const angle = (index / spec.channelCount!) * Math.PI * 2 - Math.PI / 2
+            const radius = Math.min(spec.boardWidth, spec.boardHeight) / 2 - 5
+            const ringCenterX = 3
+            const ledX = isRing
+              ? ringCenterX + Math.cos(angle) * radius
+              : -spec.boardWidth / 2 + 12 + index * 6
+            const ledY = isRing ? Math.sin(angle) * radius : spec.boardHeight > 20 ? (index % 2 === 0 ? 5 : -5) : 0
             return (
               <capacitor
                 key={name}
                 name={name}
                 capacitance="100nF"
+                manufacturerPartNumber={genericCapacitorMpn("100nF", "0402")}
                 pinAttributes={passivePinAttributes}
                 maxDecouplingTraceLength="20mm"
                 footprint="0402"
-                pcbX={pcbX + 2.7}
-                pcbY={ledY + 2.2}
+                pcbX={isRing ? ledX * 0.82 : ledX + 2.7}
+                pcbY={isRing ? ledY * 0.82 : ledY + 2.2}
                 schX={-7.8 + index * 2.2}
                 schY={5}
                 schOrientation="vertical"
@@ -706,7 +1284,7 @@ export const GroveDetailedModule = ({
             noConnect={spec.pinLabels.filter(
               (label) => mainPinAttributes[label]?.doNotConnect,
             )}
-            connections={importedModel?.supplierPartNumber === "C555456" ? mainConnections : undefined}
+            connections={mainConnections}
             supplierPartNumbers={importedModel ? { jlcpcb: [importedModel.supplierPartNumber] } : undefined}
             schPinArrangement={{
               leftSide: mainSchArrangement.leftSide,
@@ -715,11 +1293,12 @@ export const GroveDetailedModule = ({
             schHeight={mainSchHeight}
             footprint={importedModel
               ? importedModel.footprint
-              : packageFootprint({
-                  packageName: spec.packageName,
-                  pinCount: spec.pinLabels.length,
-                })}
-            pcbX={spec.family === "display" ? 5 : 4}
+              : visualFootprint(
+                  visualFamily,
+                  spec.pinLabels.length,
+                  spec.packageName,
+                )}
+            pcbX={spec.family === "input" && interfaceKind !== "i2c" ? 0 : spec.family === "display" ? (spec.boardWidth > 50 ? 8 : 3) : visualFamily === "gas" ? 5 : 4}
             pcbY={0}
             schX={2}
             schY={
@@ -744,6 +1323,7 @@ export const GroveDetailedModule = ({
                 VOUT: { mustBeConnected: true },
                 VIN: { requiresPower: true, requiresVoltage: profile.powerVoltage },
               }}
+              connections={{ GND: "net.GND", VOUT: "net.VDD", VIN: "net.VCC" }}
               footprint={packageFootprint({ packageName: "SOT23", pinCount: 3 })}
               pcbX={-5}
               pcbY={-5}
@@ -757,11 +1337,23 @@ export const GroveDetailedModule = ({
             />
           )}
 
+          <FamilySupport
+            family={visualFamily}
+            profile={profile}
+            spec={spec}
+            interfaceKind={interfaceKind}
+            signal1={signal1}
+            signal2={signal2}
+            mainAt={mainAt}
+          />
+
           <capacitor
             name="C1"
             capacitance="100nF"
+            manufacturerPartNumber={genericCapacitorMpn("100nF", "0402")}
             pinAttributes={passivePinAttributes}
-            maxDecouplingTraceLength="20mm"
+            connections={{ pin1: mainPowerNetName, pin2: "net.GND" }}
+            maxDecouplingTraceLength="40mm"
             maxVoltageRating={profile.powerVoltage}
             footprint="0402"
             pcbX={decouplingX}
@@ -794,8 +1386,10 @@ export const GroveDetailedModule = ({
               <capacitor
                 name="C2"
                 capacitance="1uF"
+                manufacturerPartNumber={genericCapacitorMpn("1uF", "0603")}
                 pinAttributes={passivePinAttributes}
-                maxDecouplingTraceLength="20mm"
+                connections={{ pin1: "net.VCC", pin2: "net.GND" }}
+                maxDecouplingTraceLength="40mm"
                 maxVoltageRating={profile.powerVoltage}
                 footprint="0603"
                 pcbX={regulatorCapX}
@@ -831,8 +1425,8 @@ export const GroveDetailedModule = ({
 
           {interfaceKind === "i2c" && (
             <>
-              <resistor name="R1" resistance="4.7k" tolerance="1%" pinAttributes={passivePinAttributes} footprint="0402" pcbX={pullupX} pcbY={5} schX={-3} schY={5} />
-              <resistor name="R2" resistance="4.7k" tolerance="1%" pinAttributes={passivePinAttributes} footprint="0402" pcbX={pullupX} pcbY={-5} schX={-3} schY={-5} />
+              <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber={genericResistorMpn("4.7k", "0402")} pinAttributes={passivePinAttributes} connections={{ pin1: mainPowerNetName, pin2: "net.SCL" }} footprint="0402" pcbX={pullupX} pcbY={5} schX={-3} schY={5} />
+              <resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber={genericResistorMpn("4.7k", "0402")} pinAttributes={passivePinAttributes} connections={{ pin1: mainPowerNetName, pin2: "net.SDA" }} footprint="0402" pcbX={pullupX} pcbY={-5} schX={-3} schY={-5} />
               <trace from={powerNet} to="R1.pin1" />
               <trace from="R1.pin2" to={`J1.${signal1}`} />
               <trace from={powerNet} to="R2.pin1" />
@@ -842,8 +1436,8 @@ export const GroveDetailedModule = ({
 
           {interfaceKind === "uart" && (
             <>
-              <resistor name="R1" resistance="1k" tolerance="1%" pinAttributes={passivePinAttributes} footprint="0402" pcbX={-4} pcbY={5} schX={-3} schY={5} />
-              <resistor name="R2" resistance="1k" tolerance="1%" pinAttributes={passivePinAttributes} footprint="0402" pcbX={-4} pcbY={-5} schX={-3} schY={-5} />
+              <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber={genericResistorMpn("1k", "0402")} pinAttributes={passivePinAttributes} connections={{ pin1: "net.RX", pin2: "net.RX" }} footprint="0402" pcbX={-4} pcbY={5} schX={-3} schY={5} />
+              <resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber={genericResistorMpn("1k", "0402")} pinAttributes={passivePinAttributes} connections={{ pin1: "net.TX", pin2: "net.TX" }} footprint="0402" pcbX={-4} pcbY={-5} schX={-3} schY={-5} />
               <trace from="J1.RX" to="R1.pin1" />
               <trace from="R1.pin2" to={mainAt("RX")} />
               <trace from="J1.TX" to="R2.pin1" />
@@ -851,13 +1445,15 @@ export const GroveDetailedModule = ({
             </>
           )}
 
-          {(interfaceKind === "analog" || interfaceKind === "digital") && (
+          {(interfaceKind === "analog" || interfaceKind === "digital") && visualFamily !== "optical" && (
             <>
               <resistor
                 name="R1"
                 resistance={spec.family === "sensor" ? "10k" : "1k"}
                 tolerance="1%"
+                manufacturerPartNumber={genericResistorMpn(spec.family === "sensor" ? "10k" : "1k", "0603")}
                 pinAttributes={passivePinAttributes}
+                connections={{ pin1: "net.SIG", pin2: "net.GND" }}
                 footprint="0603"
                 pcbX={-4}
                 pcbY={5}
@@ -867,6 +1463,7 @@ export const GroveDetailedModule = ({
               <trace from={`J1.${signal1}`} to={mainAt(signal1)} />
               <trace from={`J1.${signal1}`} to="R1.pin1" />
               <trace from="R1.pin2" to="J1.GND" />
+              <trace name="R1_GROUND_RETURN" from="R1.pin2" to={mainAt("GND")} />
             </>
           )}
 
@@ -909,7 +1506,7 @@ export const GroveDetailedModule = ({
                 footprint={packageFootprint({ packageName: "BUTTON-6MM", pinCount: 2 })}
                 // The 6mm switch body otherwise overlaps the main package by
                 // about 1mm on the compact 30mm Grove boards.
-                pcbX={10.5}
+                pcbX={spec.boardWidth / 2 - 3.5}
                 pcbY={0}
                 schX={6}
                 schY={0}
@@ -926,7 +1523,7 @@ export const GroveDetailedModule = ({
                 displayName="Antenna / RF matching"
                 manufacturerPartNumber="ANT-2.4G"
                 pinLabels={{ pin1: "IN", pin2: "GND" }}
-                pinAttributes={{ IN: { mustBeConnected: true }, GND: { requiresGround: true } }}
+                pinAttributes={{ IN: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true } }}
                 footprint={packageFootprint({ packageName: "RF-MODULE", pinCount: 2 })}
                 pcbX={spec.boardWidth / 2 - 8}
                 pcbY={-5}
@@ -965,7 +1562,7 @@ export const GroveDetailedModule = ({
                 displayName={spec.loadName ?? "Load"}
                 manufacturerPartNumber={spec.loadName}
                 pinLabels={{ pin1: "POS", pin2: "NEG" }}
-                pinAttributes={{ POS: { requiresPower: true }, NEG: { mustBeConnected: true } }}
+                pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { requiresGround: true, mustBeConnected: true } }}
                 footprint={packageFootprint({ packageName: "POWER-MODULE", pinCount: 2 })}
                 pcbX={spec.boardWidth / 2 - 8}
                 pcbY={4}
@@ -987,7 +1584,7 @@ export const GroveDetailedModule = ({
 
           {spec.family === "sensor" && /gas|mq\d|oxygen|co2|hcho|air quality|heater/.test(profile.title.toLowerCase()) && (
             <>
-              <resistor name="RHEAT" resistance="33" tolerance="5%" pinAttributes={passivePinAttributes} footprint="1206" pcbX={10} pcbY={-5} schX={7} schY={-5} />
+              <resistor name="RHEAT" resistance="33" tolerance="5%" manufacturerPartNumber={genericResistorMpn("33", "1206")} pinAttributes={passivePinAttributes} footprint="1206" pcbX={10} pcbY={-5} schX={7} schY={-5} />
               <trace from="J1.VCC" to="RHEAT.pin1" />
               <trace from="RHEAT.pin2" to="J1.GND" />
             </>

@@ -69,6 +69,156 @@ const safeNetName = (value: string) => {
   return /^[A-Za-z_]/.test(label) ? label : `N_${label}`
 }
 
+const passiveValue = (value: string, fallback: string) => {
+  const trimmed = value.trim()
+  if (!trimmed || /^n\$|^r\d*$|^c\d*$|^l\d*$/i.test(trimmed)) return fallback
+  return trimmed
+}
+
+const resistanceValue = (value: string) =>
+  passiveValue(value.replace(/\s*Ω\s*$/i, ""), "1k")
+
+const capacitanceValue = (value: string) =>
+  passiveValue(value.replace(/\s*F\s*$/i, "F"), "100nF")
+
+const packageSize = (packageName: string) => {
+  const match = packageName.match(/(?:^|[-_])(0201|0402|0603|0805|1206|1210)(?:[-_]|$)/i)
+  return match?.[1]?.toUpperCase() ?? "0603"
+}
+
+/**
+ * Use stable, orderable manufacturer part numbers for the passive values in
+ * the official Eagle files. Eagle element names such as R1/C1 are references,
+ * not BOM identifiers; keeping them as MPNs made every imported BOM look
+ * populated while still being impossible to purchase.
+ */
+const passiveMpn = (kind: "R" | "C" | "L", value: string, packageName: string) => {
+  const compact = value.toLowerCase().replace(/\s+/g, "").replace(/Ω/g, "")
+  const size = packageSize(packageName)
+  if (kind === "R") {
+    const known: Record<string, string> = {
+      "0": "RC0603JR-070RL",
+      "0r": "RC0603JR-070RL",
+      "33": "RC0603JR-0733RL",
+      "100": "RC0603JR-07100RL",
+      "200": "RC0603JR-07200RL",
+      "220": "RC0603JR-07220RL",
+      "330": "RC0603JR-07330RL",
+      "470": "RC0603JR-07470RL",
+      "1k": "RC0603FR-071KL",
+      "1k1": "RC0603FR-071K1L",
+      "2k4": "RC0603FR-072K4L",
+      "3k": "RC0603FR-073KL",
+      "4k7": "RC0603FR-074K7L",
+      "10k": "RC0603FR-0710KL",
+      "22k": "RC0603FR-0722KL",
+      "47k": "RC0603FR-0747KL",
+      "620k": "RC0603FR-07620KL",
+      "1m": "RC0603FR-071ML",
+    }
+    return known[compact] ?? `RC${size}FR-${compact.toUpperCase()}`
+  }
+  if (kind === "C") {
+    const known: Record<string, string> = {
+      "10pf": "CC0603JRNPO9BN100",
+      "22pf": "CC0603JRNPO9BN220",
+      "100pf": "CC0603JRNPO9BN101",
+      "470pf": "CC0603JRNPO9BN471",
+      "10nf": "CC0603KRX7R9BB103",
+      "100nf": "CC0603KRX7R9BB104",
+      "1uf": "CC0603ZRY5V8BB105",
+      "4.7uf": "CC0603ZRY5V8BB475",
+      "10uf": "CC0805ZRY5V8BB106",
+      "22uf": "CC0805ZRY5V8BB226",
+      "100uf": "EEH-ZA1E101P",
+    }
+    return known[compact] ?? `CC${size}X7R-${compact.toUpperCase()}`
+  }
+  const known: Record<string, string> = {
+    "4.7uh": "LQH3NPN4R7M23L",
+    "10uh": "LQH3NPN100M53L",
+    "22uh": "LQH3NPN220M53L",
+    "100uh": "LQH3NPN101M53L",
+  }
+  return known[compact] ?? `L-${size}-${compact.toUpperCase()}`
+}
+
+const componentKind = (component: GroveEagleComponent) => {
+  const name = component.name.trim()
+  const value = component.value.trim()
+  if (/^R\d*$/i.test(name)) return "R" as const
+  if (/^C\d*$/i.test(name)) return "C" as const
+  if (/^L\d*$/i.test(name)) return "L" as const
+  if (/^D\d*$/i.test(name) && /(?:led|green|red|blue|yellow|white)/i.test(value)) return "LED" as const
+  if (/^D\d*$/i.test(name) || /(?:1n4148|1n5819|bzt|bZX|diode)/i.test(value)) return "D" as const
+  return "chip" as const
+}
+
+const referenceOnlyValue = (component: GroveEagleComponent) => {
+  const value = component.value.trim()
+  return !value || value === component.name || /^(?:N\$?\d*|[RCLD]\d*|U\$?\d+|Q\d+|J\d+|P\d+|CON\d+)$/i.test(value)
+}
+
+const chipDisplayAndMpn = (
+  component: GroveEagleComponent,
+  packageSpec: GroveEaglePackage,
+  profile: GroveDetailedProfile,
+  mainComponentName: string | undefined,
+) => {
+  const kind = componentKind(component)
+  const pads = padLabels(packageSpec).length
+  if (kind === "R") {
+    const display = resistanceValue(passiveValue(component.value, "10k"))
+    return { display, mpn: passiveMpn("R", display, component.package) }
+  }
+  if (kind === "C") {
+    const display = capacitanceValue(passiveValue(component.value, "100nF"))
+    return { display, mpn: passiveMpn("C", display, component.package) }
+  }
+  if (kind === "L") {
+    const display = passiveValue(component.value, "10uH")
+    return { display, mpn: passiveMpn("L", display, component.package) }
+  }
+  const value = component.value.trim()
+  if (!referenceOnlyValue(component)) return { display: value, mpn: value }
+  if (component.name === mainComponentName) {
+    return { display: profile.primaryModel, mpn: profile.manufacturerPartNumber }
+  }
+  // These are the common unlabelled support parts in Seeed's Eagle files.
+  // Giving them a real purchasable part keeps the generated BOM useful while
+  // the imported package still preserves the exact source footprint.
+  if (/^Q\d+$/i.test(component.name)) return { display: "2N7002", mpn: "2N7002" }
+  if (/^U\d+$/i.test(component.name) && /SOT-?23|SOT23/i.test(component.package)) {
+    return { display: "XC6206P332MR-G", mpn: "XC6206P332MR-G" }
+  }
+  if (/^(?:J\d+|CON\d+|P\d+)$/i.test(component.name)) {
+    const connectorMpn = pads >= 4 ? "B4B-PH-K-S" : pads === 2 ? "B2B-PH-K-S" : `HEADER-1X${pads}`
+    return { display: connectorMpn, mpn: connectorMpn }
+  }
+  if (/^(?:LED|D\d+)$/i.test(component.name) || /^(?:red|green|blue|yellow|white)$/i.test(value)) {
+    return { display: "LTST-C190KRKT", mpn: "LTST-C190KRKT" }
+  }
+  // A blank source value is still better represented by its source reference
+  // than by an invented controller model; the BOM checker reports these for
+  // follow-up when the Eagle library omitted the manufacturer value.
+  return { display: component.name, mpn: component.name }
+}
+
+const componentPinName = (
+  component: GroveEagleComponent,
+  index: number,
+  pinCount = 2,
+) => {
+  // A reference such as R5 can still be a multi-pad resistor network in an
+  // Eagle package.  Those components are rendered as generic chips below,
+  // so their ports must stay P1/P2/... rather than being advertised as the
+  // two-pin resistor/diode primitive ports.
+  const kind = pinCount === 2 ? componentKind(component) : "chip"
+  if (kind === "R" || kind === "C" || kind === "L") return `pin${index + 1}`
+  if (kind === "D" || kind === "LED") return index === 0 ? "anode" : "cathode"
+  return `P${index + 1}`
+}
+
 const isPowerLabel = (value: string) =>
   /^(?:\+?(?:VCC|VDD|VIN|VBAT|3V3|5V|9V|12V)|PWR|POWER)/i.test(value.trim())
 
@@ -283,7 +433,101 @@ const pinRef = (
   const pkg = spec.packages[component.package]
   if (!pkg) return undefined
   const index = packagePadIndex(pkg, pad)
-  return index < 0 ? undefined : `${component.name}.P${index + 1}`
+  return index < 0 ? undefined : `${component.name}.${componentPinName(component, index, padLabels(pkg).length)}`
+}
+
+const componentConnections = (
+  spec: GroveEagleSpec,
+  component: GroveEagleComponent,
+  netNames: Map<string, string>,
+) => {
+  const pkg = spec.packages[component.package]
+  if (!pkg) return {} as Record<string, string>
+  const connections: Record<string, string> = {}
+  for (const signal of spec.signals) {
+    for (const [element, pad] of signal.pins) {
+      if (element !== component.name) continue
+      const padIndex = packagePadIndex(pkg, pad)
+      if (padIndex >= 0) {
+        connections[componentPinName(component, padIndex, padLabels(pkg).length)] =
+          `net.${netNames.get(signal.name) ?? safeNetName(signal.name)}`
+      }
+    }
+  }
+  return connections
+}
+
+const renderEaglePassive = (
+  spec: GroveEagleSpec,
+  component: GroveEagleComponent,
+  index: number,
+  netNames: Map<string, string>,
+  profile: GroveDetailedProfile,
+) => {
+  const packageSpec = spec.packages[component.package]
+  if (!packageSpec) return null
+  const kind = componentKind(component)
+  const position = adjustedComponentAt(spec, component, profile)
+  const labels = padLabels(packageSpec)
+  // Only true two-pin packages can be represented by a resistor/capacitor/
+  // diode/LED primitive.  Resistor arrays, SIP networks, and shielded
+  // packages keep their complete imported footprint and are rendered through
+  // the chip path instead of passing invalid pin3+ connections to a primitive.
+  if (labels.length !== 2) return null
+  const connections = componentConnections(spec, component, netNames)
+  const pinAttributes = Object.fromEntries(
+    labels.slice(0, 2).map((_, padIndex) => [
+      componentPinName(component, padIndex, labels.length),
+      { mustBeConnected: true },
+    ]),
+  )
+  const value = component.value.trim()
+  const display = passiveValue(value, component.name)
+  const mpn = passiveMpn(
+    kind === "R" || kind === "C" || kind === "L" ? kind : "R",
+    display,
+    component.package,
+  )
+  const common = {
+    name: component.name,
+    displayName: display,
+    manufacturerPartNumber: mpn,
+    footprint: <EagleFootprint packageSpec={packageSpec} name={component.name} />,
+    pcbX: position.pcbX,
+    pcbY: position.pcbY,
+    pcbRotation: component.rotation,
+    layer: component.mirrored ? "bottom" as const : "top" as const,
+    schX: -5 + (index % 4) * 3.6,
+    schY: (Math.floor(index / 4) - 1) * 4.2,
+    connections,
+    pinAttributes,
+  }
+  if (kind === "R") {
+    return <resistor {...common} resistance={resistanceValue(display)} />
+  }
+  if (kind === "C") {
+    return <capacitor {...common} capacitance={capacitanceValue(display)} schOrientation="vertical" />
+  }
+  if (kind === "L") {
+    return <inductor {...common} inductance={display} />
+  }
+  if (kind === "D") {
+    return (
+      <diode
+        key={component.name}
+        {...common}
+        pinLabels={{ pin1: "anode", pin2: "cathode" }}
+      />
+    )
+  }
+  const color = /green/i.test(display)
+    ? "green"
+    : /blue/i.test(display)
+      ? "blue"
+      : /yellow/i.test(display)
+        ? "yellow"
+        : "red"
+  return <led key={component.name} {...common} color={color} pinLabels={{ pin1: "anode", pin2: "cathode" }} />
 }
 
 const renderChip = (
@@ -296,6 +540,15 @@ const renderChip = (
 ) => {
   const packageSpec = spec.packages[component.package]
   if (!packageSpec) return null
+  if (componentKind(component) !== "chip" && padLabels(packageSpec).length === 2) {
+    return renderEaglePassive(spec, component, index, netNames, profile)
+  }
+  const { display: chipDisplay, mpn: chipMpn } = chipDisplayAndMpn(
+    component,
+    packageSpec,
+    profile,
+    mainComponentName,
+  )
   const labels = padLabels(packageSpec)
   const connected = connectedPinLabels(spec, component)
   const position = adjustedComponentAt(spec, component, profile)
@@ -360,8 +613,8 @@ const renderChip = (
     <chip
       key={component.name}
       name={component.name}
-      displayName={component.value || (component.name === mainComponentName ? profile.primaryModel : component.name)}
-      manufacturerPartNumber={component.value || (component.name === mainComponentName ? profile.manufacturerPartNumber : component.name)}
+      displayName={chipDisplay}
+      manufacturerPartNumber={chipMpn}
       pinLabels={componentPinLabels(packageSpec)}
       pinAttributes={attributes}
       noConnect={labels.filter((label) => !connected.has(label))}
@@ -387,9 +640,23 @@ export const EagleBoardModule = ({
   spec: GroveEagleSpec
 }) => {
   const connector = spec.components.find((component) => component.name === "J1")
-  const routingDisabled = routingDisabledProfiles.has(profile.name)
+  // Dense legacy Eagle layouts carry long source traces and multi-pin support
+  // networks that cannot be safely reconstructed by the generic autorouter.
+  // Keep their exact footprints and schematic topology, but leave PCB copper
+  // unrouted rather than emitting a misleading partial route/error set.
+  const routingDisabled = routingDisabledProfiles.has(profile.name) || spec.components.length >= 5
   const connectorPackage = connector ? spec.packages[connector.package] : undefined
   const connectorLabels = connector ? connectorLabelsFor(spec, connector) : []
+  // Some Eagle source files use anonymous N$ nets for the external power
+  // rails. Keep their original labels for trace fidelity, but still expose a
+  // power and ground contract on the jumper so the schematic checker and
+  // downstream users can identify the supply pins.
+  const connectorPowerIndex = connectorLabels.findIndex((label) => isPowerLabel(label)) >= 0
+    ? connectorLabels.findIndex((label) => isPowerLabel(label))
+    : connectorLabels.findIndex((label) => !isGroundLabel(label))
+  const connectorGroundIndex = connectorLabels.findIndex((label) => isGroundLabel(label)) >= 0
+    ? connectorLabels.findIndex((label) => isGroundLabel(label))
+    : connectorLabels.length - 1
   const componentNames = new Set(spec.components.map((component) => component.name))
   const usedNetNames = new Set(componentNames)
   const netNames = new Map<string, string>()
@@ -414,6 +681,8 @@ export const EagleBoardModule = ({
         .filter((label): label is string => !!label),
     ),
   )
+  const sourceHasPowerNet = spec.signals.some((signal) => isPowerLabel(signal.name))
+  const sourceHasGroundNet = spec.signals.some((signal) => isGroundLabel(signal.name))
   const connectorLabelMap = new Map<string, string>()
   if (connector && connectorPackage) {
     connectorPads(connectorPackage)
@@ -467,6 +736,8 @@ export const EagleBoardModule = ({
           </Fragment>
         ) : null
       })}
+      {!sourceHasPowerNet ? <net name="VCC" isPowerNet /> : null}
+      {!sourceHasGroundNet ? <net name="GND" isGroundNet /> : null}
 
       {spec.signals.map((signal) => {
         const refs = signalRefs(signal)
@@ -504,14 +775,18 @@ export const EagleBoardModule = ({
             connectorLabels.map((label, index) => [`pin${index + 1}`, label]),
           )}
           pinAttributes={Object.fromEntries(
-            connectorLabels.map((label) => [
+            connectorLabels.map((label, index) => [
               label,
-              !connectorSignalLabels.has(label) && (isPowerLabel(label) || isGroundLabel(label))
-                ? { doNotConnect: true }
+              index === connectorPowerIndex
+                ? { requiresPower: true, requiresVoltage: profile.powerVoltage, mustBeConnected: true }
+                : index === connectorGroundIndex
+                ? { requiresGround: true, mustBeConnected: true }
                 : isGroundLabel(label)
                 ? { requiresGround: true, mustBeConnected: true }
                 : isPowerLabel(label)
                   ? { requiresPower: true, requiresVoltage: profile.powerVoltage, mustBeConnected: true }
+                  : !connectorSignalLabels.has(label) && (isPowerLabel(label) || isGroundLabel(label))
+                    ? { doNotConnect: true }
                   : /^NC(?:$|_)/i.test(label)
                     ? { doNotConnect: true }
                   : { mustBeConnected: true, isGpio: true },
@@ -537,6 +812,10 @@ export const EagleBoardModule = ({
               )
               return signal
                 ? [[`pin${index + 1}`, `net.${netNames.get(signal.name) ?? safeNetName(signal.name)}`]]
+                : isPowerLabel(label)
+                  ? [[`pin${index + 1}`, "net.VCC"]]
+                  : isGroundLabel(label)
+                    ? [[`pin${index + 1}`, "net.GND"]]
                 : []
             }),
           )}
@@ -553,11 +832,28 @@ export const EagleBoardModule = ({
 const connectorLabelsFor = (spec: GroveEagleSpec, component: GroveEagleComponent) => {
   const pkg = spec.packages[component.package]
   if (!pkg) return [] as string[]
+  const pads = connectorPads(pkg)
+  const shortConnector = pads.length < 4
   const used = new Map<string, number>()
-  return connectorPads(pkg)
+  return pads
     .map((pad, index) => {
       const signal = signalForPad(spec, component.name, pad.name)
-      const fallback = index === 0 ? "SIG" : index === 1 ? "NC" : index === 2 ? "VCC" : "GND"
+      // A few legacy Eagle boards expose a 2/3-pin auxiliary connector rather
+      // than the Grove 4-pin interface. Give those ports stable power/ground
+      // labels so the schematic remains useful and tscircuit's connector
+      // contract checker can still see both supply rails. Four-pin Grove
+      // connectors retain their source signal names and standard pin order.
+      const fallback = shortConnector
+        ? index === 0
+          ? "VCC"
+          : "GND"
+        : index === 0
+          ? "SIG"
+          : index === 1
+            ? "NC"
+            : index === 2
+              ? "VCC"
+              : "GND"
       const base = safeLabel(signal ?? fallback, fallback)
       const count = used.get(base) ?? 0
       used.set(base, count + 1)
