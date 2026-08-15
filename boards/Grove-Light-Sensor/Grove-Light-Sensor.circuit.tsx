@@ -31,6 +31,7 @@ export const GroveLightSensor = () => (
     <resistor
       name="R1"
       resistance="10k"
+      manufacturerPartNumber="RC0603FR-0710KL"
       footprint="0603"
       pcbX={4}
       pcbY={0}

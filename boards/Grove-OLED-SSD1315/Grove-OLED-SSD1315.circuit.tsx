@@ -72,17 +72,17 @@ export const GroveOledSsd1315 = () => (
     <chip name="U1" displayName="XC6206P332MR" manufacturerPartNumber="XC6206P332MR" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true }, VOUT: { requiresPower: true, requiresVoltage: "3.3V" }, VIN: { requiresPower: true, requiresVoltage: "5V" } }} footprint="sot23" pcbX={-8} pcbY={0} schX={-6} schY={5} schHeight="0.4mm" />
     <mosfet name="Q1" displayName="CJ2102" manufacturerPartNumber="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={3} schX={0} schY={3} />
     <mosfet name="Q2" displayName="CJ2102" manufacturerPartNumber="CJ2102" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={-3} pcbY={-3} schX={0} schY={-3} />
-    <resistor name="R1" resistance="4.7k" footprint="0402" pcbX={-6} pcbY={6} schX={-3} schY={6} />
-    <resistor name="R2" resistance="4.7k" footprint="0402" pcbX={-2} pcbY={6} schX={3} schY={6} />
-    <resistor name="R3" resistance="4.7k" footprint="0402" pcbX={-6} pcbY={-6} schX={-3} schY={-6} />
-    <resistor name="R4" resistance="4.7k" footprint="0402" pcbX={-2} pcbY={-6} schX={3} schY={-6} />
-    <resistor name="R5" resistance="4.7k" footprint="0402" pcbX={3} pcbY={7} schX={7} schY={6} />
-    <resistor name="R6" resistance="620k" footprint="0402" pcbX={7} pcbY={7} schX={12} schY={5} />
-    <capacitor name="C1" capacitance="10uF" footprint="0603" pcbX={-12} pcbY={5} schX={-7} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
-    <capacitor name="C2" capacitance="10uF" footprint="0603" pcbX={-11} pcbY={0} pcbRotation={90} schX={-5} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
-    <capacitor name="C3" capacitance="1uF" footprint="0402" pcbX={11} pcbY={7} schX={13} schY={2} schOrientation="vertical" />
-    <capacitor name="C4" capacitance="1uF" footprint="0402" pcbX={14} pcbY={7} schX={13} schY={0} schOrientation="vertical" />
-    <capacitor name="C5" capacitance="10uF" footprint="0603" pcbX={-2} pcbY={-8} pcbRotation={-90} schX={13} schY={-3} schOrientation="vertical" />
+    <resistor name="R1" resistance="4.7k" manufacturerPartNumber="RC0402FR-074K7L" footprint="0402" pcbX={-6} pcbY={6} schX={-3} schY={6} />
+    <resistor name="R2" resistance="4.7k" manufacturerPartNumber="RC0402FR-074K7L" footprint="0402" pcbX={-2} pcbY={6} schX={3} schY={6} />
+    <resistor name="R3" resistance="4.7k" manufacturerPartNumber="RC0402FR-074K7L" footprint="0402" pcbX={-6} pcbY={-6} schX={-3} schY={-6} />
+    <resistor name="R4" resistance="4.7k" manufacturerPartNumber="RC0402FR-074K7L" footprint="0402" pcbX={-2} pcbY={-6} schX={3} schY={-6} />
+    <resistor name="R5" resistance="4.7k" manufacturerPartNumber="RC0402FR-074K7L" footprint="0402" pcbX={3} pcbY={7} schX={7} schY={6} />
+    <resistor name="R6" resistance="620k" manufacturerPartNumber="RC0402FR-07620KL" footprint="0402" pcbX={7} pcbY={7} schX={12} schY={5} />
+    <capacitor name="C1" capacitance="10uF" manufacturerPartNumber="CC0603ZRY5V8BB106" footprint="0603" pcbX={-12} pcbY={5} schX={-7} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
+    <capacitor name="C2" capacitance="10uF" manufacturerPartNumber="CC0603ZRY5V8BB106" footprint="0603" pcbX={-11} pcbY={0} pcbRotation={90} schX={-5} schY={7} schOrientation="vertical" maxDecouplingTraceLength="10mm" />
+    <capacitor name="C3" capacitance="1uF" manufacturerPartNumber="CC0402ZRY5V8BB105" footprint="0402" pcbX={11} pcbY={7} schX={13} schY={2} schOrientation="vertical" />
+    <capacitor name="C4" capacitance="1uF" manufacturerPartNumber="CC0402ZRY5V8BB105" footprint="0402" pcbX={14} pcbY={7} schX={13} schY={0} schOrientation="vertical" />
+    <capacitor name="C5" capacitance="10uF" manufacturerPartNumber="CC0603ZRY5V8BB106" footprint="0603" pcbX={-2} pcbY={-8} pcbRotation={-90} schX={13} schY={-3} schOrientation="vertical" />
     <trace from="J1.VCC" to="U1.VIN" />
     <trace from="J1.VCC" to="R1.pin1" />
     <trace from="J1.VCC" to="R3.pin1" />

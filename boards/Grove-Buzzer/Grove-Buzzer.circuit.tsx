@@ -25,6 +25,7 @@ export const GroveBuzzer = () => (
     <resistor
       name="R1"
       resistance="1k"
+      manufacturerPartNumber="RC0603FR-071KL"
       footprint="0603"
       pcbX={0}
       pcbY={-1}

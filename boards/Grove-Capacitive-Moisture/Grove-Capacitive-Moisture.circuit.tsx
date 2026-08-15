@@ -5,6 +5,7 @@ const ProbeElectrodes = () => (
       name="CSENSE"
     displayName="Capacitive soil probe"
     capacitance="100pF"
+    manufacturerPartNumber="CC0603JRNPO9BN101"
     footprint={
       <footprint>
         <smtpad shape="rect" width="6mm" height="55mm" pcbX={-4} pcbY={0} portHints={["pin1"]} coveredWithSolderMask={false} />
@@ -45,16 +46,16 @@ export const GroveCapacitiveMoisture = () => (
       schY={2}
     />
     <opamp name="U2" displayName="LMV358ID" manufacturerPartNumber="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
-    <resistor name="R1" resistance="1.5k" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
-    <resistor name="R2" resistance="2.4k" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />
-    <resistor name="R3" resistance="10k" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={2} />
-    <resistor name="R4" resistance="0" footprint="0603" pcbX={7} pcbY={-35} schX={5} schY={-3} />
-    <resistor name="R5" resistance="1M" footprint="0603" pcbX={8} pcbY={-25} schX={5} schY={2} />
-    <resistor name="R6" resistance="100" footprint="0603" pcbX={8} pcbY={-21} schX={11} schY={-2} />
-    <capacitor name="C1" capacitance="470pF" footprint="0603" pcbX={-7} pcbY={-25} schX={-5} schY={8} schOrientation="vertical" />
-    <capacitor name="C2" capacitance="100nF" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} schOrientation="vertical" />
-    <capacitor name="C3" capacitance="10nF" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} schOrientation="vertical" />
-    <capacitor name="C4" capacitance="4.7uF" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} schOrientation="vertical" />
+    <resistor name="R1" resistance="1.5k" manufacturerPartNumber="RC0603FR-071K5L" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
+    <resistor name="R2" resistance="2.4k" manufacturerPartNumber="RC0603FR-072K4L" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />
+    <resistor name="R3" resistance="10k" manufacturerPartNumber="RC0603FR-0710KL" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={2} />
+    <resistor name="R4" resistance="0" manufacturerPartNumber="RC0603JR-070RL" footprint="0603" pcbX={7} pcbY={-35} schX={5} schY={-3} />
+    <resistor name="R5" resistance="1M" manufacturerPartNumber="RC0603FR-071ML" footprint="0603" pcbX={8} pcbY={-25} schX={5} schY={2} />
+    <resistor name="R6" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" pcbX={8} pcbY={-21} schX={11} schY={-2} />
+    <capacitor name="C1" capacitance="470pF" manufacturerPartNumber="CC0603JRNPO9BN471" footprint="0603" pcbX={-7} pcbY={-25} schX={-5} schY={8} schOrientation="vertical" />
+    <capacitor name="C2" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} schOrientation="vertical" />
+    <capacitor name="C3" capacitance="10nF" manufacturerPartNumber="CC0603KRX7R9BB103" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} schOrientation="vertical" />
+    <capacitor name="C4" capacitance="4.7uF" manufacturerPartNumber="CC0603ZRY5V8BB475" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} schOrientation="vertical" />
     <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={0} pcbY={-25} schX={3} schY={2} />
     <trace from="J1.VCC" to="U1.VCC" />
     <trace from="J1.VCC" to="U1.RESET" />

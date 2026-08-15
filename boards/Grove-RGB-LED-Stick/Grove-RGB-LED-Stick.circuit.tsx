@@ -62,14 +62,14 @@ export const GroveRgbLedStick = () => (
       <Ws2813Mini key={`LED${index + 1}`} name={`LED${index + 1}`} pcbX={pcbX} schX={getLedSchX(index)} isLast={index === ledPositions.length - 1} />
     ))}
     {ledPositions.map((pcbX, index) => (
-      <capacitor key={`C${index + 1}`} name={`C${index + 1}`} capacitance="100nF" footprint="0402" connections={{ pin1: `net.LED${index + 1}_VCC`, pin2: "net.GND" }} pcbX={pcbX} pcbY={3.3} schX={getLedSchX(index)} schY={4} schOrientation="vertical" />
+      <capacitor key={`C${index + 1}`} name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0402KRX7R9BB104" footprint="0402" connections={{ pin1: `net.LED${index + 1}_VCC`, pin2: "net.GND" }} pcbX={pcbX} pcbY={3.3} schX={getLedSchX(index)} schY={4} schOrientation="vertical" />
     ))}
     {ledPositions.map((pcbX, index) => (
-      <resistor key={`R${index + 1}`} name={`R${index + 1}`} resistance="200" footprint="0402" connections={{ pin1: "net.VCC_RGB", pin2: `net.LED${index + 1}_VCC` }} pcbX={pcbX} pcbY={-3.3} schX={getLedSchX(index)} schY={-4} />
+      <resistor key={`R${index + 1}`} name={`R${index + 1}`} resistance="200" manufacturerPartNumber="RC0402JR-07200RL" footprint="0402" connections={{ pin1: "net.VCC_RGB", pin2: `net.LED${index + 1}_VCC` }} pcbX={pcbX} pcbY={-3.3} schX={getLedSchX(index)} schY={-4} />
     ))}
-    <resistor name="RIN" resistance="220" footprint="0402" pcbX={-30.5} pcbY={-3.2} schX={-10.8} schY={-4} />
-    <capacitor name="CIN" capacitance="10uF" footprint="0805" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={33} pcbY={2} schX={32} schY={4} schOrientation="vertical" />
-    <capacitor name="CBULK" capacitance="220uF" footprint="1206" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={35} pcbY={-2} schX={34} schY={4} schOrientation="vertical" />
+    <resistor name="RIN" resistance="220" manufacturerPartNumber="RC0402JR-07220RL" footprint="0402" pcbX={-30.5} pcbY={-3.2} schX={-10.8} schY={-4} />
+    <capacitor name="CIN" capacitance="10uF" manufacturerPartNumber="CC0805ZRY5V8BB106" footprint="0805" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={33} pcbY={2} schX={32} schY={4} schOrientation="vertical" />
+    <capacitor name="CBULK" capacitance="220uF" manufacturerPartNumber="EEH-ZA1E221P" footprint="1206" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={35} pcbY={-2} schX={34} schY={4} schOrientation="vertical" />
     <trace from="J1.SIG" to="RIN.pin1" />
     <trace from="J1.VCC" to="net.VCC_RGB" />
     <trace from="J1.GND" to="net.GND" />

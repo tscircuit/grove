@@ -106,13 +106,13 @@ export const GroveLcdRgbBacklight = () => (
       schHeight="0.8mm"
       noConnect={["pin8", "pin9", "pin10", "pin11", "pin12", "pin13", "pin14", "pin15", "pin16"]}
     />
-    <resistor name="R1" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={4} />
-    <resistor name="R2" resistance="4.7k" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={4} />
-    <resistor name="RR" resistance="100" footprint="0603" layer="bottom" pcbX={16} pcbY={11} schX={7} schY={-4} />
-    <resistor name="RG" resistance="100" footprint="0603" layer="bottom" pcbX={20} pcbY={11} schX={8} schY={-6} />
-    <resistor name="RB" resistance="100" footprint="0603" layer="bottom" pcbX={24} pcbY={11} schX={7} schY={-8} />
-    <capacitor name="C1" capacitance="100nF" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} schOrientation="vertical" />
-    <capacitor name="C2" capacitance="1uF" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} schOrientation="vertical" />
+    <resistor name="R1" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={4} />
+    <resistor name="R2" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={4} />
+    <resistor name="RR" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={16} pcbY={11} schX={7} schY={-4} />
+    <resistor name="RG" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={20} pcbY={11} schX={8} schY={-6} />
+    <resistor name="RB" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={24} pcbY={11} schX={7} schY={-8} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} schOrientation="vertical" />
+    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} schOrientation="vertical" />
     <trace from="J1.VCC" to="net.VCC" />
     <trace from="U1.VCC" to="net.VCC" />
     <trace from="U2.VCC" to="net.VCC" />

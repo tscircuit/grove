@@ -37,6 +37,9 @@ jobs:
       - name: Type-check circuits
         run: bun run typecheck
 
+      - name: Check per-board design reviews
+        run: bun run review:check
+
       - name: Check PCB and schematic snapshots
         run: bun run snapshot
 
