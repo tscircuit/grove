@@ -2,32 +2,38 @@ import { Fragment } from "react"
 import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
 const GroveRGBLEDRing24WS2813Mini = () => (
-  <board name={"GroveRGBLEDRing24WS2813Mini"} title={"Grove RGB LED Ring 24 WS2813 Mini"} width={"48mm"} height={"48mm"} borderRadius="1mm" solderMaskColor="blue" routingDisabled={true}>
+  <board name={"GroveRGBLEDRing24WS2813Mini"} title={"Grove RGB LED Ring 24 WS2813 Mini"} width={"72mm"} height={"72mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
     <net name="VCC" isPowerNet />
     <net name="GND" isGroundNet />
     <net name="SCL" />
     <net name="SDA" />
     <net name="RX" />
     <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
     <net name="SIG" />
     <net name="STATUS" />
     <net name="EMITTER" />
-    <GroveMountingHoles x={20} y={21} />
-    <GroveConnector kind="analog" powerVoltage={"5V"} pcbX={-18} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={32} y={33} />
+    <GroveConnector kind="analog" powerVoltage={"5V"} connectToNets pcbX={-30} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
     {Array.from({ length: 24 }, (_, index) => {
-      const name = `LED${index + 1}`
-      const x = /ring/i.test("Grove RGB LED Ring 24 WS2813 Mini") ? 3 + Math.cos((index / 24) * Math.PI * 2 - Math.PI / 2) * 19 : -12 + index * 6
-      const y = /ring/i.test("Grove RGB LED Ring 24 WS2813 Mini") ? Math.sin((index / 24) * Math.PI * 2 - Math.PI / 2) * 19 : 0
+      const name = `PIX${index + 1}`
+      const angle = (index / 24) * Math.PI * 2 - Math.PI / 2
+      const x = 3 + Math.cos(angle) * 28
+      const y = Math.sin(angle) * 28
+      const capX = x - Math.cos(angle) * 8
+      const capY = y - Math.sin(angle) * 8
       return <Fragment key={name}>
-        <chip name={name} displayName={"WS2813"} manufacturerPartNumber={"WS2813"} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: { mustBeConnected: true, isGpio: true }, DOUT: index === 23 ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, requiresVoltage: "5V" }, GND: { requiresGround: true, mustBeConnected: true } }} noConnect={index === 23 ? ["DOUT"] : []} footprint={"led_5050"} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.6mm" schHeight="1mm" />
-        <capacitor name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={x} pcbY={y + 2.2} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />
-        {index === 0 ? <trace name="DATA_IN" from="J1.SIG" to="LED1.DIN" /> : <trace name={`DATA_${index}_${index + 1}`} from={`LED${index}.DOUT`} to={`LED${index + 1}.DIN`} />}
-        <trace name={`VCC_${index + 1}`} from={`LED${index + 1}.VCC`} to="J1.VCC" />
-        <trace name={`GND_${index + 1}`} from={`LED${index + 1}.GND`} to="J1.GND" />
+        <chip name={name} displayName={"WS2813"} manufacturerPartNumber={"WS2813"} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, DOUT: { doNotConnect: true }, VCC: { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : { VCC: "net.VCC", GND: "net.GND" }} noConnect={index === 0 ? ["DOUT"] : ["DIN", "DOUT"]} footprint={<footprint><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={-1.3} portHints={["pin1"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={1.3} portHints={["pin3"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={1.7} pcbY={1.3} portHints={["pin4"]} /><silkscreenrect width="3.8mm" height="3.8mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.2mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["DIN", "VCC"], rightSide: ["DOUT", "GND"] }} />
+        <capacitor name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength={144 + "mm"} connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={capX} pcbY={capY} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />
       </Fragment>
     })}
-    <silkscreentext text={"RGB LED Ring 24 WS2813 Mini"} pcbX={0} pcbY={22.5} fontSize="0.6mm" />
-    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-22.5} fontSize="0.45mm" />
+    <trace name="DATA_IN" path={["J1.SIG","PIX1.DIN"]} />
+    <trace name="LED_VCC_RAIL" path={["J1.VCC","PIX1.VCC","C1.pin1","PIX2.VCC","C2.pin1","PIX3.VCC","C3.pin1","PIX4.VCC","C4.pin1","PIX5.VCC","C5.pin1","PIX6.VCC","C6.pin1","PIX7.VCC","C7.pin1","PIX8.VCC","C8.pin1","PIX9.VCC","C9.pin1","PIX10.VCC","C10.pin1","PIX11.VCC","C11.pin1","PIX12.VCC","C12.pin1","PIX13.VCC","C13.pin1","PIX14.VCC","C14.pin1","PIX15.VCC","C15.pin1","PIX16.VCC","C16.pin1","PIX17.VCC","C17.pin1","PIX18.VCC","C18.pin1","PIX19.VCC","C19.pin1","PIX20.VCC","C20.pin1","PIX21.VCC","C21.pin1","PIX22.VCC","C22.pin1","PIX23.VCC","C23.pin1","PIX24.VCC","C24.pin1"]} />
+    <trace name="LED_GND_RAIL" path={["J1.GND","PIX1.GND","C1.pin2","PIX2.GND","C2.pin2","PIX3.GND","C3.pin2","PIX4.GND","C4.pin2","PIX5.GND","C5.pin2","PIX6.GND","C6.pin2","PIX7.GND","C7.pin2","PIX8.GND","C8.pin2","PIX9.GND","C9.pin2","PIX10.GND","C10.pin2","PIX11.GND","C11.pin2","PIX12.GND","C12.pin2","PIX13.GND","C13.pin2","PIX14.GND","C14.pin2","PIX15.GND","C15.pin2","PIX16.GND","C16.pin2","PIX17.GND","C17.pin2","PIX18.GND","C18.pin2","PIX19.GND","C19.pin2","PIX20.GND","C20.pin2","PIX21.GND","C21.pin2","PIX22.GND","C22.pin2","PIX23.GND","C23.pin2","PIX24.GND","C24.pin2"]} />
+    <silkscreentext text={"RGB LED Ring 24 WS2813 Mini"} pcbX={0} pcbY={34.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-34.5} fontSize="0.45mm" />
   </board>
 )
 

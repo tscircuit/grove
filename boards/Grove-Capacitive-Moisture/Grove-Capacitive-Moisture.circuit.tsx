@@ -1,93 +1,32 @@
-import { GroveConnector } from "../_shared/GroveParts"
+import { Fragment } from "react"
+import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
-const ProbeElectrodes = () => (
-    <capacitor
-      name="CSENSE"
-    displayName="Capacitive soil probe"
-    capacitance="100pF"
-    manufacturerPartNumber="CC0603JRNPO9BN101"
-    footprint={
-      <footprint>
-        <smtpad shape="rect" width="6mm" height="55mm" pcbX={-4} pcbY={0} portHints={["pin1"]} coveredWithSolderMask={false} />
-        <smtpad shape="rect" width="6mm" height="55mm" pcbX={4} pcbY={0} portHints={["pin2"]} coveredWithSolderMask={false} />
-      </footprint>
-    }
-      pcbX={0}
-      pcbY={15}
-      schX={1}
-      schY={5}
-      schOrientation="vertical"
-  />
-)
-
-export const GroveCapacitiveMoisture = () => (
-  <board name="GroveCapacitiveMoisture" title="Grove - Capacitive Moisture Sensor (Corrosion Resistant)" width="23.5mm" height="92.1mm" borderRadius="2mm" solderMaskColor="blue">
-    <GroveConnector kind="analog" pcbX={0} pcbY={-41} schX={-11} schY={0} />
-    <ProbeElectrodes />
-    <chip
-      name="U1"
-      displayName="NE555DR"
-      manufacturerPartNumber="NE555DR"
-      pinLabels={{ pin1: "GND", pin2: "TRIG", pin3: "OUT", pin4: "RESET", pin5: "CTRL", pin6: "THRESH", pin7: "DISCH", pin8: "VCC" }}
-      pinAttributes={{
-        GND: { requiresGround: true },
-        TRIG: { mustBeConnected: true, isGpio: true },
-        OUT: { mustBeConnected: true, isGpio: true },
-        RESET: { mustBeConnected: true },
-        CTRL: { mustBeConnected: true },
-        THRESH: { mustBeConnected: true },
-        DISCH: { mustBeConnected: true },
-        VCC: { requiresPower: true, requiresVoltage: "5V" },
-      }}
-      footprint="soic8"
-      pcbX={-4}
-      pcbY={-29}
-      schX={-4}
-      schY={2}
-    />
-    <opamp name="U2" displayName="LMV358ID" manufacturerPartNumber="LMV358ID" footprint="soic8" pcbX={4} pcbY={-29} schX={7} schY={0} />
-    <resistor name="R1" resistance="1.5k" manufacturerPartNumber="RC0603FR-071K5L" footprint="0603" pcbX={-7} pcbY={-35} schX={-8} schY={5} />
-    <resistor name="R2" resistance="2.4k" manufacturerPartNumber="RC0603FR-072K4L" footprint="0603" pcbX={-2} pcbY={-35} schX={-4} schY={6} />
-    <resistor name="R3" resistance="10k" manufacturerPartNumber="RC0603FR-0710KL" footprint="0603" pcbX={3} pcbY={-35} schX={1} schY={2} />
-    <resistor name="R4" resistance="0" manufacturerPartNumber="RC0603JR-070RL" footprint="0603" pcbX={7} pcbY={-35} schX={5} schY={-3} />
-    <resistor name="R5" resistance="1M" manufacturerPartNumber="RC0603FR-071ML" footprint="0603" pcbX={8} pcbY={-25} schX={5} schY={2} />
-    <resistor name="R6" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" pcbX={8} pcbY={-21} schX={11} schY={-2} />
-    <capacitor name="C1" capacitance="470pF" manufacturerPartNumber="CC0603JRNPO9BN471" footprint="0603" pcbX={-7} pcbY={-25} schX={-5} schY={8} schOrientation="vertical" />
-    <capacitor name="C2" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" pcbX={-7} pcbY={-21} schX={-8} schY={-3} schOrientation="vertical" />
-    <capacitor name="C3" capacitance="10nF" manufacturerPartNumber="CC0603KRX7R9BB103" footprint="0603" pcbX={-3} pcbY={-21} schX={-1} schY={-4} schOrientation="vertical" />
-    <capacitor name="C4" capacitance="4.7uF" manufacturerPartNumber="CC0603ZRY5V8BB475" footprint="0603" pcbX={4} pcbY={-21} schX={12} schY={-5} schOrientation="vertical" />
-    <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={0} pcbY={-25} schX={3} schY={2} />
-    <trace from="J1.VCC" to="U1.VCC" />
-    <trace from="J1.VCC" to="U1.RESET" />
-    <trace from="J1.VCC" to="U2.positive_supply" />
-    <trace from="J1.VCC" to="R1.pin2" />
-    <trace from="J1.VCC" to="C2.pin2" />
-    <trace from="C2.pin1" to="J1.GND" />
-    <trace from="U1.GND" to="J1.GND" />
-    <trace from="U2.negative_supply" to="J1.GND" />
-    <trace from="R1.pin1" to="R2.pin2" />
-    <trace from="R1.pin1" to="U1.DISCH" />
-    <trace from="R2.pin1" to="U1.TRIG" />
-    <trace from="R2.pin1" to="U1.THRESH" />
-    <trace from="R2.pin1" to="C1.pin2" />
-    <trace from="C1.pin1" to="J1.GND" />
-    <trace from="U1.CTRL" to="C3.pin1" />
-    <trace from="C3.pin2" to="J1.GND" />
-    <trace from="U1.OUT" to="R3.pin1" />
-    <trace from="R3.pin2" to="D1.anode" />
-    <trace from="D1.cathode" to="U2.non_inverting_input" />
-    <trace from="D1.cathode" to="R5.pin1" />
-    <trace from="R5.pin2" to="J1.GND" />
-    <trace from="U2.output" to="U2.inverting_input" />
-    <trace from="U2.output" to="R4.pin1" />
-    <trace from="R4.pin2" to="R6.pin1" />
-    <trace from="R6.pin2" to="J1.SIG" />
-    <trace from="J1.SIG" to="C4.pin1" />
-    <trace from="C4.pin2" to="J1.GND" />
-    <trace from="R2.pin1" to="CSENSE.pin1" />
-    <trace from="CSENSE.pin2" to="J1.GND" />
-    <silkscreentext text="CAPACITIVE MOISTURE" pcbX={0} pcbY={44} fontSize="0.65mm" />
+const GroveCapacitiveMoisture = () => (
+  <board name={"GroveCapacitiveMoisture"} title={"Grove - Capacitive Moisture Sensor (Corrosion Resistant)"} width={"40mm"} height={"20mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={16} y={7} />
+    <GroveConnector kind="analog" powerVoltage={"5V"} connectToNets pcbX={-14} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"NE555DR"} manufacturerPartNumber={"NE555DR"} pinLabels={{ pin1: "SIG", pin2: "VCC", pin3: "GND", pin4: "AUX" }} pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, AUX: { doNotConnect: true } }} connections={{ "SIG": "net.SIG", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["AUX"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-0.635} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0.635} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-0.635} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0.635} portHints={["pin4"]} /><silkscreenrect width="4mm" height="4mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={4} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["SIG","VCC"], rightSide: ["GND","AUX"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-5} pcbY={0} schX={5} schY={4} schOrientation="vertical" />
+    <resistor name="R1" resistance="10k" tolerance="1%" manufacturerPartNumber="RC0603FR-0710KL" footprint="0603" connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2","R1.pin2"]} />
+    <trace name="SIGNAL_RAIL" path={["J1.SIG","U1.SIG","R1.pin1"]} />
+    <silkscreentext text={"Capacitive Moisture Sensor (Cor…"} pcbX={0} pcbY={8.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-8.5} fontSize="0.45mm" />
   </board>
 )
 
+export { GroveCapacitiveMoisture }
 export default GroveCapacitiveMoisture

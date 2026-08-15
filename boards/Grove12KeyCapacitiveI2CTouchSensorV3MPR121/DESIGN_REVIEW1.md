@@ -11,11 +11,7 @@ This review is specific to the checked-in [board source](./Grove12KeyCapacitiveI
 ## Critical design review
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 12 missing-PCB-trace errors.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -23,12 +19,12 @@ This review is specific to the checked-in [board source](./Grove12KeyCapacitiveI
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 30mm × 20mm |
-| Source components | 8 |
-| Source nets | 10 |
-| Source traces | 28 |
-| Schematic traces | 10 |
-| PCB traces | 0 |
+| Declared board size | 40mm × 24mm |
+| Source components | 7 |
+| Source nets | 13 |
+| Source traces | 24 |
+| Schematic traces | 9 |
+| PCB traces | 14 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -44,9 +40,12 @@ This review is specific to the checked-in [board source](./Grove12KeyCapacitiveI
 | SDA | signal |
 | RX | signal |
 | TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
 | SIG | signal |
 | STATUS | signal |
 | EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
@@ -59,11 +58,13 @@ This review is specific to the checked-in [board source](./Grove12KeyCapacitiveI
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 | R1 | simple_resistor | 4.7kΩ | RC0603FR-074K7L | pin1, pin2 |
 | R2 | simple_resistor | 4.7kΩ | RC0603FR-074K7L | pin1, pin2 |
-| SW1 | simple_push_button | B3F-1000 tactile switch | B3F-1000 | pin1, pin2 |
 
 ### Trace sample
 
-- `.U1 > .IRQ to net.SIG`
+- `.J1 > .SCL to net.SCL`
+- `.J1 > .SDA to net.SDA`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
 - `.U1 > .SCL to net.SCL`
 - `.U1 > .SDA to net.SDA`
 - `.U1 > .VSS to net.GND`
@@ -72,33 +73,30 @@ This review is specific to the checked-in [board source](./Grove12KeyCapacitiveI
 - `.U2 > .VOUT to net.VDD`
 - `.U2 > .VIN to net.VCC`
 - `.C2 > .pin1 to net.VCC`
-- `.C2 > .pin2 to net.GND`
-- `J1.VCC to U2.VIN`
-- `U2.GND to J1.GND`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `jlcpcb:C91322`, `sot23`, `0603`, `button_6mm`.
+- Footprint strings declared in source: `sot23`, `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 2 autorouting error(s), 11 disconnected-port error(s), 12 missing-PCB-trace error(s), 18 source-pin-missing-trace warning(s), 16 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 19 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- Invalid footprint prop on pushbutton "SW1": "button_6mm". Parser details: Invalid footprint function, got "button", from string "button_6mm"
-- Port SCL on J1 is missing a trace
-- Port SDA on J1 is missing a trace
-- Port VCC on J1 is missing a trace
-- Port GND on J1 is missing a trace
-- Port VSS on U1 is missing a trace
-- Port VDD on U1 is missing a trace
-- Port GND on U2 is missing a trace
+- <trace#1106(from:.J1 > .SCL to:net.SCL) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1107(from:.J1 > .SDA to:net.SDA) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1108(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1109(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1110(from:.U1 > .SCL to:net.SCL) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1111(from:.U1 > .SDA to:net.SDA) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1112(from:.U1 > .VSS to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#1113(from:.U1 > .VDD to:net.VDD) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

@@ -46,7 +46,7 @@ const importedModelFor = (model: string) => {
 const effectiveInterface = (profile: Profile) => {
   const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
   if (/chainable rgb led|rgb led matrix|led matrix driver|p9813/.test(text)) return "digital"
-  if (/\bi2c\b|sht\d|aht\d|bme\d|bmp\d|mcp\d|scd\d|sgp\d|vl53|amg\d|mlx\d|as3935|as5600|pca9685|ht16k33|tca9548|ads1115|rtc|nfc|tmg39931|lis3dhtr|bma\d|bmi\d|dps310|mpr121|sen5|sen54|sen55|sfa30|veml|qwiic|st25dv|display|matrix/.test(text)) return "i2c"
+  if (/\bi2c\b|dht20|sht\d|aht\d|bme\d|bmp\d|mcp\d|scd\d|sgp\d|vl53|amg\d|mlx\d|as3935|as5600|pca9685|ht16k33|tca9548|ads1115|rtc|nfc|tmg39931|lis3dhtr|bma\d|bmi\d|dps310|mpr121|sen5|sen54|sen55|sfa30|veml|qwiic|st25dv|display|matrix/.test(text)) return "i2c"
   if (/\buart\b|wifi|bluetooth|\bble\b|gps|\brf\b|lora|rfid|serial|rs232|rs485|dmx|vision ai|mp3|speech|voice|camera/.test(text)) return "uart"
   if (profile.detailKind === "communications") return "uart"
   return profile.interfaceKind
@@ -74,11 +74,22 @@ const channelCountFor = (text: string) => {
 }
 
 const boardSizeFor = (profile: Profile, family: string, text: string, channels?: number) => {
-  if (channels) return /ring/.test(text) ? { width: 48, height: 48 } : { width: Math.max(72, channels * 6 + 14), height: 16 }
+  if (channels) {
+    if (/ring/.test(text)) {
+      // Keep a real clearance envelope around each 3.8 mm pixel footprint.
+      // A 24-pixel ring cannot fit on the old 48 mm board without adjacent
+      // footprints (and their bypass capacitors) touching.
+      const diameter = Math.max(48, Math.ceil(channels / 8) * 24)
+      return { width: diameter, height: diameter }
+    }
+    return { width: Math.max(72, channels * 6 + 14), height: 16 }
+  }
+  if (/tca9548|i2c hub|i2c multiplexer/.test(text)) return { width: 52, height: 28 }
   if (/gas|mq[- ]?\d|oxygen|co2|hcho|air quality|dust|formaldehyde|sen5[45]|bme688/.test(text)) return { width: 60, height: 38 }
   if (/thermal imaging|ir array|camera|vision ai|fingerprint|nfc|rfid|lora|wifi|bluetooth|serial rf/.test(text)) return { width: 52, height: 30 }
   if (/relay|motor driver|mini motor|servo|speaker|buzzer|fan|atomization|electromagnet/.test(text)) return { width: 52, height: 28 }
   if (/lcd|oled|e-ink|ips display|display/.test(text)) return { width: /16x?2|lcd/.test(text) ? 80 : 32, height: /16x?2|lcd/.test(text) ? 36 : 30 }
+  if (/mpr121|capacitive.*touch/.test(text)) return { width: 40, height: 24 }
   if (/joystick|keypad|keycap|touch slider|track ball|dip switch/.test(text)) return { width: 42, height: 32 }
   if (/distance|proximity|ultrasonic|lidar|radar/.test(text)) return { width: 40, height: 26 }
   if (/accelerometer|gyroscope|compass|imu|motion|step counter/.test(text)) return { width: 34, height: 28 }
@@ -223,6 +234,8 @@ const emitEagleBoard = (profile: Profile, spec: EagleSpec) => {
     const pkg = spec.packages[component.package]
     const pads = padsFor(pkg)
     const kind = componentKind(component)
+    const sourceName = component.name
+    const outputName = kind === "chip" && /^R[A-Z]/i.test(sourceName) ? `U_${sourceName}` : sourceName
     const value = String(component.value ?? "").trim()
     let display = value
     let mpn = value
@@ -257,7 +270,8 @@ const emitEagleBoard = (profile: Profile, spec: EagleSpec) => {
       else pinAttrs[pin] = { mustBeConnected: true }
     }
     return {
-      name: component.name,
+      name: outputName,
+      sourceName,
       kind,
       display,
       mpn,
@@ -271,10 +285,11 @@ const emitEagleBoard = (profile: Profile, spec: EagleSpec) => {
       mirrored: !!component.mirrored,
     }
   })
-  const connectorLabels = connectorPads.map((pad: any, index: number) => {
+  const connectorLabels = uniquePinLabels(connectorPads.map((pad: any, index: number) => {
     const signal = spec.signals.find((candidate: any) => candidate.pins.some(([element, pin]: [string, string]) => element === "J1" && pin === pad.name))
-    return signal ? signal.name : index === 0 ? "SIG" : index === 1 ? "NC" : index === 2 ? "VCC" : "GND"
-  })
+    const raw = signal ? signalName(signal.name) : index === 0 ? "SIG" : index === 1 ? "NC" : index === 2 ? "VCC" : "GND"
+    return /^N_\d+$/i.test(raw) ? (index === 0 ? "SIG" : index === 1 ? "NC" : index === 2 ? "VCC" : "GND") : raw
+  }))
   const signalData = spec.signals
     .filter((signal: any) => signal.pins.length >= 2)
     .map((signal: any) => ({
@@ -285,11 +300,11 @@ const emitEagleBoard = (profile: Profile, spec: EagleSpec) => {
           const label = connectorsByPad.get(pad)
           return label ? `J1.${label}` : undefined
         }
-        const component = serializedComponents.find((candidate: any) => candidate.name === element)
+        const component = serializedComponents.find((candidate: any) => candidate.sourceName === element || candidate.name === element)
         if (!component) return undefined
         const index = component.pins.indexOf(pad)
         if (index < 0) return undefined
-        return `${element}.${componentPort(component, index)}`
+        return `${component.name}.${componentPort(component, index)}`
       }).filter(Boolean),
     }))
     .filter((signal: any) => signal.refs.length >= 2)
@@ -314,7 +329,6 @@ const ${fn} = () => (
     height={${q(`${mm(spec.height)}mm`)}}
     borderRadius="1mm"
     solderMaskColor="blue"
-    routingDisabled={${spec.components.length >= 5 ? "true" : "false"}}
   >
     {signals.map((signal) => <net name={signal.name} isPowerNet={/^(?:VCC|VDD|VIN|3V3|5V|2V5)/i.test(signal.originalName)} isGroundNet={/^GND/i.test(signal.originalName)} />)}
     <GroveMountingHoles x={${Math.max(10, spec.width / 2 - 4)}} y={${Math.max(7, spec.height / 2 - 3)}} />
@@ -324,7 +338,6 @@ const ${fn} = () => (
       manufacturerPartNumber="B4B-PH-K-S"
       pinLabels={Object.fromEntries(connectorLabels.map((label, index) => ["pin" + (index + 1), label]))}
       pinAttributes={Object.fromEntries(connectorLabels.map((label) => [label, /^GND/i.test(label) ? { requiresGround: true, mustBeConnected: true } : /^(?:VCC|VDD|VIN|3V3|5V)/i.test(label) ? { requiresPower: true, requiresVoltage: ${q(profile.powerVoltage)}, mustBeConnected: true } : /^NC/i.test(label) ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true }]))}
-      connections={Object.fromEntries(signals.flatMap((signal: any) => signal.refs.filter((ref: any) => ref.startsWith("J1.")).map((ref: any) => [ref.replace("J1.", "") , "net." + signal.name] )))}
       footprint={<HandAuthoredFootprint name="J1" pads={connectorPads} excludePadNames={["SS1", "SS2"]} />}
       pcbX={${mm((connector?.x ?? -spec.width / 2 + 5) - spec.originX)}}
       pcbY={${mm((connector?.y ?? 0) - spec.originY)}}
@@ -333,16 +346,18 @@ const ${fn} = () => (
       schY={0}
       schPinArrangement={{ rightSide: [...connectorLabels] }}
       schDirection="right"
+      schWidth="1.3mm"
+      schHeight="0.6mm"
     />
     {components.map((component, index) => {
       const footprint = <HandAuthoredFootprint name={component.name} pads={packages[component.package as keyof typeof packages].pads} graphics={packages[component.package as keyof typeof packages].graphics} />
-      const common: any = { name: component.name, displayName: component.display, manufacturerPartNumber: component.mpn, footprint, pcbX: component.x, pcbY: component.y, pcbRotation: component.rotation, layer: component.mirrored ? "bottom" : "top", schX: -5 + (index % 4) * 3.6, schY: (Math.floor(index / 4) - 1) * 4.2, connections: component.connections, pinAttributes: component.pinAttributes }
+      const common: any = { name: component.name, displayName: component.display, manufacturerPartNumber: component.mpn, footprint, pcbX: component.x, pcbY: component.y, pcbRotation: component.rotation, layer: component.mirrored ? "bottom" : "top", schX: -5 + (index % 4) * 3.6, schY: (Math.floor(index / 4) - 1) * 4.2, pinAttributes: component.pinAttributes }
       if (component.kind === "R") return <resistor {...common} resistance={component.display} />
-      if (component.kind === "C") return <capacitor {...common} capacitance={component.display} schOrientation="vertical" />
+      if (component.kind === "C") return <capacitor {...common} capacitance={component.display} maxDecouplingTraceLength="100mm" schOrientation="vertical" />
       if (component.kind === "L") return <inductor {...common} inductance={component.display} />
       if (component.kind === "D") return <diode {...common} pinLabels={{ pin1: "anode", pin2: "cathode" }} />
       if (component.kind === "LED") return <led {...common} color={/green/i.test(component.display) ? "green" : /blue/i.test(component.display) ? "blue" : /yellow/i.test(component.display) ? "yellow" : "red"} pinLabels={{ pin1: "anode", pin2: "cathode" }} />
-      return <chip {...common} pinLabels={Object.fromEntries(component.pins.map((_: any, pinIndex: number) => ["pin" + (pinIndex + 1), "P" + (pinIndex + 1)]))} noConnect={component.pins.filter((_: any, pinIndex: number) => component.pinAttributes["P" + (pinIndex + 1)]?.doNotConnect).map((_: any, pinIndex: number) => "pin" + (pinIndex + 1))} schPinArrangement={{ leftSide: component.pins.slice(0, Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + 1)), rightSide: component.pins.slice(Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + Math.ceil(component.pins.length / 2) + 1)) }} />
+      return <chip {...common} schWidth="1.6mm" schHeight="0.4mm" pinLabels={Object.fromEntries(component.pins.map((_: any, pinIndex: number) => ["pin" + (pinIndex + 1), "P" + (pinIndex + 1)]))} noConnect={component.pins.filter((_: any, pinIndex: number) => component.pinAttributes["P" + (pinIndex + 1)]?.doNotConnect).map((_: any, pinIndex: number) => "pin" + (pinIndex + 1))} schPinArrangement={{ leftSide: component.pins.slice(0, Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + 1)), rightSide: component.pins.slice(Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + Math.ceil(component.pins.length / 2) + 1)) }} />
     })}
     {signals.map((signal) => signal.refs.length >= 2 ? <trace name={"SRC_" + signal.name} path={[...signal.refs]} /> : null)}
     <silkscreentext text={${q(compact(profile.title, 32))}} pcbX={0} pcbY={${mm(spec.height / 2 - 1.5)}} fontSize="0.6mm" />
@@ -360,7 +375,9 @@ const emitGenericBoard = (profile: Profile) => {
   const text = `${profile.title} ${profile.primaryModel}`.toLowerCase()
   const interfaceKind = effectiveInterface(profile)
   const family = familyFor(profile, text)
-  const channels = channelCountFor(text)
+  // Only addressable LED families have a serial pixel chain.  Names such as
+  // “8 Channel I2C Hub” must not be mistaken for LED channel counts.
+  const channels = family === "led" ? channelCountFor(text) : undefined
   const size = boardSizeFor(profile, family, text, channels)
   const imported = importedModelFor(profile.primaryModel)
   const power3v3 = mainNeeds3v3(text)
@@ -371,89 +388,227 @@ const emitGenericBoard = (profile: Profile) => {
     const aliases: Record<string, string[]> = { VCC: ["VCC", "VDD", "VDDIO", "VIN"], VDD: ["VDD", "VDDIO", "VCC", "VIN"], GND: ["GND", "VSS", "GND1", "GND2"], SIG: ["SIG", "OUT", "OUTA", "INT1", "IRQ"], SCL: ["SCL", "SCK"], SDA: ["SDA", "SDI"] }
     return aliases[label]?.find((candidate) => mainPins.includes(candidate)) ?? label
   }
-  const mainFootprint = imported?.footprint ?? (mainPins.length >= 14 ? "qfn24" : mainPins.length >= 8 ? "qfn16" : mainPins.length >= 6 ? "soic8" : "sot23")
-  const nets = ["VCC", "VDD", "GND", "SCL", "SDA", "RX", "TX", "SIG", "STATUS", "EMITTER"].filter((name) => name !== "VDD" || power3v3)
+  // Keep imported supplier numbers in the BOM, but use a deterministic
+  // board-local package footprint for the rendered draft. A named `soic` or
+  // `qfn` package has a fixed pad count; many imported parts have 9–25 pins,
+  // which leaves some source ports without a PCB pad and crashes autorouting.
+  // Emit an exact-count two-row package instead so every hand-authored pin is
+  // physically represented.
+  const leftPadCount = Math.ceil(mainPins.length / 2)
+  const rightPadCount = mainPins.length - leftPadCount
+  const footprintHeight = Math.max(4, Math.max(leftPadCount, rightPadCount) * 1.27 + 1)
+  const mainFootprint = `<footprint>${mainPins.map((_, index) => {
+    const onLeft = index < leftPadCount
+    const sideCount = onLeft ? leftPadCount : rightPadCount
+    const sideIndex = onLeft ? index : index - leftPadCount
+    const y = mm((sideIndex - (sideCount - 1) / 2) * 1.27)
+    const x = onLeft ? -2.5 : 2.5
+    return `<smtpad shape="rect" width="1mm" height="0.6mm" pcbX={${x}} pcbY={${y}} portHints={["pin${index + 1}"]} />`
+  }).join("")}<silkscreenrect width="4mm" height="${mm(footprintHeight)}mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>`
+  const nets = ["VCC", "VDD", "GND", "SCL", "SDA", "RX", "TX", "RX_MCU", "TX_MCU", "SIG", "STATUS", "EMITTER", "LOAD_NEG"].filter((name) => name !== "VDD" || power3v3)
+  const powerPins = mainPins.filter((label) => /^(?:VCC|VDD|VDDIO|VDDH|VIN|VM)$/i.test(label))
+  const groundPins = mainPins.filter((label) => /^(?:GND|VSS|GND\d+|EP|EPAD)$/i.test(label))
+  const primaryPowerPin = mainPin(powerPins[0] ?? (power3v3 ? "VDD" : "VCC"))
+  const primaryGroundPin = mainPin(groundPins[0] ?? "GND")
+  const mainSignalPin = mainPin(signal[0])
+  const mainPcbX = /tca9548|i2c hub|i2c multiplexer/.test(text) ? 8 : family === "display" ? 1 : 4
+  const environmentalCapX = Math.min(10, size.width / 2 - 8)
+  const environmentalCapY = Math.min(8, size.height / 2 - 5)
+  const c1PcbX = /mpr121/.test(text) ? 12 : family === "input" ? 8 : -5
+  const c1PcbY = family === "input" ? -6 : 0
+  const inputRailRefs = power3v3 ? ["J1.VCC", "U2.VIN", "C2.pin1"] : []
+  const activeRailRefs = power3v3 ? ["U2.VOUT", ...powerPins.map((pin) => `U1.${pin}`), "C1.pin1"] : ["J1.VCC", ...powerPins.map((pin) => `U1.${pin}`), "C1.pin1"]
+  const groundRailRefs = ["J1.GND", ...groundPins.map((pin) => `U1.${pin}`), ...(power3v3 ? ["U2.GND", "C2.pin2"] : []), "C1.pin2"]
+  if (interfaceKind === "i2c") activeRailRefs.push("R1.pin1", "R2.pin1")
+  if (interfaceKind === "analog") {
+    groundRailRefs.push("R1.pin2")
+  }
+  if (family === "environmental" || family === "motion") {
+    activeRailRefs.push(`C_${family.toUpperCase()}.pin1`)
+    groundRailRefs.push(`C_${family.toUpperCase()}.pin2`)
+  }
+  if (family === "audio") {
+    activeRailRefs.push("U4.VCC", "C_AUDIO.pin1")
+    groundRailRefs.push("U4.GND", "C_AUDIO.pin2")
+  }
+  if (family === "power") {
+    activeRailRefs.push("R_STATUS.pin1")
+    groundRailRefs.push("D_STATUS.cathode")
+    if (/relay|motor|fan|speaker|buzzer|servo|atomization|electromagnet/.test(text)) {
+      activeRailRefs.push("U3.POS", "D1.cathode")
+      groundRailRefs.push("Q1.source", "U3.GND")
+    }
+  }
+  if (family === "gas") {
+    activeRailRefs.push("R_HEAT.pin1")
+    groundRailRefs.push("R_HEAT.pin2")
+  }
+  if (family === "optical" && interfaceKind !== "i2c") {
+    activeRailRefs.push("R_EMITTER.pin1")
+    groundRailRefs.push("D_EMITTER.cathode")
+  }
+  if (family === "distance") {
+    activeRailRefs.push("U3.VCC", "U4.VCC")
+    groundRailRefs.push("U3.GND", "U4.GND")
+  }
+  if (family === "display") {
+    activeRailRefs.push("U3.VCC")
+    groundRailRefs.push("U3.GND")
+  }
+  if (family === "input" && /button|switch/.test(text)) activeRailRefs.push("SW1.pin1")
+  const signalRailRefs: Array<[string, string[]]> = family === "distance"
+    ? [["DISTANCE_DRIVE_TRACE", [`J1.${signal[0]}`, "U3.IN"]], ["DISTANCE_SENSE_TRACE", ["U4.OUT", `U1.${mainSignalPin}`]]]
+    : interfaceKind === "i2c"
+      ? [["I2C_SCL", ["J1.SCL", `U1.${mainPin("SCL")}`, "R1.pin2"]], ["I2C_SDA", ["J1.SDA", `U1.${mainPin("SDA")}`, "R2.pin2"]]]
+    : interfaceKind === "uart"
+      ? [["UART_RX_IN", ["J1.RX", "R1.pin1"]], ["UART_RX_OUT", ["R1.pin2", `U1.${mainPin("RX")}`]], ["UART_TX_IN", ["J1.TX", "R2.pin1"]], ["UART_TX_OUT", ["R2.pin2", `U1.${mainPin("TX")}`]]]
+      : [["SIGNAL_RAIL", [`J1.${signal[0]}`, `U1.${mainSignalPin}`]]]
+  if (interfaceKind === "analog") signalRailRefs[0][1].push("R1.pin1")
+  if (family === "audio") signalRailRefs[0][1].push("U4.OUT")
+  if (family === "input" && /button|switch/.test(text)) signalRailRefs[0][1].push("SW1.pin2")
+  if (interfaceKind === "analog" && family === "input" && /potentiometer|rotary|slide pot|joystick/.test(text)) {
+    activeRailRefs.push("RV1.pin1")
+    groundRailRefs.push("RV1.pin3")
+    signalRailRefs[0][1].push("RV1.pin2")
+  }
+  if (family === "display") {
+    if (interfaceKind === "i2c") {
+      signalRailRefs[0][1].push("U3.SCL")
+      signalRailRefs[1][1].push("U3.SDA")
+    } else {
+      signalRailRefs[0][1].push("U3.DATA")
+    }
+  }
+  if (family === "power" && /relay|motor|fan|speaker|buzzer|servo|atomization|electromagnet/.test(text)) {
+    const gateRail = interfaceKind === "i2c" ? signalRailRefs[1] : signalRailRefs[0]
+    gateRail[1].push("Q1.gate")
+  }
+  const tracePath = (name: string, refs: string[]) => {
+    // Component `connections` props assign each endpoint to the canonical
+    // net before source diagnostics run. Keep the visible routed path made
+    // only of physical ports so it is also available to the PCB autorouter.
+    return `    <trace name="${name}" path={${JSON.stringify(refs)}} />`
+  }
   const attrFor = (label: string) => {
     if (/^(?:VCC|VDD|VDDIO|VDDH|VIN|VM)$/i.test(label)) return `{ requiresPower: true, ${power3v3 && /^(?:VCC|VIN)$/i.test(label) ? `requiresVoltage: ${q(profile.powerVoltage)}, ` : ""}mustBeConnected: true }`
     if (/^(?:GND|VSS|GND\d+|EP|EPAD)$/i.test(label)) return `{ requiresGround: true, mustBeConnected: true }`
-    if ([...signal, "SIG", "OUT", "OUTA", "OUTB", "INT1", "IRQ"].includes(label)) return `{ mustBeConnected: true, isGpio: true }`
+    if ([...signal, "SIG", "OUT", "OUTA", "OUTB"].includes(label)) return `{ mustBeConnected: true, isGpio: true }`
     return `{ doNotConnect: true }`
   }
-  const mainConnections = mainPins.flatMap((label) => {
-    const net = /^(?:VCC|VIN)$/i.test(label) ? "VCC" : /^(?:VDD|VDDIO|VDDH)$/i.test(label) ? (power3v3 ? "VDD" : "VCC") : /^(?:GND|VSS|GND\d+|EP|EPAD)$/i.test(label) ? "GND" : /^(?:SCL|SCK)$/i.test(label) ? "SCL" : /^(?:SDA|SDI)$/i.test(label) ? "SDA" : /^(?:RX|TX)$/i.test(label) ? label : /^(?:SIG|OUT|OUTA|OUTB|INT1|IRQ)$/i.test(label) ? "SIG" : undefined
-    return net ? [`${label}: "net.${net}"`] : []
-  }).join(", ")
+  const mainNetFor = (label: string) => {
+    if (/^(?:GND|VSS|GND\d+|GND_\d+|EP|EPAD)$/i.test(label)) return "GND"
+    if (/^(?:VCC|VIN|VM)$/i.test(label)) return "VCC"
+    if (/^(?:VDD|VDDIO|VDDH)$/i.test(label)) return power3v3 ? "VDD" : "VCC"
+    if (/^SCL$/i.test(label)) return "SCL"
+    if (/^SDA$/i.test(label)) return "SDA"
+    if (/^RX$/i.test(label)) return interfaceKind === "uart" ? "RX_MCU" : "RX"
+    if (/^TX$/i.test(label)) return interfaceKind === "uart" ? "TX_MCU" : "TX"
+    if (family === "distance" && /^IN$/i.test(label)) return "DISTANCE_DRIVE"
+    if (family === "distance" && /^OUT$/i.test(label)) return "DISTANCE_SENSE"
+    return "SIG"
+  }
+  const mainConnections = mainPins
+    .filter((label) => !attrFor(label).includes("doNotConnect"))
+    .map((label) => `${q(label)}: ${q(`net.${mainNetFor(label)}`)}`)
+    .join(", ")
   const lines: string[] = []
   lines.push(`import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"`)
   lines.push("")
   lines.push(`const ${fn} = () => (`)
-  lines.push(`  <board name={${q(profile.componentName)}} title={${q(profile.title)}} width={${q(`${size.width}mm`)}} height={${q(`${size.height}mm`)}} borderRadius="1mm" solderMaskColor="blue" routingDisabled={${channels && channels >= 10 ? "true" : "false"}}>`)
+  lines.push(`  <board name={${q(profile.componentName)}} title={${q(profile.title)}} width={${q(`${size.width}mm`)}} height={${q(`${size.height}mm`)}} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">`)
   for (const net of nets) lines.push(`    <net name="${net}"${net === "VCC" || net === "VDD" ? " isPowerNet" : net === "GND" ? " isGroundNet" : ""} />`)
   lines.push(`    <GroveMountingHoles x={${Math.max(10, size.width / 2 - 4)}} y={${Math.max(7, size.height / 2 - 3)}} />`)
-  lines.push(`    <GroveConnector kind="${interfaceKind}" powerVoltage={${q(profile.powerVoltage)}} pcbX={${-size.width / 2 + 6}} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />`)
+  // Channel boards use the same canonical power/data nets as the rest of the
+  // catalogue. This keeps the LED rail traces electrically connected while
+  // leaving the unused downstream data pins explicitly no-connect.
+  lines.push(`    <GroveConnector kind="${interfaceKind}" powerVoltage={${q(profile.powerVoltage)}} connectToNets pcbX={${-size.width / 2 + 6}} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />`)
 
   if (channels) {
+    const ring = /ring/i.test(profile.title)
+    const ringRadius = Math.min(size.width, size.height) / 2 - 8
+    const pixelConnections = `connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : { VCC: "net.VCC", GND: "net.GND" }}`
     lines.push(`    {Array.from({ length: ${channels} }, (_, index) => {`)
-    lines.push(`      const name = \`LED\${index + 1}\``)
-    lines.push(`      const x = /ring/i.test(${q(profile.title)}) ? 3 + Math.cos((index / ${channels}) * Math.PI * 2 - Math.PI / 2) * ${Math.min(size.width, size.height) / 2 - 5} : ${-size.width / 2 + 12} + index * 6`)
-    lines.push(`      const y = /ring/i.test(${q(profile.title)}) ? Math.sin((index / ${channels}) * Math.PI * 2 - Math.PI / 2) * ${Math.min(size.width, size.height) / 2 - 5} : 0`)
+    lines.push(`      const name = \`PIX\${index + 1}\``)
+    lines.push(`      const angle = (index / ${channels}) * Math.PI * 2 - Math.PI / 2`)
+    lines.push(`      const x = ${ring ? `3 + Math.cos(angle) * ${ringRadius}` : `${-size.width / 2 + 12} + index * 6`}`)
+    lines.push(`      const y = ${ring ? `Math.sin(angle) * ${ringRadius}` : "0"}`)
+    lines.push(`      const capX = ${ring ? `x - Math.cos(angle) * 8` : "x"}`)
+    lines.push(`      const capY = ${ring ? `y - Math.sin(angle) * 8` : "y + 4"}`)
     lines.push(`      return <Fragment key={name}>`)
-    lines.push(`        <chip name={name} displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: { mustBeConnected: true, isGpio: true }, DOUT: index === ${channels - 1} ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, requiresVoltage: "5V" }, GND: { requiresGround: true, mustBeConnected: true } }} noConnect={index === ${channels - 1} ? ["DOUT"] : []} footprint={${q(imported?.footprint ?? "led_5050")}} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.6mm" schHeight="1mm" />`)
-    lines.push(`        <capacitor name={\`C\${index + 1}\`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={x} pcbY={y + 2.2} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />`)
-    lines.push(`        {index === 0 ? <trace name="DATA_IN" from="J1.SIG" to="LED1.DIN" /> : <trace name={\`DATA_\${index}_\${index + 1}\`} from={\`LED\${index}.DOUT\`} to={\`LED\${index + 1}.DIN\`} />}`)
-    lines.push(`        <trace name={\`VCC_\${index + 1}\`} from={\`LED\${index + 1}.VCC\`} to="J1.VCC" />`)
-    lines.push(`        <trace name={\`GND_\${index + 1}\`} from={\`LED\${index + 1}.GND\`} to="J1.GND" />`)
+      lines.push(`        <chip name={name} displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, DOUT: { doNotConnect: true }, VCC: { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} ${pixelConnections} noConnect={index === 0 ? ["DOUT"] : ["DIN", "DOUT"]} footprint={<footprint><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={-1.3} portHints={["pin1"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={1.3} portHints={["pin3"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={1.7} pcbY={1.3} portHints={["pin4"]} /><silkscreenrect width="3.8mm" height="3.8mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.2mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["DIN", "VCC"], rightSide: ["DOUT", "GND"] }} />`)
+      lines.push(`        <capacitor name={\`C\${index + 1}\`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength={${Math.max(120, size.width * 2)} + "mm"} connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={capX} pcbY={capY} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />`)
     lines.push(`      </Fragment>`)
     lines.push(`    })}`)
+    lines.push(tracePath("DATA_IN", ["J1.SIG", "PIX1.DIN"]))
+    const ledRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.VCC`, `C${index + 1}.pin1`]).flat()
+    const groundRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.GND`, `C${index + 1}.pin2`]).flat()
+    lines.push(tracePath("LED_VCC_RAIL", ["J1.VCC", ...ledRefs]))
+    lines.push(tracePath("LED_GND_RAIL", ["J1.GND", ...groundRefs]))
   } else {
-    lines.push(`    <chip name="U1" displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}}${imported ? ` supplierPartNumbers={{ jlcpcb: [${q(imported.supplierPartNumber)}] }}` : ""} pinLabels={{ ${mainPins.map((label, index) => `pin${index + 1}: ${q(label)}`).join(", ")} }} pinAttributes={{ ${mainPins.map((label) => `${label}: ${attrFor(label)}`).join(", ")} }} connections={{ ${mainConnections} }} noConnect={[${mainPins.filter((label) => attrFor(label).includes("doNotConnect")).map((label) => q(label)).join(", ")}]} footprint={${q(mainFootprint)}} pcbX={4} pcbY={0} schX={2} schY={0} />`)
+    lines.push(`    <chip name="U1" displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}}${imported ? ` supplierPartNumbers={{ jlcpcb: [${q(imported.supplierPartNumber)}] }}` : ""} pinLabels={{ ${mainPins.map((label, index) => `pin${index + 1}: ${q(label)}`).join(", ")} }} pinAttributes={{ ${mainPins.map((label) => `${label}: ${attrFor(label)}`).join(", ")} }} connections={{ ${mainConnections} }} noConnect={[${mainPins.filter((label) => attrFor(label).includes("doNotConnect")).map((label) => q(label)).join(", ")}]} footprint={${mainFootprint}} pcbX={${mainPcbX}} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ${JSON.stringify(mainPins.slice(0, Math.ceil(mainPins.length / 2)))}, rightSide: ${JSON.stringify(mainPins.slice(Math.ceil(mainPins.length / 2)))} }} />`)
     if (power3v3) {
-      lines.push(`    <chip name="U2" displayName="XC6206P332MR-G" manufacturerPartNumber="XC6206P332MR-G" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true, mustBeConnected: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: ${q(profile.powerVoltage)}, mustBeConnected: true } }} connections={{ GND: "net.GND", VOUT: "net.VDD", VIN: "net.VCC" }} footprint="sot23" pcbX={-5} pcbY={-5} schX={-3} schY={-4} />`)
-      lines.push(`    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-1} pcbY={-4} schX={-3} schY={-4} schOrientation="vertical" />`)
-      lines.push(`    <trace name="REG_IN" from="J1.VCC" to="U2.VIN" /><trace name="REG_GND" from="U2.GND" to="J1.GND" /><trace name="REG_OUT" from="U2.VOUT" to="U1.${mainPin("VDD")}" /><trace name="REG_CAP" from="C2.pin1" to="U2.VIN" /><trace name="REG_CAP_GND" from="C2.pin2" to="U2.GND" />`)
+      lines.push(`    <chip name="U2" displayName="XC6206P332MR-G" manufacturerPartNumber="XC6206P332MR-G" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true, mustBeConnected: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: ${q(profile.powerVoltage)}, mustBeConnected: true } }} connections={{ GND: "net.GND", VOUT: "net.VDD", VIN: "net.VCC" }} footprint="sot23" pcbX={-5} pcbY={-5} schX={-4} schY={-4} schWidth="1.2mm" schHeight="0.4mm" />`)
+      lines.push(`    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-1} pcbY={-9} schX={-1.5} schY={-4} schOrientation="vertical" />`)
     }
-    lines.push(`    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.${power3v3 ? "VDD" : "VCC"}", pin2: "net.GND" }} pcbX={${family === "input" ? 7 : -5}} pcbY={0} schX={7} schY={4} schOrientation="vertical" />`)
-    lines.push(`    <trace name="DECOUPLE_VCC" from="U1.${mainPin(power3v3 ? "VDD" : "VCC")}" to="C1.pin1" /><trace name="DECOUPLE_GND" from="C1.pin2" to="U1.${mainPin("GND")}" />`)
+    lines.push(`    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${c1PcbX}} pcbY={${c1PcbY}} schX={5} schY={4} schOrientation="vertical" />`)
     if (interfaceKind === "i2c") {
-      lines.push(`    <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: "net.${power3v3 ? "VDD" : "VCC"}", pin2: "net.SCL" }} pcbX={-8} pcbY={5} schX={-3} schY={5} /><resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: "net.${power3v3 ? "VDD" : "VCC"}", pin2: "net.SDA" }} pcbX={-8} pcbY={-5} schX={-3} schY={-5} />`)
-      lines.push(`    <trace name="I2C_SCL" from="J1.SCL" to="U1.${mainPin("SCL")}" /><trace name="I2C_SDA" from="J1.SDA" to="U1.${mainPin("SDA")}" /><trace name="PULLUP_SCL" from="R1.pin2" to="J1.SCL" /><trace name="PULLUP_SDA" from="R2.pin2" to="J1.SDA" />`)
+      lines.push(`    <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SCL" }} pcbX={-8} pcbY={5} schX={-3} schY={5} />`)
+      lines.push(`    <resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SDA" }} pcbX={-8} pcbY={${power3v3 ? -8 : -5}} schX={-3} schY={-5} />`)
     } else if (interfaceKind === "uart") {
-      lines.push(`    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.RX", pin2: "net.RX" }} pcbX={-6} pcbY={5} schX={-3} schY={5} /><resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.TX", pin2: "net.TX" }} pcbX={-6} pcbY={-5} schX={-3} schY={-5} />`)
-      lines.push(`    <trace name="UART_RX" from="J1.RX" to="U1.${mainPin("RX")}" /><trace name="UART_TX" from="J1.TX" to="U1.${mainPin("TX")}" /><trace name="SERIES_RX" from="J1.RX" to="R1.pin1" /><trace name="SERIES_TX" from="J1.TX" to="R2.pin1" />`)
-    } else {
-      lines.push(`    <resistor name="R1" resistance="${profile.detailKind === "sensor" ? "10k" : "1k"}" tolerance="1%" manufacturerPartNumber="${profile.detailKind === "sensor" ? "RC0603FR-0710KL" : "RC0603FR-071KL"}" footprint="0603" connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-4} pcbY={5} schX={-3} schY={5} />`)
-      lines.push(`    <trace name="SIGNAL" from="J1.${signal[0]}" to="U1.${mainPin(signal[0])}" /><trace name="SIGNAL_BIAS" from="J1.${signal[0]}" to="R1.pin1" /><trace name="SIGNAL_RETURN" from="R1.pin2" to="J1.GND" />`)
+      lines.push(`    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.RX", pin2: "net.RX_MCU" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
+      lines.push(`    <resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.TX", pin2: "net.TX_MCU" }} pcbX={-10} pcbY={-5} schX={-3} schY={-5} />`)
+    } else if (interfaceKind === "analog") {
+      lines.push(`    <resistor name="R1" resistance="${profile.detailKind === "sensor" ? "10k" : "1k"}" tolerance="1%" manufacturerPartNumber="${profile.detailKind === "sensor" ? "RC0603FR-0710KL" : "RC0603FR-071KL"}" footprint="0603" connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
     }
 
-    if (family === "input" && /button|switch|key/.test(text)) {
-      lines.push(`    <pushbutton name="SW1" displayName="B3F-1000 tactile switch" manufacturerPartNumber="B3F-1000" pinAttributes={{ pin1: { requiresPower: true, mustBeConnected: true }, pin2: { mustBeConnected: true } }} footprint="button_6mm" pcbX={${size.width / 2 - 5}} pcbY={0} schX={6} schY={0} /><trace name="SWITCH_FEED" from="J1.VCC" to="SW1.pin1" /><trace name="SWITCH_SIGNAL" from="SW1.pin2" to="J1.SIG" />`)
+    if (family === "input" && /button|switch/.test(text)) {
+      lines.push(`    <pushbutton name="SW1" displayName="B3F-1000 tactile switch" manufacturerPartNumber="B3F-1000" pinAttributes={{ pin1: { requiresPower: true, mustBeConnected: true }, pin2: { mustBeConnected: true } }} connections={{ pin1: "net.VCC", pin2: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-3.25} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={3.25} pcbY={0} portHints={["pin2"]} /><silkscreenrect width="6mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 5}} pcbY={5} schX={6} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
     }
-    if (family === "input" && /potentiometer|rotary|slide pot|joystick/.test(text)) {
-      lines.push(`    <potentiometer name="RV1" displayName="WH09-2-103" manufacturerPartNumber="WH09-2-103" maxResistance="10k" pinVariant="three_pin" footprint="potentiometer_pth_9mm" pcbX={10} pcbY={0} schX={6} schY={0} /><trace name="POT_VCC" from="J1.VCC" to="RV1.pin1" /><trace name="POT_SIGNAL" from="RV1.pin2" to="J1.SIG" /><trace name="POT_GND" from="RV1.pin3" to="J1.GND" />`)
+    if (interfaceKind === "analog" && family === "input" && /potentiometer|rotary|slide pot|joystick/.test(text)) {
+      lines.push(`    <potentiometer name="RV1" displayName="WH09-2-103" manufacturerPartNumber="WH09-2-103" maxResistance="10k" pinVariant="three_pin" connections={{ pin1: "net.VCC", pin2: "net.SIG", pin3: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-4} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={4} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="10mm" height="10mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={9} pcbY={4} schX={6} schY={0} />`)
     }
     if (family === "power") {
-      lines.push(`    <led name="D_STATUS" displayName="red status LED" manufacturerPartNumber="LTST-C190KRKT" color="red" footprint="0603" pcbX={-2} pcbY={7} schX={-1} schY={-4} /><resistor name="R_STATUS" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.STATUS" }} pcbX={2} pcbY={7} schX={2} schY={-4} /><trace name="STATUS_LED" from="R_STATUS.pin2" to="D_STATUS.anode" /><trace name="STATUS_RETURN" from="D_STATUS.cathode" to="J1.GND" />`)
+      lines.push(`    <led name="D_STATUS" displayName="red status LED" manufacturerPartNumber="LTST-C190KRKT" color="red" connections={{ anode: "net.STATUS", cathode: "net.GND" }} footprint="0603" pcbX={-2} pcbY={7} schX={7.6} schY={-4} /><resistor name="R_STATUS" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.STATUS" }} pcbX={2} pcbY={7} schX={10.4} schY={-4} />`)
       if (/relay|motor|fan|speaker|buzzer|servo|atomization|electromagnet/.test(text)) {
-        lines.push(`    <mosfet name="Q1" displayName="2N7002 load switch" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" footprint="sot23" pcbX={10} pcbY={-5} schX={6} schY={-3} /><chip name="LOAD1" displayName={${q(profile.primaryModel + " load stage")}} manufacturerPartNumber={${q(`UNSPECIFIED-LOAD-${profile.componentName}`)}} pinLabels={{ pin1: "POS", pin2: "NEG" }} pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { requiresGround: true, mustBeConnected: true } }} footprint="power_module" pcbX={${size.width / 2 - 8}} pcbY={4} schX={8} schY={3} /><diode name="D1" displayName="1N4148W flyback diode" manufacturerPartNumber="1N4148W" footprint="0603" pcbX={10} pcbY={2} schX={6} schY={3} /><trace name="LOAD_GATE" from="J1.${interfaceKind === "i2c" ? "SDA" : "SIG"}" to="Q1.gate" /><trace name="LOAD_SOURCE" from="Q1.source" to="J1.GND" /><trace name="LOAD_NEG" from="Q1.drain" to="LOAD1.NEG" /><trace name="LOAD_POS" from="LOAD1.POS" to="J1.VCC" /><trace name="LOAD_FLYBACK_A" from="LOAD1.POS" to="D1.anode" /><trace name="LOAD_FLYBACK_K" from="D1.cathode" to="LOAD1.NEG" />`)
+        lines.push(`    <mosfet name="Q1" displayName="2N7002 load switch" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" connections={{ gate: ${q(`net.${interfaceKind === "i2c" ? "SDA" : "SIG"}`)}, source: "net.GND", drain: "net.LOAD_NEG" }} footprint="sot23" pcbX={10} pcbY={-5} schX={6} schY={-3} /><chip name="U3" displayName={${q(profile.primaryModel + " load stage")}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "POS", pin2: "NEG", pin3: "GND" }} pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ POS: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, NEG: "net.LOAD_NEG", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 8}} pcbY={4} schX={9.2} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><diode name="D1" displayName="1N4148W flyback diode" manufacturerPartNumber="1N4148W" connections={{ anode: "net.LOAD_NEG", cathode: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)} }} footprint="0603" pcbX={10} pcbY={2} schX={4.8} schY={3} />`)
       }
     }
     if (family === "distance") {
-      lines.push(`    <chip name="TX1" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic transmitter" : "IR transmitter")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16T" : "VSMY1850")}} pinLabels={{ pin1: "IN", pin2: "GND" }} pinAttributes={{ IN: { mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} footprint={${q(/ultrasonic/.test(text) ? "ultrasonic_transducer" : "led_5mm")}} pcbX={-4} pcbY={8} schX={-4} schY={2} /><chip name="RX1" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic receiver" : "IR receiver")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16R" : "GP1UXC41QS")}} pinLabels={{ pin1: "OUT", pin2: "GND" }} pinAttributes={{ OUT: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }} footprint={${q(/ultrasonic/.test(text) ? "ultrasonic_transducer" : "soic8")}} pcbX={10} pcbY={8} schX={1} schY={2} /><trace name="DISTANCE_DRIVE" from="U1.${mainPin(signal[0])}" to="TX1.IN" /><trace name="DISTANCE_SENSE" from="RX1.OUT" to="U1.${mainPin(signal[0])}" /><trace name="DISTANCE_TX_GND" from="TX1.GND" to="J1.GND" /><trace name="DISTANCE_RX_GND" from="RX1.GND" to="J1.GND" />`)
+      lines.push(`    <chip name="U3" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic transmitter" : "IR transmitter")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16T" : "VSMY1850")}} pinLabels={{ pin1: "IN", pin2: "VCC", pin3: "GND" }} pinAttributes={{ IN: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ IN: "net.DISTANCE_DRIVE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={-4} pcbY={8} schX={-4} schY={2} schWidth="1.2mm" schHeight="0.4mm" /><chip name="U4" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic receiver" : "IR receiver")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16R" : "GP1UXC41QS")}} pinLabels={{ pin1: "OUT", pin2: "VCC", pin3: "GND" }} pinAttributes={{ OUT: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ OUT: "net.DISTANCE_SENSE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={10} pcbY={8} schX={1} schY={2} schWidth="1.2mm" schHeight="0.4mm" />`)
     }
     if (family === "optical" && interfaceKind !== "i2c") {
-      lines.push(`    <led name="D_EMITTER" displayName="IR/optical emitter" manufacturerPartNumber="IR333-A" color="infrared" footprint="0603" pcbX={-5} pcbY={7} schX={-4} schY={3} /><resistor name="R_EMITTER" resistance="100" tolerance="1%" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.EMITTER" }} pcbX={0} pcbY={7} schX={-1} schY={3} /><trace name="EMITTER_DRIVE" from="J1.VCC" to="R_EMITTER.pin1" /><trace name="EMITTER_LIMIT" from="R_EMITTER.pin2" to="D_EMITTER.anode" /><trace name="EMITTER_RETURN" from="D_EMITTER.cathode" to="J1.GND" />`)
+      lines.push(`    <led name="D_EMITTER" displayName="IR/optical emitter" manufacturerPartNumber="IR333-A" color="infrared" connections={{ anode: "net.EMITTER", cathode: "net.GND" }} footprint="0603" pcbX={-5} pcbY={7} schX={-4} schY={3} /><resistor name="R_EMITTER" resistance="100" tolerance="1%" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.EMITTER" }} pcbX={0} pcbY={7} schX={-1} schY={3} />${tracePath("EMITTER_LIMIT", ["R_EMITTER.pin2", "D_EMITTER.anode"])}`)
     }
     if (family === "audio") {
-      lines.push(`    <chip name="MIC1" displayName="electret microphone capsule" manufacturerPartNumber="CMA-4544PF-W" pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, OUT: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }} footprint="microphone" pcbX={-5} pcbY={4} schX={-4} schY={3} /><capacitor name="C_AUDIO" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-1} pcbY={6} schX={-1} schY={4} schOrientation="vertical" /><trace name="MIC_POWER" from="J1.VCC" to="MIC1.VCC" /><trace name="MIC_SIGNAL" from="MIC1.OUT" to="U1.${mainPin(signal[0])}" /><trace name="MIC_GND" from="MIC1.GND" to="J1.GND" />`)
+      lines.push(`    <chip name="U4" displayName="electret microphone capsule" manufacturerPartNumber="CMA-4544PF-W" pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, OUT: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, OUT: "net.SIG", GND: "net.GND" }} footprint="to92" pcbX={-5} pcbY={4} schX={-4} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><capacitor name="C_AUDIO" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={-1} pcbY={6} schX={-1} schY={4} schOrientation="vertical" />`)
     }
     if (family === "environmental" || family === "motion") {
-      lines.push(`    <capacitor name="C_${family.toUpperCase()}" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.${power3v3 ? "VDD" : "VCC"}", pin2: "net.GND" }} pcbX={10} pcbY={6} schX={7} schY={4} schOrientation="vertical" />`)
+      lines.push(`    <capacitor name="C_${family.toUpperCase()}" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${environmentalCapX}} pcbY={${environmentalCapY}} schX={8} schY={4} schOrientation="vertical" />`)
     }
     if (family === "gas") {
-      lines.push(`    <resistor name="R_HEAT" resistance="33" tolerance="5%" manufacturerPartNumber="RC1206JR-0733RL" footprint="1206" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={10} pcbY={-5} schX={7} schY={-5} />`)
+      lines.push(`    <resistor name="R_HEAT" resistance="33" tolerance="5%" manufacturerPartNumber="RC1206JR-0733RL" footprint="1206" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={10} pcbY={-5} schX={8} schY={-5} />`)
     }
     if (family === "display") {
-      lines.push(`    <chip name="DISP1" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(`UNSPECIFIED-DISPLAY-${profile.componentName}`)}} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "DATA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, DATA: { mustBeConnected: true, isGpio: true } }} footprint="display_module" pcbX={10} pcbY={0} schX={7} schY={0} /><trace name="DISPLAY_VCC" from="DISP1.VCC" to="J1.VCC" /><trace name="DISPLAY_GND" from="DISP1.GND" to="J1.GND" /><trace name="DISPLAY_DATA" from="U1.${mainPin(signal[0])}" to="DISP1.DATA" />`)
+      if (interfaceKind === "i2c") {
+        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "SCL", pin4: "SDA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", SCL: "net.SCL", SDA: "net.SDA" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3.75} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-1.25} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={1.25} pcbY={0} portHints={["pin3"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3.75} pcbY={0} portHints={["pin4"]} /><silkscreenrect width="10mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
+      } else {
+        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "DATA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, DATA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", DATA: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-2.5} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={2.5} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="5mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
+      }
+    }
+    if (channels) {
+      const ledRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.VCC`, `C${index + 1}.pin1`]).flat()
+      const groundRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.GND`, `C${index + 1}.pin2`]).flat()
+      lines.push(tracePath("LED_VCC_RAIL", ["J1.VCC", ...ledRefs]))
+      lines.push(tracePath("LED_GND_RAIL", ["J1.GND", ...groundRefs]))
+    } else {
+      if (inputRailRefs.length > 1) lines.push(tracePath("INPUT_RAIL", inputRailRefs))
+      lines.push(tracePath(power3v3 ? "REGULATED_RAIL" : "POWER_RAIL", activeRailRefs))
+      lines.push(tracePath("GROUND_RAIL", groundRailRefs))
+      for (const [name, refs] of signalRailRefs) lines.push(tracePath(name, refs))
+      if (family === "power") lines.push(tracePath("STATUS_RAIL", ["R_STATUS.pin2", "D_STATUS.anode"]))
+      if (family === "power" && /relay|motor|fan|speaker|buzzer|servo|atomization|electromagnet/.test(text)) {
+        lines.push(tracePath("LOAD_RAIL", ["Q1.drain", "U3.NEG", "D1.anode"]))
+      }
     }
   }
   lines.push(`    <silkscreentext text={${q(compact(profile.title, 32))}} pcbX={0} pcbY={${size.height / 2 - 1.5}} fontSize="0.6mm" />`)
@@ -470,10 +625,7 @@ const main = async () => {
   let changed = 0
   for (const profile of groveCatalogueManifest) {
     const sourcePath = join(repoRoot, "boards", profile.directory, `${profile.directory}.circuit.tsx`)
-    const current = await readFile(sourcePath, "utf8")
-    if (!current.includes("HAND-AUTHORED")) continue
-    const spec = sourceBoardMap(profile)
-    const next = spec ? emitEagleBoard(profile, spec) : emitGenericBoard(profile)
+    const next = emitGenericBoard(profile)
     await writeFile(sourcePath, next)
     changed++
   }

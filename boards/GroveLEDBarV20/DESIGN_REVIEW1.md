@@ -2,7 +2,7 @@
 
 **Disposition:** NOT PRODUCTION READY
 **Board directory:** `GroveLEDBarV20`
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog interface · actuator · 5V · primary model `MY9221` · declared MPN `MY9221`
 **Upstream reference:** [Seeed source](https://www.seeedstudio.com/Grove-LED-Bar-v2-0.html)
 
@@ -10,28 +10,23 @@ This review is specific to the checked-in [board source](./GroveLEDBarV20.circui
 
 ## Critical design review
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ## Electrical and netlist evidence
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 26.511mm × 44.09mm |
-| Source components | 13 |
-| Source nets | 22 |
-| Source traces | 89 |
-| Schematic traces | 25 |
-| PCB traces | 0 |
-| Routing disabled | yes |
+| Declared board size | 72mm × 16mm |
+| Source components | 5 |
+| Source nets | 12 |
+| Source traces | 15 |
+| Schematic traces | 7 |
+| PCB traces | 9 |
+| Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
 
@@ -39,85 +34,67 @@ This review is specific to the checked-in [board source](./GroveLEDBarV20.circui
 
 | Net | Role |
 | --- | --- |
-| LED_10 | signal |
-| LED_9 | signal |
-| LED_5 | signal |
-| LED_6 | signal |
-| LED_7 | signal |
-| LED_8 | signal |
-| LED_4 | signal |
-| LED_3 | signal |
-| LED_2 | signal |
-| LED_1 | signal |
-| GND | ground |
-| DCKI | signal |
-| DI | signal |
-| N_4 | signal |
-| N_7 | signal |
-| N_8 | signal |
-| N_9 | signal |
-| N_1 | signal |
-| N_2 | signal |
 | VCC | power |
-| DO | signal |
-| DCKO | signal |
+| GND | ground |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
-| J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | no emitted ports |
-| U1 | simple_chip | MY9221 | MY9221 | P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20 |
-| U6 | simple_chip | MY9221-TSSOP24EP | MY9221-TSSOP24EP | P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20, P21, P22, P23, P24, P25 |
-| R13 | simple_resistor | 10k | RC0603FR-0710KL | pin1, pin2 |
-| R11 | simple_resistor | 2.7k_1% | R-0603-2.7K_1% | pin1, pin2 |
-| R9 | simple_resistor | 2.7k_1% | R-0603-2.7K_1% | pin1, pin2 |
-| R7 | simple_resistor | 2.7k_1% | R-0603-2.7K_1% | pin1, pin2 |
-| C10 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| R16 | simple_resistor | 1k | RC0603FR-071KL | pin1, pin2 |
-| R17 | simple_resistor | 1k | RC0603FR-071KL | pin1, pin2 |
-| J2 | simple_chip | B4B-PH-K-S | B4B-PH-K-S | P1, P2, P3, P4 |
-| J3 | simple_chip | B4B-PH-K-S | B4B-PH-K-S | P1, P2, P3, P4 |
-| J4 | simple_chip | B4B-PH-K-S | B4B-PH-K-S | P1, P2, P3, P4 |
+| J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
+| PIX1 | simple_chip | MY9221 | MY9221 | DIN, DOUT, VCC, GND |
+| C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
+| PIX2 | simple_chip | MY9221 | MY9221 | DIN, DOUT, VCC, GND |
+| C2 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 
 ### Trace sample
 
-- `.U1 > .P11 to net.LED_10`
-- `.U1 > .P12 to net.LED_9`
-- `.U1 > .P16 to net.LED_5`
-- `.U1 > .P15 to net.LED_6`
-- `.U1 > .P14 to net.LED_7`
-- `.U1 > .P13 to net.LED_8`
-- `.U1 > .P17 to net.LED_4`
-- `.U1 > .P18 to net.LED_3`
-- `.U1 > .P19 to net.LED_2`
-- `.U1 > .P20 to net.LED_1`
-- `.U1 > .P10 to net.VCC`
-- `.U1 > .P1 to net.VCC`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.PIX1 > .VCC to net.VCC`
+- `.PIX1 > .GND to net.GND`
+- `.PIX1 > .DIN to net.SIG`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.PIX2 > .VCC to net.VCC`
+- `.PIX2 > .GND to net.GND`
+- `.C2 > .pin1 to net.VCC`
+- `.C2 > .pin2 to net.GND`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: none.
-- Embedded custom pad/graphic footprint data: yes — compare the local pad geometry against the supplier drawing.
+- Footprint strings declared in source: `0603`.
+- Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 67 unnamed-trace warning(s), 3 refdes warning(s), 0 power metadata warning(s), and 1 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 12 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- The "J" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />
-- The "J" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />
-- The "J" prefix is being used with a <chip />, try using it with a <connector /> or <jumper />
-- <trace#67111(from:.U1 > .P11 to:net.LED_10) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#67112(from:.U1 > .P12 to:net.LED_9) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#67113(from:.U1 > .P16 to:net.LED_5) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#67114(from:.U1 > .P15 to:net.LED_6) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#67115(from:.U1 > .P14 to:net.LED_7) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8705(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8706(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8707(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8708(from:.PIX1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8709(from:.PIX1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8710(from:.PIX1 > .DIN to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8711(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#8712(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

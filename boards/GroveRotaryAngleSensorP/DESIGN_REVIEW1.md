@@ -2,7 +2,7 @@
 
 **Disposition:** NOT PRODUCTION READY
 **Board directory:** `GroveRotaryAngleSensorP`
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog interface · input · 5V · primary model `WH09-2-103` · declared MPN `WH09-2-103`
 **Upstream reference:** [Seeed source](https://www.seeedstudio.com/Grove-Rotary-Angle-Sensor-P.html)
 
@@ -10,11 +10,8 @@ This review is specific to the checked-in [board source](./GroveRotaryAngleSenso
 
 ## Critical design review
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 3 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -23,12 +20,12 @@ This review is specific to the checked-in [board source](./GroveRotaryAngleSenso
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 22mm × 22.5mm |
-| Source components | 1 |
-| Source nets | 3 |
-| Source traces | 3 |
-| Schematic traces | 2 |
-| PCB traces | 0 |
+| Declared board size | 30mm × 20mm |
+| Source components | 5 |
+| Source nets | 12 |
+| Source traces | 16 |
+| Schematic traces | 6 |
+| PCB traces | 10 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -39,43 +36,65 @@ This review is specific to the checked-in [board source](./GroveRotaryAngleSenso
 | --- | --- |
 | VCC | power |
 | GND | ground |
-| N_2 | signal |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
-| ROTATION | simple_chip | WH09-2-103 | WH09-2-103 | P1, P2, P3, P4, P5 |
+| J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
+| U1 | simple_chip | WH09-2-103 | WH09-2-103 | SIG, VCC, GND, AUX |
+| C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
+| R1 | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
+| RV1 | simple_potentiometer | WH09-2-103 | WH09-2-103 | pin1, pin3, pin2 |
 
 ### Trace sample
 
-- `.ROTATION > .P1 to net.VCC`
-- `.ROTATION > .P3 to net.GND`
-- `.ROTATION > .P2 to net.N_2`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .SIG to net.SIG`
+- `.U1 > .VCC to net.VCC`
+- `.U1 > .GND to net.GND`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.R1 > .pin1 to net.SIG`
+- `.R1 > .pin2 to net.GND`
+- `.RV1 > .pin1 to net.VCC`
+- `.RV1 > .pin2 to net.SIG`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: none.
-- Embedded custom pad/graphic footprint data: yes — compare the local pad geometry against the supplier drawing.
+- Footprint strings declared in source: `0603`.
+- Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 3 unnamed-trace warning(s), 1 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 13 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- Could not create jumper "J1". No pin labels provided and pin number or label is not a number: "N$2". Details: Props: {   "name": "J1",   "displayName": "Grove 4-pin",   "manufacturerPartNumber": "B4B-PH-K-S",   "pinLabels": {     "pin1": "N$2",     "pin2": "NC",     "pin3": "VCC",     "pin4": "GND"   },   "pinAttributes": {     "N$2": {       "mustBeConnected": true,       "isGpio": true     },     "NC": {       "doNotConnect": true     },     "VCC": {       "requiresPower": true,       "requiresVoltage": "5V",       "mustBeConnected": true     },     "GND": {       "requiresGround": true,       "mustBeConnected": true     }   },   "connections": {     "pin3": "net.VCC",     "pin4": "net.GND",     "pin1": "net.N_2"   },   "footprint": {     "$$typeof": "Symbol(react.transitional.element)",     "type": "[Function HandAuthoredFootprint]",     "key": null,     "props": {       "name": "J1",       "pads": [         {           "name": "1",           "kind": "platedhole",           "x": -3,           "y": 0,           "drill": 0.8,           "diameter": 1.27,           "shape": "square",           "rotation": 0         },         {           "name": "2",           "kind": "platedhole",           "x": -1,           "y": 0,           "drill": 0.8,           "diameter": 1.27,           "shape": "round",           "rotation": 0         },         {           "name": "3",           "kind": "platedhole",           "x": 1,           "y": 0,           "drill": 0.8,           "diameter": 1.27,           "shape": "round",           "rotation": 0         },         {           "name": "4",           "kind": "platedhole",           "x": 3,           "y": 0,           "drill": 0.8,           "diameter": 1.27,           "shape": "round",           "rotation": 0         }       ],       "excludePadNames": [         "SS1",         "SS2"       ]     },     "_owner": {       "tag": 0,       "key": null,       "elementType": "[Function GroveRotaryAngleSensorP]",       "type": "[Function GroveRotaryAngleSensorP]",       "stateNode": null,       "return": {         "tag": 3,         "key": null,         "e…
-- The "R" prefix is being used with a <chip />, try using it with a <resistor />
-- <trace#93404(from:.ROTATION > .P1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#93405(from:.ROTATION > .P3 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#93406(from:.ROTATION > .P2 to:net.N_2) /> is missing a name. Add a name prop to make the trace easier to identify.
-- Could not find port for selector "J1.pin3". Component "J1" found, but does not have pin "pin3". It has no ports
-- Could not find port for selector "J1.pin4". Component "J1" found, but does not have pin "pin4". It has no ports
-- Could not find port for selector "J1.pin1". Component "J1" found, but does not have pin "pin1". It has no ports
+- <trace#14103(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14104(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14105(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14106(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14107(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14108(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14109(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#14110(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

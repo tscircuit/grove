@@ -11,11 +11,7 @@ This review is specific to the checked-in [board source](./GroveSerialLCD.circui
 ## Critical design review
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -26,10 +22,10 @@ This review is specific to the checked-in [board source](./GroveSerialLCD.circui
 | --- | --- |
 | Declared board size | 80mm × 36mm |
 | Source components | 6 |
-| Source nets | 9 |
-| Source traces | 19 |
-| Schematic traces | 7 |
-| PCB traces | 0 |
+| Source nets | 12 |
+| Source traces | 23 |
+| Schematic traces | 6 |
+| PCB traces | 11 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -44,59 +40,62 @@ This review is specific to the checked-in [board source](./GroveSerialLCD.circui
 | SDA | signal |
 | RX | signal |
 | TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
 | SIG | signal |
 | STATUS | signal |
 | EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | RX, TX, VCC, GND |
-| U1 | simple_chip | ST7066U | ST7066U | RX, TX, VCC, GND, CTS, RTS, pin7, pin8 |
+| U1 | simple_chip | ST7066U | ST7066U | RX, TX, VCC, GND, CTS, RTS |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 | R1 | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
 | R2 | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
-| DISP1 | simple_chip | ST7066U display panel | UNSPECIFIED-DISPLAY-GroveSerialLCD | VCC, GND, DATA |
+| U3 | simple_chip | ST7066U display panel | ST7066U | VCC, GND, DATA |
 
 ### Trace sample
 
-- `.U1 > .RX to net.RX`
-- `.U1 > .TX to net.TX`
+- `.J1 > .RX to net.RX`
+- `.J1 > .TX to net.TX`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .RX to net.RX_MCU`
+- `.U1 > .TX to net.TX_MCU`
 - `.U1 > .VCC to net.VCC`
 - `.U1 > .GND to net.GND`
 - `.C1 > .pin1 to net.VCC`
 - `.C1 > .pin2 to net.GND`
-- `U1.VCC to C1.pin1`
-- `C1.pin2 to U1.GND`
 - `.R1 > .pin1 to net.RX`
-- `.R1 > .pin2 to net.RX`
-- `.R2 > .pin1 to net.TX`
-- `.R2 > .pin2 to net.TX`
+- `.R1 > .pin2 to net.RX_MCU`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `soic8`, `0603`, `display_module`.
+- Footprint strings declared in source: `0603`.
 - Embedded custom pad/graphic footprint data: no.
-- Placeholder/unspecified MPN count in generated source components: 1.
+- Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 1 autorouting error(s), 6 disconnected-port error(s), 9 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 10 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 17 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- Invalid footprint prop on chip "DISP1": "display_module". Parser details: Invalid footprint function, got "display", from string "display_module"
-- <trace#96162(from:.U1 > .RX to:net.RX) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96163(from:.U1 > .TX to:net.TX) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96164(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96165(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96166(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96167(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#96168(from:.R1 > .pin1 to:net.RX) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15360(from:.J1 > .RX to:net.RX) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15361(from:.J1 > .TX to:net.TX) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15362(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15363(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15364(from:.U1 > .RX to:net.RX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15365(from:.U1 > .TX to:net.TX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15366(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#15367(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

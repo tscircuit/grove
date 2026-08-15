@@ -1,46 +1,33 @@
-import { GroveConnector, TwoPinModule } from "../_shared/GroveParts"
+import { Fragment } from "react"
+import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
-export const GroveUltrasonicRanger = () => (
-  <board name="GroveUltrasonicRanger" title="Grove - Ultrasonic Ranger v2.0" width="50mm" height="25mm" borderRadius="1.5mm" solderMaskColor="blue">
-    <GroveConnector pcbX={-20} pcbY={0} pcbRotation={-90} schX={-9} schY={0} />
-    <chip
-      name="U1"
-      displayName="ATmega328P"
-      manufacturerPartNumber="ATmega328P-AU"
-      pinLabels={{ pin1: "SIG", pin2: "TX_DRIVE", pin3: "RX_SENSE", pin4: "VCC", pin5: "GND" }}
-      pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, TX_DRIVE: { mustBeConnected: true, isGpio: true }, RX_SENSE: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, requiresVoltage: "5V" }, GND: { requiresGround: true } }}
-      footprint="sot23_5"
-      pcbX={-10}
-      pcbY={0}
-      schX={0}
-      schY={0}
-      schHeight="0.6mm"
-    />
-    <transistor name="Q1" displayName="S9013" manufacturerPartNumber="S9013" type="npn" footprint="sot23" pcbX={-5} pcbY={-5} schX={4} schY={3} />
-    <resistor name="R1" resistance="1k" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" pcbX={-7} pcbY={-8} schX={2} schY={3} />
-    <resistor name="R2" resistance="10k" manufacturerPartNumber="RC0603FR-0710KL" footprint="0603" pcbX={-7} pcbY={7} schX={3} schY={-3} />
-    <capacitor name="C14" capacitance="10uF" manufacturerPartNumber="CC0805ZRY5V8BB106" footprint="0805" pcbX={-15} pcbY={7} schX={-4} schY={3.5} schOrientation="vertical" />
-    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" pcbX={-10} pcbY={7} schX={-2} schY={3.5} schOrientation="vertical" />
-    <TwoPinModule name="TX1" label="40 kHz transmitter" manufacturerPartNumber="TCT40-16T" width={16} height={16} pcbX={5} pcbY={0} schX={8} schY={3} />
-    <TwoPinModule name="RX1" label="40 kHz receiver" manufacturerPartNumber="TCT40-16R" width={16} height={16} pcbX={17} pcbY={0} schX={8} schY={-3} />
-    <trace from="J1.VCC" to="U1.VCC" />
-    <trace from="J1.VCC" to="C14.pin1" />
-    <trace from="J1.VCC" to="C1.pin1" />
-    <trace from="C14.pin2" to="J1.GND" />
-    <trace from="C1.pin2" to="J1.GND" />
-    <trace from="U1.GND" to="J1.GND" />
-    <trace from="J1.SIG" to="U1.SIG" />
-    <trace from="U1.TX_DRIVE" to="R1.pin1" />
-    <trace from="R1.pin2" to="Q1.base" />
-    <trace from="Q1.emitter" to="J1.GND" />
-    <trace from="Q1.collector" to="TX1.NEG" />
-    <trace from="TX1.POS" to="J1.VCC" />
-    <trace from="RX1.POS" to="U1.RX_SENSE" />
-    <trace from="RX1.POS" to="R2.pin1" />
-    <trace from="R2.pin2" to="J1.GND" />
-    <trace from="RX1.NEG" to="J1.GND" />
-    <silkscreentext text="ULTRASONIC RANGER v2.0" pcbX={0} pcbY={11} fontSize="0.7mm" />
+const GroveUltrasonicRanger = () => (
+  <board name={"GroveUltrasonicRanger"} title={"Grove - Ultrasonic Ranger v2.0"} width={"40mm"} height={"26mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={16} y={10} />
+    <GroveConnector kind="digital" powerVoltage={"5V"} connectToNets pcbX={-14} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"HC-SR04"} manufacturerPartNumber={"HC-SR04"} pinLabels={{ pin1: "SIG", pin2: "VCC", pin3: "GND", pin4: "AUX" }} pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, AUX: { doNotConnect: true } }} connections={{ "SIG": "net.SIG", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["AUX"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-0.635} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0.635} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-0.635} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0.635} portHints={["pin4"]} /><silkscreenrect width="4mm" height="4mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={4} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["SIG","VCC"], rightSide: ["GND","AUX"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-5} pcbY={0} schX={5} schY={4} schOrientation="vertical" />
+    <chip name="U3" displayName={"40 kHz ultrasonic transmitter"} manufacturerPartNumber={"TCT40-16T"} pinLabels={{ pin1: "IN", pin2: "VCC", pin3: "GND" }} pinAttributes={{ IN: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ IN: "net.DISTANCE_DRIVE", VCC: "net.VCC", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={-4} pcbY={8} schX={-4} schY={2} schWidth="1.2mm" schHeight="0.4mm" /><chip name="U4" displayName={"40 kHz ultrasonic receiver"} manufacturerPartNumber={"TCT40-16R"} pinLabels={{ pin1: "OUT", pin2: "VCC", pin3: "GND" }} pinAttributes={{ OUT: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ OUT: "net.DISTANCE_SENSE", VCC: "net.VCC", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={10} pcbY={8} schX={1} schY={2} schWidth="1.2mm" schHeight="0.4mm" />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1","U3.VCC","U4.VCC"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2","U3.GND","U4.GND"]} />
+    <trace name="DISTANCE_DRIVE_TRACE" path={["J1.SIG","U3.IN"]} />
+    <trace name="DISTANCE_SENSE_TRACE" path={["U4.OUT","U1.SIG"]} />
+    <silkscreentext text={"Ultrasonic Ranger v2.0"} pcbX={0} pcbY={11.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-11.5} fontSize="0.45mm" />
   </board>
 )
 
+export { GroveUltrasonicRanger }
 export default GroveUltrasonicRanger

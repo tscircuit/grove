@@ -2,32 +2,30 @@ import { Fragment } from "react"
 import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
 const GroveThumbJoystick = () => (
-  <board name={"GroveThumbJoystick"} title={"Grove - Thumb Joystick"} width={"72mm"} height={"16mm"} borderRadius="1mm" solderMaskColor="blue" routingDisabled={false}>
+  <board name={"GroveThumbJoystick"} title={"Grove - Thumb Joystick"} width={"42mm"} height={"32mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
     <net name="VCC" isPowerNet />
     <net name="GND" isGroundNet />
     <net name="SCL" />
     <net name="SDA" />
     <net name="RX" />
     <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
     <net name="SIG" />
     <net name="STATUS" />
     <net name="EMITTER" />
-    <GroveMountingHoles x={32} y={7} />
-    <GroveConnector kind="analog" powerVoltage={"5V"} pcbX={-30} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
-    {Array.from({ length: 3 }, (_, index) => {
-      const name = `LED${index + 1}`
-      const x = /ring/i.test("Grove - Thumb Joystick") ? 3 + Math.cos((index / 3) * Math.PI * 2 - Math.PI / 2) * 3 : -24 + index * 6
-      const y = /ring/i.test("Grove - Thumb Joystick") ? Math.sin((index / 3) * Math.PI * 2 - Math.PI / 2) * 3 : 0
-      return <Fragment key={name}>
-        <chip name={name} displayName={"B3F-1000"} manufacturerPartNumber={"B3F-1000"} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: { mustBeConnected: true, isGpio: true }, DOUT: index === 2 ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, requiresVoltage: "5V" }, GND: { requiresGround: true, mustBeConnected: true } }} noConnect={index === 2 ? ["DOUT"] : []} footprint={"led_5050"} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.6mm" schHeight="1mm" />
-        <capacitor name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={x} pcbY={y + 2.2} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />
-        {index === 0 ? <trace name="DATA_IN" from="J1.SIG" to="LED1.DIN" /> : <trace name={`DATA_${index}_${index + 1}`} from={`LED${index}.DOUT`} to={`LED${index + 1}.DIN`} />}
-        <trace name={`VCC_${index + 1}`} from={`LED${index + 1}.VCC`} to="J1.VCC" />
-        <trace name={`GND_${index + 1}`} from={`LED${index + 1}.GND`} to="J1.GND" />
-      </Fragment>
-    })}
-    <silkscreentext text={"Thumb Joystick"} pcbX={0} pcbY={6.5} fontSize="0.6mm" />
-    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-6.5} fontSize="0.45mm" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={17} y={13} />
+    <GroveConnector kind="analog" powerVoltage={"5V"} connectToNets pcbX={-15} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"B3F-1000"} manufacturerPartNumber={"B3F-1000"} pinLabels={{ pin1: "SIG", pin2: "VCC", pin3: "GND", pin4: "AUX" }} pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, AUX: { doNotConnect: true } }} connections={{ "SIG": "net.SIG", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["AUX"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-0.635} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0.635} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-0.635} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0.635} portHints={["pin4"]} /><silkscreenrect width="4mm" height="4mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={4} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["SIG","VCC"], rightSide: ["GND","AUX"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={8} pcbY={-6} schX={5} schY={4} schOrientation="vertical" />
+    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />
+    <potentiometer name="RV1" displayName="WH09-2-103" manufacturerPartNumber="WH09-2-103" maxResistance="10k" pinVariant="three_pin" connections={{ pin1: "net.VCC", pin2: "net.SIG", pin3: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-4} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={4} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="10mm" height="10mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={9} pcbY={4} schX={6} schY={0} />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1","RV1.pin1"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2","R1.pin2","RV1.pin3"]} />
+    <trace name="SIGNAL_RAIL" path={["J1.SIG","U1.SIG","R1.pin1","RV1.pin2"]} />
+    <silkscreentext text={"Thumb Joystick"} pcbX={0} pcbY={14.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-14.5} fontSize="0.45mm" />
   </board>
 )
 

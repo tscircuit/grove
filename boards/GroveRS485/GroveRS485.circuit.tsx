@@ -1,53 +1,34 @@
-import { GroveMountingHoles } from "../_shared/GroveParts"
-import { HandAuthoredFootprint } from "../_shared/HandAuthoredParts"
-
-const packages: any = {"SOIC8":{"pads":[{"name":"1","kind":"smd","x":-1.905,"y":-2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"2","kind":"smd","x":-0.635,"y":-2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"3","kind":"smd","x":0.635,"y":-2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"4","kind":"smd","x":1.905,"y":-2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"5","kind":"smd","x":1.905,"y":2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"6","kind":"smd","x":0.635,"y":2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"7","kind":"smd","x":-0.635,"y":2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"},{"name":"8","kind":"smd","x":-1.905,"y":2.7,"width":1.4,"height":0.6,"shape":"rect","rotation":90,"layer":"top"}],"graphics":[{"kind":"line","x1":-2.5,"y1":2,"x2":2.5,"y2":2},{"kind":"line","x1":2.5,"y1":2,"x2":2.5,"y2":-2},{"kind":"line","x1":2.5,"y1":-2,"x2":-1.23,"y2":-2},{"kind":"line","x1":-1.23,"y1":-2,"x2":-2.5,"y2":-0.73},{"kind":"line","x1":-2.5,"y1":-0.73,"x2":-2.5,"y2":2},{"kind":"circle","x":-2.54,"y":-1.524,"radius":0.254}]},"4P-2.0":{"pads":[{"name":"1","kind":"platedhole","x":-3,"y":0,"drill":0.8,"diameter":1.27,"shape":"square","rotation":0},{"name":"2","kind":"platedhole","x":-1,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0},{"name":"3","kind":"platedhole","x":1,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0},{"name":"4","kind":"platedhole","x":3,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0}],"graphics":[{"kind":"line","x1":-5,"y1":1,"x2":-5,"y2":-1},{"kind":"line","x1":5,"y1":1.5,"x2":5,"y2":-1.5},{"kind":"line","x1":-5,"y1":2.2,"x2":-5,"y2":-2.2},{"kind":"line","x1":-5,"y1":-2.2,"x2":-3.2,"y2":-2.2},{"kind":"line","x1":3.2,"y1":-2.2,"x2":5,"y2":-2.2},{"kind":"line","x1":5,"y1":-2.2,"x2":5,"y2":2.2},{"kind":"line","x1":-5,"y1":2.2,"x2":5,"y2":2.2},{"kind":"line","x1":-5,"y1":-2.2,"x2":-5,"y2":-2.8},{"kind":"line","x1":-5,"y1":-2.8,"x2":-3.2,"y2":-2.8},{"kind":"line","x1":-3.2,"y1":-2.8,"x2":-3.2,"y2":-2.2},{"kind":"line","x1":-3.2,"y1":-2.2,"x2":3.2,"y2":-2.2},{"kind":"line","x1":3.2,"y1":-2.2,"x2":3.2,"y2":-2.8},{"kind":"line","x1":3.2,"y1":-2.8,"x2":5,"y2":-2.8},{"kind":"line","x1":5,"y1":-2.8,"x2":5,"y2":-2.2}]},"R0603":{"pads":[{"name":"1","kind":"smd","x":-0.762,"y":0,"width":0.889,"height":0.889,"shape":"round","rotation":0,"layer":"top"},{"name":"2","kind":"smd","x":0.762,"y":0,"width":0.889,"height":0.889,"shape":"round","rotation":0,"layer":"top"}],"graphics":[{"kind":"line","x1":-1.397,"y1":0.635,"x2":1.397,"y2":0.635},{"kind":"line","x1":1.397,"y1":0.635,"x2":1.397,"y2":-0.635},{"kind":"line","x1":1.397,"y1":-0.635,"x2":-1.397,"y2":-0.635},{"kind":"line","x1":-1.397,"y1":-0.635,"x2":-1.397,"y2":0.635}]},"C0603":{"pads":[{"name":"1","kind":"smd","x":-0.762,"y":0,"width":0.889,"height":0.889,"shape":"round","rotation":0,"layer":"top"},{"name":"2","kind":"smd","x":0.762,"y":0,"width":0.889,"height":0.889,"shape":"round","rotation":0,"layer":"top"}],"graphics":[{"kind":"line","x1":-1.397,"y1":0.635,"x2":1.397,"y2":0.635},{"kind":"line","x1":1.397,"y1":0.635,"x2":1.397,"y2":-0.635},{"kind":"line","x1":1.397,"y1":-0.635,"x2":-1.397,"y2":-0.635},{"kind":"line","x1":-1.397,"y1":-0.635,"x2":-1.397,"y2":0.635}]},"3P-4.0":{"pads":[{"name":"1","kind":"platedhole","x":-2.2,"y":-4.2,"drill":1.8,"diameter":2.8,"shape":"round","rotation":0},{"name":"3","kind":"platedhole","x":2.086,"y":-8.112,"drill":1.2,"diameter":2,"shape":"round","rotation":0},{"name":"2","kind":"platedhole","x":6.1,"y":-4.6,"drill":1.8,"diameter":2.8,"shape":"round","rotation":0}],"graphics":[{"kind":"line","x1":-2.4,"y1":-9.3,"x2":7.208,"y2":-9.3},{"kind":"line","x1":-2.4,"y1":-9.3,"x2":-2.4,"y2":-5.5},{"kind":"line","x1":-2.4,"y1":-5.5,"x2":-7.6,"y2":-5.5},{"kind":"line","x1":-7.6,"y1":-5.5,"x2":-7.6,"y2":4.5},{"kind":"line","x1":-7.6,"y1":4.5,"x2":-11.8,"y2":4.5},{"kind":"line","x1":-11.8,"y1":4.5,"x2":-11.8,"y2":9.3},{"kind":"line","x1":-11.8,"y1":9.3,"x2":7.208,"y2":9.3},{"kind":"line","x1":7.208,"y1":9.3,"x2":7.208,"y2":-9.3}]}}
-const components: any[] = [{"name":"U1","kind":"chip","display":"SN75176","mpn":"SN75176","package":"SOIC8","pins":["1","2","3","4","5","6","7","8"],"connections":{"P4":"net.SIG","P8":"net.VCC","P3":"net.VCC","P5":"net.GND","P2":"net.GND","P1":"net.N_1","P6":"net.N_2","P7":"net.N_3"},"pinAttributes":{"P1":{"mustBeConnected":true},"P2":{"requiresGround":true,"mustBeConnected":true},"P3":{"requiresPower":true,"mustBeConnected":true},"P4":{"mustBeConnected":true},"P5":{"requiresGround":true,"mustBeConnected":true},"P6":{"mustBeConnected":true},"P7":{"mustBeConnected":true},"P8":{"requiresPower":true,"mustBeConnected":true}},"x":-5.815,"y":-0.685,"rotation":180,"mirrored":false},{"name":"R1","kind":"R","display":"100_1%","mpn":"R-R0603-100_1%","package":"R0603","pins":["1","2"],"connections":{"pin1":"net.GND","pin2":"net.N_1"},"pinAttributes":{"P1":{"requiresGround":true,"mustBeConnected":true},"P2":{"mustBeConnected":true}},"x":-3.91,"y":5.03,"rotation":270,"mirrored":false},{"name":"C1","kind":"C","display":"100nf","mpn":"CC0603KRX7R9BB104","package":"C0603","pins":["1","2"],"connections":{"pin2":"net.VCC","pin1":"net.GND"},"pinAttributes":{"P1":{"requiresGround":true,"mustBeConnected":true},"P2":{"requiresPower":true,"mustBeConnected":true}},"x":-9.625,"y":-1.955,"rotation":90,"mirrored":false},{"name":"J2","kind":"chip","display":"HEADER-1X3","mpn":"HEADER-1X3","package":"3P-4.0","pins":["1","3","2"],"connections":{"P1":"net.GND","P2":"net.N_2","P3":"net.N_3"},"pinAttributes":{"P1":{"requiresGround":true,"mustBeConnected":true},"P2":{"mustBeConnected":true},"P3":{"mustBeConnected":true}},"x":8.79,"y":1.22,"rotation":270,"mirrored":false}]
-const signals: any[] = [{"name":"SIG","originalName":"SIG","refs":["J1.pin1","U1.P4"]},{"name":"VCC","originalName":"VCC","refs":["J1.pin3","U1.P8","U1.P3","C1.pin2"]},{"name":"GND","originalName":"GND","refs":["J1.pin4","U1.P5","U1.P2","R1.pin1","C1.pin1","J2.P1"]},{"name":"N_1","originalName":"N$1","refs":["U1.P1","R1.pin2"]},{"name":"N_2","originalName":"N$2","refs":["U1.P6","J2.P2"]},{"name":"N_3","originalName":"N$3","refs":["U1.P7","J2.P3"]}]
-const connectorPads: any[] = {"pads":[{"name":"1","kind":"platedhole","x":-3,"y":0,"drill":0.8,"diameter":1.27,"shape":"square","rotation":0},{"name":"2","kind":"platedhole","x":-1,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0},{"name":"3","kind":"platedhole","x":1,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0},{"name":"4","kind":"platedhole","x":3,"y":0,"drill":0.8,"diameter":1.27,"shape":"round","rotation":0}],"graphics":[{"kind":"line","x1":-5,"y1":1,"x2":-5,"y2":-1},{"kind":"line","x1":5,"y1":1.5,"x2":5,"y2":-1.5},{"kind":"line","x1":-5,"y1":2.2,"x2":-5,"y2":-2.2},{"kind":"line","x1":-5,"y1":-2.2,"x2":-3.2,"y2":-2.2},{"kind":"line","x1":3.2,"y1":-2.2,"x2":5,"y2":-2.2},{"kind":"line","x1":5,"y1":-2.2,"x2":5,"y2":2.2},{"kind":"line","x1":-5,"y1":2.2,"x2":5,"y2":2.2},{"kind":"line","x1":-5,"y1":-2.2,"x2":-5,"y2":-2.8},{"kind":"line","x1":-5,"y1":-2.8,"x2":-3.2,"y2":-2.8},{"kind":"line","x1":-3.2,"y1":-2.8,"x2":-3.2,"y2":-2.2},{"kind":"line","x1":-3.2,"y1":-2.2,"x2":3.2,"y2":-2.2},{"kind":"line","x1":3.2,"y1":-2.2,"x2":3.2,"y2":-2.8},{"kind":"line","x1":3.2,"y1":-2.8,"x2":5,"y2":-2.8},{"kind":"line","x1":5,"y1":-2.8,"x2":5,"y2":-2.2}]}.pads
-const connectorLabels: string[] = ["SIG","NC","VCC","GND"]
+import { Fragment } from "react"
+import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
 const GroveRS485 = () => (
-  <board
-    name={"GroveRS485"}
-    title={"Grove RS485"}
-    width={"42.2mm"}
-    height={"22.5mm"}
-    borderRadius="1mm"
-    solderMaskColor="blue"
-    routingDisabled={true}
-  >
-    {signals.map((signal) => <net name={signal.name} isPowerNet={/^(?:VCC|VDD|VIN|3V3|5V|2V5)/i.test(signal.originalName)} isGroundNet={/^GND/i.test(signal.originalName)} />)}
-    <GroveMountingHoles x={17.1} y={8.25} />
-    <jumper
-      name="J1"
-      displayName="Grove 4-pin"
-      manufacturerPartNumber="B4B-PH-K-S"
-      pinLabels={Object.fromEntries(connectorLabels.map((label, index) => ["pin" + (index + 1), label]))}
-      pinAttributes={Object.fromEntries(connectorLabels.map((label) => [label, /^GND/i.test(label) ? { requiresGround: true, mustBeConnected: true } : /^(?:VCC|VDD|VIN|3V3|5V)/i.test(label) ? { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true } : /^NC/i.test(label) ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true }]))}
-      connections={Object.fromEntries(signals.flatMap((signal: any) => signal.refs.filter((ref: any) => ref.startsWith("J1.")).map((ref: any) => [ref.replace("J1.", "") , "net." + signal.name] )))}
-      footprint={<HandAuthoredFootprint name="J1" pads={connectorPads} excludePadNames={["SS1", "SS2"]} />}
-      pcbX={-14.705}
-      pcbY={-0.05}
-      pcbRotation={270}
-      schX={-10}
-      schY={0}
-      schPinArrangement={{ rightSide: [...connectorLabels] }}
-      schDirection="right"
-    />
-    {components.map((component, index) => {
-      const footprint = <HandAuthoredFootprint name={component.name} pads={packages[component.package as keyof typeof packages].pads} graphics={packages[component.package as keyof typeof packages].graphics} />
-      const common: any = { name: component.name, displayName: component.display, manufacturerPartNumber: component.mpn, footprint, pcbX: component.x, pcbY: component.y, pcbRotation: component.rotation, layer: component.mirrored ? "bottom" : "top", schX: -5 + (index % 4) * 3.6, schY: (Math.floor(index / 4) - 1) * 4.2, connections: component.connections, pinAttributes: component.pinAttributes }
-      if (component.kind === "R") return <resistor {...common} resistance={component.display} />
-      if (component.kind === "C") return <capacitor {...common} capacitance={component.display} schOrientation="vertical" />
-      if (component.kind === "L") return <inductor {...common} inductance={component.display} />
-      if (component.kind === "D") return <diode {...common} pinLabels={{ pin1: "anode", pin2: "cathode" }} />
-      if (component.kind === "LED") return <led {...common} color={/green/i.test(component.display) ? "green" : /blue/i.test(component.display) ? "blue" : /yellow/i.test(component.display) ? "yellow" : "red"} pinLabels={{ pin1: "anode", pin2: "cathode" }} />
-      return <chip {...common} pinLabels={Object.fromEntries(component.pins.map((_: any, pinIndex: number) => ["pin" + (pinIndex + 1), "P" + (pinIndex + 1)]))} noConnect={component.pins.filter((_: any, pinIndex: number) => component.pinAttributes["P" + (pinIndex + 1)]?.doNotConnect).map((_: any, pinIndex: number) => "pin" + (pinIndex + 1))} schPinArrangement={{ leftSide: component.pins.slice(0, Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + 1)), rightSide: component.pins.slice(Math.ceil(component.pins.length / 2)).map((_: any, pinIndex: number) => "P" + (pinIndex + Math.ceil(component.pins.length / 2) + 1)) }} />
-    })}
-    {signals.map((signal) => signal.refs.length >= 2 ? <trace name={"SRC_" + signal.name} path={[...signal.refs]} /> : null)}
-    <silkscreentext text={"RS485"} pcbX={0} pcbY={9.75} fontSize="0.6mm" />
-    <silkscreentext text="HAND-AUTHORED NETLIST" pcbX={0} pcbY={-9.75} fontSize="0.45mm" />
+  <board name={"GroveRS485"} title={"Grove RS485"} width={"40mm"} height={"20mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={16} y={7} />
+    <GroveConnector kind="uart" powerVoltage={"5V"} connectToNets pcbX={-14} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"SN75176"} manufacturerPartNumber={"SN75176"} pinLabels={{ pin1: "RX", pin2: "TX", pin3: "VCC", pin4: "GND", pin5: "CTS", pin6: "RTS" }} pinAttributes={{ RX: { mustBeConnected: true, isGpio: true }, TX: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, CTS: { doNotConnect: true }, RTS: { doNotConnect: true } }} connections={{ "RX": "net.RX_MCU", "TX": "net.TX_MCU", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["CTS", "RTS"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-1.27} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={1.27} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-1.27} portHints={["pin4"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0} portHints={["pin5"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={1.27} portHints={["pin6"]} /><silkscreenrect width="4mm" height="4.81mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={4} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["RX","TX","VCC"], rightSide: ["GND","CTS","RTS"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-5} pcbY={0} schX={5} schY={4} schOrientation="vertical" />
+    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.RX", pin2: "net.RX_MCU" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />
+    <resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.TX", pin2: "net.TX_MCU" }} pcbX={-10} pcbY={-5} schX={-3} schY={-5} />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2"]} />
+    <trace name="UART_RX_IN" path={["J1.RX","R1.pin1"]} />
+    <trace name="UART_RX_OUT" path={["R1.pin2","U1.RX"]} />
+    <trace name="UART_TX_IN" path={["J1.TX","R2.pin1"]} />
+    <trace name="UART_TX_OUT" path={["R2.pin2","U1.TX"]} />
+    <silkscreentext text={"RS485"} pcbX={0} pcbY={8.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-8.5} fontSize="0.45mm" />
   </board>
 )
 

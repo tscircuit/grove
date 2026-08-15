@@ -11,9 +11,7 @@ This review is specific to the checked-in [board source](./Grove3AxisAnalogAccel
 ## Critical design review
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -23,10 +21,10 @@ This review is specific to the checked-in [board source](./Grove3AxisAnalogAccel
 | --- | --- |
 | Declared board size | 34mm × 28mm |
 | Source components | 7 |
-| Source nets | 10 |
-| Source traces | 24 |
-| Schematic traces | 10 |
-| PCB traces | 0 |
+| Source nets | 13 |
+| Source traces | 21 |
+| Schematic traces | 8 |
+| PCB traces | 14 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -42,9 +40,12 @@ This review is specific to the checked-in [board source](./Grove3AxisAnalogAccel
 | SDA | signal |
 | RX | signal |
 | TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
 | SIG | signal |
 | STATUS | signal |
 | EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
@@ -60,6 +61,9 @@ This review is specific to the checked-in [board source](./Grove3AxisAnalogAccel
 
 ### Trace sample
 
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
 - `.U1 > .SIG to net.SIG`
 - `.U1 > .VCC to net.VCC`
 - `.U1 > .GND to net.GND`
@@ -68,10 +72,7 @@ This review is specific to the checked-in [board source](./Grove3AxisAnalogAccel
 - `.U2 > .VIN to net.VCC`
 - `.C2 > .pin1 to net.VCC`
 - `.C2 > .pin2 to net.GND`
-- `J1.VCC to U2.VIN`
-- `U2.GND to J1.GND`
-- `U2.VOUT to U1.VCC`
-- `C2.pin1 to U2.VIN`
+- `.C1 > .pin1 to net.VDD`
 
 ## BOM and footprint review
 
@@ -84,18 +85,18 @@ The BOM check confirms that source components carry non-empty manufacturer part 
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 1 autorouting error(s), 10 disconnected-port error(s), 10 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 14 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 17 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- <trace#15996(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#15997(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#15998(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#15999(from:.U2 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16000(from:.U2 > .VOUT to:net.VDD) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16001(from:.U2 > .VIN to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16002(from:.C2 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16003(from:.C2 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2174(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2175(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2176(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2177(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2178(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2179(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2180(from:.U2 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#2181(from:.U2 > .VOUT to:net.VDD) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

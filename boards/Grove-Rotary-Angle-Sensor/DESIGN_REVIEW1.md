@@ -11,9 +11,7 @@ This review is specific to the checked-in [board source](./Grove-Rotary-Angle-Se
 ## Critical design review
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — Placeholder or non-standard footprint token(s) are present (potentiometer_pth_9mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -22,12 +20,12 @@ This review is specific to the checked-in [board source](./Grove-Rotary-Angle-Se
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 20mm × 20mm |
-| Source components | 2 |
-| Source nets | 0 |
-| Source traces | 3 |
-| Schematic traces | 3 |
-| PCB traces | 3 |
+| Declared board size | 30mm × 20mm |
+| Source components | 5 |
+| Source nets | 12 |
+| Source traces | 16 |
+| Schematic traces | 6 |
+| PCB traces | 10 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -36,39 +34,67 @@ This review is specific to the checked-in [board source](./Grove-Rotary-Angle-Se
 
 | Net | Role |
 | --- | --- |
-| — | no emitted nets |
+| VCC | power |
+| GND | ground |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| ROTATION | simple_potentiometer | WH09-2-103 | WH09-2-103 | pin1, pin3, pin2 |
+| U1 | simple_chip | WH09-2-103 | WH09-2-103 | SIG, VCC, GND, AUX |
+| C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
+| R1 | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
+| RV1 | simple_potentiometer | WH09-2-103 | WH09-2-103 | pin1, pin3, pin2 |
 
 ### Trace sample
 
-- `J1.VCC to ROTATION.pin1`
-- `J1.GND to ROTATION.pin2`
-- `J1.SIG to ROTATION.pin3`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .SIG to net.SIG`
+- `.U1 > .VCC to net.VCC`
+- `.U1 > .GND to net.GND`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.R1 > .pin1 to net.SIG`
+- `.R1 > .pin2 to net.GND`
+- `.RV1 > .pin1 to net.VCC`
+- `.RV1 > .pin2 to net.SIG`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `potentiometer_pth_9mm`.
+- Footprint strings declared in source: `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 3 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 13 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- <trace#5224(from:J1.VCC to:ROTATION.pin1) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5225(from:J1.GND to:ROTATION.pin2) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5226(from:J1.SIG to:ROTATION.pin3) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#536(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#537(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#538(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#539(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#540(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#541(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#542(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#543(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 
