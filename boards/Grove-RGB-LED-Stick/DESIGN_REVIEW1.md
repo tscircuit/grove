@@ -20,11 +20,11 @@ This review is specific to the checked-in [board source](./Grove-RGB-LED-Stick.c
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 74mm × 16mm |
+| Declared board size | 89mm × 20mm |
 | Source components | 21 |
 | Source nets | 12 |
 | Source traces | 47 |
-| Schematic traces | 39 |
+| Schematic traces | 38 |
 | PCB traces | 41 |
 | Routing disabled | no |
 | Grove connector declaration | present |
@@ -52,25 +52,25 @@ This review is specific to the checked-in [board source](./Grove-RGB-LED-Stick.c
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| PIX1 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX1 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX2 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX2 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C2 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX3 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX3 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C3 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX4 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX4 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C4 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX5 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX5 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C5 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX6 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX6 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C6 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX7 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX7 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C7 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX8 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX8 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C8 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX9 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX9 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C9 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| PIX10 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX10 | simple_chip | WS2813 | WS2813 | BI, VCC, DOUT, DIN, GND, BO |
 | C10 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 
 ### Trace sample
@@ -90,12 +90,12 @@ This review is specific to the checked-in [board source](./Grove-RGB-LED-Stick.c
 
 ## BOM and footprint review
 
-The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
+The BOM check confirms that source components carry non-empty manufacturer part numbers. The JLCPCB coverage gate also records a valid C-number supplier selection for each emitted source component; that selection is an assembly candidate, not a claim that the Grove module's electrical or mechanical identity has been independently approved. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `0603`.
+- Footprint strings declared in source: `jlcpcb:C965558`, `jlcpcb:C131334`, `jlcpcb:C14663`, `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
-- Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
+- JLCPCB footprint import reference: present in the board-local source; compare the imported supplier geometry and courtyard against the retained local pad geometry before release.
 
 ## Routing, placement, and snapshot diagnostics
 
@@ -103,14 +103,14 @@ The latest generated artifacts report 0 autorouting error(s), 0 disconnected-por
 
 ### Diagnostic sample
 
-- <trace#681(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#682(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#683(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#684(from:.PIX1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#685(from:.PIX1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#686(from:.PIX1 > .DIN to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#687(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#688(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#710(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#711(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#712(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#713(from:.PIX1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#714(from:.PIX1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#715(from:.PIX1 > .DIN to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#716(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#717(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

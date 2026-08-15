@@ -167,6 +167,7 @@ const evidence = [
   "`bun run typecheck` — PASS (all 394 board entry points type-check).",
   "`bun run build` — completed 395 circuits (394 boards plus the snapshot fixture); tscircuit emitted placement/routing diagnostics that are recorded per board below.",
   "`bun run bom:check` — PASS (394 boards have manufacturer part numbers on every source component; placeholder MPNs remain review findings where applicable).",
+  "`bun run jlcpcb:check` — PASS when the generated circuit JSON carries a valid C-number JLCPCB selection on every source component and more than 90% of boards are fully selected.",
   "`bun run snapshot:update` — PASS (790 canonicalized PCB/schematic SVGs: 394 boards plus the example).",
   "`bun run validate:catalogue` — intentionally remains a review gate: run it after the board-specific findings below are addressed; this document does not treat renderer output alone as fabrication approval.",
 ]
@@ -331,12 +332,12 @@ ${traceSample}
 
 ## BOM and footprint review
 
-The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
+The BOM check confirms that source components carry non-empty manufacturer part numbers. The JLCPCB coverage gate also records a valid C-number supplier selection for each emitted source component; that selection is an assembly candidate, not a claim that the Grove module's electrical or mechanical identity has been independently approved. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
 - Footprint strings declared in source: ${footprints.length > 0 ? footprints.map((footprint) => `\`${markdownCell(footprint)}\``).join(", ") : "none"}.
 - Embedded custom pad/graphic footprint data: ${hasCustomFootprint ? "yes — compare the local pad geometry against the supplier drawing" : "no"}.
 - Placeholder/unspecified MPN count in generated source components: ${placeholderMpns}.
-- Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
+- JLCPCB footprint import reference: ${source.includes("jlcpcb:") ? "present in the board-local source" : "not present in the board-local source"}; compare the imported supplier geometry and courtyard against the retained local pad geometry before release.
 
 ## Routing, placement, and snapshot diagnostics
 

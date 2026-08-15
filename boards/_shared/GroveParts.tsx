@@ -47,6 +47,7 @@ export const TactileButton = ({
     name={name}
     displayName="6 mm tactile button"
     manufacturerPartNumber="B3F-1000"
+    supplierPartNumbers={{ jlcpcb: ["C271750"] }}
     pinLabels={{ pin1: "A", pin2: "B" }}
     pinAttributes={{
       A: { requiresPower: true, mustBeConnected: true },
@@ -89,6 +90,7 @@ export const GroveConnector = ({
       name={name}
       displayName="Grove 4-pin"
       manufacturerPartNumber="B4B-PH-K-S"
+      supplierPartNumbers={{ jlcpcb: ["C131334"] }}
       pinLabels={{
         pin1: signal1,
         pin2: signal2,
