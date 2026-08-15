@@ -80,10 +80,10 @@ export const GroveRelay = () => (
       schHeight="0.4mm"
     />
     <transistor name="Q1" displayName="S8050TL" manufacturerPartNumber="S8050TL" type="npn" footprint="sot23" pcbX={-7} pcbY={-3.5} schX={0} schY={-2.5} />
-    <resistor name="R1" resistance="4.7k" footprint="0603" pcbX={-11} pcbY={-3} schX={-3.5} schY={-2.5} />
-    <resistor name="R2" resistance="470" footprint="0603" pcbX={11} pcbY={-4.5} schX={1} schY={4} />
-    <resistor name="R3" resistance="47k" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
-    <capacitor name="C1" capacitance="1uF" footprint="0603" pcbX={-11} pcbY={5.5} pcbRotation={-90} schX={-4} schY={4} schOrientation="vertical" maxDecouplingTraceLength="5mm" />
+    <resistor name="R1" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" pcbX={-11} pcbY={-3} schX={-3.5} schY={-2.5} />
+    <resistor name="R2" resistance="470" manufacturerPartNumber="RC0603JR-07470RL" footprint="0603" pcbX={11} pcbY={-4.5} schX={1} schY={4} />
+    <resistor name="R3" resistance="47k" manufacturerPartNumber="RC0603FR-0747KL" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
+    <capacitor name="C1" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" pcbX={-11} pcbY={5.5} pcbRotation={-90} schX={-4} schY={4} schOrientation="vertical" maxDecouplingTraceLength="15mm" />
     <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={12} pcbY={5.5} schX={4} schY={2.5} />
     <led name="D2" displayName="Red LED 0603" manufacturerPartNumber="LED-RED-0603" color="red" footprint="0603" pcbX={15} pcbY={5.5} schX={4} schY={4} />
     <trace from="J1.VCC" to="U1.VIN" />

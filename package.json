@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/react": "^19.2.18",
     "fast-xml-parser": "^5.10.1",
-    "tscircuit": "^0.0.2340",
+    "tscircuit": "^0.0.2341",
     "typescript": "^5.0.0"
   }
 }

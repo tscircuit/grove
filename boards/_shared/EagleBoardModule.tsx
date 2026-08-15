@@ -149,14 +149,17 @@ const componentKind = (component: GroveEagleComponent) => {
   if (/^R\d*$/i.test(name)) return "R" as const
   if (/^C\d*$/i.test(name)) return "C" as const
   if (/^L\d*$/i.test(name)) return "L" as const
-  if (/^D\d*$/i.test(name) && /(?:led|green|red|blue|yellow|white)/i.test(value)) return "LED" as const
+  if (
+    /^D\d*$/i.test(name) &&
+    /(?:led|green|red|blue|yellow|white)/i.test(`${value} ${component.package}`)
+  ) return "LED" as const
   if (/^D\d*$/i.test(name) || /(?:1n4148|1n5819|bzt|bZX|diode)/i.test(value)) return "D" as const
   return "chip" as const
 }
 
 const referenceOnlyValue = (component: GroveEagleComponent) => {
   const value = component.value.trim()
-  return !value || value === component.name || /^(?:N\$?\d*|[RCLD]\d*|U\$?\d+|Q\d+|J\d+|P\d+|CON\d+)$/i.test(value)
+  return !value || value === component.name || /^(?:N\$?\d*|[RCLD]\d*|U\$?\d+|Q\d+|J\d+|P\d{1,2}|CON\d+)$/i.test(value)
 }
 
 const chipDisplayAndMpn = (
@@ -181,6 +184,28 @@ const chipDisplayAndMpn = (
   }
   const value = component.value.trim()
   if (!referenceOnlyValue(component)) return { display: value, mpn: value }
+  const profileText = `${profile.title} ${profile.primaryModel}`.toLowerCase()
+  if (/^BUZ\d*$/i.test(component.name)) {
+    return { display: "YMD12065", mpn: "YMD12065" }
+  }
+  if (/^SW\d*$/i.test(component.name)) {
+    return { display: "B3F-1000", mpn: "B3F-1000" }
+  }
+  if (/^PSR$/i.test(component.name)) {
+    return { display: "PT12-21C/TR8", mpn: "PT12-21C/TR8" }
+  }
+  if (/^(?:INT|SYNC)$/i.test(component.name)) {
+    return { display: "TESTPOINT-1MM", mpn: "TESTPOINT-1MM" }
+  }
+  if (/^LED\d+$/i.test(component.name) && /(?:circular led|led ring|my9221)/i.test(profileText)) {
+    return { display: "LTST-C150KRKT", mpn: "LTST-C150KRKT" }
+  }
+  if (/^U2$/i.test(component.name) && /(?:TO252|TO-252)/i.test(component.package) && /motor driver|l298|motor/i.test(profileText)) {
+    return { display: "P3055LDG", mpn: "P3055LDG" }
+  }
+  if (/^U2$/i.test(component.name) && /7-4-BYTE-SEG/i.test(component.package)) {
+    return { display: "FJ3461AH", mpn: "FJ3461AH" }
+  }
   if (component.name === mainComponentName) {
     return { display: profile.primaryModel, mpn: profile.manufacturerPartNumber }
   }
@@ -475,23 +500,34 @@ const renderEaglePassive = (
   // the chip path instead of passing invalid pin3+ connections to a primitive.
   if (labels.length !== 2) return null
   const connections = componentConnections(spec, component, netNames)
+  // Eagle files frequently leave a spare passive pad unassigned (for
+  // example a reset capacitor pad or an unpopulated pull-up). Requiring a
+  // route on every primitive pin invents connectivity that is not present in
+  // the source file and produces misleading floating-pin errors. Keep the
+  // source netlist authoritative: connected pads must be routed, while pads
+  // with no source signal are explicitly marked as no-connect.
   const pinAttributes = Object.fromEntries(
-    labels.slice(0, 2).map((_, padIndex) => [
-      componentPinName(component, padIndex, labels.length),
-      { mustBeConnected: true },
-    ]),
+    labels.slice(0, 2).map((_, padIndex) => {
+      const pin = componentPinName(component, padIndex, labels.length)
+      return [pin, connections[pin] ? { mustBeConnected: true } : { doNotConnect: true }]
+    }),
   )
   const value = component.value.trim()
-  const display = passiveValue(value, component.name)
+  const display = kind === "LED" && referenceOnlyValue(component)
+    ? "red"
+    : passiveValue(value, component.name)
   const mpn = passiveMpn(
     kind === "R" || kind === "C" || kind === "L" ? kind : "R",
     display,
     component.package,
   )
+  const componentMpn = kind === "D" || kind === "LED"
+    ? (/^IN4007$/i.test(display) ? "1N4007" : /^IN4148$/i.test(display) ? "1N4148W" : /^(?:red|green|blue|yellow|white)$/i.test(display) ? "LTST-C190KRKT" : display)
+    : mpn
   const common = {
     name: component.name,
     displayName: display,
-    manufacturerPartNumber: mpn,
+    manufacturerPartNumber: componentMpn,
     footprint: <EagleFootprint packageSpec={packageSpec} name={component.name} />,
     pcbX: position.pcbX,
     pcbY: position.pcbY,
@@ -694,7 +730,11 @@ export const EagleBoardModule = ({
       component,
       pinCount: spec.packages[component.package]?.pads.filter((pad) => pad.kind !== "hole").length ?? 0,
     }))
-    .filter(({ component, pinCount }) => !component.value && pinCount >= 4)
+    .filter(({ component, pinCount }) =>
+      !component.value &&
+      pinCount >= 4 &&
+      !/^(?:SW|J|LED|BUZ|INT|SYNC|RESET|POWER|RST|IN|OUT|PWR)\d*$/i.test(component.name),
+    )
     .sort((a, b) => b.pinCount - a.pinCount)[0]?.component.name
   const j1Position = connector ? componentAt(spec, connector) : { pcbX: -spec.width / 2 + 5, pcbY: 0 }
   const boardLabel = compact(profile.title.replace(/^Grove\s*[-:]?\s*/i, ""), 32)

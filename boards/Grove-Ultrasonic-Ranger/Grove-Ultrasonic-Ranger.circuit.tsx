@@ -17,10 +17,10 @@ export const GroveUltrasonicRanger = () => (
       schHeight="0.6mm"
     />
     <transistor name="Q1" displayName="S9013" manufacturerPartNumber="S9013" type="npn" footprint="sot23" pcbX={-5} pcbY={-5} schX={4} schY={3} />
-    <resistor name="R1" resistance="1k" footprint="0603" pcbX={-7} pcbY={-8} schX={2} schY={3} />
-    <resistor name="R2" resistance="10k" footprint="0603" pcbX={-7} pcbY={7} schX={3} schY={-3} />
-    <capacitor name="C14" capacitance="10uF" footprint="0805" pcbX={-15} pcbY={7} schX={-4} schY={3.5} schOrientation="vertical" />
-    <capacitor name="C1" capacitance="100nF" footprint="0603" pcbX={-10} pcbY={7} schX={-2} schY={3.5} schOrientation="vertical" />
+    <resistor name="R1" resistance="1k" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" pcbX={-7} pcbY={-8} schX={2} schY={3} />
+    <resistor name="R2" resistance="10k" manufacturerPartNumber="RC0603FR-0710KL" footprint="0603" pcbX={-7} pcbY={7} schX={3} schY={-3} />
+    <capacitor name="C14" capacitance="10uF" manufacturerPartNumber="CC0805ZRY5V8BB106" footprint="0805" pcbX={-15} pcbY={7} schX={-4} schY={3.5} schOrientation="vertical" />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" pcbX={-10} pcbY={7} schX={-2} schY={3.5} schOrientation="vertical" />
     <TwoPinModule name="TX1" label="40 kHz transmitter" manufacturerPartNumber="TCT40-16T" width={16} height={16} pcbX={5} pcbY={0} schX={8} schY={3} />
     <TwoPinModule name="RX1" label="40 kHz receiver" manufacturerPartNumber="TCT40-16R" width={16} height={16} pcbX={17} pcbY={0} schX={8} schY={-3} />
     <trace from="J1.VCC" to="U1.VCC" />
