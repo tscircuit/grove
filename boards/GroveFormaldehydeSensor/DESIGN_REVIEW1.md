@@ -2,7 +2,7 @@
 
 **Disposition:** NOT PRODUCTION READY
 **Board directory:** `GroveFormaldehydeSensor`
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital interface · sensor · 5V · primary model `WSP2110` · declared MPN `WSP2110`
 **Upstream reference:** [Seeed source](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
 
@@ -10,11 +10,8 @@ This review is specific to the checked-in [board source](./GroveFormaldehydeSens
 
 ## Critical design review
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 10 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 1 disconnected-port errors, 1 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -23,12 +20,12 @@ This review is specific to the checked-in [board source](./GroveFormaldehydeSens
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 102mm × 106.21mm |
-| Source components | 3 |
-| Source nets | 3 |
-| Source traces | 10 |
-| Schematic traces | 5 |
-| PCB traces | 0 |
+| Declared board size | 60mm × 38mm |
+| Source components | 4 |
+| Source nets | 12 |
+| Source traces | 13 |
+| Schematic traces | 4 |
+| PCB traces | 7 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -37,54 +34,66 @@ This review is specific to the checked-in [board source](./GroveFormaldehydeSens
 
 | Net | Role |
 | --- | --- |
-| SIG | signal |
 | VCC | power |
 | GND | ground |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| U1 | simple_chip | WSP2110 | WSP2110 | P1, P2, P3, P4 |
+| U1 | simple_chip | WSP2110 | WSP2110 | SIG, VCC, GND, AUX |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
+| R_HEAT | simple_resistor | 33Ω | RC1206JR-0733RL | pin1, pin2 |
 
 ### Trace sample
 
-- `.J1 > .pin1 to net.SIG`
-- `.J1 > .pin3 to net.VCC`
-- `.J1 > .pin4 to net.GND`
-- `.U1 > .P4 to net.SIG`
-- `.U1 > .P1 to net.VCC`
-- `.U1 > .P3 to net.VCC`
-- `.U1 > .P2 to net.GND`
-- `.C1 > .pin2 to net.VCC`
-- `.C1 > .pin1 to net.GND`
-- `J1.pin3 to U1.P1`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .SIG to net.SIG`
+- `.U1 > .VCC to net.VCC`
+- `.U1 > .GND to net.GND`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.R_HEAT > .pin1 to net.VCC`
+- `.R_HEAT > .pin2 to net.GND`
+- `J1.VCC to U1.VCC`
+- `J1.GND to U1.GND`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: none.
-- Embedded custom pad/graphic footprint data: yes — compare the local pad geometry against the supplier drawing.
+- Footprint strings declared in source: `0603`, `1206`.
+- Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 1 autorouting error(s), 1 disconnected-port error(s), 1 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 9 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 10 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- Could not create resistor "R1". Invalid props for resistor "R1": connections ({"_errors":[],"pin3":{"_errors":["Invalid enum value. Expected 'pin1' \| 'pin2' \| 'pos' \| 'neg', received 'pin3'"]}}) Details: Props: {   "name": "R1",   "displayName": "10K",   "manufacturerPartNumber": "RC0603FR-0710KL",   "footprint": {     "$$typeof": "Symbol(react.transitional.element)",     "type": "[Function HandAuthoredFootprint]",     "key": null,     "props": {       "name": "R1",       "pads": [         {           "name": "1",           "kind": "platedhole",           "x": -2.54,           "y": -0.25,           "drill": 0.8,           "diameter": 1.35,           "shape": "round",           "rotation": 0         },         {           "name": "2",           "kind": "platedhole",           "x": 2.54,           "y": -0.25,           "drill": 0.8,           "diameter": 1.35,           "shape": "round",           "rotation": 0         },         {           "name": "3",           "kind": "platedhole",           "x": 0,           "y": 2.25,           "drill": 0.8,           "diameter": 1.35,           "shape": "square",           "rotation": 0         }       ],       "graphics": [         {           "kind": "line",           "x1": -3.4,           "y1": 3.5,           "x2": 3.4,           "y2": 3.5         },         {           "kind": "line",           "x1": 3.4,           "y1": 3.5,           "x2": 3.4,           "y2": -3.5         },         {           "kind": "line",           "x1": 3.4,           "y1": -3.5,           "x2": -3.4,           "y2": -3.5         },         {           "kind": "line",           "x1": -3.4,           "y1": -3.5,           "x2": -3.4,           "y2": 3.5         }       ]     },     "_owner": {       "tag": 0,       "key": null,       "elementType": "[Function GroveFormaldehydeSensor]",       "type": "[Function GroveFormaldehydeSensor]",       "stateNode": null,       "return": {         "tag": 3,         "key": null,         "elementType": null,         "type": null,         "stateNode": {           "tag": 1,           "containerInfo": {             "children": [               {                 "renderPhaseStates": {                   "ReactSubtreesRender"…
-- <trace#44141(from:.J1 > .pin1 to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44142(from:.J1 > .pin3 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44143(from:.J1 > .pin4 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44144(from:.U1 > .P4 to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44145(from:.U1 > .P1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44146(from:.U1 > .P3 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#44147(from:.U1 > .P2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4183(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4184(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4185(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4186(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4187(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4188(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4189(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#4190(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

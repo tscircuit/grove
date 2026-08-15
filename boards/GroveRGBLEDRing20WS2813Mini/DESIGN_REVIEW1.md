@@ -11,11 +11,7 @@ This review is specific to the checked-in [board source](./GroveRGBLEDRing20WS28
 ## Critical design review
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 100 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 40 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 20 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 84 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -24,13 +20,13 @@ This review is specific to the checked-in [board source](./GroveRGBLEDRing20WS28
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 48mm × 48mm |
+| Declared board size | 72mm × 72mm |
 | Source components | 41 |
-| Source nets | 9 |
-| Source traces | 100 |
-| Schematic traces | 38 |
-| PCB traces | 0 |
-| Routing disabled | yes |
+| Source nets | 12 |
+| Source traces | 87 |
+| Schematic traces | 79 |
+| PCB traces | 81 |
+| Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
 
@@ -44,94 +40,97 @@ This review is specific to the checked-in [board source](./GroveRGBLEDRing20WS28
 | SDA | signal |
 | RX | signal |
 | TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
 | SIG | signal |
 | STATUS | signal |
 | EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| LED1 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX1 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED2 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX2 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C2 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED3 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX3 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C3 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED4 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX4 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C4 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED5 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX5 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C5 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED6 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX6 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C6 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED7 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX7 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C7 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED8 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX8 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C8 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED9 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX9 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C9 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED10 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX10 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C10 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED11 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX11 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C11 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED12 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX12 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C12 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED13 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX13 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C13 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED14 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX14 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C14 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED15 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX15 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C15 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED16 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX16 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C16 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED17 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX17 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C17 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED18 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX18 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C18 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED19 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX19 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C19 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| LED20 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
+| PIX20 | simple_chip | WS2813 | WS2813 | DIN, DOUT, VCC, GND |
 | C20 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 
 ### Trace sample
 
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.PIX1 > .VCC to net.VCC`
+- `.PIX1 > .GND to net.GND`
+- `.PIX1 > .DIN to net.SIG`
 - `.C1 > .pin1 to net.VCC`
 - `.C1 > .pin2 to net.GND`
-- `J1.SIG to LED1.DIN`
-- `LED1.VCC to J1.VCC`
-- `LED1.GND to J1.GND`
+- `.PIX2 > .VCC to net.VCC`
+- `.PIX2 > .GND to net.GND`
 - `.C2 > .pin1 to net.VCC`
 - `.C2 > .pin2 to net.GND`
-- `LED1.DOUT to LED2.DIN`
-- `LED2.VCC to J1.VCC`
-- `LED2.GND to J1.GND`
-- `.C3 > .pin1 to net.VCC`
-- `.C3 > .pin2 to net.GND`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `led_5050`, `0603`.
+- Footprint strings declared in source: `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 40 unnamed-trace warning(s), 20 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 84 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
+- <trace#12657(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12658(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12659(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12660(from:.PIX1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12661(from:.PIX1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12662(from:.PIX1 > .DIN to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12663(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#12664(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

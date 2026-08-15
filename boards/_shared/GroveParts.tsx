@@ -8,6 +8,7 @@ export interface GroveConnectorProps {
   schX?: number
   schY?: number
   schRotation?: number
+  connectToNets?: boolean
 }
 
 const GroveConnectorFootprint = () => (
@@ -75,6 +76,7 @@ export const GroveConnector = ({
   schX,
   schY,
   schRotation,
+  connectToNets = false,
 }: GroveConnectorProps) => {
   const signal1 =
     kind === "i2c" ? "SCL" : kind === "uart" ? "RX" : "SIG"
@@ -101,6 +103,12 @@ export const GroveConnector = ({
         VCC: { requiresPower: true, requiresVoltage: powerVoltage },
         GND: { requiresGround: true },
       }}
+      connections={connectToNets ? {
+        [signal1]: `net.${signal1}`,
+        ...(signal2IsActive ? { [signal2]: `net.${signal2}` } : {}),
+        VCC: "net.VCC",
+        GND: "net.GND",
+      } : undefined}
       footprint={<GroveConnectorFootprint />}
       pcbX={pcbX}
       pcbY={pcbY}

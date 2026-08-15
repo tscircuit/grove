@@ -1,155 +1,35 @@
+import { Fragment } from "react"
 import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
-const LcdPanel = () => (
-  <chip
-    name="LCD1"
-    displayName="16x2 RGB LCD"
-    manufacturerPartNumber="JHD1313"
-    pinLabels={{
-      pin1: "GND",
-      pin2: "VCC",
-      pin3: "CONTRAST",
-      pin4: "RS",
-      pin5: "RW",
-      pin6: "E",
-      pin7: "D4",
-      pin8: "D5",
-      pin9: "D6",
-      pin10: "D7",
-      pin11: "BL_COM",
-      pin12: "BL_R",
-      pin13: "BL_G",
-      pin14: "BL_B",
-    }}
-    pinAttributes={{
-      GND: { requiresGround: true },
-      VCC: { requiresPower: true, requiresVoltage: "5V" },
-      CONTRAST: { mustBeConnected: true },
-      RS: { mustBeConnected: true, isGpio: true },
-      RW: { mustBeConnected: true, isGpio: true },
-      E: { mustBeConnected: true, isGpio: true },
-      D4: { mustBeConnected: true, isGpio: true },
-      D5: { mustBeConnected: true, isGpio: true },
-      D6: { mustBeConnected: true, isGpio: true },
-      D7: { mustBeConnected: true, isGpio: true },
-      BL_COM: { mustBeConnected: true },
-      BL_R: { mustBeConnected: true },
-      BL_G: { mustBeConnected: true },
-      BL_B: { mustBeConnected: true },
-    }}
-    footprint={
-      <footprint>
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-16.51} pcbY={-14.5} portHints={["pin1"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-13.97} pcbY={-14.5} portHints={["pin2"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-11.43} pcbY={-14.5} portHints={["pin3"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-8.89} pcbY={-14.5} portHints={["pin4"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-6.35} pcbY={-14.5} portHints={["pin5"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-3.81} pcbY={-14.5} portHints={["pin6"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={-1.27} pcbY={-14.5} portHints={["pin7"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={1.27} pcbY={-14.5} portHints={["pin8"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={3.81} pcbY={-14.5} portHints={["pin9"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={6.35} pcbY={-14.5} portHints={["pin10"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={8.89} pcbY={-14.5} portHints={["pin11"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={11.43} pcbY={-14.5} portHints={["pin12"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={13.97} pcbY={-14.5} portHints={["pin13"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.8mm" pcbX={16.51} pcbY={-14.5} portHints={["pin14"]} />
-        <silkscreenrect width="72mm" height="28mm" stroke="solid" strokeWidth="0.3mm" filled={false} />
-        <silkscreenrect width="51mm" height="14mm" stroke="solid" strokeWidth="0.2mm" filled={false} />
-        <silkscreentext text="16 × 2" pcbX={0} pcbY={0} fontSize="1.5mm" />
-      </footprint>
-    }
-    pcbX={0}
-    pcbY={0}
-    schX={11}
-    schY={0}
-  />
-)
-
-export const GroveLcdRgbBacklight = () => (
-  <board name="GroveLcdRgbBacklight" title="Grove - LCD RGB Backlight v5.0" width="80mm" height="36mm" borderRadius="1.5mm" solderMaskColor="blue">
+const GroveLcdRgbBacklight = () => (
+  <board name={"GroveLcdRgbBacklight"} title={"Grove - LCD RGB Backlight v5.0"} width={"80mm"} height={"36mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
     <net name="VCC" isPowerNet />
     <net name="GND" isGroundNet />
-    <GroveMountingHoles x={37} y={15} diameter="2.8mm" />
-    <GroveConnector kind="i2c" pcbX={-34} pcbY={0} pcbRotation={-90} schX={-12} schY={0} />
-    <LcdPanel />
-    <chip
-      name="U1"
-      displayName="JHD1313 LCD controller"
-      manufacturerPartNumber="JHD1313"
-      pinLabels={{
-        pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "RS", pin6: "RW",
-        pin7: "E", pin8: "D4", pin9: "D5", pin10: "D6", pin11: "D7", pin12: "CONTRAST",
-      }}
-      pinAttributes={{
-        GND: { requiresGround: true }, VCC: { requiresPower: true, requiresVoltage: "5V" },
-        SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true },
-        RS: { mustBeConnected: true, isGpio: true }, RW: { mustBeConnected: true, isGpio: true },
-        E: { mustBeConnected: true, isGpio: true }, D4: { mustBeConnected: true, isGpio: true },
-        D5: { mustBeConnected: true, isGpio: true }, D6: { mustBeConnected: true, isGpio: true },
-        D7: { mustBeConnected: true, isGpio: true }, CONTRAST: { mustBeConnected: true },
-      }}
-      footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={0.2}
-    />
-    <chip
-      name="U2"
-      displayName="SGM31323 RGB driver"
-      manufacturerPartNumber="SGM31323"
-      pinLabels={{ pin1: "GND", pin2: "VCC", pin3: "SCL", pin4: "SDA", pin5: "R", pin6: "G", pin7: "B" }}
-      pinAttributes={{
-        GND: { requiresGround: true }, VCC: { requiresPower: true, requiresVoltage: "5V" },
-        SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true },
-        R: { mustBeConnected: true }, G: { mustBeConnected: true }, B: { mustBeConnected: true },
-      }}
-      footprint="qfn16" layer="bottom" pcbX={8} pcbY={9} schX={3} schY={-6}
-      schPinArrangement={{ leftSide: ["SCL", "SDA", "VCC"], rightSide: ["R", "G", "B", "GND"] }}
-      schWidth="1.2mm"
-      schHeight="0.8mm"
-      noConnect={["pin8", "pin9", "pin10", "pin11", "pin12", "pin13", "pin14", "pin15", "pin16"]}
-    />
-    <resistor name="R1" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" layer="bottom" pcbX={-25} pcbY={10} schX={-7} schY={4} />
-    <resistor name="R2" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" layer="bottom" pcbX={-21} pcbY={10} schX={-5} schY={4} />
-    <resistor name="RR" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={16} pcbY={11} schX={7} schY={-4} />
-    <resistor name="RG" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={20} pcbY={11} schX={8} schY={-6} />
-    <resistor name="RB" resistance="100" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" layer="bottom" pcbX={24} pcbY={11} schX={7} schY={-8} />
-    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" layer="bottom" pcbX={-5} pcbY={10} schX={-1} schY={4.5} schOrientation="vertical" />
-    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" layer="bottom" pcbX={3} pcbY={10} schX={3} schY={-10} schOrientation="vertical" />
-    <trace from="J1.VCC" to="net.VCC" />
-    <trace from="U1.VCC" to="net.VCC" />
-    <trace from="U2.VCC" to="net.VCC" />
-    <trace from="LCD1.VCC" to="net.VCC" />
-    <trace from="LCD1.BL_COM" to="net.VCC" />
-    <trace from="R1.pin1" to="net.VCC" />
-    <trace from="R2.pin1" to="net.VCC" />
-    <trace from="C1.pin1" to="net.VCC" />
-    <trace from="C2.pin1" to="net.VCC" />
-    <trace from="J1.GND" to="net.GND" />
-    <trace from="U1.GND" to="net.GND" />
-    <trace from="U2.GND" to="net.GND" />
-    <trace from="LCD1.GND" to="net.GND" />
-    <trace from="C1.pin2" to="net.GND" />
-    <trace from="C2.pin2" to="net.GND" />
-    <trace from="J1.SCL" to="U1.SCL" />
-    <trace from="J1.SCL" to="U2.SCL" />
-    <trace from="J1.SCL" to="R1.pin2" />
-    <trace from="J1.SDA" to="U1.SDA" />
-    <trace from="J1.SDA" to="U2.SDA" />
-    <trace from="J1.SDA" to="R2.pin2" />
-    <trace from="U1.RS" to="LCD1.RS" />
-    <trace from="U1.RW" to="LCD1.RW" />
-    <trace from="U1.E" to="LCD1.E" />
-    <trace from="U1.D4" to="LCD1.D4" />
-    <trace from="U1.D5" to="LCD1.D5" />
-    <trace from="U1.D6" to="LCD1.D6" />
-    <trace from="U1.D7" to="LCD1.D7" />
-    <trace from="U1.CONTRAST" to="LCD1.CONTRAST" />
-    <trace from="U2.R" to="RR.pin1" />
-    <trace from="RR.pin2" to="LCD1.BL_R" />
-    <trace from="U2.G" to="RG.pin1" />
-    <trace from="RG.pin2" to="LCD1.BL_G" />
-    <trace from="U2.B" to="RB.pin1" />
-    <trace from="RB.pin2" to="LCD1.BL_B" />
-    <silkscreentext text="GROVE LCD RGB BACKLIGHT v5.0" pcbX={0} pcbY={17} fontSize="0.7mm" />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={36} y={15} />
+    <GroveConnector kind="i2c" powerVoltage={"5V"} connectToNets pcbX={-34} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"HD44780"} manufacturerPartNumber={"HD44780"} pinLabels={{ pin1: "SDA", pin2: "SCL", pin3: "VCC", pin4: "GND", pin5: "ADDR", pin6: "INT" }} pinAttributes={{ SDA: { mustBeConnected: true, isGpio: true }, SCL: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, ADDR: { doNotConnect: true }, INT: { doNotConnect: true } }} connections={{ "SDA": "net.SDA", "SCL": "net.SCL", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["ADDR", "INT"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-1.27} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={1.27} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-1.27} portHints={["pin4"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0} portHints={["pin5"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={1.27} portHints={["pin6"]} /><silkscreenrect width="4mm" height="4.81mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={1} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["SDA","SCL","VCC"], rightSide: ["GND","ADDR","INT"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-5} pcbY={0} schX={5} schY={4} schOrientation="vertical" />
+    <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.SCL" }} pcbX={-8} pcbY={5} schX={-3} schY={5} />
+    <resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.SDA" }} pcbX={-8} pcbY={-5} schX={-3} schY={-5} />
+    <chip name="U3" displayName={"HD44780 display panel"} manufacturerPartNumber={"HD44780"} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "SCL", pin4: "SDA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: "net.VCC", GND: "net.GND", SCL: "net.SCL", SDA: "net.SDA" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3.75} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-1.25} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={1.25} pcbY={0} portHints={["pin3"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3.75} pcbY={0} portHints={["pin4"]} /><silkscreenrect width="10mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1","R1.pin1","R2.pin1","U3.VCC"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2","U3.GND"]} />
+    <trace name="I2C_SCL" path={["J1.SCL","U1.SCL","R1.pin2","U3.SCL"]} />
+    <trace name="I2C_SDA" path={["J1.SDA","U1.SDA","R2.pin2","U3.SDA"]} />
+    <silkscreentext text={"LCD RGB Backlight v5.0"} pcbX={0} pcbY={16.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-16.5} fontSize="0.45mm" />
   </board>
 )
 
+export { GroveLcdRgbBacklight }
 export default GroveLcdRgbBacklight

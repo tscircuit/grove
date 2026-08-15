@@ -11,9 +11,7 @@ This review is specific to the checked-in [board source](./Grove-Button.circuit.
 ## Critical design review
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 4 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -22,12 +20,12 @@ This review is specific to the checked-in [board source](./Grove-Button.circuit.
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 20mm × 20mm |
-| Source components | 3 |
-| Source nets | 0 |
-| Source traces | 4 |
-| Schematic traces | 2 |
-| PCB traces | 4 |
+| Declared board size | 30mm × 20mm |
+| Source components | 4 |
+| Source nets | 12 |
+| Source traces | 13 |
+| Schematic traces | 4 |
+| PCB traces | 7 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -36,22 +34,42 @@ This review is specific to the checked-in [board source](./Grove-Button.circuit.
 
 | Net | Role |
 | --- | --- |
-| — | no emitted nets |
+| VCC | power |
+| GND | ground |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| S1 | simple_chip | 6 mm tactile button | B3F-1000 | A, B |
-| R1 | simple_resistor | 10kΩ | RC0603FR-0710KL | pin1, pin2 |
+| U1 | simple_chip | B3F-1000 | B3F-1000 | SIG, VCC, GND, AUX |
+| C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
+| SW1 | simple_push_button | B3F-1000 tactile switch | B3F-1000 | pin1, pin2 |
 
 ### Trace sample
 
-- `J1.VCC to S1.pin1`
-- `S1.pin2 to J1.SIG`
-- `J1.SIG to R1.pin1`
-- `R1.pin2 to J1.GND`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .SIG to net.SIG`
+- `.U1 > .VCC to net.VCC`
+- `.U1 > .GND to net.GND`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.SW1 > .pin1 to net.VCC`
+- `.SW1 > .pin2 to net.SIG`
+- `J1.VCC to U1.VCC`
+- `J1.GND to U1.GND`
 
 ## BOM and footprint review
 
@@ -64,15 +82,18 @@ The BOM check confirms that source components carry non-empty manufacturer part 
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 4 unnamed-trace warning(s), 1 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 10 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- The "S" prefix is being used with a <chip />, try using it with a <switch /> or <pushbutton />
-- <trace#25(from:J1.VCC to:S1.pin1) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#26(from:S1.pin2 to:J1.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#27(from:J1.SIG to:R1.pin1) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#28(from:R1.pin2 to:J1.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#82(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#83(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#84(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#85(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#86(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#87(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#88(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#89(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

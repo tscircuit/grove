@@ -11,12 +11,7 @@ This review is specific to the checked-in [board source](./GroveI2CMotorDriverTB
 ## Critical design review
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 14 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -27,10 +22,10 @@ This review is specific to the checked-in [board source](./GroveI2CMotorDriverTB
 | --- | --- |
 | Declared board size | 52mm × 28mm |
 | Source components | 10 |
-| Source nets | 9 |
-| Source traces | 26 |
-| Schematic traces | 7 |
-| PCB traces | 0 |
+| Source nets | 12 |
+| Source traces | 32 |
+| Schematic traces | 11 |
+| PCB traces | 20 |
 | Routing disabled | no |
 | Grove connector declaration | present |
 | Mounting/mechanical declaration | present |
@@ -45,63 +40,66 @@ This review is specific to the checked-in [board source](./GroveI2CMotorDriverTB
 | SDA | signal |
 | RX | signal |
 | TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
 | SIG | signal |
 | STATUS | signal |
 | EMITTER | signal |
+| LOAD_NEG | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SCL, SDA, VCC, GND |
-| U1 | simple_chip | TB6612FNG | TB6612FNG | SDA, SCL, VCC, GND, ADDR, INT, pin7, pin8 |
+| U1 | simple_chip | TB6612FNG | TB6612FNG | SDA, SCL, VCC, GND, ADDR, INT |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
 | R1 | simple_resistor | 4.7kΩ | RC0603FR-074K7L | pin1, pin2 |
 | R2 | simple_resistor | 4.7kΩ | RC0603FR-074K7L | pin1, pin2 |
 | D_STATUS | simple_led | red status LED | LTST-C190KRKT | pin1, pin2 |
 | R_STATUS | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
 | Q1 | simple_mosfet | 2N7002 load switch | 2N7002 | pin1, pin2, pin3 |
-| LOAD1 | simple_chip | TB6612FNG load stage | UNSPECIFIED-LOAD-GroveI2CMotorDriverTB6612FNG | POS, NEG |
+| U3 | simple_chip | TB6612FNG load stage | TB6612FNG | POS, NEG, GND |
 | D1 | simple_diode | 1N4148W flyback diode | 1N4148W | pin1, pin2 |
 
 ### Trace sample
 
+- `.J1 > .SCL to net.SCL`
+- `.J1 > .SDA to net.SDA`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
 - `.U1 > .SDA to net.SDA`
 - `.U1 > .SCL to net.SCL`
 - `.U1 > .VCC to net.VCC`
 - `.U1 > .GND to net.GND`
 - `.C1 > .pin1 to net.VCC`
 - `.C1 > .pin2 to net.GND`
-- `U1.VCC to C1.pin1`
-- `C1.pin2 to U1.GND`
 - `.R1 > .pin1 to net.VCC`
 - `.R1 > .pin2 to net.SCL`
-- `.R2 > .pin1 to net.VCC`
-- `.R2 > .pin2 to net.SDA`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `soic8`, `0603`, `sot23`, `power_module`.
+- Footprint strings declared in source: `0603`, `sot23`.
 - Embedded custom pad/graphic footprint data: no.
-- Placeholder/unspecified MPN count in generated source components: 1.
+- Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 1 autorouting error(s), 10 disconnected-port error(s), 14 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 12 unnamed-trace warning(s), 1 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 26 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- The "L" prefix is being used with a <chip />, try using it with an <inductor />
-- Invalid footprint prop on chip "LOAD1": "power_module". Parser details: Invalid footprint function, got "power", from string "power_module"
-- <trace#57340(from:.U1 > .SDA to:net.SDA) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#57341(from:.U1 > .SCL to:net.SCL) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#57342(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#57343(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#57344(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#57345(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5721(from:.J1 > .SCL to:net.SCL) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5722(from:.J1 > .SDA to:net.SDA) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5723(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5724(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5725(from:.U1 > .SDA to:net.SDA) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5726(from:.U1 > .SCL to:net.SCL) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5727(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#5728(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

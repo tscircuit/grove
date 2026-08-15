@@ -11,10 +11,7 @@ This review is specific to the checked-in [board source](./Grove-Ultrasonic-Rang
 ## Critical design review
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — No mounting-hole/mechanical datum declaration is visible; verify panel fit, fastener clearance, and board orientation before fabrication.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -23,74 +20,83 @@ This review is specific to the checked-in [board source](./Grove-Ultrasonic-Rang
 
 | Item | Observed value |
 | --- | --- |
-| Declared board size | 50mm × 25mm |
-| Source components | 9 |
-| Source nets | 0 |
-| Source traces | 16 |
-| Schematic traces | 8 |
-| PCB traces | 16 |
+| Declared board size | 40mm × 26mm |
+| Source components | 5 |
+| Source nets | 14 |
+| Source traces | 18 |
+| Schematic traces | 5 |
+| PCB traces | 11 |
 | Routing disabled | no |
 | Grove connector declaration | present |
-| Mounting/mechanical declaration | missing |
+| Mounting/mechanical declaration | present |
 
 ### Nets
 
 | Net | Role |
 | --- | --- |
-| — | no emitted nets |
+| VCC | power |
+| GND | ground |
+| SCL | signal |
+| SDA | signal |
+| RX | signal |
+| TX | signal |
+| RX_MCU | signal |
+| TX_MCU | signal |
+| SIG | signal |
+| STATUS | signal |
+| EMITTER | signal |
+| LOAD_NEG | signal |
+| DISTANCE_DRIVE | signal |
+| DISTANCE_SENSE | signal |
 
 ### Emitted source components and ports
 
 | Refdes | tscircuit type | Value/display | Manufacturer part number | Emitted ports |
 | --- | --- | --- | --- | --- |
 | J1 | simple_chip | Grove 4-pin | B4B-PH-K-S | SIG, NC, VCC, GND |
-| U1 | simple_chip | ATmega328P | ATmega328P-AU | SIG, TX_DRIVE, RX_SENSE, VCC, GND |
-| Q1 | simple_transistor | S9013 | S9013 | pin1, pin3, pin2 |
-| R1 | simple_resistor | 1kΩ | RC0603FR-071KL | pin1, pin2 |
-| R2 | simple_resistor | 10kΩ | RC0603FR-0710KL | pin1, pin2 |
-| C14 | simple_capacitor | 10uF | CC0805ZRY5V8BB106 | pin1, pin2 |
+| U1 | simple_chip | HC-SR04 | HC-SR04 | SIG, VCC, GND, AUX |
 | C1 | simple_capacitor | 100nF | CC0603KRX7R9BB104 | pin1, pin2 |
-| TX1 | simple_chip | 40 kHz transmitter | TCT40-16T | POS, NEG |
-| RX1 | simple_chip | 40 kHz receiver | TCT40-16R | POS, NEG |
+| U3 | simple_chip | 40 kHz ultrasonic transmitter | TCT40-16T | IN, VCC, GND |
+| U4 | simple_chip | 40 kHz ultrasonic receiver | TCT40-16R | OUT, VCC, GND |
 
 ### Trace sample
 
-- `J1.VCC to U1.VCC`
-- `J1.VCC to C14.pin1`
-- `J1.VCC to C1.pin1`
-- `C14.pin2 to J1.GND`
-- `C1.pin2 to J1.GND`
-- `U1.GND to J1.GND`
-- `J1.SIG to U1.SIG`
-- `U1.TX_DRIVE to R1.pin1`
-- `R1.pin2 to Q1.base`
-- `Q1.emitter to J1.GND`
-- `Q1.collector to TX1.NEG`
-- `TX1.POS to J1.VCC`
+- `.J1 > .SIG to net.SIG`
+- `.J1 > .VCC to net.VCC`
+- `.J1 > .GND to net.GND`
+- `.U1 > .SIG to net.SIG`
+- `.U1 > .VCC to net.VCC`
+- `.U1 > .GND to net.GND`
+- `.C1 > .pin1 to net.VCC`
+- `.C1 > .pin2 to net.GND`
+- `.U3 > .IN to net.DISTANCE_DRIVE`
+- `.U3 > .VCC to net.VCC`
+- `.U3 > .GND to net.GND`
+- `.U4 > .OUT to net.DISTANCE_SENSE`
 
 ## BOM and footprint review
 
 The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `sot23_5`, `sot23`, `0603`, `0805`.
+- Footprint strings declared in source: `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
 - Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
 
 ## Routing, placement, and snapshot diagnostics
 
-The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 16 unnamed-trace warning(s), 1 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
+The latest generated artifacts report 0 autorouting error(s), 0 disconnected-port error(s), 0 missing-PCB-trace error(s), 0 source-pin-missing-trace warning(s), 14 unnamed-trace warning(s), 0 refdes warning(s), 0 power metadata warning(s), and 0 ground metadata warning(s).
 
 ### Diagnostic sample
 
-- The "R" prefix is being used with a <chip />, try using it with a <resistor />
-- <trace#5348(from:J1.VCC to:U1.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5349(from:J1.VCC to:C14.pin1) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5350(from:J1.VCC to:C1.pin1) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5351(from:C14.pin2 to:J1.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5352(from:C1.pin2 to:J1.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5353(from:U1.GND to:J1.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#5354(from:J1.SIG to:U1.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#392(from:.J1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#393(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#394(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#395(from:.U1 > .SIG to:net.SIG) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#396(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#397(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#398(from:.C1 > .pin1 to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#399(from:.C1 > .pin2 to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 

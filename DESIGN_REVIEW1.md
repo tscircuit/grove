@@ -4,7 +4,7 @@ Generated from the checked-in board-local TSX sources and the latest `dist/board
 
 ## Executive disposition
 
-The catalogue is structurally complete but is **not production-ready as a set**. Every entry now has a board-local TSX source and a committed PCB/schematic snapshot, but the current artifacts still require board-specific BOM, datasheet, footprint, mechanical, power, and routed-copper sign-off. The strongest repo-wide blocker is that 19/394 boards produced at least one PCB trace in the latest build; 309/394 emitted autorouting/disconnected-port/missing-PCB-trace diagnostics, and 58/394 contain at least one placeholder MPN.
+The catalogue is structurally complete but is **not production-ready as a set**. Every entry now has a board-local TSX source and a committed PCB/schematic snapshot, but the current artifacts still require board-specific BOM, datasheet, footprint, mechanical, power, and routed-copper sign-off. The strongest repo-wide blocker is that 394/394 boards produced at least one PCB trace in the latest build; 0/394 emitted autorouting/disconnected-port/missing-PCB-trace diagnostics, and 0/394 contain at least one placeholder MPN.
 
 The wrapper-removal requirement is satisfied at the entry-point level: 394/394 board circuit files are board-local and 0 board circuit files import a profile wrapper. The 12 retained hand-authored boards remain source-specific; 67 entries preserve local Eagle pad/net data; the remaining entries are explicit board-local engineering drafts and are called out as such below.
 
@@ -23,18 +23,18 @@ The wrapper-removal requirement is satisfied at the entry-point level: 394/394 b
 | Manifest boards | 394 |
 | Board-local TSX entry points | 394 |
 | Profile-wrapper entry points | 0 |
-| Source components | 3123 |
-| Source traces | 10053 |
-| PCB traces | 353 |
-| Schematic traces | 3299 |
-| Boards with PCB traces | 19 |
-| Boards with autorouting/disconnect/missing-trace diagnostics | 309 |
-| Boards with placeholder MPNs | 58 |
-| Unnamed source-trace warnings | 6556 |
-| Refdes convention warnings | 311 |
-| Power metadata warnings | 123 |
-| Ground metadata warnings | 88 |
-| Source-pin-missing-trace warnings | 710 |
+| Source components | 2406 |
+| Source traces | 7762 |
+| PCB traces | 4641 |
+| Schematic traces | 2661 |
+| Boards with PCB traces | 394 |
+| Boards with autorouting/disconnect/missing-trace diagnostics | 0 |
+| Boards with placeholder MPNs | 0 |
+| Unnamed source-trace warnings | 6187 |
+| Refdes convention warnings | 0 |
+| Power metadata warnings | 0 |
+| Ground metadata warnings | 0 |
+| Source-pin-missing-trace warnings | 0 |
 
 ## Review method
 
@@ -49,14 +49,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 3 source components · 4 source traces · 4 PCB traces · 2 schematic traces · 0 placeholder MPNs · 4 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 4 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -68,16 +66,15 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · actuator · primary model `YMD12065` · declared MPN `YMD12065` · 5V
 
-**Artifact counts:** 4 source components · 5 source traces · 5 PCB traces · 3 schematic traces · 0 placeholder MPNs · 5 unnamed-trace warnings
+**Artifact counts:** 8 source components · 25 source traces · 15 PCB traces · 8 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 5 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
-- P1 — This load family needs a measured current path and suppression network; no flyback/suppression diode is evident.
+- P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
 
 ### Grove - Capacitive Moisture Sensor (Corrosion Resistant) — `Grove-Capacitive-Moisture`
 
@@ -86,16 +83,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** analog · sensor · primary model `NE555DR` · declared MPN `NE555DR` · 5V
 
-**Artifact counts:** 15 source components · 29 source traces · 29 PCB traces · 12 schematic traces · 0 placeholder MPNs · 29 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 29 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — 3 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — No mounting-hole/mechanical datum declaration is visible; verify panel fit, fastener clearance, and board orientation before fabrication.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -106,14 +99,13 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** i2c · sensor · primary model `DHT20` · declared MPN `DHT20` · 5V
 
-**Artifact counts:** 13 source components · 25 source traces · 25 PCB traces · 11 schematic traces · 0 placeholder MPNs · 25 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 12 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 25 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
 
@@ -124,13 +116,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 11 source components · 21 source traces · 21 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -142,14 +133,13 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 11 source components · 35 source traces · 33 PCB traces · 14 schematic traces · 0 placeholder MPNs · 35 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 35 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 4 reference-designator convention warning(s) require cleanup before release.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -161,15 +151,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 4 source components · 8 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — 3 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -180,14 +167,13 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** i2c · display · primary model `SSD1315` · declared MPN `SSD1315` · 5V
 
-**Artifact counts:** 16 source components · 35 source traces · 35 PCB traces · 12 schematic traces · 0 placeholder MPNs · 35 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 35 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -199,13 +185,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 11 source components · 19 source traces · 19 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 25 source traces · 15 PCB traces · 8 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -217,17 +202,15 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 34 source components · 97 source traces · 85 PCB traces · 59 schematic traces · 0 placeholder MPNs · 79 unnamed-trace warnings
+**Artifact counts:** 21 source components · 47 source traces · 41 PCB traces · 39 schematic traces · 0 placeholder MPNs · 44 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 79 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 13 reference-designator convention warning(s) require cleanup before release.
-- P1 — No mounting-hole/mechanical datum declaration is visible; verify panel fit, fastener clearance, and board orientation before fabrication.
+- P2 — 44 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove - Rotary Angle Sensor v1.2 — `Grove-Rotary-Angle-Sensor`
 
@@ -236,14 +219,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** analog · input · primary model `WH09-2-103` · declared MPN `WH09-2-103` · 5V
 
-**Artifact counts:** 2 source components · 3 source traces · 3 PCB traces · 3 schematic traces · 0 placeholder MPNs · 3 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — Placeholder or non-standard footprint token(s) are present (potentiometer_pth_9mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -255,15 +236,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · sensor · primary model `HC-SR04` · declared MPN `HC-SR04` · 5V
 
-**Artifact counts:** 9 source components · 16 source traces · 16 PCB traces · 8 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — Retained hand-authored source still needs a source/BOM/footprint and electrical review; rendering is not fabrication sign-off.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — The source uses direct component-to-component traces without emitted named nets; reconcile the intended net classes and power domains before ERC/DRC sign-off.
-- P1 — No mounting-hole/mechanical datum declaration is visible; verify panel fit, fastener clearance, and board orientation before fabrication.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -275,15 +253,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `AHT20` · declared MPN `AHT20` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -295,15 +270,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SHT31` · declared MPN `SHT31` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -314,15 +286,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SHT35` · declared MPN `SHT35` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -333,15 +302,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT22` · declared MPN `DHT22` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -350,20 +316,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTemperatureHumiditySensorDHT11/DESIGN_REVIEW1.md)
 **Source:** [GroveTemperatureHumiditySensorDHT11.circuit.tsx](boards/GroveTemperatureHumiditySensorDHT11/GroveTemperatureHumiditySensorDHT11.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT11` · declared MPN `DHT11` · 5V
 
-**Artifact counts:** 15 source components · 52 source traces · 0 PCB traces · 21 schematic traces · 0 placeholder MPNs · 43 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 43 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -375,15 +336,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT20` · declared MPN `DHT20` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 12 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 4 disconnected-port errors, 4 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 11 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -392,20 +350,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTemperatureHumiditySensorHighAccuracyMiniV10/DESIGN_REVIEW1.md)
 **Source:** [GroveTemperatureHumiditySensorHighAccuracyMiniV10.circuit.tsx](boards/GroveTemperatureHumiditySensorHighAccuracyMiniV10/GroveTemperatureHumiditySensorHighAccuracyMiniV10.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `TH02` · declared MPN `TH02` · 5V
 
-**Artifact counts:** 15 source components · 52 source traces · 0 PCB traces · 21 schematic traces · 0 placeholder MPNs · 43 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 43 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -414,20 +367,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTemperatureHumiditySensor/DESIGN_REVIEW1.md)
 **Source:** [GroveTemperatureHumiditySensor.circuit.tsx](boards/GroveTemperatureHumiditySensor/GroveTemperatureHumiditySensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT11` · declared MPN `DHT11` · 5V
 
-**Artifact counts:** 15 source components · 52 source traces · 0 PCB traces · 21 schematic traces · 0 placeholder MPNs · 43 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 43 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -439,15 +387,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `MAX31850K` · declared MPN `MAX31850K` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -458,14 +403,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `MCP9600` · declared MPN `MCP9600` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -476,15 +419,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DS18B20` · declared MPN `DS18B20` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -496,15 +436,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `CJ432` · declared MPN `CJ432` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -516,14 +453,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9064x` · declared MPN `MLX9064x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -534,15 +469,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MLX90614` · declared MPN `MLX90614` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 16 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -554,15 +486,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MLX90614` · declared MPN `MLX90614` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 16 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -574,14 +503,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `AMG8833` · declared MPN `AMG8833` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -593,15 +520,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -613,15 +537,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -633,14 +554,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `MCP9808` · declared MPN `MCP9808` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -652,14 +571,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `SEN55` · declared MPN `SEN55` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - Temperature Humidity Pressure Gas Sensor(BME680) — `GroveTemperatureHumidityPressureGasSensorBME680`
@@ -669,14 +586,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BME680` · declared MPN `BME680` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -689,14 +604,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SCD41` · declared MPN `SCD41` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -709,14 +622,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SCD30` · declared MPN `SCD30` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -729,16 +640,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `TMG39931` · declared MPN `TMG39931` · 5V
 
-**Artifact counts:** 9 source components · 30 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 9 source components · 30 source traces · 20 PCB traces · 10 schematic traces · 0 placeholder MPNs · 25 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 13 disconnected-port errors, 15 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
+- P2 — 25 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -750,15 +657,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `Himax WE1` · declared MPN `Himax WE1` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -769,15 +673,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `WiseEye2` · declared MPN `WiseEye2` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -788,14 +689,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `PAJ7620` · declared MPN `PAJ7620` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -806,15 +705,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -825,18 +721,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `HC-SR04` · declared MPN `HC-SR04` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (ultrasonic_transducer); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -848,17 +738,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -870,17 +755,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `TFMINI` · declared MPN `TFMINI` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -892,17 +772,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `HB100` · declared MPN `HB100` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -914,16 +789,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `VL53L0X` · declared MPN `VL53L0X` · 5V
 
-**Artifact counts:** 9 source components · 30 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 9 source components · 30 source traces · 20 PCB traces · 10 schematic traces · 0 placeholder MPNs · 25 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 13 disconnected-port errors, 15 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
+- P2 — 25 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -935,17 +806,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GP2Y0A21YK` · declared MPN `GP2Y0A21YK` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -957,14 +823,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `PAJ7620` · declared MPN `PAJ7620` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -972,20 +836,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveAdjustablePIRMotionSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveAdjustablePIRMotionSensor.circuit.tsx](boards/GroveAdjustablePIRMotionSensor/GroveAdjustablePIRMotionSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 35 source components · 108 source traces · 0 PCB traces · 34 schematic traces · 0 placeholder MPNs · 86 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 108 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 86 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -998,15 +857,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `HM3301` · declared MPN `HM3301` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1017,15 +873,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `PPD42NS` · declared MPN `PPD42NS` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1036,15 +889,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `SX1301` · declared MPN `SX1301` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1053,18 +903,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveFormaldehydeSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveFormaldehydeSensor.circuit.tsx](boards/GroveFormaldehydeSensor/GroveFormaldehydeSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `WSP2110` · declared MPN `WSP2110` · 5V
 
-**Artifact counts:** 3 source components · 10 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 10 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 1 disconnected-port errors, 1 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1076,15 +923,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MiCS-6814` · declared MPN `MiCS-6814` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1096,15 +940,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-2` · declared MPN `MQ-2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1116,15 +957,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ME3-O2` · declared MPN `ME3-O2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1136,15 +974,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MIX8410` · declared MPN `MIX8410` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1156,15 +991,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GGC2330-O2` · declared MPN `GGC2330-O2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1176,15 +1008,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-3` · declared MPN `MQ-3` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1196,15 +1025,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `MH-Z16` · declared MPN `MH-Z16` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1216,15 +1042,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SGP41` · declared MPN `SGP41` · 5V
 
-**Artifact counts:** 7 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 7 source components · 26 source traces · 16 PCB traces · 8 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1236,14 +1059,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SGP30` · declared MPN `SGP30` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1255,15 +1076,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SGP40` · declared MPN `SGP40` · 5V
 
-**Artifact counts:** 8 source components · 30 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 28 source traces · 18 PCB traces · 9 schematic traces · 0 placeholder MPNs · 23 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 20 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 23 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1275,15 +1093,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `WSP2110` · declared MPN `WSP2110` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1295,15 +1110,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MiCS-6814` · declared MPN `MiCS-6814` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -1315,15 +1127,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `HP206C` · declared MPN `HP206C` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -1335,15 +1144,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BME280` · declared MPN `BME280` · 5V
 
-**Artifact counts:** 8 source components · 30 source traces · 0 PCB traces · 13 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 28 source traces · 18 PCB traces · 10 schematic traces · 0 placeholder MPNs · 23 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 20 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 23 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -1355,15 +1161,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BMP280` · declared MPN `BMP280` · 5V
 
-**Artifact counts:** 8 source components · 30 source traces · 0 PCB traces · 13 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 28 source traces · 18 PCB traces · 10 schematic traces · 0 placeholder MPNs · 23 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 20 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 23 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -1375,14 +1178,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `DPS310` · declared MPN `DPS310` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -1391,19 +1192,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveIntegratedPressureSensorKit/DESIGN_REVIEW1.md)
 **Source:** [GroveIntegratedPressureSensorKit.circuit.tsx](boards/GroveIntegratedPressureSensorKit/GroveIntegratedPressureSensorKit.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BMP180` · declared MPN `BMP180` · 5V
 
-**Artifact counts:** 8 source components · 32 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 30 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 32 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 30 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -1415,15 +1212,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `D7S` · declared MPN `D7S` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1431,20 +1225,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove3AxisDigitalAccelerometer/DESIGN_REVIEW1.md)
 **Source:** [Grove3AxisDigitalAccelerometer.circuit.tsx](boards/Grove3AxisDigitalAccelerometer/Grove3AxisDigitalAccelerometer.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL345` · declared MPN `ADXL345` · 5V
 
-**Artifact counts:** 11 source components · 42 source traces · 0 PCB traces · 18 schematic traces · 0 placeholder MPNs · 35 unnamed-trace warnings
+**Artifact counts:** 7 source components · 22 source traces · 15 PCB traces · 10 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 42 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 35 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1455,14 +1244,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `LIS3DHTR` · declared MPN `LIS3DHTR` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1473,14 +1260,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL335` · declared MPN `ADXL335` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1488,20 +1273,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove3AxisDigitialCompassV20/DESIGN_REVIEW1.md)
 **Source:** [Grove3AxisDigitialCompassV20.circuit.tsx](boards/Grove3AxisDigitialCompassV20/Grove3AxisDigitialCompassV20.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `HMC5883` · declared MPN `HMC5883` · 5V
 
-**Artifact counts:** 11 source components · 37 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 33 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 37 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 33 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1512,14 +1292,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BMA400` · declared MPN `BMA400` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1527,20 +1305,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove6AxisAccelerometerGyroscope/DESIGN_REVIEW1.md)
 **Source:** [Grove6AxisAccelerometerGyroscope.circuit.tsx](boards/Grove6AxisAccelerometerGyroscope/Grove6AxisAccelerometerGyroscope.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LSM6DS3` · declared MPN `LSM6DS3` · 5V
 
-**Artifact counts:** 17 source components · 59 source traces · 0 PCB traces · 26 schematic traces · 0 placeholder MPNs · 49 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 59 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 49 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1548,21 +1321,16 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove6AxisAccelerometerGyroscopeBMI088/DESIGN_REVIEW1.md)
 **Source:** [Grove6AxisAccelerometerGyroscopeBMI088.circuit.tsx](boards/Grove6AxisAccelerometerGyroscopeBMI088/Grove6AxisAccelerometerGyroscopeBMI088.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BMI088` · declared MPN `BMI088` · 5V
 
-**Artifact counts:** 17 source components · 59 source traces · 0 PCB traces · 26 schematic traces · 0 placeholder MPNs · 49 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 59 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 49 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
 ### Grove - IMU 9DOF(lcm20600+AK09918) — `GroveIMU9DOFLcm20600AK09918`
@@ -1572,14 +1340,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `AK09918` · declared MPN `AK09918` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1590,15 +1356,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `AS3935` · declared MPN `AS3935` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1606,20 +1369,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveDigitalLightSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveDigitalLightSensor.circuit.tsx](boards/GroveDigitalLightSensor/GroveDigitalLightSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `TSL2561` · declared MPN `TSL2561` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1627,20 +1385,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLightSensor2/DESIGN_REVIEW1.md)
 **Source:** [GroveLightSensor2.circuit.tsx](boards/GroveLightSensor2/GroveLightSensor2.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1648,20 +1401,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveSunlightSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveSunlightSensor.circuit.tsx](boards/GroveSunlightSensor/GroveSunlightSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1672,14 +1420,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `GUVA-S12D` · declared MPN `GUVA-S12D` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1690,14 +1436,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `TSOP38238` · declared MPN `TSOP38238` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove - Line Finder V1.1 — `GroveLineFinderV11`
@@ -1707,15 +1451,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove - Flame Sensor — `GroveFlameSensor`
@@ -1725,14 +1466,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `YG1006` · declared MPN `YG1006` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1740,19 +1479,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveInfraredReflectiveSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveInfraredReflectiveSensor.circuit.tsx](boards/GroveInfraredReflectiveSensor/GroveInfraredReflectiveSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 8 source components · 26 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1763,15 +1498,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MAX30100` · declared MPN `MAX30100` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1782,15 +1514,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · utility · primary model `INA331` · declared MPN `INA331` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 
 ### Grove - Ear-clip Heart Rate Sensor — `GroveEarClipHeartRateSensor`
@@ -1800,15 +1529,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MAX30100` · declared MPN `MAX30100` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1819,15 +1545,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM324` · declared MPN `LM324` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1838,15 +1561,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
@@ -1858,15 +1578,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -1877,15 +1594,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM358` · declared MPN `LM358` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
@@ -1897,15 +1611,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `ISD1820P` · declared MPN `ISD1820P` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 4 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
@@ -1917,15 +1628,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · sensor · primary model `M007` · declared MPN `M007` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
@@ -1934,19 +1642,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTouchSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveTouchSensor.circuit.tsx](boards/GroveTouchSensor/GroveTouchSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `AT42QT1070` · declared MPN `AT42QT1070` · 5V
 
-**Artifact counts:** 16 source components · 52 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 39 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 39 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 7 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -1954,18 +1658,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveRotaryAngleSensor2/DESIGN_REVIEW1.md)
 **Source:** [GroveRotaryAngleSensor2.circuit.tsx](boards/GroveRotaryAngleSensor2/GroveRotaryAngleSensor2.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `WH09-2-103` · declared MPN `WH09-2-103` · 5V
 
-**Artifact counts:** 1 source components · 3 source traces · 0 PCB traces · 2 schematic traces · 0 placeholder MPNs · 3 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 3 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -1977,15 +1678,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `FSR402` · declared MPN `FSR402` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -1996,15 +1694,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · input · primary model `LDC1612` · declared MPN `LDC1612` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -2015,16 +1710,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · input · primary model `MPR121` · declared MPN `MPR121` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 12 missing-PCB-trace errors.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -2035,15 +1726,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `ATtiny1616` · declared MPN `ATtiny1616` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2055,15 +1743,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `OPA333` · declared MPN `OPA333` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2074,15 +1759,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2093,15 +1775,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2112,15 +1791,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `TDS-SENSOR` · declared MPN `TDS-SENSOR` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2131,15 +1807,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `SEN0189` · declared MPN `SEN0189` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2147,20 +1820,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GrovePIRMotionSensor/DESIGN_REVIEW1.md)
 **Source:** [GrovePIRMotionSensor.circuit.tsx](boards/GrovePIRMotionSensor/GrovePIRMotionSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 35 source components · 108 source traces · 0 PCB traces · 34 schematic traces · 0 placeholder MPNs · 86 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 108 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 86 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -2169,20 +1837,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveDigitalPIRSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveDigitalPIRSensor.circuit.tsx](boards/GroveDigitalPIRSensor/GroveDigitalPIRSensor.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 35 source components · 108 source traces · 0 PCB traces · 34 schematic traces · 0 placeholder MPNs · 86 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 108 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 86 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -2194,15 +1857,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `SW-200D` · declared MPN `SW-200D` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2214,15 +1874,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM2904` · declared MPN `LM2904` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -2230,18 +1887,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveSlidePotentiometer/DESIGN_REVIEW1.md)
 **Source:** [GroveSlidePotentiometer.circuit.tsx](boards/GroveSlidePotentiometer/GroveSlidePotentiometer.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `WH09-2-103` · declared MPN `WH09-2-103` · 5V
 
-**Artifact counts:** 1 source components · 3 source traces · 0 PCB traces · 2 schematic traces · 0 placeholder MPNs · 3 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 3 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2250,20 +1904,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveOpticalRotaryEncoderTCUT1600X01/DESIGN_REVIEW1.md)
 **Source:** [GroveOpticalRotaryEncoderTCUT1600X01.circuit.tsx](boards/GroveOpticalRotaryEncoderTCUT1600X01/GroveOpticalRotaryEncoderTCUT1600X01.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `TCUT1600X01` · declared MPN `TCUT1600X01` · 5V
 
-**Artifact counts:** 9 source components · 28 source traces · 0 PCB traces · 6 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2275,16 +1924,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · input · primary model `AS5600` · declared MPN `AS5600` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 13 disconnected-port errors, 13 missing-PCB-trace errors.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (potentiometer_pth_9mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2293,20 +1938,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveEncoder/DESIGN_REVIEW1.md)
 **Source:** [GroveEncoder.circuit.tsx](boards/GroveEncoder/GroveEncoder.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Sensor_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `TCUT1600X01` · declared MPN `TCUT1600X01` · 5V
 
-**Artifact counts:** 9 source components · 28 source traces · 0 PCB traces · 6 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -2318,15 +1958,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `BMA456` · declared MPN `BMA456` · 5V
 
-**Artifact counts:** 8 source components · 30 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove - ADC for Load Cell (HX711) — `GroveADCForLoadCellHX711`
@@ -2336,15 +1973,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `HX711` · declared MPN `HX711` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Wio-E5 — `GroveWioE5`
@@ -2354,15 +1988,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · communications · primary model `Wio-E5` · declared MPN `Wio-E5` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -2370,20 +2001,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBLEDualModelV10/DESIGN_REVIEW1.md)
 **Source:** [GroveBLEDualModelV10.circuit.tsx](boards/GroveBLEDualModelV10/GroveBLEDualModelV10.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_network_module_intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `HM-13` · declared MPN `HM-13` · 5V
 
-**Artifact counts:** 17 source components · 55 source traces · 0 PCB traces · 16 schematic traces · 0 placeholder MPNs · 45 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 55 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 45 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2395,15 +2021,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `BC417` · declared MPN `BC417` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2412,20 +2035,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBLEV1/DESIGN_REVIEW1.md)
 **Source:** [GroveBLEV1.circuit.tsx](boards/GroveBLEV1/GroveBLEV1.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_network_module_intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `HM-11` · declared MPN `HM-11` · 5V
 
-**Artifact counts:** 22 source components · 64 source traces · 0 PCB traces · 22 schematic traces · 0 placeholder MPNs · 52 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 64 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 52 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2437,15 +2055,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `ESP8285` · declared MPN `ESP8285` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2457,14 +2072,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `ST25DV64` · declared MPN `ST25DV64` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2476,15 +2089,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `PN532` · declared MPN `PN532` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2496,15 +2106,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `PN532` · declared MPN `PN532` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2516,15 +2123,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `SIM28` · declared MPN `SIM28` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2536,15 +2140,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `Air530` · declared MPN `Air530` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2556,15 +2157,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `EM4100` · declared MPN `EM4100` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2576,15 +2174,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `FS1000A` · declared MPN `FS1000A` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2596,15 +2191,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `FS1000A` · declared MPN `FS1000A` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2616,15 +2208,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · communications · primary model `RFM95` · declared MPN `RFM95` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -2635,15 +2224,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `HM-TRP` · declared MPN `HM-TRP` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -2652,20 +2238,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveDMX512/DESIGN_REVIEW1.md)
 **Source:** [GroveDMX512.circuit.tsx](boards/GroveDMX512/GroveDMX512.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_network_module_intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `SN75176` · declared MPN `SN75176` · 5V
 
-**Artifact counts:** 5 source components · 24 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -2676,15 +2257,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `ADC121C021` · declared MPN `ADC121C021` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - I2C FM Receiver — `GroveI2CFMReceiver`
@@ -2694,15 +2272,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `RDA5807M` · declared MPN `RDA5807M` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - Protoshield — `GroveProtoshield`
@@ -2712,15 +2287,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `Grove-Prototyping` · declared MPN `Grove-Prototyping` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove - RJ45 Adapter — `GroveRJ45Adapter`
@@ -2730,15 +2302,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `Grove-Prototyping` · declared MPN `Grove-Prototyping` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove 1.2-inch IPS Display — `Grove12InchIPSDisplay`
@@ -2748,16 +2317,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `ST7789` · declared MPN `ST7789` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -2766,21 +2331,16 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove4DigitDisplay/DESIGN_REVIEW1.md)
 **Source:** [Grove4DigitDisplay.circuit.tsx](boards/Grove4DigitDisplay/Grove4DigitDisplay.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `TM1637` · declared MPN `TM1637` · 5V
 
-**Artifact counts:** 9 source components · 60 source traces · 0 PCB traces · 8 schematic traces · 1 placeholder MPNs · 44 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 60 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 44 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
 
@@ -2788,21 +2348,16 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove054InchRedAlphanumericDisplay/DESIGN_REVIEW1.md)
 **Source:** [Grove054InchRedAlphanumericDisplay.circuit.tsx](boards/Grove054InchRedAlphanumericDisplay/Grove054InchRedAlphanumericDisplay.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `TM1637` · declared MPN `TM1637` · 5V
 
-**Artifact counts:** 9 source components · 60 source traces · 0 PCB traces · 8 schematic traces · 1 placeholder MPNs · 44 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 60 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 44 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
 
@@ -2813,16 +2368,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -2834,16 +2385,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2856,16 +2403,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2878,16 +2421,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1315` · declared MPN `SSD1315` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2900,16 +2439,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1315` · declared MPN `SSD1315` · 3.3V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2922,16 +2457,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2944,16 +2475,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SH1107` · declared MPN `SH1107` · 3.3V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -2966,17 +2493,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -2985,18 +2507,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBuzzer2/DESIGN_REVIEW1.md)
 **Source:** [GroveBuzzer2.circuit.tsx](boards/GroveBuzzer2/GroveBuzzer2.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `YMD12065` · declared MPN `YMD12065` · 5V
 
-**Artifact counts:** 4 source components · 15 source traces · 5 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3005,18 +2524,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GrovePassiveBuzzer/DESIGN_REVIEW1.md)
 **Source:** [GrovePassiveBuzzer.circuit.tsx](boards/GrovePassiveBuzzer/GrovePassiveBuzzer.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `YMD12065` · declared MPN `YMD12065` · 5V
 
-**Artifact counts:** 4 source components · 15 source traces · 5 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3028,64 +2544,49 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · actuator · primary model `P9813` · declared MPN `P9813` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
 
 ### Grove - I2C Motor Driver V1.3 — `GroveI2CMotorDriverV13`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CMotorDriverV13/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CMotorDriverV13.circuit.tsx](boards/GroveI2CMotorDriverV13/GroveI2CMotorDriverV13.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · actuator · primary model `L298N` · declared MPN `L298N` · 5V
 
-**Artifact counts:** 42 source components · 166 source traces · 0 PCB traces · 47 schematic traces · 1 placeholder MPNs · 135 unnamed-trace warnings
+**Artifact counts:** 10 source components · 32 source traces · 20 PCB traces · 11 schematic traces · 0 placeholder MPNs · 26 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 166 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 135 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 8 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (11 power-pin warning(s), 6 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
-- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
+- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
 
 ### Grove - I2C Motor Driver (L298P) — `GroveI2CMotorDriverL298P`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CMotorDriverL298P/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CMotorDriverL298P.circuit.tsx](boards/GroveI2CMotorDriverL298P/GroveI2CMotorDriverL298P.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · actuator · primary model `L298N` · declared MPN `L298N` · 5V
 
-**Artifact counts:** 42 source components · 166 source traces · 0 PCB traces · 47 schematic traces · 1 placeholder MPNs · 135 unnamed-trace warnings
+**Artifact counts:** 10 source components · 32 source traces · 20 PCB traces · 11 schematic traces · 0 placeholder MPNs · 26 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 166 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 135 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 8 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (11 power-pin warning(s), 6 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
-- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
+- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
 
 ### Grove - Infrared Emitter — `GroveInfraredEmitter`
@@ -3095,14 +2596,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `IR333-A` · declared MPN `IR333-A` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove - MP3 v4.0 — `GroveMP3V40`
@@ -3112,15 +2611,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · utility · primary model `WT5001-48L` · declared MPN `WT5001-48L` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 
 ### Grove - Mini Fan — `GroveMiniFan`
@@ -3130,17 +2626,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `ATMEGA168PV-10MU` · declared MPN `ATMEGA168PV-10MU` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3152,15 +2643,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ISD1820P` · declared MPN `ISD1820P` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 4 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
 
@@ -3171,17 +2659,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3193,17 +2676,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3215,17 +2693,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3237,17 +2710,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3259,17 +2727,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3281,17 +2744,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `SG90` · declared MPN `SG90` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3303,17 +2761,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `LM386` · declared MPN `LM386` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3326,17 +2779,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `LM386` · declared MPN `LM386` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3349,17 +2797,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `DRV2605` · declared MPN `DRV2605` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3371,17 +2814,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `Atomizer-Driver` · declared MPN `Atomizer-Driver` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3393,14 +2831,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `PCA9685` · declared MPN `PCA9685` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - I2C Motor Driver (TB6612FNG) — `GroveI2CMotorDriverTB6612FNG`
@@ -3410,17 +2846,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · actuator · primary model `TB6612FNG` · declared MPN `TB6612FNG` · 5V
 
-**Artifact counts:** 10 source components · 26 source traces · 0 PCB traces · 7 schematic traces · 1 placeholder MPNs · 12 unnamed-trace warnings
+**Artifact counts:** 10 source components · 32 source traces · 20 PCB traces · 11 schematic traces · 0 placeholder MPNs · 26 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 14 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3432,15 +2863,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `A3144` · declared MPN `A3144` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -3451,15 +2879,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LMV358` · declared MPN `LMV358` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -3471,15 +2896,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `DS1307` · declared MPN `DS1307` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 12 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - High Precision RTC (Real Time Clock) — `GroveHighPrecisionRTCRealTimeClock`
@@ -3489,15 +2911,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `DS1307` · declared MPN `DS1307` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 12 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - 10A DC Current Sensor (ACS725) — `Grove10ADCCurrentSensorACS725`
@@ -3507,15 +2926,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ACS725` · declared MPN `ACS725` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -3527,15 +2943,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ACS70331` · declared MPN `ACS70331` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -3547,15 +2960,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ACS70331` · declared MPN `ACS70331` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -3567,15 +2977,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ACS712` · declared MPN `ACS712` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -3586,15 +2993,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `LTC2941` · declared MPN `LTC2941` · 3.3V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -3606,15 +3010,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `2N7002` · declared MPN `2N7002` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -3625,17 +3026,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3647,15 +3043,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `Screw-Terminal` · declared MPN `Screw-Terminal` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -3666,17 +3059,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MOSFET-Driver` · declared MPN `MOSFET-Driver` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -3688,15 +3076,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -3708,15 +3093,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -3728,16 +3110,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 41 source components · 100 source traces · 0 PCB traces · 38 schematic traces · 0 placeholder MPNs · 40 unnamed-trace warnings
+**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 79 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 100 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 40 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 20 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 84 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -3746,20 +3124,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLEDStringLight/DESIGN_REVIEW1.md)
 **Source:** [GroveLEDStringLight.circuit.tsx](boards/GroveLEDStringLight/GroveLEDStringLight.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 13 source components · 89 source traces · 0 PCB traces · 25 schematic traces · 0 placeholder MPNs · 67 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -3771,15 +3144,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -3791,19 +3161,15 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · display · primary model `P9813` · declared MPN `P9813` · 5V
 
-**Artifact counts:** 5 source components · 15 source traces · 0 PCB traces · 4 schematic traces · 1 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 14 source traces · 8 PCB traces · 5 schematic traces · 0 placeholder MPNs · 11 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 15 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 11 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove - LED Matrix Driver (HT16K33) — `GroveLEDMatrixDriverHT16K33`
 
@@ -3812,19 +3178,15 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · display · primary model `HT16K33` · declared MPN `HT16K33` · 5V
 
-**Artifact counts:** 5 source components · 15 source traces · 0 PCB traces · 4 schematic traces · 1 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 14 source traces · 8 PCB traces · 5 schematic traces · 0 placeholder MPNs · 11 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 15 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 11 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove - Red LED Matrix w/Driver — `GroveRedLEDMatrixWDriver`
 
@@ -3833,19 +3195,15 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `P9813` · declared MPN `P9813` · 5V
 
-**Artifact counts:** 5 source components · 15 source traces · 0 PCB traces · 4 schematic traces · 1 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 14 source traces · 8 PCB traces · 5 schematic traces · 0 placeholder MPNs · 11 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 15 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 11 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove - Button — `GroveButton2`
 
@@ -3854,15 +3212,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -3874,15 +3229,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -3894,15 +3246,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -3915,15 +3264,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -3935,15 +3281,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -3954,15 +3297,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 7 source components · 15 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 6 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 15 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P2 — 6 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -3974,15 +3314,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -3991,52 +3328,46 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CHub/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CHub.circuit.tsx](boards/GroveI2CHub/GroveI2CHub.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `TCA9548A` · declared MPN `TCA9548A` · 5V
 
-**Artifact counts:** 4 source components · 20 source traces · 12 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - I2C Hub(6 Port) — `GroveI2CHub6Port`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CHub6Port/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CHub6Port.circuit.tsx](boards/GroveI2CHub6Port/GroveI2CHub6Port.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `TCA9548A` · declared MPN `TCA9548A` · 5V
 
-**Artifact counts:** 4 source components · 20 source traces · 12 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - 8 Channel I2C Multiplexer/I2C Hub (TCA9548A) — `Grove8ChannelI2CMultiplexerI2CHubTCA9548A`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove8ChannelI2CMultiplexerI2CHubTCA9548A/DESIGN_REVIEW1.md)
 **Source:** [Grove8ChannelI2CMultiplexerI2CHubTCA9548A.circuit.tsx](boards/Grove8ChannelI2CMultiplexerI2CHubTCA9548A/Grove8ChannelI2CMultiplexerI2CHubTCA9548A.circuit.tsx) · [upstream reference](https://wiki.seeedstudio.com/Grove_Accessories_Intro/)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `TCA9548A` · declared MPN `TCA9548A` · 5V
 
-**Artifact counts:** 4 source components · 20 source traces · 12 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - 4-Channel 16-bit ADC(ADS1115) — `Grove4Channel16BitADCADS1115`
 
@@ -4045,18 +3376,13 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `ADS1115` · declared MPN `ADS1115` · 5V
 
-**Artifact counts:** 33 source components · 79 source traces · 0 PCB traces · 30 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 79 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 16 reference-designator convention warning(s) require cleanup before release.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
-- P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove - Wrapper — `GroveWrapper`
 
@@ -4065,15 +3391,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `Grove-Wrapper` · declared MPN `Grove-Wrapper` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove 16 x 2 LCD Black on Yellow — `Grove16X2LCDBlackOnYellow`
@@ -4083,16 +3406,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -4104,16 +3423,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -4125,16 +3440,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `HD44780` · declared MPN `HD44780` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -4146,14 +3457,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `VEML6070` · declared MPN `VEML6070` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4164,15 +3473,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `CY8C4014` · declared MPN `CY8C4014` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -4183,15 +3489,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `SW-420` · declared MPN `SW-420` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4202,14 +3505,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `ICM20600` · declared MPN `ICM20600` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove 12 Key Capacitive I2C Touch Sensor V2 MPR121 — `Grove12KeyCapacitiveI2CTouchSensorV2MPR121`
@@ -4219,16 +3520,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · input · primary model `MPR121` · declared MPN `MPR121` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 12 missing-PCB-trace errors.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -4239,15 +3536,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -4259,15 +3553,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -4279,17 +3570,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -4301,17 +3587,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -4323,17 +3604,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -4345,15 +3621,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4365,15 +3638,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4385,15 +3655,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4406,15 +3673,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4427,15 +3691,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4448,17 +3709,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `GP2Y0D805Z0F` · declared MPN `GP2Y0D805Z0F` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
 
@@ -4469,17 +3725,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `GP2Y0D805Z0F` · declared MPN `GP2Y0D805Z0F` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
 
@@ -4490,15 +3741,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `RDA5807M` · declared MPN `RDA5807M` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove UART WiFi V2 ESP8285 — `GroveUARTWiFiV2ESP8285`
@@ -4508,15 +3756,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `ESP8285` · declared MPN `ESP8285` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -4525,20 +3770,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove3AxisDigitalCompassV2/DESIGN_REVIEW1.md)
 **Source:** [Grove3AxisDigitalCompassV2.circuit.tsx](boards/Grove3AxisDigitalCompassV2/Grove3AxisDigitalCompassV2.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-3-Axis-Digital-Compass-V2.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `HMC5883` · declared MPN `HMC5883` · 5V
 
-**Artifact counts:** 11 source components · 37 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 33 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 37 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 33 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Micro Switch — `GroveMicroSwitch`
@@ -4548,15 +3788,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -4568,16 +3805,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4587,20 +3820,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveVariableColorLEDV11/DESIGN_REVIEW1.md)
 **Source:** [GroveVariableColorLEDV11.circuit.tsx](boards/GroveVariableColorLEDV11/GroveVariableColorLEDV11.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Variable-Color-LED-V1-1.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 13 source components · 89 source traces · 0 PCB traces · 25 schematic traces · 0 placeholder MPNs · 67 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -4610,20 +3838,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveMiniPIRMotionSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveMiniPIRMotionSensor.circuit.tsx](boards/GroveMiniPIRMotionSensor/GroveMiniPIRMotionSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-mini-PIR-motion-sensor-p-2930.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 35 source components · 108 source traces · 0 PCB traces · 34 schematic traces · 0 placeholder MPNs · 86 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 108 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 86 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -4635,15 +3858,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `TCS3414CS` · declared MPN `TCS3414CS` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4651,20 +3871,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveHeelightSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveHeelightSensor.circuit.tsx](boards/GroveHeelightSensor/GroveHeelightSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Heelight-Sensor.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4672,19 +3887,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveInfraredReflectiveSensorV12/DESIGN_REVIEW1.md)
 **Source:** [GroveInfraredReflectiveSensorV12.circuit.tsx](boards/GroveInfraredReflectiveSensorV12/GroveInfraredReflectiveSensorV12.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Infrared-Reflective-Sensor-v1-2.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 8 source components · 26 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 8 PCB traces · 4 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4695,15 +3906,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `RFM95` · declared MPN `RFM95` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -4715,15 +3923,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `RFM95` · declared MPN `RFM95` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -4735,35 +3940,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `DS1307` · declared MPN `DS1307` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 12 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove Light Sensor v1 2 LS06 S phototransistor — `GroveLightSensorV12LS06SPhototransistor`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLightSensorV12LS06SPhototransistor/DESIGN_REVIEW1.md)
 **Source:** [GroveLightSensorV12LS06SPhototransistor.circuit.tsx](boards/GroveLightSensorV12LS06SPhototransistor/GroveLightSensorV12LS06SPhototransistor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4774,15 +3971,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ISD1820P` · declared MPN `ISD1820P` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 4 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
 
@@ -4793,35 +3987,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · utility · primary model `M007` · declared MPN `M007` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 
 ### Grove Light Sensor P v1 1 — `GroveLightSensorPV11`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLightSensorPV11/DESIGN_REVIEW1.md)
 **Source:** [GroveLightSensorPV11.circuit.tsx](boards/GroveLightSensorPV11/GroveLightSensorPV11.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Light-Sensor-P-v1-1.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GL5528` · declared MPN `GL5528` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -4832,15 +4018,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MPU-9250` · declared MPN `MPU-9250` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Mini Fan v1 1 — `GroveMiniFanV11`
@@ -4850,17 +4033,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `ATMEGA168PV-10MU` · declared MPN `ATMEGA168PV-10MU` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -4872,15 +4050,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SHT31` · declared MPN `SHT31` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -4892,15 +4067,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BME280` · declared MPN `BME280` · 5V
 
-**Artifact counts:** 8 source components · 30 source traces · 0 PCB traces · 13 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
+**Artifact counts:** 8 source components · 28 source traces · 18 PCB traces · 10 schematic traces · 0 placeholder MPNs · 23 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 20 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 23 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -4912,38 +4084,29 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · display · primary model `P9813` · declared MPN `P9813` · 5V
 
-**Artifact counts:** 5 source components · 15 source traces · 0 PCB traces · 4 schematic traces · 1 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 14 source traces · 8 PCB traces · 5 schematic traces · 0 placeholder MPNs · 11 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 15 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 11 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove Mouse Encoder — `GroveMouseEncoder`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveMouseEncoder/DESIGN_REVIEW1.md)
 **Source:** [GroveMouseEncoder.circuit.tsx](boards/GroveMouseEncoder/GroveMouseEncoder.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Mouse-Encoder.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `TCUT1600X01` · declared MPN `TCUT1600X01` · 5V
 
-**Artifact counts:** 9 source components · 28 source traces · 0 PCB traces · 6 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -4955,15 +4118,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · utility · primary model `WT5001-48L` · declared MPN `WT5001-48L` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 
 ### Grove Mini Track Ball — `GroveMiniTrackBall`
@@ -4973,15 +4133,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Haptic Motor — `GroveHapticMotor`
@@ -4991,17 +4148,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `DRV2605` · declared MPN `DRV2605` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -5013,17 +4165,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `Atomizer-Driver` · declared MPN `Atomizer-Driver` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -5032,20 +4179,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTemperatureHumiditySensorHDC100/DESIGN_REVIEW1.md)
 **Source:** [GroveTemperatureHumiditySensorHDC100.circuit.tsx](boards/GroveTemperatureHumiditySensorHDC100/GroveTemperatureHumiditySensorHDC100.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-HDC100-p-2535.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT11` · declared MPN `DHT11` · 5V
 
-**Artifact counts:** 15 source components · 52 source traces · 0 PCB traces · 21 schematic traces · 0 placeholder MPNs · 43 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 43 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -5054,23 +4196,17 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CMiniMotorDriver/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CMiniMotorDriver.circuit.tsx](boards/GroveI2CMiniMotorDriver/GroveI2CMiniMotorDriver.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-I2C-Mini-Motor-Driver.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · actuator · primary model `L298N` · declared MPN `L298N` · 5V
 
-**Artifact counts:** 42 source components · 166 source traces · 0 PCB traces · 47 schematic traces · 1 placeholder MPNs · 135 unnamed-trace warnings
+**Artifact counts:** 10 source components · 32 source traces · 20 PCB traces · 11 schematic traces · 0 placeholder MPNs · 26 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 166 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 135 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 8 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (11 power-pin warning(s), 6 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
-- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
+- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
 
 ### Grove Uart Wifi — `GroveUartWifi`
@@ -5080,15 +4216,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `ESP8285` · declared MPN `ESP8285` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -5097,20 +4230,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove6AxisAccelerometerCompassV20/DESIGN_REVIEW1.md)
 **Source:** [Grove6AxisAccelerometerCompassV20.circuit.tsx](boards/Grove6AxisAccelerometerCompassV20/Grove6AxisAccelerometerCompassV20.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer-Compass-v2-0.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LSM6DS3` · declared MPN `LSM6DS3` · 5V
 
-**Artifact counts:** 17 source components · 59 source traces · 0 PCB traces · 26 schematic traces · 0 placeholder MPNs · 49 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 59 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 49 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5121,15 +4249,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `BC417` · declared MPN `BC417` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -5137,23 +4262,18 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLEDBarV20/DESIGN_REVIEW1.md)
 **Source:** [GroveLEDBarV20.circuit.tsx](boards/GroveLEDBarV20/GroveLEDBarV20.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-LED-Bar-v2-0.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 13 source components · 89 source traces · 0 PCB traces · 25 schematic traces · 0 placeholder MPNs · 67 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 7 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 
 ### Grove Gesture PAJ7620U2 — `GroveGesturePAJ7620U2`
 
@@ -5162,14 +4282,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · utility · primary model `PAJ7620` · declared MPN `PAJ7620` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 
 ### Grove Finger clip Heart Rate Sensor with shell — `GroveFingerClipHeartRateSensorWithShell`
@@ -5179,15 +4297,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MAX30100` · declared MPN `MAX30100` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5195,20 +4310,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBlueseeedDualModelHM13/DESIGN_REVIEW1.md)
 **Source:** [GroveBlueseeedDualModelHM13.circuit.tsx](boards/GroveBlueseeedDualModelHM13/GroveBlueseeedDualModelHM13.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Blueseeed-Dual-model-HM13.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `HM-13` · declared MPN `HM-13` · 5V
 
-**Artifact counts:** 17 source components · 55 source traces · 0 PCB traces · 16 schematic traces · 0 placeholder MPNs · 45 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 55 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 45 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove IMU 9DOF v2 0 — `GroveIMU9DOFV20`
@@ -5218,15 +4328,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MPU-9150` · declared MPN `MPU-9150` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove IMU 10DOF — `GroveIMU10DOF`
@@ -5236,15 +4343,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MPU-9250` · declared MPN `MPU-9250` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove EL Driver — `GroveELDriver`
@@ -5254,15 +4358,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `SX1301` · declared MPN `SX1301` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Carbon Dioxide Sensor MH Z16 — `GroveCarbonDioxideSensorMHZ16`
@@ -5272,15 +4373,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `MH-Z16` · declared MPN `MH-Z16` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5288,19 +4386,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveQTouchSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveQTouchSensor.circuit.tsx](boards/GroveQTouchSensor/GroveQTouchSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Q-Touch-Sensor.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `AT42QT1070` · declared MPN `AT42QT1070` · 5V
 
-**Artifact counts:** 16 source components · 52 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 39 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 39 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 7 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -5311,34 +4405,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `SX6119` · declared MPN `SX6119` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove Barometer Sensor BMP18 — `GroveBarometerSensorBMP18`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBarometerSensorBMP18/DESIGN_REVIEW1.md)
 **Source:** [GroveBarometerSensorBMP18.circuit.tsx](boards/GroveBarometerSensorBMP18/GroveBarometerSensorBMP18.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Barometer-Sensor-BMP18-p-1840.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BMP180` · declared MPN `BMP180` · 5V
 
-**Artifact counts:** 8 source components · 32 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 30 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 32 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 30 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -5350,15 +4437,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ISD1820P` · declared MPN `ISD1820P` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 4 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
 
@@ -5369,15 +4453,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `PN532` · declared MPN `PN532` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -5389,15 +4470,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MPU-9150` · declared MPN `MPU-9150` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Mini Camera — `GroveMiniCamera`
@@ -5407,15 +4485,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `OV2640` · declared MPN `OV2640` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -5426,15 +4501,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `OPA333` · declared MPN `OPA333` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5445,15 +4517,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `WT5001-48L` · declared MPN `WT5001-48L` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -5464,35 +4533,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · utility · primary model `ENC-03R` · declared MPN `ENC-03R` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 
 ### Grove 6 Axis Accelerometer Compass — `Grove6AxisAccelerometerCompass`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove6AxisAccelerometerCompass/DESIGN_REVIEW1.md)
 **Source:** [Grove6AxisAccelerometerCompass.circuit.tsx](boards/Grove6AxisAccelerometerCompass/Grove6AxisAccelerometerCompass.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer-Compass-p-1448.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LSM6DS3` · declared MPN `LSM6DS3` · 5V
 
-**Artifact counts:** 17 source components · 59 source traces · 0 PCB traces · 26 schematic traces · 0 placeholder MPNs · 49 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 59 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 49 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5503,15 +4564,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `AS608` · declared MPN `AS608` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5522,15 +4580,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-9` · declared MPN `MQ-9` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -5542,15 +4597,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-3` · declared MPN `MQ-3` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -5562,17 +4614,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -5584,17 +4631,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `HLS8L-DC3V-S-C` · declared MPN `HLS8L-DC3V-S-C` · 5V
 
-**Artifact counts:** 9 source components · 22 source traces · 0 PCB traces · 5 schematic traces · 1 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 9 source components · 27 source traces · 17 PCB traces · 9 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 22 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 9 disconnected-port errors, 13 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (power_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
@@ -5603,20 +4645,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveLEDBar/DESIGN_REVIEW1.md)
 **Source:** [GroveLEDBar.circuit.tsx](boards/GroveLEDBar/GroveLEDBar.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-LED-Bar.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 13 source components · 89 source traces · 0 PCB traces · 25 schematic traces · 0 placeholder MPNs · 67 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -5628,35 +4665,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `INA125` · declared MPN `INA125` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Digital Light Sensor TSL2561 — `GroveDigitalLightSensorTSL2561`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveDigitalLightSensorTSL2561/DESIGN_REVIEW1.md)
 **Source:** [GroveDigitalLightSensorTSL2561.circuit.tsx](boards/GroveDigitalLightSensorTSL2561/GroveDigitalLightSensorTSL2561.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Digital-Light-Sensor-TSL2561.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `TSL2561` · declared MPN `TSL2561` · 5V
 
-**Artifact counts:** 12 source components · 39 source traces · 0 PCB traces · 15 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 39 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5667,17 +4696,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
 
@@ -5688,15 +4712,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `B3F-1000` · declared MPN `B3F-1000` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 5 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 5 disconnected-port errors, 7 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (button_6mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -5705,18 +4726,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveRotaryAngleSensorP/DESIGN_REVIEW1.md)
 **Source:** [GroveRotaryAngleSensorP.circuit.tsx](boards/GroveRotaryAngleSensorP/GroveRotaryAngleSensorP.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Rotary-Angle-Sensor-P.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · input · primary model `WH09-2-103` · declared MPN `WH09-2-103` · 5V
 
-**Artifact counts:** 1 source components · 3 source traces · 0 PCB traces · 2 schematic traces · 0 placeholder MPNs · 3 unnamed-trace warnings
+**Artifact counts:** 5 source components · 16 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 13 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 3 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P2 — 3 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 13 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -5725,19 +4743,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBarometerSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveBarometerSensor.circuit.tsx](boards/GroveBarometerSensor/GroveBarometerSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Barometer-Sensor.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BMP180` · declared MPN `BMP180` · 5V
 
-**Artifact counts:** 8 source components · 32 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 30 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 32 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 30 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -5749,15 +4763,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `VC0706` · declared MPN `VC0706` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -5768,15 +4779,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-5` · declared MPN `MQ-5` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -5788,15 +4796,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MQ-2` · declared MPN `MQ-2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -5805,23 +4810,17 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CMotorDriverWithL298/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CMotorDriverWithL298.circuit.tsx](boards/GroveI2CMotorDriverWithL298/GroveI2CMotorDriverWithL298.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-I2C-Motor-Driver-with-L298.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · actuator · primary model `L298N` · declared MPN `L298N` · 5V
 
-**Artifact counts:** 42 source components · 166 source traces · 0 PCB traces · 47 schematic traces · 1 placeholder MPNs · 135 unnamed-trace warnings
+**Artifact counts:** 10 source components · 32 source traces · 20 PCB traces · 11 schematic traces · 0 placeholder MPNs · 26 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 166 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 135 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 8 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (11 power-pin warning(s), 6 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 26 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
-- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
+- P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; a switching element is present, but its SOA/gate drive/return path must be verified.
 - P1 — This load family needs a measured current path and suppression network; a diode is declared, but polarity, pulse energy, and physical placement must be checked.
 
 ### Grove Sound Recorder — `GroveSoundRecorder`
@@ -5831,15 +4830,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ISD1820P` · declared MPN `ISD1820P` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Audio noise, bias, gain, grounding, acoustic port, and cable EMI need bench measurements; the current netlist does not prove signal integrity or dynamic range.
@@ -5851,15 +4847,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `M4011` · declared MPN `M4011` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove I2C Color Sensor — `GroveI2CColorSensor`
@@ -5869,15 +4862,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `TCS3414CS` · declared MPN `TCS3414CS` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -5885,20 +4875,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveVariableColorLED/DESIGN_REVIEW1.md)
 **Source:** [GroveVariableColorLED.circuit.tsx](boards/GroveVariableColorLED/GroveVariableColorLED.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Variable-Color-LED-p-852.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 13 source components · 89 source traces · 0 PCB traces · 25 schematic traces · 0 placeholder MPNs · 67 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 89 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 67 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -5911,37 +4896,30 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · actuator · primary model `P9813` · declared MPN `P9813` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
-- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
+- P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
 
 ### Grove I2C Touch Sensor — `GroveI2CTouchSensor`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveI2CTouchSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveI2CTouchSensor.circuit.tsx](boards/GroveI2CTouchSensor/GroveI2CTouchSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-I2C-Touch-Sensor-p-840.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · input · primary model `AT42QT1070` · declared MPN `AT42QT1070` · 5V
 
-**Artifact counts:** 16 source components · 52 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 39 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 6 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 39 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 7 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 
@@ -5952,15 +4930,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT22` · declared MPN `DHT22` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -5972,15 +4947,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Line Finder — `GroveLineFinder`
@@ -5990,15 +4962,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove OLED Display 1 12 — `GroveOLEDDisplay112`
@@ -6008,16 +4977,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6030,16 +4995,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6052,16 +5013,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `ST7066U` · declared MPN `ST7066U` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 7 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 23 source traces · 11 PCB traces · 6 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -6073,15 +5030,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6093,15 +5047,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MMA7660FC` · declared MPN `MMA7660FC` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6109,20 +5060,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove3AxisDigitalCompass/DESIGN_REVIEW1.md)
 **Source:** [Grove3AxisDigitalCompass.circuit.tsx](boards/Grove3AxisDigitalCompass/Grove3AxisDigitalCompass.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-3-Axis-Digital-Compass.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `HMC5883` · declared MPN `HMC5883` · 5V
 
-**Artifact counts:** 11 source components · 37 source traces · 0 PCB traces · 14 schematic traces · 0 placeholder MPNs · 33 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 37 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 33 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove RTC DS1307 — `GroveRTCDS1307`
@@ -6132,15 +5078,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `DS1307` · declared MPN `DS1307` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 12 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove 3 Axis Digital Gyro — `Grove3AxisDigitalGyro`
@@ -6150,35 +5093,27 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ITG-3205` · declared MPN `ITG-3205` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove 3 Axis Digital Accelerometer 16g — `Grove3AxisDigitalAccelerometer16g`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove3AxisDigitalAccelerometer16g/DESIGN_REVIEW1.md)
 **Source:** [Grove3AxisDigitalAccelerometer16g.circuit.tsx](boards/Grove3AxisDigitalAccelerometer16g/Grove3AxisDigitalAccelerometer16g.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-3-Axis-Digital-Accelerometer-16g.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL345` · declared MPN `ADXL345` · 5V
 
-**Artifact counts:** 11 source components · 42 source traces · 0 PCB traces · 18 schematic traces · 0 placeholder MPNs · 35 unnamed-trace warnings
+**Artifact counts:** 7 source components · 22 source traces · 15 PCB traces · 10 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 42 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 35 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (3 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6189,15 +5124,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6209,15 +5141,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6229,15 +5158,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6249,15 +5175,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6269,15 +5192,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6289,15 +5209,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `MVS0608.02` · declared MPN `MVS0608.02` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6308,15 +5225,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ESP8266` · declared MPN `ESP8266` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Chest Strap Heart Rate Sensor — `GroveChestStrapHeartRateSensor`
@@ -6326,15 +5240,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MAX30100` · declared MPN `MAX30100` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 12 PCB traces · 5 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (microphone); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6345,15 +5256,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ATmega328P` · declared MPN `ATmega328P` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove 3 Axis Analog Accelerometer ADXL335 — `Grove3AxisAnalogAccelerometerADXL335`
@@ -6363,14 +5271,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL335` · declared MPN `ADXL335` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6381,15 +5287,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `Grove-Expansion` · declared MPN `Grove-Expansion` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
 
@@ -6400,15 +5303,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `SX1301` · declared MPN `SX1301` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -6420,15 +5320,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `PPD42NS` · declared MPN `PPD42NS` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6439,18 +5336,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `HC-SR04` · declared MPN `HC-SR04` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (ultrasonic_transducer); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -6462,14 +5353,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `APDS-9002` · declared MPN `APDS-9002` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6477,40 +5366,30 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveBlueseeedHM11/DESIGN_REVIEW1.md)
 **Source:** [GroveBlueseeedHM11.circuit.tsx](boards/GroveBlueseeedHM11/GroveBlueseeedHM11.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Blueseeed-HM11.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `HM-11` · declared MPN `HM-11` · 5V
 
-**Artifact counts:** 22 source components · 64 source traces · 0 PCB traces · 22 schematic traces · 0 placeholder MPNs · 52 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 64 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 52 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Temperature Humidity Sensor High Accuracy Mini — `GroveTemperatureHumiditySensorHighAccuracyMini`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveTemperatureHumiditySensorHighAccuracyMini/DESIGN_REVIEW1.md)
 **Source:** [GroveTemperatureHumiditySensorHighAccuracyMini.circuit.tsx](boards/GroveTemperatureHumiditySensorHighAccuracyMini/GroveTemperatureHumiditySensorHighAccuracyMini.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Temperature-Humidity-Sensor-High-Accuracy-Mini.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT11` · declared MPN `DHT11` · 5V
 
-**Artifact counts:** 15 source components · 52 source traces · 0 PCB traces · 21 schematic traces · 0 placeholder MPNs · 43 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 52 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 43 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (0 power-pin warning(s), 2 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -6522,15 +5401,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `H3LIS331DL` · declared MPN `H3LIS331DL` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6541,15 +5417,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `NEO-6M` · declared MPN `NEO-6M` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -6561,15 +5434,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ME2-O2` · declared MPN `ME2-O2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -6581,17 +5451,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · sensor · primary model `AK9753` · declared MPN `AK9753` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6602,15 +5467,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `MAX3232` · declared MPN `MAX3232` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -6621,16 +5483,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `TMG39931` · declared MPN `TMG39931` · 5V
 
-**Artifact counts:** 9 source components · 30 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 9 source components · 30 source traces · 20 PCB traces · 10 schematic traces · 0 placeholder MPNs · 25 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 30 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 13 disconnected-port errors, 15 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
+- P2 — 25 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -6642,16 +5500,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `IL0373` · declared MPN `IL0373` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -6663,16 +5517,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `IL0373` · declared MPN `IL0373` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
@@ -6681,20 +5531,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveRS485/DESIGN_REVIEW1.md)
 **Source:** [GroveRS485.circuit.tsx](boards/GroveRS485/GroveRS485.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-RS485-p-2924.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `SN75176` · declared MPN `SN75176` · 5V
 
-**Artifact counts:** 5 source components · 24 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -6705,14 +5550,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL372` · declared MPN `ADXL372` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6723,14 +5566,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL356B` · declared MPN `ADXL356B` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6741,14 +5582,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL357` · declared MPN `ADXL357` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6759,14 +5598,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL356C` · declared MPN `ADXL356C` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6777,36 +5614,28 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `W600` · declared MPN `W600` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove 0 54 Red Dual Alphanumeric Display — `Grove054RedDualAlphanumericDisplay`
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove054RedDualAlphanumericDisplay/DESIGN_REVIEW1.md)
 **Source:** [Grove054RedDualAlphanumericDisplay.circuit.tsx](boards/Grove054RedDualAlphanumericDisplay/Grove054RedDualAlphanumericDisplay.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-0-54-Red-Dual-Alphanumeric-Display-p-4031.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `TM1637` · declared MPN `TM1637` · 5V
 
-**Artifact counts:** 9 source components · 60 source traces · 0 PCB traces · 8 schematic traces · 1 placeholder MPNs · 44 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 60 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 44 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
 
@@ -6814,21 +5643,16 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove054RedQuadAlphanumericDisplay/DESIGN_REVIEW1.md)
 **Source:** [Grove054RedQuadAlphanumericDisplay.circuit.tsx](boards/Grove054RedQuadAlphanumericDisplay/Grove054RedQuadAlphanumericDisplay.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-0-54-Red-Quad-Alphanumeric-Display-p-4032.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `TM1637` · declared MPN `TM1637` · 5V
 
-**Artifact counts:** 9 source components · 60 source traces · 0 PCB traces · 8 schematic traces · 1 placeholder MPNs · 44 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 60 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 44 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 1 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — The declared I²C interface is missing a canonical SCL/SDA net in the emitted netlist; reconcile the Grove contract before release.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — Confirm that the declared display footprint is the actual panel/module outline rather than a symbolic placeholder, including mounting holes, glass keepout, and connector orientation.
 
@@ -6839,15 +5663,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `Grove-Prototyping` · declared MPN `Grove-Prototyping` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Single Axis Analog Accelerometer 100g ADXL1001 — `GroveSingleAxisAnalogAccelerometer100gADXL1001`
@@ -6857,14 +5678,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADXL1001` · declared MPN `ADXL1001` · 5V
 
-**Artifact counts:** 7 source components · 24 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
+**Artifact counts:** 7 source components · 21 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 24 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 10 disconnected-port errors, 10 missing-PCB-trace errors.
-- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6875,15 +5694,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ADIS16470` · declared MPN `ADIS16470` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -6894,15 +5710,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `MT3620` · declared MPN `MT3620` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### 38mm 8 8 square matrix LED matched with Grove Green Common Anode — `Grovemm88SquareMatrixLEDMatchedWithGroveGreenCommonAnode`
@@ -6912,16 +5725,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6933,16 +5742,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6954,16 +5759,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -6975,16 +5776,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · input · primary model `AS5600` · declared MPN `AS5600` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 13 disconnected-port errors, 13 missing-PCB-trace errors.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
-- P1 — Placeholder or non-standard footprint token(s) are present (potentiometer_pth_9mm); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P2 — Input behavior needs debounce, ESD, pull-state, and accidental-short analysis across cable length and host pin configuration.
 - P2 — Verify the user-interface mechanics (shaft/key travel, actuation force, panel height, rotation/pin order) and ESD path; a symbolic component does not establish the physical fit.
@@ -6996,16 +5793,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 33 source components · 80 source traces · 0 PCB traces · 30 schematic traces · 0 placeholder MPNs · 32 unnamed-trace warnings
+**Artifact counts:** 33 source components · 71 source traces · 65 PCB traces · 63 schematic traces · 0 placeholder MPNs · 68 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 80 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 32 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 16 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 68 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -7017,16 +5810,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 49 source components · 120 source traces · 0 PCB traces · 46 schematic traces · 0 placeholder MPNs · 48 unnamed-trace warnings
+**Artifact counts:** 49 source components · 103 source traces · 97 PCB traces · 95 schematic traces · 0 placeholder MPNs · 100 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 120 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 48 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 24 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 100 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -7038,15 +5827,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -7058,15 +5844,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -7078,16 +5861,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 31 source components · 75 source traces · 0 PCB traces · 28 schematic traces · 0 placeholder MPNs · 30 unnamed-trace warnings
+**Artifact counts:** 31 source components · 67 source traces · 61 PCB traces · 59 schematic traces · 0 placeholder MPNs · 64 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 75 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 30 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 15 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 64 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -7099,16 +5878,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 41 source components · 100 source traces · 0 PCB traces · 38 schematic traces · 0 placeholder MPNs · 40 unnamed-trace warnings
+**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 79 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 100 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 40 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 20 reference-designator convention warning(s) require cleanup before release.
-- P1 — Placeholder or non-standard footprint token(s) are present (led_5050); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 84 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -7120,15 +5895,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · utility · primary model `WT5001-48L` · declared MPN `WT5001-48L` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 
 ### Grove Thermal Imaging Camera IR Array MLX90640 110 degree — `GroveThermalImagingCameraIRArrayMLX90640110Degree`
@@ -7138,14 +5910,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9064x` · declared MPN `MLX9064x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7156,14 +5926,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9064x` · declared MPN `MLX9064x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7174,15 +5942,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ESP32` · declared MPN `ESP32` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Capacitive Fingerprint Scanner — `GroveCapacitiveFingerprintScanner`
@@ -7192,15 +5957,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `AS608` · declared MPN `AS608` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove High Precision Barometer Sensor DPS310 — `GroveHighPrecisionBarometerSensorDPS310`
@@ -7210,14 +5972,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `DPS310` · declared MPN `DPS310` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 11 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -7226,18 +5986,16 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/Grove8ChannelI2CHubTCA9548A/DESIGN_REVIEW1.md)
 **Source:** [Grove8ChannelI2CHubTCA9548A.circuit.tsx](boards/Grove8ChannelI2CHubTCA9548A/Grove8ChannelI2CHubTCA9548A.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-8-Channel-I2C-Hub-TCA9548A-p-4398.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `TCA9548A` · declared MPN `TCA9548A` · 5V
 
-**Artifact counts:** 4 source components · 20 source traces · 12 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
-- P1 — No explicit I²C pull-up value is visible in the source; calculate bus rise time at the declared rail and document whether pull-ups are on-board or supplied by the host.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove Turbidity Sensor — `GroveTurbiditySensor`
 
@@ -7246,15 +6004,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `SEN0189` · declared MPN `SEN0189` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -7265,15 +6020,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `LM393` · declared MPN `LM393` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -7284,15 +6036,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `AHT20` · declared MPN `AHT20` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -7301,20 +6050,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveDigitalPIRMotionSensor/DESIGN_REVIEW1.md)
 **Source:** [GroveDigitalPIRMotionSensor.circuit.tsx](boards/GroveDigitalPIRMotionSensor/GroveDigitalPIRMotionSensor.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Digital-PIR-Motion-Sensor-p-4524.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `BISS0001` · declared MPN `BISS0001` · 5V
 
-**Artifact counts:** 35 source components · 108 source traces · 0 PCB traces · 34 schematic traces · 0 placeholder MPNs · 86 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 13 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P1 — 108 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
-- P2 — 86 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 2 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (1 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
@@ -7323,17 +6067,15 @@ Each section below names the exact source file, links its upstream reference, re
 
 **Per-board review:** [DESIGN_REVIEW1.md](boards/GroveQwiicHub/DESIGN_REVIEW1.md)
 **Source:** [GroveQwiicHub.circuit.tsx](boards/GroveQwiicHub/GroveQwiicHub.circuit.tsx) · [upstream reference](https://www.seeedstudio.com/Grove-Qwiic-Hub-p-4531.html)
-**Implementation class:** board-local Eagle geometry materialization
+**Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `TCA9548A` · declared MPN `TCA9548A` · 5V
 
-**Artifact counts:** 4 source components · 20 source traces · 12 PCB traces · 10 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
+**Artifact counts:** 7 source components · 25 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 20 unnamed-trace warnings
 
 **Critical findings:**
 
-- P1 — Pad/net geometry was materialized locally from an Eagle source set; confirm the exact Seeed revision, BOM alternates, assembly polarity, and board outline against the upstream design before release.
-- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 3 reference-designator convention warning(s) require cleanup before release.
-- P1 — This source embeds custom pad/graphic geometry; compare every pad number, polarity marker, courtyard, drill, and assembly origin to the supplier drawing.
+- P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
+- P2 — 20 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Multichannel Gas Sensor v2 — `GroveMultichannelGasSensorV2`
@@ -7343,15 +6085,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MiCS-6814` · declared MPN `MiCS-6814` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7363,17 +6102,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `BGT24LTR11` · declared MPN `BGT24LTR11` · 5V
 
-**Artifact counts:** 6 source components · 16 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 5 source components · 18 source traces · 11 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 7 disconnected-port errors, 9 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P2 — 1 reference-designator convention warning(s) require cleanup before release.
-- P1 — Power/ground metadata is incomplete (2 power-pin warning(s), 0 ground-pin warning(s)); confirm rail constraints and return-current paths.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 - P1 — Validate transducer/sensor spacing, acoustic/optical keepouts, aperture geometry, blind zone, and host timing assumptions against the mechanical assembly.
 
@@ -7384,14 +6118,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · utility · primary model `ADS1115` · declared MPN `ADS1115` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 
 ### Grove Thermal Imaging Camera IR Array MLX90641 110 degree — `GroveThermalImagingCameraIRArrayMLX90641110Degree`
@@ -7401,14 +6133,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9064x` · declared MPN `MLX9064x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7419,15 +6149,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX90614` · declared MPN `MLX90614` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 16 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7438,14 +6165,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9062x` · declared MPN `MLX9062x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7456,15 +6181,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX90614` · declared MPN `MLX90614` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 9 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 16 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7475,15 +6197,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `MIX8410` · declared MPN `MIX8410` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7495,15 +6214,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** uart · communications · primary model `STM32WLE5JC` · declared MPN `STM32WLE5JC` · 5V
 
-**Artifact counts:** 5 source components · 16 source traces · 0 PCB traces · 7 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 5 source components · 20 source traces · 8 PCB traces · 3 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 16 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 6 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 2 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — UART/RF serial levels, baud-domain assumptions, and RX/TX protection must be checked against the host voltage; the Grove connector alone does not prove compatibility.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -7515,15 +6231,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `GGC2330-O2` · declared MPN `GGC2330-O2` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 12 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7535,15 +6248,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `DHT20` · declared MPN `DHT20` · 5V
 
-**Artifact counts:** 5 source components · 14 source traces · 0 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 20 source traces · 12 PCB traces · 6 schematic traces · 0 placeholder MPNs · 16 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 14 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 4 disconnected-port errors, 4 missing-PCB-trace errors.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 11 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 16 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -7555,16 +6265,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1315` · declared MPN `SSD1315` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -7577,16 +6283,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SH1107` · declared MPN `SH1107` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -7599,16 +6301,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · display · primary model `SSD1306` · declared MPN `SSD1306` · 5V
 
-**Artifact counts:** 6 source components · 19 source traces · 0 PCB traces · 6 schematic traces · 1 placeholder MPNs · 10 unnamed-trace warnings
+**Artifact counts:** 6 source components · 22 source traces · 14 PCB traces · 7 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 19 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 6 disconnected-port errors, 9 missing-PCB-trace errors.
-- P1 — 1 source component MPN(s) are placeholder/unspecified values; replace them with orderable manufacturer numbers and verify alternates.
-- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — Placeholder or non-standard footprint token(s) are present (display_module); replace with a verified supplier footprint and mechanical drawing.
+- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Display glass/module dimensions, connector/flex pin order, backlight current, contrast/logic rail, and mounting keepouts need mechanical and electrical sign-off.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. Series resistors exist in the source, but their values and dissipation still need calculation.
@@ -7621,14 +6319,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SFA30` · declared MPN `SFA30` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7640,14 +6336,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9064x` · declared MPN `MLX9064x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7658,14 +6352,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `MLX9062x` · declared MPN `MLX9062x` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 
@@ -7676,14 +6368,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SEN55` · declared MPN `SEN55` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -7695,14 +6385,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SEN55` · declared MPN `SEN55` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P2 — Keep the sensing element thermally isolated from regulators, LEDs, heaters, and host airflow; verify the declared package/vent and calibration conditions.
@@ -7714,15 +6402,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SHT4x` · declared MPN `SHT4x` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -7733,15 +6418,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SHT4x` · declared MPN `SHT4x` · 5V
 
-**Artifact counts:** 8 source components · 29 source traces · 0 PCB traces · 12 schematic traces · 0 placeholder MPNs · 18 unnamed-trace warnings
+**Artifact counts:** 8 source components · 27 source traces · 17 PCB traces · 10 schematic traces · 0 placeholder MPNs · 22 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 29 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 18 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 19 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 22 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 
@@ -7752,14 +6434,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `BME688` · declared MPN `BME688` · 5V
 
-**Artifact counts:** 8 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 8 source components · 26 source traces · 16 PCB traces · 9 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7771,15 +6451,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `ZMPT101B` · declared MPN `ZMPT101B` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 4 source components · 13 source traces · 7 PCB traces · 4 schematic traces · 0 placeholder MPNs · 10 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 10 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Verify shunt/heating/current capacity, Kelvin routing, divider tolerance and maximum input, creepage, and calibration at the specified load range.
@@ -7791,15 +6468,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** digital · utility · primary model `ESP8285` · declared MPN `ESP8285` · 5V
 
-**Artifact counts:** 4 source components · 12 source traces · 0 PCB traces · 3 schematic traces · 0 placeholder MPNs · 7 unnamed-trace warnings
+**Artifact counts:** 3 source components · 11 source traces · 5 PCB traces · 2 schematic traces · 0 placeholder MPNs · 8 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 12 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 5 disconnected-port errors, 5 missing-PCB-trace errors.
-- P2 — 7 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 1 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 8 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify VIH/VIL across the declared rail, startup state, edge rate, debounce/pulse width, and host input protection; the source does not establish firmware timing behavior.
 
 ### Grove Air Quality Sensor SGP41 — `GroveAirQualitySensorSGP41`
@@ -7809,15 +6483,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SGP41` · declared MPN `SGP41` · 5V
 
-**Artifact counts:** 7 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 7 source components · 26 source traces · 16 PCB traces · 8 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7829,14 +6500,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · communications · primary model `ST25DV64` · declared MPN `ST25DV64` · 5V
 
-**Artifact counts:** 7 source components · 26 source traces · 0 PCB traces · 9 schematic traces · 0 placeholder MPNs · 15 unnamed-trace warnings
+**Artifact counts:** 7 source components · 24 source traces · 14 PCB traces · 8 schematic traces · 0 placeholder MPNs · 19 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 26 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 15 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 19 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — RF/communications production review is missing: antenna or connector keepout, impedance/control of the RF path, shielding, ESD, regulatory identity, and module firmware/configuration must be documented.
 - P1 — Wireless placement must preserve antenna clearance and ground strategy; confirm module certification, matching/impedance assumptions, and enclosure detuning.
@@ -7848,15 +6517,12 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** i2c · sensor · primary model `SGP40` · declared MPN `SGP40` · 5V
 
-**Artifact counts:** 7 source components · 28 source traces · 0 PCB traces · 10 schematic traces · 0 placeholder MPNs · 17 unnamed-trace warnings
+**Artifact counts:** 7 source components · 26 source traces · 16 PCB traces · 8 schematic traces · 0 placeholder MPNs · 21 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 28 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 2 autorouting errors, 11 disconnected-port errors, 11 missing-PCB-trace errors.
-- P2 — 17 trace(s) lack a `name`, reducing review/debug traceability.
-- P1 — 18 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
+- P2 — 21 trace(s) lack a `name`, reducing review/debug traceability.
 - P2 — I²C pull-ups are present in source; verify their rail, aggregate resistance across stacked modules, bus capacitance, and address/strap state.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.
 - P1 — Gas/heater designs require a measured heater-current path, warm-up profile, thermal isolation, sensor replacement/calibration plan, and enclosure airflow review.
@@ -7868,13 +6534,11 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · sensor · primary model `PAJ7620` · declared MPN `PAJ7620` · 5V
 
-**Artifact counts:** 6 source components · 17 source traces · 0 PCB traces · 5 schematic traces · 0 placeholder MPNs · 9 unnamed-trace warnings
+**Artifact counts:** 6 source components · 18 source traces · 10 PCB traces · 5 schematic traces · 0 placeholder MPNs · 14 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P1 — 17 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
-- P1 — Build diagnostics: 1 autorouting errors, 8 disconnected-port errors, 8 missing-PCB-trace errors.
-- P2 — 9 trace(s) lack a `name`, reducing review/debug traceability.
+- P2 — 14 trace(s) lack a `name`, reducing review/debug traceability.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Sensor accuracy is not demonstrated by the schematic: review calibration constants, self-heating, placement/venting, environmental limits, and production test points.

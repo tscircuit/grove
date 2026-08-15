@@ -1,112 +1,35 @@
+import { Fragment } from "react"
 import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
-const Relay = () => (
-  <chip
-    name="K1"
-    displayName="HLS8L-DC3V-S-C"
-    manufacturerPartNumber="HLS8L-DC3V-S-C"
-    pinLabels={{
-      pin1: "COIL_POS",
-      pin2: "COIL_NEG",
-      pin3: "COM",
-      pin4: "NO",
-      pin5: "NC",
-    }}
-    pinAttributes={{
-      COIL_POS: { requiresPower: true, mustBeConnected: true },
-      COIL_NEG: { requiresGround: true, mustBeConnected: true },
-      COM: { mustBeConnected: true },
-      NO: { mustBeConnected: true },
-      NC: { mustBeConnected: true },
-    }}
-    footprint={
-      <footprint>
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-6} pcbY={-4} portHints={["pin1"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={6} pcbY={-4} portHints={["pin2"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={0} pcbY={4} portHints={["pin3"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-6} pcbY={4} portHints={["pin4"]} />
-        <platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={6} pcbY={4} portHints={["pin5"]} />
-        <silkscreenrect width="15mm" height="10mm" stroke="solid" strokeWidth="0.25mm" filled={false} />
-      </footprint>
-    }
-    schHeight="0.6mm"
-    pcbX={2}
-    pcbY={1.8}
-    schX={4}
-    schY={0}
-  />
-)
-
-const RelayTerminal = () => (
-  <connector
-    name="J2"
-    displayName="NO / COM / NC"
-    manufacturerPartNumber="KF128-3.5-3P"
-    pinLabels={{ pin1: "NO", pin2: "COM", pin3: "NC" }}
-    footprint={
-      <footprint insertionDirection="from_top">
-        <platedhole shape="circle" holeDiameter="1.2mm" outerDiameter="2.4mm" pcbX={-5} pcbY={0} portHints={["pin1"]} />
-        <platedhole shape="circle" holeDiameter="1.2mm" outerDiameter="2.4mm" pcbX={0} pcbY={0} portHints={["pin2"]} />
-        <platedhole shape="circle" holeDiameter="1.2mm" outerDiameter="2.4mm" pcbX={5} pcbY={0} portHints={["pin3"]} />
-        <silkscreenrect width="15mm" height="6mm" stroke="solid" strokeWidth="0.25mm" filled={false} />
-      </footprint>
-    }
-    pcbX={10}
-    pcbY={-7}
-    pcbRotation={180}
-    schX={9}
-    schY={0}
-    schHeight="0.4mm"
-  />
-)
-
-export const GroveRelay = () => (
-  <board name="GroveRelay" title="Grove - Relay v1.2" width="40mm" height="20mm" borderRadius="1mm" solderMaskColor="blue">
-    <GroveMountingHoles x={18} y={8} />
-    <GroveConnector pcbX={-14} pcbY={0} pcbRotation={-90} schX={-9} schY={0} />
-    <Relay />
-    <RelayTerminal />
-    <chip
-      name="U1"
-      displayName="XC6206P302MR"
-      manufacturerPartNumber="XC6206P302MR"
-      pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }}
-      pinAttributes={{ GND: { requiresGround: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: "5V" } }}
-      footprint="sot23"
-      pcbX={-8}
-      pcbY={4}
-      schX={-4}
-      schY={2}
-      schHeight="0.4mm"
-    />
-    <transistor name="Q1" displayName="S8050TL" manufacturerPartNumber="S8050TL" type="npn" footprint="sot23" pcbX={-7} pcbY={-3.5} schX={0} schY={-2.5} />
-    <resistor name="R1" resistance="4.7k" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" pcbX={-11} pcbY={-3} schX={-3.5} schY={-2.5} />
-    <resistor name="R2" resistance="470" manufacturerPartNumber="RC0603JR-07470RL" footprint="0603" pcbX={11} pcbY={-4.5} schX={1} schY={4} />
-    <resistor name="R3" resistance="47k" manufacturerPartNumber="RC0603FR-0747KL" footprint="0603" pcbX={-5} pcbY={-6} schX={0} schY={-5} />
-    <capacitor name="C1" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" pcbX={-11} pcbY={5.5} pcbRotation={-90} schX={-4} schY={4} schOrientation="vertical" maxDecouplingTraceLength="15mm" />
-    <diode name="D1" displayName="1N4148" manufacturerPartNumber="1N4148" footprint="0603" pcbX={12} pcbY={5.5} schX={4} schY={2.5} />
-    <led name="D2" displayName="Red LED 0603" manufacturerPartNumber="LED-RED-0603" color="red" footprint="0603" pcbX={15} pcbY={5.5} schX={4} schY={4} />
-    <trace from="J1.VCC" to="U1.VIN" />
-    <trace from="U1.GND" to="J1.GND" />
-    <trace from="U1.VOUT" to="K1.COIL_POS" />
-    <trace from="U1.VOUT" to="D1.cathode" />
-    <trace from="U1.VOUT" to="R2.pin2" />
-    <trace from="U1.VOUT" to="C1.pin2" />
-    <trace from="C1.pin1" to="U1.GND" />
-    <trace from="J1.SIG" to="R1.pin1" />
-    <trace from="R1.pin2" to="Q1.base" />
-    <trace from="Q1.base" to="R3.pin1" />
-    <trace from="R3.pin2" to="J1.GND" />
-    <trace from="Q1.emitter" to="J1.GND" />
-    <trace from="Q1.collector" to="K1.COIL_NEG" />
-    <trace from="Q1.collector" to="D1.anode" />
-    <trace from="Q1.collector" to="D2.cathode" />
-    <trace from="R2.pin1" to="D2.anode" />
-    <trace from="K1.NO" to="J2.NO" />
-    <trace from="K1.COM" to="J2.COM" />
-    <trace from="K1.NC" to="J2.NC" />
-    <silkscreentext text="GROVE RELAY v1.2" pcbX={0} pcbY={8.4} fontSize="0.7mm" />
+const GroveRelay = () => (
+  <board name={"GroveRelay"} title={"Grove - Relay v1.2"} width={"52mm"} height={"28mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={22} y={11} />
+    <GroveConnector kind="digital" powerVoltage={"5V"} connectToNets pcbX={-20} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    <chip name="U1" displayName={"HLS8L-DC3V-S-C"} manufacturerPartNumber={"HLS8L-DC3V-S-C"} pinLabels={{ pin1: "SIG", pin2: "VCC", pin3: "GND", pin4: "AUX" }} pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, AUX: { doNotConnect: true } }} connections={{ "SIG": "net.SIG", "VCC": "net.VCC", "GND": "net.GND" }} noConnect={["AUX"]} footprint={<footprint><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={-0.635} portHints={["pin1"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={-2.5} pcbY={0.635} portHints={["pin2"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={-0.635} portHints={["pin3"]} /><smtpad shape="rect" width="1mm" height="0.6mm" pcbX={2.5} pcbY={0.635} portHints={["pin4"]} /><silkscreenrect width="4mm" height="4mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={4} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["SIG","VCC"], rightSide: ["GND","AUX"] }} />
+    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-5} pcbY={0} schX={5} schY={4} schOrientation="vertical" />
+    <led name="D_STATUS" displayName="red status LED" manufacturerPartNumber="LTST-C190KRKT" color="red" connections={{ anode: "net.STATUS", cathode: "net.GND" }} footprint="0603" pcbX={-2} pcbY={7} schX={7.6} schY={-4} /><resistor name="R_STATUS" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.VCC", pin2: "net.STATUS" }} pcbX={2} pcbY={7} schX={10.4} schY={-4} />
+    <mosfet name="Q1" displayName="2N7002 load switch" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" connections={{ gate: "net.SIG", source: "net.GND", drain: "net.LOAD_NEG" }} footprint="sot23" pcbX={10} pcbY={-5} schX={6} schY={-3} /><chip name="U3" displayName={"HLS8L-DC3V-S-C load stage"} manufacturerPartNumber={"HLS8L-DC3V-S-C"} pinLabels={{ pin1: "POS", pin2: "NEG", pin3: "GND" }} pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ POS: "net.VCC", NEG: "net.LOAD_NEG", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={18} pcbY={4} schX={9.2} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><diode name="D1" displayName="1N4148W flyback diode" manufacturerPartNumber="1N4148W" connections={{ anode: "net.LOAD_NEG", cathode: "net.VCC" }} footprint="0603" pcbX={10} pcbY={2} schX={4.8} schY={3} />
+    <trace name="POWER_RAIL" path={["J1.VCC","U1.VCC","C1.pin1","R_STATUS.pin1","U3.POS","D1.cathode"]} />
+    <trace name="GROUND_RAIL" path={["J1.GND","U1.GND","C1.pin2","D_STATUS.cathode","Q1.source","U3.GND"]} />
+    <trace name="SIGNAL_RAIL" path={["J1.SIG","U1.SIG","Q1.gate"]} />
+    <trace name="STATUS_RAIL" path={["R_STATUS.pin2","D_STATUS.anode"]} />
+    <trace name="LOAD_RAIL" path={["Q1.drain","U3.NEG","D1.anode"]} />
+    <silkscreentext text={"Relay v1.2"} pcbX={0} pcbY={12.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-12.5} fontSize="0.45mm" />
   </board>
 )
 
+export { GroveRelay }
 export default GroveRelay

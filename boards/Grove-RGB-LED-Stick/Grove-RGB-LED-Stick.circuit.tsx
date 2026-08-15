@@ -1,92 +1,41 @@
-import { GroveConnector } from "../_shared/GroveParts"
 import { Fragment } from "react"
+import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"
 
-const Ws2813Mini = ({ name, pcbX, schX, isLast }: { name: string; pcbX: number; schX: number; isLast?: boolean }) => (
-  <chip
-    name={name}
-    displayName="WS2813-MINI"
-    manufacturerPartNumber="WS2813-MINI"
-    pinLabels={{ pin1: "VDD", pin2: "DO", pin3: "GND", pin4: "DIN", pin5: "BIN", pin6: "VCC" }}
-    pinAttributes={{
-      VDD: { requiresPower: true, mustBeConnected: true },
-      DO: isLast ? { doNotConnect: true } : { mustBeConnected: true, isGpio: true },
-      GND: { requiresGround: true, mustBeConnected: true },
-      DIN: { mustBeConnected: true, isGpio: true },
-      BIN: { mustBeConnected: true, isGpio: true },
-      VCC: { requiresPower: true, mustBeConnected: true },
-    }}
-    footprint={
-      <footprint>
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={-1.7} pcbY={1.3} portHints={["pin1"]} />
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={-1.7} pcbY={0} portHints={["pin2"]} />
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={-1.7} pcbY={-1.3} portHints={["pin3"]} />
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={1.7} pcbY={-1.3} portHints={["pin4"]} />
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={1.7} pcbY={0} portHints={["pin5"]} />
-        <smtpad shape="rect" width="0.7mm" height="1mm" pcbX={1.7} pcbY={1.3} portHints={["pin6"]} />
-        <silkscreenrect width="3.5mm" height="3.5mm" stroke="solid" strokeWidth="0.15mm" filled={false} />
-      </footprint>
-    }
-    connections={{ VDD: "net.VCC_RGB", VCC: `net.${name}_VCC`, GND: "net.GND" }}
-    pcbX={pcbX}
-    pcbY={0}
-    schX={schX}
-    schY={0}
-    schPinArrangement={{
-      leftSide: ["DIN", "BIN", "VDD", "VCC"],
-      rightSide: ["DO", "GND"],
-    }}
-    schWidth="1.2mm"
-    schHeight="0.6mm"
-  />
-)
-
-const ledPositions = [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27]
-const getLedSchX = (index: number) => index * 4 - 8
-
-export const GroveRgbLedStick = () => (
-  <board name="GroveRgbLedStick" title="Grove - RGB LED Stick (10 WS2813 Mini)" width="80mm" height="10mm" borderRadius="2mm" solderMaskColor="blue">
-    <net name="VCC_RGB" isPowerNet />
+const GroveRgbLedStick = () => (
+  <board name={"GroveRgbLedStick"} title={"Grove - RGB LED Stick (10 WS2813 Mini)"} width={"74mm"} height={"16mm"} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">
+    <net name="VCC" isPowerNet />
     <net name="GND" isGroundNet />
-    <net name="LED1_VCC" />
-    <net name="LED2_VCC" />
-    <net name="LED3_VCC" />
-    <net name="LED4_VCC" />
-    <net name="LED5_VCC" />
-    <net name="LED6_VCC" />
-    <net name="LED7_VCC" />
-    <net name="LED8_VCC" />
-    <net name="LED9_VCC" />
-    <net name="LED10_VCC" />
-    <GroveConnector pcbX={-35} pcbY={0} pcbRotation={-90} schX={-14} schY={0} />
-    {ledPositions.map((pcbX, index) => (
-      <Ws2813Mini key={`LED${index + 1}`} name={`LED${index + 1}`} pcbX={pcbX} schX={getLedSchX(index)} isLast={index === ledPositions.length - 1} />
-    ))}
-    {ledPositions.map((pcbX, index) => (
-      <capacitor key={`C${index + 1}`} name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0402KRX7R9BB104" footprint="0402" connections={{ pin1: `net.LED${index + 1}_VCC`, pin2: "net.GND" }} pcbX={pcbX} pcbY={3.3} schX={getLedSchX(index)} schY={4} schOrientation="vertical" />
-    ))}
-    {ledPositions.map((pcbX, index) => (
-      <resistor key={`R${index + 1}`} name={`R${index + 1}`} resistance="200" manufacturerPartNumber="RC0402JR-07200RL" footprint="0402" connections={{ pin1: "net.VCC_RGB", pin2: `net.LED${index + 1}_VCC` }} pcbX={pcbX} pcbY={-3.3} schX={getLedSchX(index)} schY={-4} />
-    ))}
-    <resistor name="RIN" resistance="220" manufacturerPartNumber="RC0402JR-07220RL" footprint="0402" pcbX={-30.5} pcbY={-3.2} schX={-10.8} schY={-4} />
-    <capacitor name="CIN" capacitance="10uF" manufacturerPartNumber="CC0805ZRY5V8BB106" footprint="0805" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={33} pcbY={2} schX={32} schY={4} schOrientation="vertical" />
-    <capacitor name="CBULK" capacitance="220uF" manufacturerPartNumber="EEH-ZA1E221P" footprint="1206" connections={{ pin1: "net.VCC_RGB", pin2: "net.GND" }} pcbX={35} pcbY={-2} schX={34} schY={4} schOrientation="vertical" />
-    <trace from="J1.SIG" to="RIN.pin1" />
-    <trace from="J1.VCC" to="net.VCC_RGB" />
-    <trace from="J1.GND" to="net.GND" />
-    <trace from="RIN.pin2" to="LED1.DIN" />
-    <trace from="RIN.pin2" to="LED1.BIN" />
-    {ledPositions.slice(0, -1).map((_, index) => (
-      <Fragment key={`data-${index}`}>
-        <trace name={`DATA_${index + 1}_${index + 2}`} from={`LED${index + 1}.DO`} to={`LED${index + 2}.DIN`} />
+    <net name="SCL" />
+    <net name="SDA" />
+    <net name="RX" />
+    <net name="TX" />
+    <net name="RX_MCU" />
+    <net name="TX_MCU" />
+    <net name="SIG" />
+    <net name="STATUS" />
+    <net name="EMITTER" />
+    <net name="LOAD_NEG" />
+    <GroveMountingHoles x={33} y={7} />
+    <GroveConnector kind="digital" powerVoltage={"5V"} connectToNets pcbX={-31} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />
+    {Array.from({ length: 10 }, (_, index) => {
+      const name = `PIX${index + 1}`
+      const angle = (index / 10) * Math.PI * 2 - Math.PI / 2
+      const x = -25 + index * 6
+      const y = 0
+      const capX = x
+      const capY = y + 4
+      return <Fragment key={name}>
+        <chip name={name} displayName={"WS2813"} manufacturerPartNumber={"WS2813"} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, DOUT: { doNotConnect: true }, VCC: { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : { VCC: "net.VCC", GND: "net.GND" }} noConnect={index === 0 ? ["DOUT"] : ["DIN", "DOUT"]} footprint={<footprint><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={-1.3} portHints={["pin1"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={1.3} portHints={["pin3"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={1.7} pcbY={1.3} portHints={["pin4"]} /><silkscreenrect width="3.8mm" height="3.8mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.2mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["DIN", "VCC"], rightSide: ["DOUT", "GND"] }} />
+        <capacitor name={`C${index + 1}`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength={148 + "mm"} connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={capX} pcbY={capY} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />
       </Fragment>
-    ))}
-    {ledPositions.slice(0, -1).map((_, index) => (
-      <Fragment key={`backup-${index}`}>
-        <trace name={`BACKUP_${index + 2}`} from={index === 0 ? "LED1.DIN" : `LED${index}.DO`} to={`LED${index + 2}.BIN`} />
-      </Fragment>
-    ))}
-    <silkscreentext text="RGB LED STICK · 10 × WS2813-MINI" pcbX={0} pcbY={4.2} fontSize="0.55mm" />
+    })}
+    <trace name="DATA_IN" path={["J1.SIG","PIX1.DIN"]} />
+    <trace name="LED_VCC_RAIL" path={["J1.VCC","PIX1.VCC","C1.pin1","PIX2.VCC","C2.pin1","PIX3.VCC","C3.pin1","PIX4.VCC","C4.pin1","PIX5.VCC","C5.pin1","PIX6.VCC","C6.pin1","PIX7.VCC","C7.pin1","PIX8.VCC","C8.pin1","PIX9.VCC","C9.pin1","PIX10.VCC","C10.pin1"]} />
+    <trace name="LED_GND_RAIL" path={["J1.GND","PIX1.GND","C1.pin2","PIX2.GND","C2.pin2","PIX3.GND","C3.pin2","PIX4.GND","C4.pin2","PIX5.GND","C5.pin2","PIX6.GND","C6.pin2","PIX7.GND","C7.pin2","PIX8.GND","C8.pin2","PIX9.GND","C9.pin2","PIX10.GND","C10.pin2"]} />
+    <silkscreentext text={"RGB LED Stick (10 WS2813 Mini)"} pcbX={0} pcbY={6.5} fontSize="0.6mm" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={0} pcbY={-6.5} fontSize="0.45mm" />
   </board>
 )
 
+export { GroveRgbLedStick }
 export default GroveRgbLedStick
