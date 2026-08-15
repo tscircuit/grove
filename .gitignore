@@ -30,4 +30,7 @@ yarn-error.log*
 
 # Snapshot mismatch artifacts (uploaded by CI)
 **/__snapshots__/*.diff.*
+
+# Temporary visual artifacts emitted by `tsci check shorts`
+checks/check-shorts/
 .vercel

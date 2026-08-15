@@ -88,7 +88,7 @@ export const GroveLcdRgbBacklight = () => (
         D5: { mustBeConnected: true, isGpio: true }, D6: { mustBeConnected: true, isGpio: true },
         D7: { mustBeConnected: true, isGpio: true }, CONTRAST: { mustBeConnected: true },
       }}
-      footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={1}
+      footprint="soic12" layer="bottom" pcbX={-12} pcbY={9} schX={-3} schY={0.2}
     />
     <chip
       name="U2"

@@ -109,7 +109,7 @@ export const GroveConnector = ({
       schY={schY}
       schRotation={schRotation}
       schWidth="1.3mm"
-      schHeight="1mm"
+      schHeight="0.6mm"
       schPinArrangement={{
         rightSide: [signal1, signal2, "VCC", "GND"],
       }}

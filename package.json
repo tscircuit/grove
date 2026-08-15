@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "dev": "tsci dev",
-    "build": "tsci build --concurrency 1",
+    "build": "tsci build --concurrency 1 --autorouter-timeout 10s",
     "snapshot:generate": "tsci snapshot --update --force-update --concurrency 1",
     "snapshot:normalize": "bun scripts/normalize-snapshots.ts && bun scripts/normalize-snapshots.ts",
     "snapshot:check": "bun scripts/check-snapshots.ts",
@@ -26,7 +26,8 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
-    "tscircuit": "^0.0.2339",
+    "fast-xml-parser": "^5.10.1",
+    "tscircuit": "^0.0.2340",
     "typescript": "^5.0.0"
   }
 }
