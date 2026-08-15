@@ -84,12 +84,12 @@ Seeed's official [Grove sensor guide](https://wiki.seeedstudio.com/Grove_Sensor_
 [accessories guide](https://wiki.seeedstudio.com/Grove_Accessories_Intro/), and
 official product sitemap. Every manifest entry has its own board directory,
 default-exported TSX circuit, README with source attribution, and independent
-PCB and schematic SVG snapshots. All 394 entries are defined with the
-profile-driven `GroveDetailedModule`: each has a named primary model/MPN,
-interface-specific signal conditioning, explicit component footprints, power
-decoupling, no-connect declarations, and routed nets. The 12 entries listed
-above additionally preserve their source-backed, board-specific
-reverse-engineered geometry.
+PCB and schematic SVG snapshots. All 394 entry files are hand-authored
+board-local TSX: none imports a profile wrapper. The 12 entries listed above retain their reviewed
+board-specific sources; 67 additional entries materialize local pad/net data
+from the catalogue's Eagle source set; the remaining entries are explicit
+board-local engineering drafts that still need part-level electrical and
+mechanical review before fabrication.
 
 Refresh the catalogue from those official sources with:
 
@@ -100,8 +100,9 @@ bun run validate:catalogue
 ```
 
 The generator is intentionally deterministic for a given upstream catalogue;
-it regenerates the 382 profile-driven catalogue entries while preserving the
-12 source-backed board-specific directories.
+it can refresh the 382 materialized board-local sources while preserving the
+12 retained hand-authored directories. It is a development aid only; the
+checked-in board files, not a runtime profile wrapper, are the source of truth.
 
 ## Project scope
 

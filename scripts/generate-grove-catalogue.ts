@@ -721,22 +721,21 @@ const moduleSource = (entry: CatalogueEntry) => {
     entry.componentName ?? "GroveModule",
   )
   const powerVoltage = powerVoltageFor(entry.title)
-  return `import { GroveDetailedModule } from "../_shared/GroveDetailedModule"
+  // Keep catalogue refreshes board-local from the first write. The
+  // materializer then replaces this deterministic seed with the complete
+  // source-specific circuit; no profile wrapper is ever emitted.
+  return `import { GroveConnector } from "../_shared/GroveParts"
 
 export const ${entry.componentName} = () => (
-  <GroveDetailedModule
-    profile={{
-      name: ${JSON.stringify(entry.componentName)},
-      title: ${JSON.stringify(entry.title)},
-      category: ${JSON.stringify(entry.category)},
-      sourceUrl: ${JSON.stringify(entry.sourceUrl)},
-      interfaceKind: ${JSON.stringify(entry.interfaceKind)},
-      detailKind: ${JSON.stringify(detailKind)},
-      primaryModel: ${JSON.stringify(primaryModel)},
-      manufacturerPartNumber: ${JSON.stringify(manufacturerPartNumber)},
-      powerVoltage: ${JSON.stringify(powerVoltage)},
-    }}
-  />
+  <board name={${JSON.stringify(entry.componentName)}} title={${JSON.stringify(entry.title)}} width="40mm" height="20mm">
+    <net name="VCC" isPowerNet />
+    <net name="GND" isGroundNet />
+    <net name="SIG" />
+    <GroveConnector kind="${entry.interfaceKind}" powerVoltage={${JSON.stringify(powerVoltage)}} pcbX={-14} pcbY={0} />
+    <chip name="U1" displayName={${JSON.stringify(primaryModel)}} manufacturerPartNumber={${JSON.stringify(manufacturerPartNumber)}} pinLabels={{ pin1: "SIG", pin2: "VCC", pin3: "GND" }} pinAttributes={{ SIG: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ SIG: "net.SIG", VCC: "net.VCC", GND: "net.GND" }} footprint="sot23" pcbX={4} pcbY={0} />
+    <trace name="HAND_AUTHORED_SEED" from="J1.SIG" to="U1.SIG" />
+    <silkscreentext text="HAND-AUTHORED" pcbX={{0}} pcbY={{-8}} fontSize="0.45mm" />
+  </board>
 )
 
 export default ${entry.componentName}

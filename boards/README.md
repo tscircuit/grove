@@ -10,10 +10,9 @@ source-backed board-specific recreations. Their individual READMEs identify
 the upstream Seeed revision and public source package, explain the design
 choices, and record the license status of the source material.
 
-Every other entry is also a complete, fabrication-oriented TSX board model,
-not an interface-only placeholder. The deterministic profile generator gives
-each board a primary model/MPN, an interface-appropriate Grove pinout,
-explicit footprints, power decoupling, passive signal conditioning,
-no-connects, routed nets, and independent PCB and schematic snapshots. Run
-`bun run validate:catalogue` before review to apply the same tscircuit gates to
-every directory.
+All 394 entries are now board-local TSX sources; there are no profile-wrapper
+imports. Some files preserve source Eagle pad/net data, while others are
+explicit engineering drafts with provisional parts and footprints. A passing
+tscircuit build or snapshot proves that the source renders, not that it is
+ready to fabricate. Run `bun run validate:catalogue` before review and consult
+`DESIGN_REVIEW1.md` for the board-by-board production-readiness findings.

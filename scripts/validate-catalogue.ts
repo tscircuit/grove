@@ -91,11 +91,11 @@ const validateStaticCatalogue = async () => {
       if (!/export default\s+\w+/.test(source)) {
         failures.push(`${board.directory}: circuit has no default export`)
       }
-      if (/placementDrcChecksDisabled|GroveCatalogueModule/.test(source)) {
-        failures.push(`${board.directory}: contains a placement bypass or legacy module`)
+      if (/placementDrcChecksDisabled|GroveCatalogueModule|EagleBoardModule|from \"\.\.\/\_shared\/[^\"]*Module/.test(source)) {
+        failures.push(`${board.directory}: contains a placement bypass or shared/profile board wrapper`)
       }
-      if (!board.detailed && !source.includes("GroveDetailedModule")) {
-        failures.push(`${board.directory}: generated board is not profile-driven`)
+      if (!/<board\b/.test(source) || !/<trace\b/.test(source)) {
+        failures.push(`${board.directory}: board-local source is missing a board or trace declaration`)
       }
     } catch {
       // Missing circuit files are already reported above.

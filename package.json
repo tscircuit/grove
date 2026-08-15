@@ -19,7 +19,7 @@
     "bom:check": "bun scripts/check-bom.ts",
     "snapshot": "bun run snapshot:generate && bun run snapshot:normalize && bun run snapshot:check && bun run bom:check",
     "snapshot:update": "bun run snapshot:generate && bun run snapshot:normalize",
-    "catalogue:generate": "bun scripts/generate-grove-catalogue.ts",
+    "catalogue:generate": "bun scripts/generate-grove-catalogue.ts && bun scripts/materialize-hand-authored.ts",
     "validate:catalogue": "bun scripts/validate-catalogue.ts",
     "typecheck": "tsc --noEmit",
     "check": "bun run typecheck && bun run build && bun run snapshot"
