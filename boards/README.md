@@ -14,5 +14,6 @@ All 394 entries are now board-local TSX sources; there are no profile-wrapper
 imports. Some files preserve source Eagle pad/net data, while others are
 explicit engineering drafts with provisional parts and footprints. A passing
 tscircuit build or snapshot proves that the source renders, not that it is
-ready to fabricate. Run `bun run validate:catalogue` before review and consult
-`DESIGN_REVIEW1.md` for the board-by-board production-readiness findings.
+ready to fabricate. Every board directory must contain a board-specific
+`DESIGN_REVIEW1.md`; run `bun run review:check` to verify the full 394-board
+coverage, then use `bun run validate:catalogue` for the tscircuit gates.

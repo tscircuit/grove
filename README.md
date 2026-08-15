@@ -75,6 +75,10 @@ Each board README records its source URL, interface, primary device model,
 manufacturer part number, power rail, explicit footprints, routed nets, and
 decoupling components. A passing snapshot is a review artifact; fabrication
 readiness is additionally gated by the catalogue-wide tscircuit checks below.
+Every board directory also contains its own `DESIGN_REVIEW1.md` with the
+component/port table, netlist and routing evidence, footprint/BOM risks, and
+board-specific release gates. Run `bun run review:check` to verify that all
+394 manifest entries have an individualized review.
 
 ## Grove catalogue
 
