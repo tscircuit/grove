@@ -4,7 +4,7 @@ Generated from the checked-in board-local TSX sources and the latest `dist/board
 
 ## Executive disposition
 
-The catalogue is structurally complete but is **not production-ready as a set**. Every entry now has a board-local TSX source and a committed PCB/schematic snapshot, but the current artifacts still require board-specific BOM, datasheet, footprint, mechanical, power, and routed-copper sign-off. The strongest repo-wide blocker is that 394/394 boards produced at least one PCB trace in the latest build; 0/394 emitted autorouting/disconnected-port/missing-PCB-trace diagnostics, and 0/394 contain at least one placeholder MPN.
+The catalogue is structurally complete but is **not production-ready as a set**. Every entry now has a board-local TSX source and a committed PCB/schematic snapshot, but the current artifacts still require board-specific BOM, datasheet, footprint, mechanical, power, and routed-copper sign-off. The strongest repo-wide blocker is that 393/394 boards produced at least one PCB trace in the latest build; 0/394 emitted autorouting/disconnected-port/missing-PCB-trace diagnostics, and 0/394 contain at least one placeholder MPN.
 
 The wrapper-removal requirement is satisfied at the entry-point level: 394/394 board circuit files are board-local and 0 board circuit files import a profile wrapper. The 12 retained hand-authored boards remain source-specific; 67 entries preserve local Eagle pad/net data; the remaining entries are explicit board-local engineering drafts and are called out as such below.
 
@@ -13,6 +13,7 @@ The wrapper-removal requirement is satisfied at the entry-point level: 394/394 b
 - `bun run typecheck` — PASS (all 394 board entry points type-check).
 - `bun run build` — completed 395 circuits (394 boards plus the snapshot fixture); tscircuit emitted placement/routing diagnostics that are recorded per board below.
 - `bun run bom:check` — PASS (394 boards have manufacturer part numbers on every source component; placeholder MPNs remain review findings where applicable).
+- `bun run jlcpcb:check` — PASS when the generated circuit JSON carries a valid C-number JLCPCB selection on every source component and more than 90% of boards are fully selected.
 - `bun run snapshot:update` — PASS (790 canonicalized PCB/schematic SVGs: 394 boards plus the example).
 - `bun run validate:catalogue` — intentionally remains a review gate: run it after the board-specific findings below are addressed; this document does not treat renderer output alone as fabrication approval.
 
@@ -24,17 +25,17 @@ The wrapper-removal requirement is satisfied at the entry-point level: 394/394 b
 | Board-local TSX entry points | 394 |
 | Profile-wrapper entry points | 0 |
 | Source components | 2406 |
-| Source traces | 7762 |
-| PCB traces | 4641 |
-| Schematic traces | 2661 |
-| Boards with PCB traces | 394 |
+| Source traces | 7666 |
+| PCB traces | 4544 |
+| Schematic traces | 2562 |
+| Boards with PCB traces | 393 |
 | Boards with autorouting/disconnect/missing-trace diagnostics | 0 |
 | Boards with placeholder MPNs | 0 |
-| Unnamed source-trace warnings | 6187 |
+| Unnamed source-trace warnings | 6093 |
 | Refdes convention warnings | 0 |
-| Power metadata warnings | 0 |
-| Ground metadata warnings | 0 |
-| Source-pin-missing-trace warnings | 0 |
+| Power metadata warnings | 23 |
+| Ground metadata warnings | 23 |
+| Source-pin-missing-trace warnings | 48 |
 
 ## Review method
 
@@ -202,7 +203,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** retained hand-authored source
 **Catalogue declaration:** digital · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 21 source components · 47 source traces · 41 PCB traces · 39 schematic traces · 0 placeholder MPNs · 44 unnamed-trace warnings
+**Artifact counts:** 21 source components · 47 source traces · 41 PCB traces · 38 schematic traces · 0 placeholder MPNs · 44 unnamed-trace warnings
 
 **Critical findings:**
 
@@ -3110,7 +3111,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 79 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
+**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 78 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
 
 **Critical findings:**
 
@@ -4265,7 +4266,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `MY9221` · declared MPN `MY9221` · 5V
 
-**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 7 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
+**Artifact counts:** 5 source components · 15 source traces · 9 PCB traces · 6 schematic traces · 0 placeholder MPNs · 12 unnamed-trace warnings
 
 **Critical findings:**
 
@@ -5793,7 +5794,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 33 source components · 71 source traces · 65 PCB traces · 63 schematic traces · 0 placeholder MPNs · 68 unnamed-trace warnings
+**Artifact counts:** 33 source components · 71 source traces · 65 PCB traces · 62 schematic traces · 0 placeholder MPNs · 68 unnamed-trace warnings
 
 **Critical findings:**
 
@@ -5810,12 +5811,16 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 49 source components · 103 source traces · 97 PCB traces · 95 schematic traces · 0 placeholder MPNs · 100 unnamed-trace warnings
+**Artifact counts:** 49 source components · 7 source traces · 0 PCB traces · 2 schematic traces · 0 placeholder MPNs · 6 unnamed-trace warnings
 
 **Critical findings:**
 
 - P1 — This is an explicit board-local engineering draft, but its primary part, support circuit, footprint, and mechanical envelope still require source-specific review before release.
-- P2 — 100 trace(s) lack a `name`, reducing review/debug traceability.
+- P1 — 7 source traces are declared but the build produced 0 PCB traces; routing, clearances, and DRC must be resolved.
+- P1 — `routingDisabled={true}` is present; this board has no automated copper completion and needs an explicit routed layout review.
+- P2 — 6 trace(s) lack a `name`, reducing review/debug traceability.
+- P1 — Power/ground metadata is incomplete (23 power-pin warning(s), 23 ground-pin warning(s)); confirm rail constraints and return-current paths.
+- P1 — 48 source pin(s) are marked as requiring connectivity but have no trace evidence; resolve or intentionally no-connect them in the schematic.
 - P1 — Verify sensor output range, source impedance, ADC reference, over-voltage tolerance, and calibration transfer function at the Grove SIG pin.
 - P1 — Actuator current, inrush, thermal rise, and fault behavior need load testing; no obvious dedicated load switch is visible in the source.
 - P1 — LED current and thermal budget are not proven: verify per-channel resistoring, worst-case simultaneous current, copper/connector limits, data-chain termination, and reset/power sequencing. No explicit current-limiting resistor is evident.
@@ -5861,7 +5866,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 31 source components · 67 source traces · 61 PCB traces · 59 schematic traces · 0 placeholder MPNs · 64 unnamed-trace warnings
+**Artifact counts:** 31 source components · 67 source traces · 61 PCB traces · 58 schematic traces · 0 placeholder MPNs · 64 unnamed-trace warnings
 
 **Critical findings:**
 
@@ -5878,7 +5883,7 @@ Each section below names the exact source file, links its upstream reference, re
 **Implementation class:** board-local engineering draft
 **Catalogue declaration:** analog · actuator · primary model `WS2813` · declared MPN `WS2813` · 5V
 
-**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 79 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
+**Artifact counts:** 41 source components · 87 source traces · 81 PCB traces · 78 schematic traces · 0 placeholder MPNs · 84 unnamed-trace warnings
 
 **Critical findings:**
 

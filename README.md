@@ -42,6 +42,7 @@ bun run typecheck
 bun run build
 bun run snapshot:update
 bun run snapshot
+bun run jlcpcb:check
 ```
 
 Commit the generated PCB and schematic SVGs alongside every board. The
@@ -79,6 +80,11 @@ Every board directory also contains its own `DESIGN_REVIEW1.md` with the
 component/port table, netlist and routing evidence, footprint/BOM risks, and
 board-specific release gates. Run `bun run review:check` to verify that all
 394 manifest entries have an individualized review.
+
+JLCPCB/LCSC supplier selections and their `jlcpcb:C...` footprint references
+are documented in [JLCPCB_PARTS.md](JLCPCB_PARTS.md). `bun run jlcpcb:check`
+audits the generated circuit JSON and enforces complete supplier selection on
+more than 90% of boards before review.
 
 ## Grove catalogue
 

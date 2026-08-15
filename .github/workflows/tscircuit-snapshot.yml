@@ -43,6 +43,9 @@ jobs:
       - name: Check PCB and schematic snapshots
         run: bun run snapshot
 
+      - name: Check JLCPCB supplier and footprint selections
+        run: bun run jlcpcb:check
+
       - name: Verify deterministic snapshots are committed
         shell: bash
         run: |

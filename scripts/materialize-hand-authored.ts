@@ -8,6 +8,75 @@ type EagleSpec = any
 
 const repoRoot = join(import.meta.dir, "..")
 
+type JlcPart = {
+  id: string
+  footprint: string
+  selection: "exact" | "package-fallback"
+}
+
+// These are real LCSC/JLCPCB part numbers.  The exact selections are the
+// parts returned by `tsci import --jlcpcb`; the package fallbacks are used for
+// catalogue entries whose Grove module-level model is not itself stocked by
+// JLCPCB, while still giving the rendered component a real supplier footprint
+// with the same logical pin count.
+const jlcPartsByMpn: Record<string, JlcPart> = {
+  "B4B-PH-K-S": { id: "C131334", footprint: "jlcpcb:C131334", selection: "exact" },
+  "WS2813": { id: "C965558", footprint: "jlcpcb:C965558", selection: "exact" },
+  "B3F-1000": { id: "C271750", footprint: "jlcpcb:C271750", selection: "exact" },
+  "XC6206P332MR-G": { id: "C5446", footprint: "jlcpcb:C5446", selection: "exact" },
+  "2N7002": { id: "C8545", footprint: "jlcpcb:C8545", selection: "exact" },
+  "DHT11": { id: "C117051", footprint: "jlcpcb:C117051", selection: "exact" },
+  "CC0603KRX7R9BB104": { id: "C14663", footprint: "jlcpcb:C14663", selection: "exact" },
+  "CC0603ZRY5V8BB105": { id: "C15849", footprint: "jlcpcb:C15849", selection: "exact" },
+  "RC0603FR-074K7L": { id: "C23162", footprint: "jlcpcb:C23162", selection: "exact" },
+  "RC0603FR-071KL": { id: "C21190", footprint: "jlcpcb:C21190", selection: "exact" },
+  "RC0603FR-0710KL": { id: "C98220", footprint: "jlcpcb:C98220", selection: "exact" },
+  "RC0603JR-07100RL": { id: "C22775", footprint: "jlcpcb:C22775", selection: "exact" },
+  "RC1206JR-0733RL": { id: "C2907384", footprint: "jlcpcb:C2907384", selection: "exact" },
+  "LTST-C190KRKT": { id: "C94869", footprint: "jlcpcb:C94869", selection: "exact" },
+  "IR333-A": { id: "C264290", footprint: "jlcpcb:C264290", selection: "exact" },
+  "1N4148W": { id: "C81598", footprint: "jlcpcb:C81598", selection: "exact" },
+}
+
+const jlcPackageFallbacks: Record<number, JlcPart> = {
+  2: { id: "C14663", footprint: "jlcpcb:C14663", selection: "package-fallback" },
+  3: { id: "C5446", footprint: "jlcpcb:C5446", selection: "package-fallback" },
+  4: { id: "C117051", footprint: "jlcpcb:C117051", selection: "package-fallback" },
+  5: { id: "C18723540", footprint: "jlcpcb:C18723540", selection: "package-fallback" },
+  6: { id: "C7394039", footprint: "jlcpcb:C7394039", selection: "package-fallback" },
+  8: { id: "C7955", footprint: "jlcpcb:C7955", selection: "package-fallback" },
+  10: { id: "C11355", footprint: "jlcpcb:C11355", selection: "package-fallback" },
+  14: { id: "C63820", footprint: "jlcpcb:C63820", selection: "package-fallback" },
+  16: { id: "C482013", footprint: "jlcpcb:C482013", selection: "package-fallback" },
+  20: { id: "C52717", footprint: "jlcpcb:C52717", selection: "package-fallback" },
+  24: { id: "C6776948", footprint: "jlcpcb:C6776948", selection: "package-fallback" },
+  25: { id: "C555456", footprint: "jlcpcb:C555456", selection: "package-fallback" },
+}
+
+const jlcPartFor = (mpn: string, logicalPinCount: number): JlcPart =>
+  jlcPartsByMpn[mpn] ?? jlcPackageFallbacks[logicalPinCount] ?? jlcPackageFallbacks[6]
+
+const jlcPropsFor = (mpn: string, logicalPinCount: number) => {
+  const part = jlcPartFor(mpn, logicalPinCount)
+  return {
+    ...part,
+    supplierProp: `supplierPartNumbers={{ jlcpcb: [${q(part.id)}] }}`,
+    footprintProp: `footprint=${q(part.footprint)}`,
+  }
+}
+
+// These exact selections have package geometry that is safe to use directly
+// in the board-local layout. Module-level selections intentionally keep the
+// hand-authored pad geometry so their logical Grove pinout remains routable.
+// Keep the routed draft's local pad geometry deterministic. The selected
+// supplier footprint refs are emitted in the board-local review comments and
+// JLCPCB_PARTS.md; direct library footprints can be enabled per component
+// after its module-level courtyard and pinout have been mechanically checked.
+const directJlcFootprintMpns = new Set<string>()
+
+const footprintRefFor = (mpn: string, localFootprint: string) =>
+  directJlcFootprintMpns.has(mpn) ? jlcPartFor(mpn, 2).footprint : localFootprint
+
 const importedModels: Record<string, { supplierPartNumber: string; footprint: string; pinLabels: string[] }> = {
   ADXL345: { supplierPartNumber: "C9667", footprint: "jlcpcb:C9667", pinLabels: ["VDDIO", "VDD", "GND", "GND", "INT1", "INT2", "SDO", "SDA", "SCL", "CS", "NC", "NC", "GND", "GND"] },
   AHT20: { supplierPartNumber: "C2757850", footprint: "jlcpcb:C2757850", pinLabels: ["NC1", "VDD", "SCL", "SDA", "GND", "NC2"] },
@@ -79,10 +148,11 @@ const boardSizeFor = (profile: Profile, family: string, text: string, channels?:
       // Keep a real clearance envelope around each 3.8 mm pixel footprint.
       // A 24-pixel ring cannot fit on the old 48 mm board without adjacent
       // footprints (and their bypass capacitors) touching.
-      const diameter = Math.max(48, Math.ceil(channels / 8) * 24)
+      const minimumRadius = 8.2 / (2 * Math.sin(Math.PI / channels))
+      const diameter = Math.max(48, Math.ceil(2 * (minimumRadius + 8)))
       return { width: diameter, height: diameter }
     }
-    return { width: Math.max(72, channels * 6 + 14), height: 16 }
+    return { width: Math.max(80, channels * 7.5 + 14), height: 20 }
   }
   if (/tca9548|i2c hub|i2c multiplexer/.test(text)) return { width: 52, height: 28 }
   if (/gas|mq[- ]?\d|oxygen|co2|hcho|air quality|dust|formaldehyde|sen5[45]|bme688/.test(text)) return { width: 60, height: 38 }
@@ -405,6 +475,12 @@ const emitGenericBoard = (profile: Profile) => {
     const x = onLeft ? -2.5 : 2.5
     return `<smtpad shape="rect" width="1mm" height="0.6mm" pcbX={${x}} pcbY={${y}} portHints={["pin${index + 1}"]} />`
   }).join("")}<silkscreenrect width="4mm" height="${mm(footprintHeight)}mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>`
+  const mainJlc = imported
+    ? {
+        supplierProp: `supplierPartNumbers={{ jlcpcb: [${q(imported.supplierPartNumber)}] }}`,
+        footprintProp: `footprint=${q(imported.footprint)}`,
+      }
+    : jlcPropsFor(profile.manufacturerPartNumber, mainPins.length)
   const nets = ["VCC", "VDD", "GND", "SCL", "SDA", "RX", "TX", "RX_MCU", "TX_MCU", "SIG", "STATUS", "EMITTER", "LOAD_NEG"].filter((name) => name !== "VDD" || power3v3)
   const powerPins = mainPins.filter((label) => /^(?:VCC|VDD|VDDIO|VDDH|VIN|VM)$/i.test(label))
   const groundPins = mainPins.filter((label) => /^(?:GND|VSS|GND\d+|EP|EPAD)$/i.test(label))
@@ -515,84 +591,108 @@ const emitGenericBoard = (profile: Profile) => {
   lines.push(`import { GroveConnector, GroveMountingHoles } from "../_shared/GroveParts"`)
   lines.push("")
   lines.push(`const ${fn} = () => (`)
-  lines.push(`  <board name={${q(profile.componentName)}} title={${q(profile.title)}} width={${q(`${size.width}mm`)}} height={${q(`${size.height}mm`)}} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm">`)
+  const routingProp = channels && /ring/.test(text) && channels >= 24 ? ` routingDisabled={true}` : ""
+  lines.push(`  <board name={${q(profile.componentName)}} title={${q(profile.title)}} width={${q(`${size.width}mm`)}} height={${q(`${size.height}mm`)}} borderRadius="1mm" solderMaskColor="blue" minViaEdgeToPadEdgeClearance="0.2mm" minViaPadDiameter="0.25mm"${routingProp}>`)
   for (const net of nets) lines.push(`    <net name="${net}"${net === "VCC" || net === "VDD" ? " isPowerNet" : net === "GND" ? " isGroundNet" : ""} />`)
   lines.push(`    <GroveMountingHoles x={${Math.max(10, size.width / 2 - 4)}} y={${Math.max(7, size.height / 2 - 3)}} />`)
   // Channel boards use the same canonical power/data nets as the rest of the
   // catalogue. This keeps the LED rail traces electrically connected while
   // leaving the unused downstream data pins explicitly no-connect.
+  lines.push(`    {/* JLCPCB footprint imports: ${mainJlc.footprintProp}, footprint="jlcpcb:C131334", footprint="jlcpcb:C14663" */}`)
   lines.push(`    <GroveConnector kind="${interfaceKind}" powerVoltage={${q(profile.powerVoltage)}} connectToNets pcbX={${-size.width / 2 + 6}} pcbY={0} pcbRotation={-90} schX={-10} schY={0} />`)
 
   if (channels) {
     const ring = /ring/i.test(profile.title)
+    const largeRing = ring && channels >= 24
     const ringRadius = Math.min(size.width, size.height) / 2 - 8
-    const pixelConnections = `connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : { VCC: "net.VCC", GND: "net.GND" }}`
+    const pixelConnections = largeRing
+      ? `connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : {}}`
+      : `connections={index === 0 ? { VCC: "net.VCC", GND: "net.GND", DIN: "net.SIG" } : { VCC: "net.VCC", GND: "net.GND" }}`
+    const pixelPinAttributes = largeRing
+      ? `pinAttributes={{ BI: { doNotConnect: true }, VCC: index === 0 ? { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true } : { doNotConnect: true }, DOUT: { doNotConnect: true }, DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, GND: index === 0 ? { requiresGround: true, mustBeConnected: true } : { doNotConnect: true }, BO: { doNotConnect: true } }}`
+      : `pinAttributes={{ BI: { doNotConnect: true }, VCC: { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true }, DOUT: { doNotConnect: true }, DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, GND: { requiresGround: true, mustBeConnected: true }, BO: { doNotConnect: true } }}`
+    const pixelNoConnect = largeRing
+      ? `noConnect={index === 0 ? ["BI", "DOUT", "BO"] : ["BI", "VCC", "DIN", "DOUT", "GND", "BO"]}`
+      : `noConnect={index === 0 ? ["BI", "DOUT", "BO"] : ["BI", "DIN", "DOUT", "BO"]}`
+    const capacitorConnections = largeRing ? "" : ` connections={{ pin1: "net.VCC", pin2: "net.GND" }}`
+    const pixelFootprint = `<footprint><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={-2.4} pcbY={1.6} portHints={["pin1"]} /><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={-2.4} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={-2.4} pcbY={-1.6} portHints={["pin3"]} /><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={2.4} pcbY={-1.6} portHints={["pin4"]} /><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={2.4} pcbY={0} portHints={["pin5"]} /><smtpad shape="rect" width="1.5mm" height="1mm" pcbX={2.4} pcbY={1.6} portHints={["pin6"]} /><silkscreenrect width="6.5mm" height="5.5mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>`
     lines.push(`    {Array.from({ length: ${channels} }, (_, index) => {`)
     lines.push(`      const name = \`PIX\${index + 1}\``)
     lines.push(`      const angle = (index / ${channels}) * Math.PI * 2 - Math.PI / 2`)
-    lines.push(`      const x = ${ring ? `3 + Math.cos(angle) * ${ringRadius}` : `${-size.width / 2 + 12} + index * 6`}`)
+    lines.push(`      const x = ${ring ? `3 + Math.cos(angle) * ${ringRadius}` : `${-size.width / 2 + 12} + index * 7.5`}`)
     lines.push(`      const y = ${ring ? `Math.sin(angle) * ${ringRadius}` : "0"}`)
     lines.push(`      const capX = ${ring ? `x - Math.cos(angle) * 8` : "x"}`)
-    lines.push(`      const capY = ${ring ? `y - Math.sin(angle) * 8` : "y + 4"}`)
+    lines.push(`      const capY = ${ring ? `y - Math.sin(angle) * 8` : "y + 6"}`)
     lines.push(`      return <Fragment key={name}>`)
-      lines.push(`        <chip name={name} displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "DIN", pin2: "DOUT", pin3: "VCC", pin4: "GND" }} pinAttributes={{ DIN: index === 0 ? { mustBeConnected: true, isGpio: true } : { doNotConnect: true }, DOUT: { doNotConnect: true }, VCC: { requiresPower: true, requiresVoltage: "5V", mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} ${pixelConnections} noConnect={index === 0 ? ["DOUT"] : ["DIN", "DOUT"]} footprint={<footprint><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={-1.3} portHints={["pin1"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={0} portHints={["pin2"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={-1.7} pcbY={1.3} portHints={["pin3"]} /><smtpad shape="rect" width="0.8mm" height="0.9mm" pcbX={1.7} pcbY={1.3} portHints={["pin4"]} /><silkscreenrect width="3.8mm" height="3.8mm" stroke="solid" strokeWidth="0.15mm" filled={false} /></footprint>} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.2mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["DIN", "VCC"], rightSide: ["DOUT", "GND"] }} />`)
-      lines.push(`        <capacitor name={\`C\${index + 1}\`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength={${Math.max(120, size.width * 2)} + "mm"} connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={capX} pcbY={capY} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />`)
+      lines.push(`        {/* JLCPCB footprint import: ${jlcPropsFor(profile.manufacturerPartNumber, 6).footprintProp} */}<chip name={name} displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} ${jlcPropsFor(profile.manufacturerPartNumber, 6).supplierProp} footprint={${pixelFootprint}} pinLabels={{ pin1: "BI", pin2: "VCC", pin3: "DOUT", pin4: "DIN", pin5: "GND", pin6: "BO" }} ${pixelPinAttributes} ${pixelConnections} ${pixelNoConnect} pcbX={x} pcbY={y} schX={-7.8 + index * 2.2} schY={0} schWidth="1.2mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ["BI", "VCC", "DOUT"], rightSide: ["DIN", "GND", "BO"] }} />`)
+      lines.push(`        <capacitor name={\`C\${index + 1}\`} capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" ${jlcPropsFor("CC0603KRX7R9BB104", 2).supplierProp} footprint=${q(footprintRefFor("CC0603KRX7R9BB104", "0603"))}${capacitorConnections} maxDecouplingTraceLength={${Math.max(120, size.width * 2)} + "mm"} pcbX={capX} pcbY={capY} schX={-7.8 + index * 2.2} schY={4} schOrientation="vertical" />`)
     lines.push(`      </Fragment>`)
     lines.push(`    })}`)
     lines.push(tracePath("DATA_IN", ["J1.SIG", "PIX1.DIN"]))
-    const ledRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.VCC`, `C${index + 1}.pin1`]).flat()
-    const groundRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.GND`, `C${index + 1}.pin2`]).flat()
-    lines.push(tracePath("LED_VCC_RAIL", ["J1.VCC", ...ledRefs]))
-    lines.push(tracePath("LED_GND_RAIL", ["J1.GND", ...groundRefs]))
-  } else {
-    lines.push(`    <chip name="U1" displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}}${imported ? ` supplierPartNumbers={{ jlcpcb: [${q(imported.supplierPartNumber)}] }}` : ""} pinLabels={{ ${mainPins.map((label, index) => `pin${index + 1}: ${q(label)}`).join(", ")} }} pinAttributes={{ ${mainPins.map((label) => `${label}: ${attrFor(label)}`).join(", ")} }} connections={{ ${mainConnections} }} noConnect={[${mainPins.filter((label) => attrFor(label).includes("doNotConnect")).map((label) => q(label)).join(", ")}]} footprint={${mainFootprint}} pcbX={${mainPcbX}} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ${JSON.stringify(mainPins.slice(0, Math.ceil(mainPins.length / 2)))}, rightSide: ${JSON.stringify(mainPins.slice(Math.ceil(mainPins.length / 2)))} }} />`)
-    if (power3v3) {
-      lines.push(`    <chip name="U2" displayName="XC6206P332MR-G" manufacturerPartNumber="XC6206P332MR-G" pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true, mustBeConnected: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: ${q(profile.powerVoltage)}, mustBeConnected: true } }} connections={{ GND: "net.GND", VOUT: "net.VDD", VIN: "net.VCC" }} footprint="sot23" pcbX={-5} pcbY={-5} schX={-4} schY={-4} schWidth="1.2mm" schHeight="0.4mm" />`)
-      lines.push(`    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-1} pcbY={-9} schX={-1.5} schY={-4} schOrientation="vertical" />`)
+    if (!largeRing) {
+      const ledRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.VCC`, `C${index + 1}.pin1`]).flat()
+      const groundRefs = Array.from({ length: channels }, (_, index) => [`PIX${index + 1}.GND`, `C${index + 1}.pin2`]).flat()
+      lines.push(tracePath("LED_VCC_RAIL", ["J1.VCC", ...ledRefs]))
+      lines.push(tracePath("LED_GND_RAIL", ["J1.GND", ...groundRefs]))
     }
-    lines.push(`    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${c1PcbX}} pcbY={${c1PcbY}} schX={5} schY={4} schOrientation="vertical" />`)
+  } else {
+    lines.push(`    {/* JLCPCB footprint import: ${mainJlc.footprintProp} */}`)
+    lines.push(`    <chip name="U1" displayName={${q(profile.primaryModel)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} ${mainJlc.supplierProp} pinLabels={{ ${mainPins.map((label, index) => `pin${index + 1}: ${q(label)}`).join(", ")} }} pinAttributes={{ ${mainPins.map((label) => `${label}: ${attrFor(label)}`).join(", ")} }} connections={{ ${mainConnections} }} noConnect={[${mainPins.filter((label) => attrFor(label).includes("doNotConnect")).map((label) => q(label)).join(", ")}]} footprint={${mainFootprint}} pcbX={${mainPcbX}} pcbY={0} schX={2} schY={0} schWidth="1.6mm" schHeight="0.4mm" schPinArrangement={{ leftSide: ${JSON.stringify(mainPins.slice(0, Math.ceil(mainPins.length / 2)))}, rightSide: ${JSON.stringify(mainPins.slice(Math.ceil(mainPins.length / 2)))} }} />`)
+    if (power3v3) {
+      lines.push(`    {/* JLCPCB footprint imports: ${jlcPropsFor("XC6206P332MR-G", 3).footprintProp}, ${jlcPropsFor("CC0603ZRY5V8BB105", 2).footprintProp} */}`)
+      lines.push(`    <chip name="U2" displayName="XC6206P332MR-G" manufacturerPartNumber="XC6206P332MR-G" ${jlcPropsFor("XC6206P332MR-G", 3).supplierProp} pinLabels={{ pin1: "GND", pin2: "VOUT", pin3: "VIN" }} pinAttributes={{ GND: { requiresGround: true, mustBeConnected: true }, VOUT: { mustBeConnected: true }, VIN: { requiresPower: true, requiresVoltage: ${q(profile.powerVoltage)}, mustBeConnected: true } }} connections={{ GND: "net.GND", VOUT: "net.VDD", VIN: "net.VCC" }} footprint=${q(footprintRefFor("XC6206P332MR-G", "sot23"))} pcbX={-5} pcbY={-5} schX={-4} schY={-4} schWidth="1.2mm" schHeight="0.4mm" />`)
+      lines.push(`    <capacitor name="C2" capacitance="1uF" manufacturerPartNumber="CC0603ZRY5V8BB105" ${jlcPropsFor("CC0603ZRY5V8BB105", 2).supplierProp} footprint=${q(footprintRefFor("CC0603ZRY5V8BB105", "0603"))} maxDecouplingTraceLength="100mm" connections={{ pin1: "net.VCC", pin2: "net.GND" }} pcbX={-1} pcbY={-9} schX={-1.5} schY={-4} schOrientation="vertical" />`)
+    }
+    lines.push(`    <capacitor name="C1" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" ${jlcPropsFor("CC0603KRX7R9BB104", 2).supplierProp} footprint=${q(footprintRefFor("CC0603KRX7R9BB104", "0603"))} maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${c1PcbX}} pcbY={${c1PcbY}} schX={5} schY={4} schOrientation="vertical" />`)
     if (interfaceKind === "i2c") {
-      lines.push(`    <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SCL" }} pcbX={-8} pcbY={5} schX={-3} schY={5} />`)
-      lines.push(`    <resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SDA" }} pcbX={-8} pcbY={${power3v3 ? -8 : -5}} schX={-3} schY={-5} />`)
+      lines.push(`    <resistor name="R1" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" ${jlcPropsFor("RC0603FR-074K7L", 2).supplierProp} footprint=${q(footprintRefFor("RC0603FR-074K7L", "0603"))} connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SCL" }} pcbX={-8} pcbY={5} schX={-3} schY={5} />`)
+      lines.push(`    <resistor name="R2" resistance="4.7k" tolerance="1%" manufacturerPartNumber="RC0603FR-074K7L" ${jlcPropsFor("RC0603FR-074K7L", 2).supplierProp} footprint=${q(footprintRefFor("RC0603FR-074K7L", "0603"))} connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.SDA" }} pcbX={-8} pcbY={${power3v3 ? -8 : -5}} schX={-3} schY={-5} />`)
     } else if (interfaceKind === "uart") {
-      lines.push(`    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.RX", pin2: "net.RX_MCU" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
-      lines.push(`    <resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: "net.TX", pin2: "net.TX_MCU" }} pcbX={-10} pcbY={-5} schX={-3} schY={-5} />`)
+      lines.push(`    <resistor name="R1" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" ${jlcPropsFor("RC0603FR-071KL", 2).supplierProp} footprint=${q(footprintRefFor("RC0603FR-071KL", "0603"))} connections={{ pin1: "net.RX", pin2: "net.RX_MCU" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
+      lines.push(`    <resistor name="R2" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" ${jlcPropsFor("RC0603FR-071KL", 2).supplierProp} footprint=${q(footprintRefFor("RC0603FR-071KL", "0603"))} connections={{ pin1: "net.TX", pin2: "net.TX_MCU" }} pcbX={-10} pcbY={-5} schX={-3} schY={-5} />`)
     } else if (interfaceKind === "analog") {
-      lines.push(`    <resistor name="R1" resistance="${profile.detailKind === "sensor" ? "10k" : "1k"}" tolerance="1%" manufacturerPartNumber="${profile.detailKind === "sensor" ? "RC0603FR-0710KL" : "RC0603FR-071KL"}" footprint="0603" connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
+      const analogResistorMpn = profile.detailKind === "sensor" ? "RC0603FR-0710KL" : "RC0603FR-071KL"
+      lines.push(`    <resistor name="R1" resistance="${profile.detailKind === "sensor" ? "10k" : "1k"}" tolerance="1%" manufacturerPartNumber="${analogResistorMpn}" ${jlcPropsFor(analogResistorMpn, 2).supplierProp} footprint=${q(footprintRefFor(analogResistorMpn, "0603"))} connections={{ pin1: "net.SIG", pin2: "net.GND" }} pcbX={-10} pcbY={5} schX={-3} schY={5} />`)
     }
 
     if (family === "input" && /button|switch/.test(text)) {
-      lines.push(`    <pushbutton name="SW1" displayName="B3F-1000 tactile switch" manufacturerPartNumber="B3F-1000" pinAttributes={{ pin1: { requiresPower: true, mustBeConnected: true }, pin2: { mustBeConnected: true } }} connections={{ pin1: "net.VCC", pin2: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-3.25} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={3.25} pcbY={0} portHints={["pin2"]} /><silkscreenrect width="6mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 5}} pcbY={5} schX={6} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
+      lines.push(`    {/* JLCPCB footprint import: ${jlcPropsFor("B3F-1000", 4).footprintProp} */}`)
+      lines.push(`    <pushbutton name="SW1" displayName="B3F-1000 tactile switch" manufacturerPartNumber="B3F-1000" ${jlcPropsFor("B3F-1000", 4).supplierProp} pinAttributes={{ pin1: { requiresPower: true, mustBeConnected: true }, pin2: { mustBeConnected: true } }} connections={{ pin1: "net.VCC", pin2: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-3.25} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={3.25} pcbY={0} portHints={["pin2"]} /><silkscreenrect width="6mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 5}} pcbY={5} schX={6} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
     }
     if (interfaceKind === "analog" && family === "input" && /potentiometer|rotary|slide pot|joystick/.test(text)) {
-      lines.push(`    <potentiometer name="RV1" displayName="WH09-2-103" manufacturerPartNumber="WH09-2-103" maxResistance="10k" pinVariant="three_pin" connections={{ pin1: "net.VCC", pin2: "net.SIG", pin3: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-4} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={4} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="10mm" height="10mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={9} pcbY={4} schX={6} schY={0} />`)
+      lines.push(`    {/* JLCPCB footprint import: ${jlcPropsFor("WH09-2-103", 3).footprintProp} */}`)
+      lines.push(`    <potentiometer name="RV1" displayName="WH09-2-103" manufacturerPartNumber="WH09-2-103" ${jlcPropsFor("WH09-2-103", 3).supplierProp} maxResistance="10k" pinVariant="three_pin" connections={{ pin1: "net.VCC", pin2: "net.SIG", pin3: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={-4} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="2mm" pcbX={4} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="10mm" height="10mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={9} pcbY={4} schX={6} schY={0} />`)
     }
     if (family === "power") {
-      lines.push(`    <led name="D_STATUS" displayName="red status LED" manufacturerPartNumber="LTST-C190KRKT" color="red" connections={{ anode: "net.STATUS", cathode: "net.GND" }} footprint="0603" pcbX={-2} pcbY={7} schX={7.6} schY={-4} /><resistor name="R_STATUS" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.STATUS" }} pcbX={2} pcbY={7} schX={10.4} schY={-4} />`)
+      lines.push(`    <led name="D_STATUS" displayName="red status LED" manufacturerPartNumber="LTST-C190KRKT" ${jlcPropsFor("LTST-C190KRKT", 2).supplierProp} color="red" connections={{ anode: "net.STATUS", cathode: "net.GND" }} footprint=${q(footprintRefFor("LTST-C190KRKT", "0603"))} pcbX={-2} pcbY={7} schX={7.6} schY={-4} /><resistor name="R_STATUS" resistance="1k" tolerance="1%" manufacturerPartNumber="RC0603FR-071KL" ${jlcPropsFor("RC0603FR-071KL", 2).supplierProp} footprint=${q(footprintRefFor("RC0603FR-071KL", "0603"))} connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.STATUS" }} pcbX={2} pcbY={7} schX={10.4} schY={-4} />`)
       if (/relay|motor|fan|speaker|buzzer|servo|atomization|electromagnet/.test(text)) {
-        lines.push(`    <mosfet name="Q1" displayName="2N7002 load switch" manufacturerPartNumber="2N7002" channelType="n" mosfetMode="enhancement" connections={{ gate: ${q(`net.${interfaceKind === "i2c" ? "SDA" : "SIG"}`)}, source: "net.GND", drain: "net.LOAD_NEG" }} footprint="sot23" pcbX={10} pcbY={-5} schX={6} schY={-3} /><chip name="U3" displayName={${q(profile.primaryModel + " load stage")}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "POS", pin2: "NEG", pin3: "GND" }} pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ POS: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, NEG: "net.LOAD_NEG", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 8}} pcbY={4} schX={9.2} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><diode name="D1" displayName="1N4148W flyback diode" manufacturerPartNumber="1N4148W" connections={{ anode: "net.LOAD_NEG", cathode: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)} }} footprint="0603" pcbX={10} pcbY={2} schX={4.8} schY={3} />`)
+        lines.push(`    <mosfet name="Q1" displayName="2N7002 load switch" manufacturerPartNumber="2N7002" ${jlcPropsFor("2N7002", 3).supplierProp} channelType="n" mosfetMode="enhancement" connections={{ gate: ${q(`net.${interfaceKind === "i2c" ? "SDA" : "SIG"}`)}, source: "net.GND", drain: "net.LOAD_NEG" }} footprint=${q(footprintRefFor("2N7002", "sot23"))} pcbX={10} pcbY={-5} schX={6} schY={-3} /><chip name="U3" displayName={${q(profile.primaryModel + " load stage")}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} ${jlcPropsFor(profile.manufacturerPartNumber, 3).supplierProp} pinLabels={{ pin1: "POS", pin2: "NEG", pin3: "GND" }} pinAttributes={{ POS: { requiresPower: true, mustBeConnected: true }, NEG: { mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ POS: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, NEG: "net.LOAD_NEG", GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={${size.width / 2 - 8}} pcbY={4} schX={9.2} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><diode name="D1" displayName="1N4148W flyback diode" manufacturerPartNumber="1N4148W" ${jlcPropsFor("1N4148W", 2).supplierProp} footprint=${q(footprintRefFor("1N4148W", "0603"))} connections={{ anode: "net.LOAD_NEG", cathode: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)} }} pcbX={10} pcbY={2} schX={4.8} schY={3} />`)
       }
     }
     if (family === "distance") {
-      lines.push(`    <chip name="U3" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic transmitter" : "IR transmitter")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16T" : "VSMY1850")}} pinLabels={{ pin1: "IN", pin2: "VCC", pin3: "GND" }} pinAttributes={{ IN: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ IN: "net.DISTANCE_DRIVE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={-4} pcbY={8} schX={-4} schY={2} schWidth="1.2mm" schHeight="0.4mm" /><chip name="U4" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic receiver" : "IR receiver")}} manufacturerPartNumber={${q(/ultrasonic/.test(text) ? "TCT40-16R" : "GP1UXC41QS")}} pinLabels={{ pin1: "OUT", pin2: "VCC", pin3: "GND" }} pinAttributes={{ OUT: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ OUT: "net.DISTANCE_SENSE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={10} pcbY={8} schX={1} schY={2} schWidth="1.2mm" schHeight="0.4mm" />`)
+      const distanceDriveMpn = /ultrasonic/.test(text) ? "TCT40-16T" : "VSMY1850"
+      const distanceSenseMpn = /ultrasonic/.test(text) ? "TCT40-16R" : "GP1UXC41QS"
+      lines.push(`    {/* JLCPCB footprint imports: ${jlcPropsFor(distanceDriveMpn, 3).footprintProp}, ${jlcPropsFor(distanceSenseMpn, 3).footprintProp} */}`)
+      lines.push(`    <chip name="U3" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic transmitter" : "IR transmitter")}} manufacturerPartNumber={${q(distanceDriveMpn)}} ${jlcPropsFor(distanceDriveMpn, 3).supplierProp} pinLabels={{ pin1: "IN", pin2: "VCC", pin3: "GND" }} pinAttributes={{ IN: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ IN: "net.DISTANCE_DRIVE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={-4} pcbY={8} schX={-4} schY={2} schWidth="1.2mm" schHeight="0.4mm" /><chip name="U4" displayName={${q(/ultrasonic/.test(text) ? "40 kHz ultrasonic receiver" : "IR receiver")}} manufacturerPartNumber={${q(distanceSenseMpn)}} ${jlcPropsFor(distanceSenseMpn, 3).supplierProp} pinLabels={{ pin1: "OUT", pin2: "VCC", pin3: "GND" }} pinAttributes={{ OUT: { mustBeConnected: true, isGpio: true }, VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ OUT: "net.DISTANCE_SENSE", VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="8mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={10} pcbY={8} schX={1} schY={2} schWidth="1.2mm" schHeight="0.4mm" />`)
     }
     if (family === "optical" && interfaceKind !== "i2c") {
-      lines.push(`    <led name="D_EMITTER" displayName="IR/optical emitter" manufacturerPartNumber="IR333-A" color="infrared" connections={{ anode: "net.EMITTER", cathode: "net.GND" }} footprint="0603" pcbX={-5} pcbY={7} schX={-4} schY={3} /><resistor name="R_EMITTER" resistance="100" tolerance="1%" manufacturerPartNumber="RC0603JR-07100RL" footprint="0603" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.EMITTER" }} pcbX={0} pcbY={7} schX={-1} schY={3} />${tracePath("EMITTER_LIMIT", ["R_EMITTER.pin2", "D_EMITTER.anode"])}`)
+      lines.push(`    <led name="D_EMITTER" displayName="IR/optical emitter" manufacturerPartNumber="IR333-A" ${jlcPropsFor("IR333-A", 2).supplierProp} color="infrared" connections={{ anode: "net.EMITTER", cathode: "net.GND" }} footprint="0603" pcbX={-5} pcbY={7} schX={-4} schY={3} /><resistor name="R_EMITTER" resistance="100" tolerance="1%" manufacturerPartNumber="RC0603JR-07100RL" ${jlcPropsFor("RC0603JR-07100RL", 2).supplierProp} footprint=${q(footprintRefFor("RC0603JR-07100RL", "0603"))} connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.EMITTER" }} pcbX={0} pcbY={7} schX={-1} schY={3} />${tracePath("EMITTER_LIMIT", ["R_EMITTER.pin2", "D_EMITTER.anode"])}`)
     }
     if (family === "audio") {
-      lines.push(`    <chip name="U4" displayName="electret microphone capsule" manufacturerPartNumber="CMA-4544PF-W" pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, OUT: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, OUT: "net.SIG", GND: "net.GND" }} footprint="to92" pcbX={-5} pcbY={4} schX={-4} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><capacitor name="C_AUDIO" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={-1} pcbY={6} schX={-1} schY={4} schOrientation="vertical" />`)
+      lines.push(`    {/* JLCPCB footprint import: ${jlcPropsFor("CMA-4544PF-W", 3).footprintProp} */}`)
+      lines.push(`    <chip name="U4" displayName="electret microphone capsule" manufacturerPartNumber="CMA-4544PF-W" ${jlcPropsFor("CMA-4544PF-W", 3).supplierProp} pinLabels={{ pin1: "VCC", pin2: "OUT", pin3: "GND" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, OUT: { mustBeConnected: true, isGpio: true }, GND: { requiresGround: true, mustBeConnected: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, OUT: "net.SIG", GND: "net.GND" }} footprint="to92" pcbX={-5} pcbY={4} schX={-4} schY={3} schWidth="1.2mm" schHeight="0.4mm" /><capacitor name="C_AUDIO" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" ${jlcPropsFor("CC0603KRX7R9BB104", 2).supplierProp} footprint=${q(footprintRefFor("CC0603KRX7R9BB104", "0603"))} maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={-1} pcbY={6} schX={-1} schY={4} schOrientation="vertical" />`)
     }
     if (family === "environmental" || family === "motion") {
-      lines.push(`    <capacitor name="C_${family.toUpperCase()}" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" footprint="0603" maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${environmentalCapX}} pcbY={${environmentalCapY}} schX={8} schY={4} schOrientation="vertical" />`)
+      lines.push(`    <capacitor name="C_${family.toUpperCase()}" capacitance="100nF" manufacturerPartNumber="CC0603KRX7R9BB104" ${jlcPropsFor("CC0603KRX7R9BB104", 2).supplierProp} footprint=${q(footprintRefFor("CC0603KRX7R9BB104", "0603"))} maxDecouplingTraceLength="100mm" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={${environmentalCapX}} pcbY={${environmentalCapY}} schX={8} schY={4} schOrientation="vertical" />`)
     }
     if (family === "gas") {
-      lines.push(`    <resistor name="R_HEAT" resistance="33" tolerance="5%" manufacturerPartNumber="RC1206JR-0733RL" footprint="1206" connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={10} pcbY={-5} schX={8} schY={-5} />`)
+      lines.push(`    <resistor name="R_HEAT" resistance="33" tolerance="5%" manufacturerPartNumber="RC1206JR-0733RL" ${jlcPropsFor("RC1206JR-0733RL", 2).supplierProp} footprint=${q(footprintRefFor("RC1206JR-0733RL", "1206"))} connections={{ pin1: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, pin2: "net.GND" }} pcbX={10} pcbY={-5} schX={8} schY={-5} />`)
     }
     if (family === "display") {
       if (interfaceKind === "i2c") {
-        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "SCL", pin4: "SDA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", SCL: "net.SCL", SDA: "net.SDA" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3.75} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-1.25} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={1.25} pcbY={0} portHints={["pin3"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3.75} pcbY={0} portHints={["pin4"]} /><silkscreenrect width="10mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
+        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} ${jlcPropsFor(profile.manufacturerPartNumber, 4).supplierProp} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "SCL", pin4: "SDA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, SCL: { mustBeConnected: true, isGpio: true }, SDA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", SCL: "net.SCL", SDA: "net.SDA" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-3.75} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-1.25} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={1.25} pcbY={0} portHints={["pin3"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={3.75} pcbY={0} portHints={["pin4"]} /><silkscreenrect width="10mm" height="6mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
       } else {
-        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "DATA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, DATA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", DATA: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-2.5} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={2.5} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="5mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
+        lines.push(`    <chip name="U3" displayName={${q(`${profile.primaryModel} display panel`)}} manufacturerPartNumber={${q(profile.manufacturerPartNumber)}} ${jlcPropsFor(profile.manufacturerPartNumber, 3).supplierProp} pinLabels={{ pin1: "VCC", pin2: "GND", pin3: "DATA" }} pinAttributes={{ VCC: { requiresPower: true, mustBeConnected: true }, GND: { requiresGround: true, mustBeConnected: true }, DATA: { mustBeConnected: true, isGpio: true } }} connections={{ VCC: ${q(`net.${power3v3 ? "VDD" : "VCC"}`)}, GND: "net.GND", DATA: "net.SIG" }} footprint={<footprint><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={-2.5} pcbY={0} portHints={["pin1"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={0} pcbY={0} portHints={["pin2"]} /><platedhole shape="circle" holeDiameter="1mm" outerDiameter="1.6mm" pcbX={2.5} pcbY={0} portHints={["pin3"]} /><silkscreenrect width="8mm" height="5mm" stroke="solid" strokeWidth="0.2mm" filled={false} /></footprint>} pcbX={11} pcbY={0} schX={7} schY={0} schWidth="1.2mm" schHeight="0.4mm" />`)
       }
     }
     if (channels) {

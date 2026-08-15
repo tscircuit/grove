@@ -73,12 +73,12 @@ This review is specific to the checked-in [board source](./GroveWioE5.circuit.ts
 
 ## BOM and footprint review
 
-The BOM check confirms that source components carry non-empty manufacturer part numbers, but that is only a syntactic gate. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
+The BOM check confirms that source components carry non-empty manufacturer part numbers. The JLCPCB coverage gate also records a valid C-number supplier selection for each emitted source component; that selection is an assembly candidate, not a claim that the Grove module's electrical or mechanical identity has been independently approved. For this board, independently verify lifecycle/orderability, exact package revision, tolerances/ratings, pin-1 polarity, assembly side, approved alternates, and whether the declared part is actually the part named by the upstream Grove revision.
 
-- Footprint strings declared in source: `0603`.
+- Footprint strings declared in source: `jlcpcb:C7394039`, `jlcpcb:C131334`, `jlcpcb:C14663`, `0603`.
 - Embedded custom pad/graphic footprint data: no.
 - Placeholder/unspecified MPN count in generated source components: 0.
-- Supplier-backed footprint and courtyard approval: **not evidenced by the current source or snapshots**.
+- JLCPCB footprint import reference: present in the board-local source; compare the imported supplier geometry and courtyard against the retained local pad geometry before release.
 
 ## Routing, placement, and snapshot diagnostics
 
@@ -86,14 +86,14 @@ The latest generated artifacts report 0 autorouting error(s), 0 disconnected-por
 
 ### Diagnostic sample
 
-- <trace#16818(from:.J1 > .RX to:net.RX) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16819(from:.J1 > .TX to:net.TX) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16820(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16821(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16822(from:.U1 > .RX to:net.RX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16823(from:.U1 > .TX to:net.TX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16824(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
-- <trace#16825(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20635(from:.J1 > .RX to:net.RX) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20636(from:.J1 > .TX to:net.TX) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20637(from:.J1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20638(from:.J1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20639(from:.U1 > .RX to:net.RX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20640(from:.U1 > .TX to:net.TX_MCU) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20641(from:.U1 > .VCC to:net.VCC) /> is missing a name. Add a name prop to make the trace easier to identify.
+- <trace#20642(from:.U1 > .GND to:net.GND) /> is missing a name. Add a name prop to make the trace easier to identify.
 
 ## Required release gates
 
